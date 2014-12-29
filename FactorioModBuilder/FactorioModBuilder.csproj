@@ -53,7 +53,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="MainWindow.xaml">
+    <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -61,12 +61,26 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="Models\ProjectItems\ModControl.cs" />
+    <Compile Include="Models\ProjectItems\ModData.cs" />
+    <Compile Include="Models\ProjectItems\ProjectHeader.cs" />
+    <Compile Include="ViewModels\MainVM.cs" />
+    <Compile Include="ViewModels\ProjectItems\ProjectHeaderVM.cs" />
+    <Compile Include="ViewTemplateSelectorcs.cs" />
+    <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Project.cs" />
+    <Compile Include="Models\ProjectItems\ProjectItem.cs" />
+    <Compile Include="Models\ProjectItems\ModInfo.cs" />
+    <Compile Include="ViewModels\ProjectItems\ModControlVM.cs" />
+    <Compile Include="ViewModels\ProjectItems\ModDataVM.cs" />
+    <Compile Include="ViewModels\ProjectItems\ModInfoVM.cs" />
+    <Compile Include="ViewModels\ProjectItems\ProjectItemVM.cs" />
+    <Compile Include="ViewModels\ProjectVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

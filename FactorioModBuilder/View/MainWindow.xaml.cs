@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using FactorioModBuilder.ViewModels;
 
 namespace FactorioModBuilder
 {
@@ -23,6 +24,12 @@ namespace FactorioModBuilder
         public MainWindow()
         {
             InitializeComponent();
+            this.DataContext = new MainVM();
+        }
+
+        private void projectView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+
         }
     }
 }
