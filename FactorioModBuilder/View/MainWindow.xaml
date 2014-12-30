@@ -70,7 +70,19 @@
         </DataTemplate>
         <!-- Mod Data Settings Screen -->
         <DataTemplate x:Key="modDataTemplate">
-            <TextBlock Text="Mod Data Selected"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="5">
+                    <CheckBox VerticalAlignment="Center" IsChecked="{Binding ManualMode}"/>
+                    <Label Content="Manage Manually"/>
+                </StackPanel>
+                <DataGrid Grid.Row="1" Margin="5">
+                    
+                </DataGrid>
+            </Grid>
         </DataTemplate>
         <!-- Mod Control Settings Screen -->
         <DataTemplate x:Key="modControlTemplate">
