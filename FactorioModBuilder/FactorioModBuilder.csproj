@@ -61,11 +61,16 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Models\ProjectItems\Graphics.cs" />
+    <Compile Include="Models\ProjectItems\ItemGroups.cs" />
     <Compile Include="Models\ProjectItems\ModControl.cs" />
     <Compile Include="Models\ProjectItems\ModData.cs" />
     <Compile Include="Models\ProjectItems\ProjectHeader.cs" />
+    <Compile Include="Models\ProjectItems\Prototypes.cs" />
     <Compile Include="ViewModels\MainVM.cs" />
+    <Compile Include="ViewModels\ProjectItems\ItemGroupsVM.cs" />
     <Compile Include="ViewModels\ProjectItems\ProjectHeaderVM.cs" />
+    <Compile Include="ViewModels\ProjectItems\PrototypesVM.cs" />
     <Compile Include="ViewTemplateSelectorcs.cs" />
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

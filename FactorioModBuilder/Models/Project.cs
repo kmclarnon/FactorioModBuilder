@@ -19,6 +19,7 @@ namespace FactorioModBuilder
                 "http://singularity.tk/realism", "The Realism Mod completely overhauls the base game"));
             this.ProjectItem.Children.Add(new ModData());
             this.ProjectItem.Children.Add(new ModControl());
+            this.ProjectItem.Children.Add(new Prototypes());
         }
     }
 }

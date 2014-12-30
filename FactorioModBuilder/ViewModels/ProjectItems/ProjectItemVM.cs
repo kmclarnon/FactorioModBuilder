@@ -73,7 +73,9 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
             { typeof(ModControl),       ((x, y) => new ModControlVM(x, (ModControl)y)) },
             { typeof(ModData),          ((x, y) => new ModDataVM(x, (ModData)y)) },
             { typeof(ModInfo),          ((x, y) => new ModInfoVM(x, (ModInfo)y)) },
-            { typeof(ProjectHeader),    ((x, y) => new ProjectHeaderVM((ProjectHeader)y)) }
+            { typeof(ProjectHeader),    ((x, y) => new ProjectHeaderVM((ProjectHeader)y)) },
+            { typeof(Prototypes),       ((x, y) => new PrototypesVM(x, (Prototypes)y)) },
+            { typeof(ItemGroups),       ((x, y) => new ItemGroupsVM(x, (ItemGroups)y)) }
         };
 
         public static ProjectItemVM Wrap(ProjectItemVM parent, ProjectItem item)

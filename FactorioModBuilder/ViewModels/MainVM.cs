@@ -10,6 +10,10 @@ namespace FactorioModBuilder.ViewModels
 {
     public class MainVM : BaseVM
     {
+        public string ApplicationTitle { get { return this.ApplicationName + " v" + this.ApplicationVersion; } }
+        public string ApplicationName { get { return "Factorio Mod Builder"; } }
+        public string ApplicationVersion { get { return "0.0.1"; } }
+
         private ProjectVM _activeProject;
         public ProjectVM ActiveProject
         {
