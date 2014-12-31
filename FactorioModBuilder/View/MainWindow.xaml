@@ -10,146 +10,25 @@
         Height="{Binding Path=AppHeight, Mode=TwoWay}" 
         Width="{Binding Path=Width, Mode=TwoWay}">
     <Window.Resources>
-        <util:BindingProxy x:Key="proxy" Data="{Binding}"/>
-        <!-- Project Header Screen -->
-        <DataTemplate x:Key="headerTemplate">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="0">
-                    <Label Content="Project:" Margin="5"/>
-                    <TextBlock Text="Realism Mod v0.0.1" Margin="5" VerticalAlignment="Center"/>
-                </StackPanel>
-            </Grid>
-        </DataTemplate>
-        <!-- Mod Info Settings Screen -->
-        <DataTemplate x:Key="modInfoTemplate">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid Grid.Column="0" Grid.Row="0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="20"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <Label Content="Name:" Grid.Column="0" Grid.Row="0"/>
-                    <TextBox Grid.Column="1" Grid.Row="0" Margin="2" Text="{Binding Path=ModName}"/>
-                    <Label Content="Version:" Grid.Column="0" Grid.Row="1"/>
-                    <TextBox Grid.Column="1" Grid.Row="1" Margin="2" Text="{Binding Path=Version}"/>
-                    <Label Content="Title:" Grid.Column="0" Grid.Row="2"/>
-                    <TextBox Grid.Column="1" Grid.Row="2" Margin="2" Text="{Binding Path=Title}"/>
-                    <Label Content="Author:" Grid.Column="0" Grid.Row="3"/>
-                    <TextBox Grid.Column="1" Grid.Row="3" Margin="2" Text="{Binding Path=Author}"/>
-                    <Label Content="Contact:" Grid.Column="0" Grid.Row="4"/>
-                    <TextBox Grid.Column="1" Grid.Row="4" Margin="2" Text="{Binding Path=Contact}"/>
-                    <Label Content="Homepage:" Grid.Column="0" Grid.Row="5"/>
-                    <TextBox Grid.Column="1" Grid.Row="5" Margin="2" Text="{Binding Path=Homepage}"/>
-                    <Label Content="Description:" Grid.Column="0" Grid.Row="6"/>
-                    <TextBox Grid.Column="1" Grid.Row="6" Margin="2" Text="{Binding Path=Description}"
-                             TextWrapping="Wrap" Height="Auto"/>
-                    <Grid Grid.Column="1" Grid.Row="8">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="3*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Button Content="Cancel" Grid.Column="1" Margin="5"  Command="{Binding Path=CancelCmd}"/>
-                        <Button Content="Apply" Grid.Column="2" Margin="5" Command="{Binding Path=ApplyCmd}"/>
-                    </Grid>
-                </Grid>                
-            </Grid>
-        </DataTemplate>
-        <!-- Mod Data Settings Screen -->
-        <DataTemplate x:Key="modDataTemplate">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="5">
-                    <CheckBox x:Name="modDataEnabled" VerticalAlignment="Center" IsChecked="{Binding Path=ManualMode}"/>
-                    <Label Content="Manage Manually"/>
-                </StackPanel>
-                <DataGrid Grid.Row="1" Margin="5" AutoGenerateColumns="False"
-                          ItemsSource="{Binding Path=DataItems}"
-                          IsReadOnly="{Binding Path=IsChecked, ElementName=modDataEnabled, Converter={conv:BooleanNot}}">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Module" Width="3*" Binding="{Binding Path=Name}"/>
-                        <DataGridTextColumn Header="Type" Width="*" Binding="{Binding Path=Type}"/>
-                        <DataGridCheckBoxColumn Header="Enabled" Width="*" Binding="{Binding Path=Enabled}"/>
-                    </DataGrid.Columns>
-                    <DataGrid.CellStyle>
-                        <Style TargetType="{x:Type DataGridCell}">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding Path=IsChecked, ElementName=modDataEnabled}" Value="False">
-                                    <Setter Property="Background" Value="{x:Static SystemColors.ControlBrush}"/>
-                                    <Setter Property="Foreground" Value="{x:Static SystemColors.GrayTextBrush}"/>
-                                </DataTrigger>
-                                <MultiTrigger>
-                                    <MultiTrigger.Conditions>
-                                        <Condition Property="IsReadOnly" Value="True"/>
-                                        <Condition Property="IsSelected" Value="True"/>
-                                    </MultiTrigger.Conditions>
-                                    <Setter Property="Background" Value="{x:Null}"/>
-                                    <Setter Property="BorderBrush" Value="{x:Null}"/>
-                                </MultiTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </DataGrid.CellStyle>
-                    <DataGrid.ColumnHeaderStyle>
-                        <Style TargetType="{x:Type DataGridColumnHeader}">
-                            <Setter Property="Height" Value="25"/>
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding Path=IsChecked, ElementName=modDataEnabled}" Value="False">
-                                    <Setter Property="Foreground" Value="{x:Static SystemColors.GrayTextBrush}"/>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </DataGrid.ColumnHeaderStyle>
-                    <DataGrid.Style>
-                        <Style TargetType="{x:Type DataGrid}">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding Path=IsChecked, ElementName=modDataEnabled}" Value="False">
-                                    <Setter Property="HorizontalGridLinesBrush" Value="{x:Static SystemColors.GrayTextBrush}"/>
-                                    <Setter Property="VerticalGridLinesBrush" Value="{x:Static SystemColors.GrayTextBrush}"/>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </DataGrid.Style>
-                </DataGrid>
-            </Grid>
-        </DataTemplate>
-        <!-- Mod Control Settings Screen -->
-        <DataTemplate x:Key="modControlTemplate">
-            <TextBlock Text="Mod Control Selected"/>
-        </DataTemplate>
-        <!-- Content Presenter Template Selector -->
-        <local:ViewTemplateSelector x:Key="selector" ModControlTemplate="{StaticResource modControlTemplate}" ModDataTemplate="{StaticResource modDataTemplate}"
-                                    ModInfoTemplate="{StaticResource modInfoTemplate}" ProjectHeaderTemplate="{StaticResource headerTemplate}"/>
+        <!-- Right Panel Screen Resources -->
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Screens/ScreenDict.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <!-- Data context reference for consistent syntax -->
+            <util:BindingProxy x:Key="proxy" Data="{Binding}"/>
+            <!-- Mod Control Settings Screen -->
+            <DataTemplate x:Key="modControlTemplate">
+                <TextBlock Text="Mod Control Selected"/>
+            </DataTemplate>
+            <!-- Content Presenter Template Selector -->
+            <local:ViewTemplateSelector 
+                x:Key="selector" 
+                ModControlTemplate="{StaticResource modControlTemplate}" 
+                ModDataTemplate="{StaticResource modDataTemplate}"     
+                ModInfoTemplate="{StaticResource modInfoTemplate}" 
+                ProjectHeaderTemplate="{StaticResource headerTemplate}"/>
+        </ResourceDictionary>
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
