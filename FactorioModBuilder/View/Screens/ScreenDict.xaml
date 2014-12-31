@@ -5,5 +5,9 @@
         <ResourceDictionary Source="ModDataScreen.xaml"/>
         <ResourceDictionary Source="ModControlScreen.xaml"/>
         <ResourceDictionary Source="ProjectHeaderScreen.xaml"/>
+        <ResourceDictionary Source="ItemGroupsScreen.xaml"/>
+        <ResourceDictionary Source="ItemsScreen.xaml"/>
+        <ResourceDictionary Source="ItemSubGroupsScreen.xaml"/>
+        <ResourceDictionary Source="PrototypeScreen.xaml"/>
     </ResourceDictionary.MergedDictionaries>    
 </ResourceDictionary>

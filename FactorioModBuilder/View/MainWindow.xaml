@@ -23,7 +23,11 @@
                 ModControlTemplate="{StaticResource ModControlScreen_Template}" 
                 ModDataTemplate="{StaticResource ModDataScreen_Template}"     
                 ModInfoTemplate="{StaticResource ModInfoScreen_Template}" 
-                ProjectHeaderTemplate="{StaticResource ProjectHeaderScreen_Template}"/>
+                ProjectHeaderTemplate="{StaticResource ProjectHeaderScreen_Template}"
+                ItemGroupsTemplate="{StaticResource ItemGroups_Template}"
+                ItemSubGroupsTemplate="{StaticResource ItemSubGroups_Template}"
+                ItemsTemplate="{StaticResource Items_Template}"
+                PrototypeTemplate="{StaticResource Prototype_Template}"/>
         </ResourceDictionary>
     </Window.Resources>
     <Grid>
