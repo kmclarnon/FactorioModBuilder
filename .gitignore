@@ -3,3 +3,4 @@ FactorioModBuilder/bin/
 WpfUtils/obj/
 *.dll
 *.pdb
+*.suo
