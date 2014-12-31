@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using WpfUtils;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems
 {
@@ -94,6 +96,34 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
             }
         }
 
+        private ICommand _cancelCmd;
+        public ICommand CancelCmd
+        {
+            get
+            {
+                if (_cancelCmd == null)
+                {
+                    _cancelCmd = new RelayCommand((x => this.DoCancel()),
+                        (x => this.CanCancel()));
+                }
+                return _cancelCmd;
+            }
+        }
+
+        private ICommand _applyCmd;
+        public ICommand ApplyCmd
+        {
+            get
+            {
+                if(_applyCmd == null)
+                {
+                    _applyCmd = new RelayCommand((x => this.DoApply()),
+                        (x => this.CanApply()));
+                }
+                return _applyCmd;
+            }
+        }
+
         private ModInfo _mItem { get { return (ModInfo)_item; } }
 
         public ModInfoVM(ProjectItemVM parent, ModInfo info)
@@ -101,5 +131,26 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
         {
 
         }
+
+        private bool CanCancel()
+        {
+            return true;
+        }
+
+        private void DoCancel()
+        {
+
+        }
+
+        private bool CanApply()
+        {
+            return true;
+        }
+
+        private void DoApply()
+        {
+
+        }
+
     }
 }
