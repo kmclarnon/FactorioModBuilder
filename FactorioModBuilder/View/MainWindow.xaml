@@ -8,7 +8,7 @@
         xmlns:local="clr-namespace:FactorioModBuilder"
         Title="{Binding Path=AppTitle, Mode=OneWay}" 
         Height="{Binding Path=AppHeight, Mode=TwoWay}" 
-        Width="{Binding Path=Width, Mode=TwoWay}">
+        Width="{Binding Path=AppWidth, Mode=TwoWay}">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
