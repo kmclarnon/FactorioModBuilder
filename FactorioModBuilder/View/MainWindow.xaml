@@ -10,24 +10,20 @@
         Height="{Binding Path=AppHeight, Mode=TwoWay}" 
         Width="{Binding Path=Width, Mode=TwoWay}">
     <Window.Resources>
-        <!-- Right Panel Screen Resources -->
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <!-- Right Panel Screen Resources -->
                 <ResourceDictionary Source="Screens/ScreenDict.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <!-- Data context reference for consistent syntax -->
             <util:BindingProxy x:Key="proxy" Data="{Binding}"/>
-            <!-- Mod Control Settings Screen -->
-            <DataTemplate x:Key="modControlTemplate">
-                <TextBlock Text="Mod Control Selected"/>
-            </DataTemplate>
             <!-- Content Presenter Template Selector -->
             <local:ViewTemplateSelector 
                 x:Key="selector" 
-                ModControlTemplate="{StaticResource modControlTemplate}" 
-                ModDataTemplate="{StaticResource modDataTemplate}"     
-                ModInfoTemplate="{StaticResource modInfoTemplate}" 
-                ProjectHeaderTemplate="{StaticResource headerTemplate}"/>
+                ModControlTemplate="{StaticResource ModControlScreen_Template}" 
+                ModDataTemplate="{StaticResource ModDataScreen_Template}"     
+                ModInfoTemplate="{StaticResource ModInfoScreen_Template}" 
+                ProjectHeaderTemplate="{StaticResource ProjectHeaderScreen_Template}"/>
         </ResourceDictionary>
     </Window.Resources>
     <Grid>
