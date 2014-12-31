@@ -5,7 +5,9 @@
         xmlns:vm="clr-namespace:FactorioModBuilder.ViewModels"
         xmlns:vmp="clr-namespace:FactorioModBuilder.ViewModels.ProjectItems"
         xmlns:local="clr-namespace:FactorioModBuilder"
-        Title="{Binding Path=ApplicationTitle}" Height="800" Width="1200">
+        Title="{Binding Path=AppTitle, Mode=OneWay}" 
+        Height="{Binding Path=AppHeight, Mode=TwoWay}" 
+        Width="{Binding Path=Width, Mode=TwoWay}">
     <Window.Resources>
         <util:BindingProxy x:Key="proxy" Data="{Binding}"/>
         <!-- Project Header Screen -->
@@ -66,7 +68,8 @@
                     <Label Content="Homepage:" Grid.Column="0" Grid.Row="5"/>
                     <TextBox Grid.Column="1" Grid.Row="5" Margin="2" Text="{Binding Path=Homepage}"/>
                     <Label Content="Description:" Grid.Column="0" Grid.Row="6"/>
-                    <TextBox Grid.Column="1" Grid.Row="6" Margin="2" Text="{Binding Path=Description}"/>
+                    <TextBox Grid.Column="1" Grid.Row="6" Margin="2" Text="{Binding Path=Description}"
+                             TextWrapping="Wrap" Height="Auto"/>
                     <Grid Grid.Column="1" Grid.Row="8">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="3*"/>
@@ -143,8 +146,7 @@
             </Grid.RowDefinitions>
             <!-- Main project view -->
             <TreeView x:Name="projectView" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="100" Margin="5"
-                      ItemsSource="{Binding Path=Data.ActiveProject.ProjectItems, Source={StaticResource proxy}}"
-                      SelectedItemChanged="projectView_SelectedItemChanged">
+                      ItemsSource="{Binding Path=Data.ActiveProject.ProjectItems, Source={StaticResource proxy}}">
                 <TreeView.ItemContainerStyle>
                     <Style TargetType="{x:Type TreeViewItem}">
                         <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}"/>

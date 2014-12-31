@@ -61,6 +61,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Models\Main.cs" />
     <Compile Include="Models\ProjectItems\Graphics.cs" />
     <Compile Include="Models\ProjectItems\ItemGroups.cs" />
     <Compile Include="Models\ProjectItems\ModControl.cs" />
