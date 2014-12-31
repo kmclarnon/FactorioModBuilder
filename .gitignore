@@ -4,3 +4,4 @@ WpfUtils/obj/
 *.dll
 *.pdb
 *.suo
+*.tmp_proj
