@@ -63,18 +63,20 @@
     </Compile>
     <Compile Include="Models\Main.cs" />
     <Compile Include="Models\ProjectItems\Graphics.cs" />
-    <Compile Include="Models\ProjectItems\ItemGroups.cs" />
-    <Compile Include="Models\ProjectItems\Items.cs" />
-    <Compile Include="Models\ProjectItems\ItemSubGroups.cs" />
+    <Compile Include="Models\ProjectItems\GameItem.cs" />
+    <Compile Include="Models\ProjectItems\Groups.cs" />
+    <Compile Include="Models\ProjectItems\GameItems.cs" />
+    <Compile Include="Models\ProjectItems\SubGroups.cs" />
     <Compile Include="Models\ProjectItems\ModControl.cs" />
     <Compile Include="Models\ProjectItems\ModData.cs" />
     <Compile Include="Models\ProjectItems\ModDataItem.cs" />
     <Compile Include="Models\ProjectItems\ProjectHeader.cs" />
     <Compile Include="Models\ProjectItems\Prototypes.cs" />
     <Compile Include="ViewModels\MainVM.cs" />
-    <Compile Include="ViewModels\ProjectItems\ItemGroupsVM.cs" />
-    <Compile Include="ViewModels\ProjectItems\ItemSubGroupsVM.cs" />
-    <Compile Include="ViewModels\ProjectItems\ItemsVM.cs" />
+    <Compile Include="ViewModels\ProjectItems\GameItemVM.cs" />
+    <Compile Include="ViewModels\ProjectItems\GroupsVM.cs" />
+    <Compile Include="ViewModels\ProjectItems\SubGroupsVM.cs" />
+    <Compile Include="ViewModels\ProjectItems\GameItemsVM.cs" />
     <Compile Include="ViewModels\ProjectItems\ModDataItemVM.cs" />
     <Compile Include="ViewModels\ProjectItems\ProjectHeaderVM.cs" />
     <Compile Include="ViewModels\ProjectItems\PrototypesVM.cs" />

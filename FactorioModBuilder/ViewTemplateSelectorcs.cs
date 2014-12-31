@@ -27,9 +27,9 @@ namespace FactorioModBuilder
             { typeof(ModDataVM),        (x => x.ModDataTemplate) },
             { typeof(ModInfoVM),        (x => x.ModInfoTemplate) },
             { typeof(ProjectHeaderVM),  (x => x.ProjectHeaderTemplate) },
-            { typeof(ItemGroupsVM),     (x => x.ItemGroupsTemplate) },
-            { typeof(ItemSubGroupsVM),  (x => x.ItemSubGroupsTemplate) },
-            { typeof(ItemsVM),          (x => x.ItemsTemplate) },
+            { typeof(GroupsVM),     (x => x.ItemGroupsTemplate) },
+            { typeof(SubGroupsVM),  (x => x.ItemSubGroupsTemplate) },
+            { typeof(GameItemsVM),          (x => x.ItemsTemplate) },
             { typeof(PrototypesVM),     (x => x.PrototypeTemplate) }
         };
 

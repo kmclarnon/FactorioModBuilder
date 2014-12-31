@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems
 {
-    public class ItemGroupsVM : ProjectItemVM
+    public class SubGroupsVM : ProjectItemVM
     {
-        public ItemGroupsVM(ProjectItemVM parent, ItemGroups groups)
-            : base(parent, groups)
-        { 
+        public SubGroupsVM(ProjectItemVM parent, SubGroups items)
+            : base(parent, items)
+        {
         }
     }
 }
