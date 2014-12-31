@@ -9,19 +9,6 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
 {
     public class ModDataItemVM : ProjectItemVM
     {
-        public string Name
-        {
-            get { return _data.Name; }
-            set
-            {
-                if(_data.Name != value)
-                {
-                    _data.Name = value;
-                    this.NotifyPropertyChanged();
-                }
-            }
-        }
-
         public string Type
         {
             get { return _data.Type; }
