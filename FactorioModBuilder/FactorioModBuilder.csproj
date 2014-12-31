@@ -64,6 +64,8 @@
     <Compile Include="Models\Main.cs" />
     <Compile Include="Models\ProjectItems\Graphics.cs" />
     <Compile Include="Models\ProjectItems\ItemGroups.cs" />
+    <Compile Include="Models\ProjectItems\Items.cs" />
+    <Compile Include="Models\ProjectItems\ItemSubGroups.cs" />
     <Compile Include="Models\ProjectItems\ModControl.cs" />
     <Compile Include="Models\ProjectItems\ModData.cs" />
     <Compile Include="Models\ProjectItems\ModDataItem.cs" />
@@ -71,6 +73,8 @@
     <Compile Include="Models\ProjectItems\Prototypes.cs" />
     <Compile Include="ViewModels\MainVM.cs" />
     <Compile Include="ViewModels\ProjectItems\ItemGroupsVM.cs" />
+    <Compile Include="ViewModels\ProjectItems\ItemSubGroupsVM.cs" />
+    <Compile Include="ViewModels\ProjectItems\ItemsVM.cs" />
     <Compile Include="ViewModels\ProjectItems\ModDataItemVM.cs" />
     <Compile Include="ViewModels\ProjectItems\ProjectHeaderVM.cs" />
     <Compile Include="ViewModels\ProjectItems\PrototypesVM.cs" />
@@ -79,6 +83,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\Screens\ModControlScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Screens\ModDataScreen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
