@@ -5,7 +5,7 @@
         xmlns:vm="clr-namespace:FactorioModBuilder.ViewModels"
         xmlns:vmp="clr-namespace:FactorioModBuilder.ViewModels.ProjectItems"
         xmlns:local="clr-namespace:FactorioModBuilder"
-        Title="{Binding Path=ApplicationTitle}" Height="550" Width="825">
+        Title="{Binding Path=ApplicationTitle}" Height="800" Width="1200">
     <Window.Resources>
         <util:BindingProxy x:Key="proxy" Data="{Binding}"/>
         <!-- Project Header Screen -->
@@ -50,6 +50,8 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Label Content="Name:" Grid.Column="0" Grid.Row="0"/>
                     <TextBox Grid.Column="1" Grid.Row="0" Margin="2" Text="{Binding Path=ModName}"/>
@@ -65,6 +67,15 @@
                     <TextBox Grid.Column="1" Grid.Row="5" Margin="2" Text="{Binding Path=Homepage}"/>
                     <Label Content="Description:" Grid.Column="0" Grid.Row="6"/>
                     <TextBox Grid.Column="1" Grid.Row="6" Margin="2" Text="{Binding Path=Description}"/>
+                    <Grid Grid.Column="1" Grid.Row="8">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Content="Cancel" Grid.Column="1" Margin="5"  Command="{Binding Path=CancelCmd}"/>
+                        <Button Content="Apply" Grid.Column="2" Margin="5" Command="{Binding Path=ApplyCmd}"/>
+                    </Grid>
                 </Grid>                
             </Grid>
         </DataTemplate>
@@ -76,11 +87,17 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="5">
-                    <CheckBox VerticalAlignment="Center" IsChecked="{Binding ManualMode}"/>
+                    <CheckBox x:Name="modDataEnabled" VerticalAlignment="Center" IsChecked="{Binding Path=ManualMode}"/>
                     <Label Content="Manage Manually"/>
                 </StackPanel>
-                <DataGrid Grid.Row="1" Margin="5">
-                    
+                <DataGrid Grid.Row="1" Margin="5" AutoGenerateColumns="False"
+                          ItemsSource="{Binding Path=DataItems}"
+                          IsEnabled="{Binding Path=IsChecked, ElementName=modDataEnabled}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Module" Width="3*" Binding="{Binding Path=Name}"/>
+                        <DataGridTextColumn Header="Type" Width="*" Binding="{Binding Path=Type}"/>
+                        <DataGridCheckBoxColumn Header="Enabled" Width="*" Binding="{Binding Path=Enabled}"/>
+                    </DataGrid.Columns>
                 </DataGrid>
             </Grid>
         </DataTemplate>
