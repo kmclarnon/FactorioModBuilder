@@ -11,8 +11,7 @@ namespace FactorioModBuilder.Models.ProjectItems
         public string Type { get; set; }
         public bool Required { get; set; }
 
-        public ModDataItem(string name)
-            : base(name)
+        public ModDataItem(string name) : base(name)
         {
         }
     }

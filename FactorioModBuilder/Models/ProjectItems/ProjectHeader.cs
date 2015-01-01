@@ -8,8 +8,7 @@ namespace FactorioModBuilder.Models.ProjectItems
 {
     public class ProjectHeader : ProjectItem
     {
-        public ProjectHeader(string name)
-            : base(name)
+        public ProjectHeader(string name) : base(name)
         {
         }
     }
