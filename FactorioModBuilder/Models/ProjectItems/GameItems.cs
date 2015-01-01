@@ -14,8 +14,8 @@ namespace FactorioModBuilder.Models.ProjectItems
         {
             this.ItemList = new List<GameItem>();
 
-            ItemList.Add(new GameItem());
-            ItemList.Add(new GameItem());
+            ItemList.Add(new GameItem("Test Item 1"));
+            ItemList.Add(new GameItem("Test Item 2"));
         }
     }
 }

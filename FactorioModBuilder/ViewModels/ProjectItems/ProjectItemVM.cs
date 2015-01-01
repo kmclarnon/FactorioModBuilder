@@ -157,9 +157,9 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
             { typeof(ModInfo),          ((x, y) => new ModInfoVM(x, (ModInfo)y)) },
             { typeof(ProjectHeader),    ((x, y) => new ProjectHeaderVM((ProjectHeader)y)) },
             { typeof(Prototypes),       ((x, y) => new PrototypesVM(x, (Prototypes)y)) },
-            { typeof(Groups),       ((x, y) => new GroupsVM(x, (Groups)y)) },
-            { typeof(SubGroups),    ((x, y) => new SubGroupsVM(x, (SubGroups)y)) },
-            { typeof(GameItems),            ((x, y) => new GameItemsVM(x, (GameItems)y)) } 
+            { typeof(Groups),           ((x, y) => new GroupsVM(x, (Groups)y)) },
+            { typeof(SubGroups),        ((x, y) => new SubGroupsVM(x, (SubGroups)y)) },
+            { typeof(GameItems),        ((x, y) => new GameItemsVM(x, (GameItems)y)) } 
         };
 
         public static ProjectItemVM Wrap(ProjectItemVM parent, ProjectItem item)
