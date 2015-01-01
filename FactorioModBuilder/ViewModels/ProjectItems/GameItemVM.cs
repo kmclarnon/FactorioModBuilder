@@ -97,7 +97,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
             get
             {
                 ProjectItemVM res;
-                if (!this.TryFindElementWithProperty(typeof(ObservableCollection<String>),
+                if (!this.TryFindElementWithPropertyUp(typeof(ObservableCollection<String>),
                     "PossibleSubgroups", out res))
                 {
                     throw new Exception("Failed to find parent to supply Possible Subgroups");
