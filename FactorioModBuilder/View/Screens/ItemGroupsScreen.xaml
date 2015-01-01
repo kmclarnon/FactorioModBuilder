@@ -1,6 +1,63 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <DataTemplate x:Key="ItemGroups_Template">
-        
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <DataGrid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="100" Margin="5"
+                      ItemsSource="{Binding Path=ItemList}" AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Group" Binding="{Binding Path=Name}" Width="3*"/>
+                    <DataGridTextColumn Header="Inventory Order" Binding="{Binding Path=IvnOrder}" Width="*"/>
+                    <DataGridTextColumn Header="Inventory Order" Binding="{Binding Path=Order}" Width="*"/>
+                    <DataGridCheckBoxColumn Header="Enabled" Binding="{Binding Path=Enabled}" Width="*"/>
+                    <DataGridTemplateColumn Header="Icon" Width="2*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding Path=Icon}" Margin="5"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Grid Grid.Row="1" Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Content="Add New Group" Command="{Binding Path=AddGroupCmd}" Margin="2.5 5 5 5"/>
+                <Button Grid.Column="1" Content="Remove Group" Command="{Binding Path=RemoveGroupCmd}" Margin="5 5 2.5 5"/>
+            </Grid>
+            <Grid Grid.Column="0" Grid.ColumnSpan="1000" Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label Content="Name:" Grid.Column="0" Grid.Row="0" Margin="5 5 2.5 5"/>
+                <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Path=Name}" Margin="2.5 5 5 5"/>
+                <Label Content="Icon Path:" Grid.Column="0" Grid.Row="1" Margin="5"/>
+                <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Path=IconPath}"/>
+                <Label Content="Inventory Order:" Grid.Column="0" Grid.Row="2"/>
+                <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Path=InvOrder}"/>
+                <Label Content="Order:" Grid.Column="0" Grid.Row="3"/>
+                <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Path=Order}"/>
+                <Label Content="Enabled:" Grid.Row="4"/>
+                <CheckBox Grid.Column="1" Grid.Row="4" IsEnabled="{Binding Path=Enabled}"/>
+            </Grid>
+        </Grid>
     </DataTemplate>
 </ResourceDictionary>
