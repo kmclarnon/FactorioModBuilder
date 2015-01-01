@@ -62,6 +62,8 @@ namespace FactorioModBuilder.ViewModels
             _main = m;
             // test
             this.ActiveProject = new ProjectVM(new Project());
+            foreach (var i in this.ActiveProject.ProjectItems)
+                i.ExpandDown();
         }
     }
 }

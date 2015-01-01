@@ -22,6 +22,9 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
                 {
                     _isExpanded = value;
                     this.NotifyPropertyChanged();
+                    // if we are expanded, expand our parent
+                    if (_isExpanded && _parent != null)
+                        _parent.IsExpanded = true;
                 }
             }
         }
@@ -63,6 +66,22 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
             _item = item;
             _parent = parent;
             this.Children = new ObservableCollection<ProjectItemVM>();
+        }
+
+        public void ExpandDown()
+        {
+            this.IsExpanded = true;
+            foreach (var c in this.Children)
+                c.ExpandDown();
+        }
+
+        public void ExpandDown(int levels)
+        {
+            if (levels < 1)
+                return;
+            this.IsExpanded = true;
+            foreach(var c in this.Children)
+                c.ExpandDown(levels - 1);
         }
 
         public bool TryFindElementUp<T>(out T element) where T : ProjectItemVM
