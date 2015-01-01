@@ -49,6 +49,7 @@
                          VerticalContentAlignment="Center"/>
                 <Label Content="Subgroup:" Grid.Column="0" Grid.Row="2" Margin="5"/>
                 <ComboBox ItemsSource="{Binding Path=SelectedItem.PossibleSubgroups, ElementName=itemList}"
+                          DisplayMemberPath="Name"
                           SelectedItem="{Binding Path=SelectedItem.Subgroup, ElementName=itemList}"
                           VerticalContentAlignment="Center" Margin="5" Grid.Column="1" Grid.Row="2"/>
                 <Label Content="Order:" Grid.Column="0" Grid.Row="3" Margin="5"/>
