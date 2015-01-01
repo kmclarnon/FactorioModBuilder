@@ -10,14 +10,15 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
 {
     public class ModDataVM : ProjectItemVM
     {
+        private bool _manualMode;
         public bool ManualMode
         {
-            get { return _data.ManualMode; }
+            get { return _manualMode; }
             set
             {
-                if(_data.ManualMode != value)
+                if(_manualMode != value)
                 {
-                    _data.ManualMode = value;
+                    _manualMode = value;
                     this.NotifyPropertyChanged();
                 }
             }
