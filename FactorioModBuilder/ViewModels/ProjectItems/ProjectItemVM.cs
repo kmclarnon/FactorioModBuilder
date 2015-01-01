@@ -67,6 +67,47 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
                 this.Children.Add(ProjectItemVM.Wrap(this, c));
         }
 
+        public bool TryFindElement<T>(out T element) where T : ProjectItemVM
+        {
+            element = default(T);
+            T res = (T)_parent;
+            while(res != null)
+            {
+                if (res.GetType() == typeof(T))
+                {
+                    element = res;
+                    return true;
+                }
+                else
+                    res = (T)res._parent;
+            }
+
+            return false;
+        }
+
+        public bool TryFindElementWithProperty(Type propType, 
+            string propName, out ProjectItemVM element)
+        {
+            element = null;
+            ProjectItemVM res = _parent;
+            while(res != null)
+            {
+                var type = res.GetType();
+                foreach(var p in type.GetProperties())
+                {
+                    if(p.PropertyType == propType && p.Name == propName)
+                    {
+                        element = res;
+                        return true;
+                    }
+                }
+
+                res = res._parent;
+            }
+
+            return false;
+        }
+
         private static readonly Dictionary<Type, Func<ProjectItemVM, ProjectItem, ProjectItemVM>> _wrapDict =
             new Dictionary<Type, Func<ProjectItemVM, ProjectItem, ProjectItemVM>>()
         {
