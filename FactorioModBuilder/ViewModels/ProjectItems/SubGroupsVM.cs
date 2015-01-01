@@ -10,14 +10,12 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
 {
     public class SubGroupsVM : ProjectItemVM
     {
-        public ObservableCollection<String> SubgroupNames { get; set; }
+        public ObservableCollection<SubGroupVM> SubgroupList { get; private set; }
 
         public SubGroupsVM(ProjectItemVM parent, SubGroups items)
             : base(parent, items)
         {
-            this.SubgroupNames = new ObservableCollection<string>();
-            this.SubgroupNames.Add("Sg 1");
-            this.SubgroupNames.Add("Sg 2");
+            this.SubgroupList = new ObservableCollection<SubGroupVM>();
         }
     }
 }

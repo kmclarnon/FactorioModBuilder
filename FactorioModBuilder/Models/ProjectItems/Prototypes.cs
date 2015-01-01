@@ -11,9 +11,6 @@ namespace FactorioModBuilder.Models.ProjectItems
         public Prototypes()
             : base("Prototypes")
         {
-            this.Children.Add(new Groups());
-            this.Children.Add(new SubGroups());
-            this.Children.Add(new GameItems());
         }
     }
 }

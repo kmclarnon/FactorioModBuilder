@@ -66,6 +66,7 @@
     <Compile Include="Models\ProjectItems\GameItem.cs" />
     <Compile Include="Models\ProjectItems\Groups.cs" />
     <Compile Include="Models\ProjectItems\GameItems.cs" />
+    <Compile Include="Models\ProjectItems\SubGroup.cs" />
     <Compile Include="Models\ProjectItems\SubGroups.cs" />
     <Compile Include="Models\ProjectItems\ModControl.cs" />
     <Compile Include="Models\ProjectItems\ModData.cs" />
@@ -80,6 +81,7 @@
     <Compile Include="ViewModels\ProjectItems\ModDataItemVM.cs" />
     <Compile Include="ViewModels\ProjectItems\ProjectHeaderVM.cs" />
     <Compile Include="ViewModels\ProjectItems\PrototypesVM.cs" />
+    <Compile Include="ViewModels\ProjectItems\SubGroupVM.cs" />
     <Compile Include="ViewTemplateSelectorcs.cs" />
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

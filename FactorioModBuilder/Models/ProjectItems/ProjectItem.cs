@@ -11,12 +11,9 @@ namespace FactorioModBuilder.Models.ProjectItems
     {
         public string Name { get; set; }
 
-        public List<ProjectItem> Children { get; private set; }
-
         public ProjectItem(string name)
         {
             this.Name = name;
-            this.Children = new List<ProjectItem>();
         }
     }
 }

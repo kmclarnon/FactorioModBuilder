@@ -29,6 +29,9 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
         public PrototypesVM(ProjectItemVM parent, Prototypes types)
             : base(parent, types)
         {
+            this.Children.Add(new GroupsVM(this, new Groups()));
+            this.Children.Add(new SubGroupsVM(this, new SubGroups()));
+            this.Children.Add(new GameItemsVM(this, new GameItems()));
         }
     }
 }

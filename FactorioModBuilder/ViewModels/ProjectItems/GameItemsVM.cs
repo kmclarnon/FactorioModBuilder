@@ -18,8 +18,6 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
             : base(parent, items)
         {
             this.ItemList = new ObservableCollection<GameItemVM>();
-            foreach (var c in _internal.ItemList)
-                this.ItemList.Add(new GameItemVM(this, c));
         }
     }
 }

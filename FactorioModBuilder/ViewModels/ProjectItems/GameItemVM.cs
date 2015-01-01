@@ -92,17 +92,17 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
             }
         }
 
-        public ObservableCollection<String> PossibleSubgroups
+        public ObservableCollection<SubGroupVM> PossibleSubgroups
         {
             get
             {
                 ProjectItemVM res;
-                if (!this.TryFindElementWithPropertyUp(typeof(ObservableCollection<String>),
+                if (!this.TryFindElementWithPropertyUp(typeof(ObservableCollection<SubGroupVM>),
                     "PossibleSubgroups", out res))
                 {
                     throw new Exception("Failed to find parent to supply Possible Subgroups");
                 }
-                return (ObservableCollection<String>)res.GetType()
+                return (ObservableCollection<SubGroupVM>)res.GetType()
                     .GetProperty("PossibleSubgroups").GetValue(res);
             }
         }

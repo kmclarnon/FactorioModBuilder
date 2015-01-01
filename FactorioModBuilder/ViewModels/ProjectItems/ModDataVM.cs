@@ -25,14 +25,12 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
 
         public ObservableCollection<ModDataItemVM> DataItems { get; private set; }
 
-        private ModData _data { get { return (ModData)_item; } }
+        private ModData _internal { get { return (ModData)_item; } }
 
         public ModDataVM(ProjectItemVM parent, ModData data)
             : base(parent, data)
         {
             this.DataItems = new ObservableCollection<ModDataItemVM>();
-            foreach (var c in _data.DataItems)
-                this.DataItems.Add(new ModDataItemVM(this, c));
         }
     }
 }

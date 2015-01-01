@@ -14,12 +14,6 @@ namespace FactorioModBuilder
         public Project()
         {
             this.ProjectItem = new ProjectHeader("Realism Mod Project");
-            this.ProjectItem.Children.Add(new ModInfo("RealismMod", "0.0.1",
-                "Realism Total Overhaul Mod", "DopplerEffect", "DopplerEffect@gmail.com",
-                "http://singularity.tk/realism", "The Realism Mod completely overhauls the base game"));
-            this.ProjectItem.Children.Add(new ModData());
-            this.ProjectItem.Children.Add(new ModControl());
-            this.ProjectItem.Children.Add(new Prototypes());
         }
     }
 }

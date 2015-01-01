@@ -63,8 +63,6 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
             _item = item;
             _parent = parent;
             this.Children = new ObservableCollection<ProjectItemVM>();
-            foreach(var c in _item.Children)
-                this.Children.Add(ProjectItemVM.Wrap(this, c));
         }
 
         public bool TryFindElementUp<T>(out T element) where T : ProjectItemVM

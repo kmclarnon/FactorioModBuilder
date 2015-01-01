@@ -12,6 +12,10 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
         public ProjectHeaderVM(ProjectHeader header)
             : base(null, header)
         {
+            this.Children.Add(new ModInfoVM(this, new ModInfo()));
+            this.Children.Add(new ModDataVM(this, new ModData()));
+            this.Children.Add(new ModControlVM(this, new ModControl()));
+            this.Children.Add(new PrototypesVM(this, new Prototypes()));
         }
     }
 }
