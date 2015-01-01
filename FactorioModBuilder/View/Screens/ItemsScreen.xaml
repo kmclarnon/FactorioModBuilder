@@ -17,17 +17,19 @@
                       ItemsSource="{Binding Path=ItemList}" AutoGenerateColumns="False">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Item" Width="3*" Binding="{Binding Path=Name}" />
-                    <DataGridTextColumn Header="Group" Width="2*" Binding="{Binding Path=Group}"/>
+                    <DataGridTextColumn Header="Subgroup" Width="2*" Binding="{Binding Path=Subgroup}"/>
                     <DataGridCheckBoxColumn Header="Enabled" Width="*" Binding="{Binding Path=Enabled}"/>
                 </DataGrid.Columns>
             </DataGrid>
             <!-- Item Image -->
-            <Image Grid.Column="1" Grid.Row="0" Margin="5" Source="{Binding Path=SelectedItem.Icon, ElementName=itemList}"/>
+            <Image Grid.Column="1" Grid.Row="0" Margin="5" Source="{Binding Path=SelectedItem.IconPath, ElementName=itemList}"/>
             <!-- Item Properties -->
             <Grid Grid.Column="1" Grid.Row="1">
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="8*"/>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -40,21 +42,30 @@
                 <Label Content="Type:" Grid.Column="0" Grid.Row="0" Margin="5"/>
                 <TextBox Text="{Binding Path=SelectedItem.Type, ElementName=itemList, Mode=OneWay}" 
                          IsReadOnly="True" Margin="5" Grid.Column="1" Grid.Row="0"
-                         HorizontalContentAlignment="Center"/>
+                         VerticalContentAlignment="Center"/>
                 <Label Content="Name:" Grid.Column="0" Grid.Row="1" Margin="5"/>
                 <TextBox Text="{Binding Path=SelectedItem.Name, ElementName=itemList}" 
                          Margin="5" Grid.Column="1" Grid.Row="1" 
                          VerticalContentAlignment="Center"/>
-                <Label Content="Icon:" Grid.Column="0" Grid.Row="2" Margin="5"/>
-                <TextBox Text="{Binding Path=SelectedItem.Icon, ElementName=itemList}" 
-                         Margin="5" Grid.Column="1" Grid.Row="2"/>
-                <Label Content="Subgroup:" Grid.Column="0" Grid.Row="3" Margin="5"/>
-                <ComboBox ItemsSource="{Binding Path=SelectedItem.PossibleSubgroups, ElementName=itemList}" 
-                          Margin="5" Grid.Column="1" Grid.Row="3"/>
-                <Label Content="Order:" Grid.Column="0" Grid.Row="4" Margin="5"/>
-                <TextBox Text="{Binding Path=SelectedItem.Order, ElementName=itemList}"
-                         Margin="5" Grid.Column="1" Grid.Row="4"
-                         VerticalContentAlignment="Center"/>
+                <Label Content="Subgroup:" Grid.Column="0" Grid.Row="2" Margin="5"/>
+                <ComboBox ItemsSource="{Binding Path=SelectedItem.PossibleSubgroups, ElementName=itemList}"
+                          SelectedItem="{Binding Path=SelectedItem.Subgroup, ElementName=itemList}"
+                          VerticalContentAlignment="Center" Margin="5" Grid.Column="1" Grid.Row="2"/>
+                <Label Content="Order:" Grid.Column="0" Grid.Row="3" Margin="5"/>
+                <TextBox Text="{Binding Path=SelectedItem.Order, ElementName=itemList}" 
+                         Margin="5" Grid.Column="1" Grid.Row="3"/>
+                <Label Content="Icon Path:" Grid.Column="0" Grid.Row="4" Margin="5"/>
+                <Grid Grid.Column="1" Grid.Row="4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="30"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox Text="{Binding Path=SelectedItem.IconPath, ElementName=itemList}"
+                             Margin="5 5 2.5 5" Grid.Column="0" IsReadOnly="True"
+                             VerticalContentAlignment="Center"/>
+                    <Button Content="..." Grid.Column="1" Margin="2.5 5 5 5"
+                            Command="{Binding Path=SelectedItem.FindImageCmd, ElementName=itemList}"/>
+                </Grid>
                 <Label Content="Stack Size:" Grid.Column="0" Grid.Row="5" Margin="5"/>
                 <TextBox Text="{bind:NumberBinding Path=SelectedItem.StackSize, ElementName=itemList}" 
                          Grid.Column="1" Grid.Row="5" Margin="5"
