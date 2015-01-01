@@ -10,19 +10,19 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
 {
     public class PrototypesVM : ProjectItemVM
     {
-        public ObservableCollection<String> PossibleSubgroups
+        public ObservableCollection<SubGroupVM> PossibleSubgroups
         {
             get
             {
                 ProjectItemVM res;
-                if (!this.TryFindElementWithPropertyDown(typeof(ObservableCollection<String>),
-                    "SubgroupNames", out res))
+                if (!this.TryFindElementWithPropertyDown(typeof(ObservableCollection<SubGroupVM>),
+                    "SubgroupList", out res))
                 {
                     throw new Exception("Could not find appropriate child element to populate Possible Subgroups");
                 }
 
-                return (ObservableCollection<String>)res.GetType()
-                    .GetProperty("SubgroupNames").GetValue(res);
+                return (ObservableCollection<SubGroupVM>)res.GetType()
+                    .GetProperty("SubgroupList").GetValue(res);
             }
         }
 
