@@ -67,7 +67,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
                 this.Children.Add(ProjectItemVM.Wrap(this, c));
         }
 
-        public bool TryFindElement<T>(out T element) where T : ProjectItemVM
+        public bool TryFindElementUp<T>(out T element) where T : ProjectItemVM
         {
             element = default(T);
             T res = (T)_parent;
@@ -85,7 +85,25 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
             return false;
         }
 
-        public bool TryFindElementWithProperty(Type propType, 
+        public bool TryFindElementDown<T>(out T element) where T : ProjectItemVM
+        {
+            element = default(T);
+            foreach(var c in this.Children)
+            {
+                if(c.GetType() == typeof(T))
+                {
+                    element = (T)c;
+                    return true;
+                }
+
+                if (c.TryFindElementDown<T>(out element))
+                    return true;
+            }
+
+            return false;
+        }
+
+        public bool TryFindElementWithPropertyUp(Type propType, 
             string propName, out ProjectItemVM element)
         {
             element = null;
@@ -103,6 +121,29 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
                 }
 
                 res = res._parent;
+            }
+
+            return false;
+        }
+
+        public bool TryFindElementWithPropertyDown(Type propType,
+            string propName, out ProjectItemVM element)
+        {
+            element = null;
+            foreach(var c in this.Children)
+            {
+                var type = c.GetType();
+                foreach(var p in type.GetProperties())
+                {
+                    if(p.PropertyType == propType && p.Name == propName)
+                    {
+                        element = c;
+                        return true;
+                    }
+                }
+
+                if (c.TryFindElementWithPropertyDown(propType, propName, out element))
+                    return true;
             }
 
             return false;
