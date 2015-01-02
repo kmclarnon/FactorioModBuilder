@@ -64,6 +64,7 @@
     <Compile Include="Models\Main.cs" />
     <Compile Include="Models\ProjectItems\Graphics.cs" />
     <Compile Include="Models\ProjectItems\GameItem.cs" />
+    <Compile Include="Models\ProjectItems\Group.cs" />
     <Compile Include="Models\ProjectItems\Groups.cs" />
     <Compile Include="Models\ProjectItems\GameItems.cs" />
     <Compile Include="Models\ProjectItems\SubGroup.cs" />
@@ -76,6 +77,7 @@
     <Compile Include="ViewModels\MainVM.cs" />
     <Compile Include="ViewModels\ProjectItems\GameItemVM.cs" />
     <Compile Include="ViewModels\ProjectItems\GroupsVM.cs" />
+    <Compile Include="ViewModels\ProjectItems\GroupVM.cs" />
     <Compile Include="ViewModels\ProjectItems\SubGroupsVM.cs" />
     <Compile Include="ViewModels\ProjectItems\GameItemsVM.cs" />
     <Compile Include="ViewModels\ProjectItems\ModDataItemVM.cs" />
