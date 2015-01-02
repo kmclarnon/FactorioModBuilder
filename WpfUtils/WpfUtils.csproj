@@ -51,6 +51,7 @@
     <Compile Include="RelayCommand.cs" />
     <Compile Include="ValueConverters\BaseConverter.cs" />
     <Compile Include="ValueConverters\BooleanNot.cs" />
+    <Compile Include="ValueConverters\ObjectNotNull.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
