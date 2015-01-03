@@ -1,4 +1,4 @@
-﻿using FactorioModBuilder.Models.ProjectItems;
+﻿using FactorioModBuilder.Models.ProjectItems.Prototype;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using WpfUtils;
 
-namespace FactorioModBuilder.ViewModels.ProjectItems
+namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
-    public class GameItemVM : ProjectItemVM
+    public class ItemVM : ProjectItemVM
     {
         public string Type { get { return _internal.Type; } }
 
@@ -109,7 +109,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
 
         private GameItem _internal { get { return (GameItem)_item; } }
 
-        public GameItemVM(ProjectItemVM parent, GameItem item)
+        public ItemVM(ProjectItemVM parent, GameItem item)
             : base(parent, item)
         {
 

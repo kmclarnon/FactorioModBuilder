@@ -1,4 +1,5 @@
 ﻿using FactorioModBuilder.ViewModels.ProjectItems;
+using FactorioModBuilder.ViewModels.ProjectItems.Prototype;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +30,7 @@ namespace FactorioModBuilder
             { typeof(ProjectHeaderVM),  (x => x.ProjectHeaderTemplate) },
             { typeof(GroupsVM),     (x => x.ItemGroupsTemplate) },
             { typeof(SubGroupsVM),  (x => x.ItemSubGroupsTemplate) },
-            { typeof(GameItemsVM),          (x => x.ItemsTemplate) },
+            { typeof(ItemsVM),          (x => x.ItemsTemplate) },
             { typeof(PrototypesVM),     (x => x.PrototypeTemplate) }
         };
 

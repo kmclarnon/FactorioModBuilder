@@ -4,12 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FactorioModBuilder.Models.ProjectItems
+namespace FactorioModBuilder.Models.ProjectItems.Prototype
 {
-    public class Prototypes : ProjectItem
+    public class SubGroups : ProjectItem
     {
-        public Prototypes()
-            : base("Prototypes")
+        public SubGroups() : base("Subgroups")
         {
         }
     }

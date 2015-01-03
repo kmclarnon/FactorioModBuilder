@@ -1,4 +1,6 @@
 ﻿using FactorioModBuilder.Models.ProjectItems;
+using FactorioModBuilder.Models.ProjectItems.Prototype;
+using FactorioModBuilder.ViewModels.ProjectItems.Prototype;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +18,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
             this.Children.Add(new ModDataVM(this, new ModData()));
             this.Children.Add(new ModControlVM(this, new ModControl()));
             this.Children.Add(new PrototypesVM(this, new Prototypes()));
+            this.Children.Add(new LocaleVM(this, new Locale()));
         }
     }
 }

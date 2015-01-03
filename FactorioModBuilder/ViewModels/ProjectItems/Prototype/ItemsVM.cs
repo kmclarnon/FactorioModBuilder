@@ -1,4 +1,4 @@
-﻿using FactorioModBuilder.Models.ProjectItems;
+﻿using FactorioModBuilder.Models.ProjectItems.Prototype;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using WpfUtils;
 
-namespace FactorioModBuilder.ViewModels.ProjectItems
+namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
-    public class GameItemsVM : ProjectItemVM
+    public class ItemsVM : ProjectItemVM
     {
-        public ObservableCollection<GameItemVM> ItemList { get; private set; }
+        public ObservableCollection<ItemVM> ItemList { get; private set; }
 
-        private GameItems _internal { get { return (GameItems)_item; } }
+        private Items _internal { get { return (Items)_item; } }
 
         private ICommand _addItem;
         public ICommand AddItemCmd
@@ -42,10 +42,10 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
 
         private int _newCount = 1;
 
-        public GameItemsVM(ProjectItemVM parent, GameItems items)
+        public ItemsVM(ProjectItemVM parent, Items items)
             : base(parent, items)
         {
-            this.ItemList = new ObservableCollection<GameItemVM>();
+            this.ItemList = new ObservableCollection<ItemVM>();
         }
 
         private bool CanAddItem()
@@ -55,7 +55,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
 
         private void AddItem()
         {
-            this.ItemList.Add(new GameItemVM(this, 
+            this.ItemList.Add(new ItemVM(this, 
                 new GameItem("New Item " + _newCount)));
             _newCount++;
         }

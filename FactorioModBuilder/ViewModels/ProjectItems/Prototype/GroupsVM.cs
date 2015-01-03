@@ -1,4 +1,4 @@
-﻿using FactorioModBuilder.Models.ProjectItems;
+﻿using FactorioModBuilder.Models.ProjectItems.Prototype;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using WpfUtils;
 
-namespace FactorioModBuilder.ViewModels.ProjectItems
+namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
     public class GroupsVM : ProjectItemVM
     {

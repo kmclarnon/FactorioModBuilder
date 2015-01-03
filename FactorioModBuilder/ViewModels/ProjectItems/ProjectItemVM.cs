@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using WpfUtils;
 using FactorioModBuilder.Models;
 using FactorioModBuilder.Models.ProjectItems;
+using FactorioModBuilder.Models.ProjectItems.Prototype;
+using FactorioModBuilder.ViewModels.ProjectItems.Prototype;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems
 {
@@ -176,7 +178,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
             { typeof(Prototypes),       ((x, y) => new PrototypesVM(x, (Prototypes)y)) },
             { typeof(Groups),           ((x, y) => new GroupsVM(x, (Groups)y)) },
             { typeof(SubGroups),        ((x, y) => new SubGroupsVM(x, (SubGroups)y)) },
-            { typeof(GameItems),        ((x, y) => new GameItemsVM(x, (GameItems)y)) } 
+            { typeof(Items),        ((x, y) => new ItemsVM(x, (Items)y)) } 
         };
 
         public static ProjectItemVM Wrap(ProjectItemVM parent, ProjectItem item)

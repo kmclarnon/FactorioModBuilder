@@ -1,4 +1,4 @@
-﻿using FactorioModBuilder.Models.ProjectItems;
+﻿using FactorioModBuilder.Models.ProjectItems.Prototype;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FactorioModBuilder.ViewModels.ProjectItems
+namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
     public class PrototypesVM : ProjectItemVM
     {
@@ -26,7 +26,8 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
         {
             this.Children.Add(new GroupsVM(this, new Groups()));
             this.Children.Add(new SubGroupsVM(this, new SubGroups()));
-            this.Children.Add(new GameItemsVM(this, new GameItems()));
+            this.Children.Add(new ItemsVM(this, new Items()));
+            this.Children.Add(new EntityVM(this, new Entity()));
         }
     }
 }
