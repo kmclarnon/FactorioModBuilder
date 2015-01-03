@@ -31,8 +31,8 @@
                         </Style>
                     </DataGrid.RowStyle>
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Item" Width="6*" Binding="{Binding Path=Name}" />
-                        <DataGridTextColumn Header="Subgroup" Width="4*" Binding="{Binding Path=Subgroup}"/>
+                        <DataGridTextColumn Header="Item" Width="5*" Binding="{Binding Path=Name}" />
+                        <DataGridTextColumn Header="Subgroup" Width="5*" Binding="{Binding Path=Subgroup}"/>
                         <DataGridCheckBoxColumn Header="Enabled" Width="3*" Binding="{Binding Path=Enabled}"/>
                     </DataGrid.Columns>
                 </DataGrid>
@@ -76,8 +76,8 @@
                 <Label Content="Subgroup:" Grid.Column="0" Grid.Row="4" Margin="5"
                        IsEnabled="{Binding Path=SelectedItem, Converter={conv:ObjectNotNull}, ElementName=itemList}"/>
                 <ComboBox ItemsSource="{Binding Path=SelectedItem.PossibleSubgroups, ElementName=itemList}"
-                          DisplayMemberPath="Name" Background="LightGray"
-                          SelectedItem="{Binding Path=SelectedItem.Subgroup, ElementName=itemList}"
+                          DisplayMemberPath="Name" Background="LightGray" SelectedValuePath="Name"
+                          SelectedValue="{Binding Path=SelectedItem.Subgroup, ElementName=itemList}"
                           VerticalContentAlignment="Center" Margin="5" Grid.Column="1" Grid.Row="4"
                           IsEnabled="{Binding Path=SelectedItem, Converter={conv:ObjectNotNull}, ElementName=itemList}"/>
                 <Label Content="Order:" Grid.Column="0" Grid.Row="5" Margin="5"
