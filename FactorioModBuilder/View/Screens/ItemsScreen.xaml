@@ -25,6 +25,11 @@
                 </Grid.ColumnDefinitions>
                 <DataGrid x:Name="itemList" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Margin="5"
                       ItemsSource="{Binding Path=ItemList}" AutoGenerateColumns="False">
+                    <DataGrid.RowStyle>
+                        <Style TargetType="{x:Type DataGridRow}">
+                            <Setter Property="IsSelected" Value="{Binding Path=IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        </Style>
+                    </DataGrid.RowStyle>
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Item" Width="6*" Binding="{Binding Path=Name}" />
                         <DataGridTextColumn Header="Subgroup" Width="4*" Binding="{Binding Path=Subgroup}"/>
