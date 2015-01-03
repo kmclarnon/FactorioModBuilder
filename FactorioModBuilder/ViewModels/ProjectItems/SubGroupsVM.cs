@@ -38,6 +38,8 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
             }
         }
 
+        private int _newCount = 1;
+
         public SubGroupsVM(ProjectItemVM parent, SubGroups items)
             : base(parent, items)
         {
@@ -51,17 +53,21 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
 
         private void AddSubgroup()
         {
-
+            this.ItemList.Add(new SubGroupVM(this, 
+                new SubGroup("New Subgroup " + _newCount)));
+            _newCount++;
         }
 
         private bool CanRemoveSubgroup()
         {
-            return true;
+            return this.ItemList.Where(o => o.IsSelected).Any();
         }
 
         private void RemoveSubgroup()
         {
-
+            var list = this.ItemList.Where(o => o.IsSelected).ToList();
+            foreach (var i in list)
+                this.ItemList.Remove(i);
         }
     }
 }
