@@ -16,6 +16,8 @@ namespace FactorioModBuilder.Models.ProjectItems
 
         public Group(string name) : base(name)
         {
+            this.Enabled = true;
+            this.Type = "item-group";
         }
     }
 }
