@@ -58,7 +58,7 @@
                 <TextBox Grid.Column="1" Grid.Row="0" Margin="2.5 2.5 5 2.5"
                          VerticalContentAlignment="Center" 
                          IsEnabled="{Binding Path=SelectedItem, Converter={conv:ObjectNotNull}, ElementName=itemList}"
-                         Text="{Binding Path=SelectedItem.Name, ElementName=itemList}">
+                         Text="{Binding Path=SelectedItem.Name, ElementName=itemList, UpdateSourceTrigger=PropertyChanged}">
                 </TextBox>
                 <Label Content="Icon Path:" Grid.Column="0" Grid.Row="1" Margin="5 2.5 2.5 2.5"
                        VerticalContentAlignment="Center"
