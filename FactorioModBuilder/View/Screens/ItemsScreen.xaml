@@ -36,7 +36,8 @@
                         IsEnabled="{Binding Path=SelectedItem, Converter={conv:ObjectNotNull}, ElementName=itemList}"/>
             </Grid>
             <!-- Item Image -->
-            <Image Grid.Column="1" Grid.Row="0" Margin="5" Source="{Binding Path=SelectedItem.IconPath, ElementName=itemList}"/>
+            <Image Grid.Column="1" Grid.Row="0" Margin="5" Source="{Binding Path=SelectedItem.IconPath, 
+                ElementName=itemList, Converter={conv:NullImage}}"/>
             <!-- Item Properties -->
             <Grid Grid.Column="1" Grid.Row="1">
                 <Grid.ColumnDefinitions>

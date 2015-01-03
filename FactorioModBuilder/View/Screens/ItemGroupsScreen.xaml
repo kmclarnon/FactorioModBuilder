@@ -22,7 +22,7 @@
                     <DataGridTemplateColumn Header="Icon" Width="2*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Image Source="{Binding Path=Icon}" Margin="5"/>
+                                <Image Source="{Binding Path=IconPath, Converter={conv:NullImage}}" Margin="5"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
