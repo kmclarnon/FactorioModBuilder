@@ -14,15 +14,10 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
         {
             get
             {
-                ProjectItemVM res;
-                if (!this.TryFindElementWithPropertyDown(typeof(ObservableCollection<SubGroupVM>),
-                    "SubgroupList", out res))
-                {
-                    throw new Exception("Could not find appropriate child element to populate Possible Subgroups");
-                }
-
-                return (ObservableCollection<SubGroupVM>)res.GetType()
-                    .GetProperty("SubgroupList").GetValue(res);
+                SubGroupsVM res;
+                if (!this.TryFindElementDown<SubGroupsVM>(out res))
+                    throw new Exception("Could not find subgroups child element");
+                return res.ItemList;
             }
         }
 
