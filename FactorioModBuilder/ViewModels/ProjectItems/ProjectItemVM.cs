@@ -178,7 +178,10 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
             { typeof(Prototypes),       ((x, y) => new PrototypesVM(x, (Prototypes)y)) },
             { typeof(Groups),           ((x, y) => new GroupsVM(x, (Groups)y)) },
             { typeof(SubGroups),        ((x, y) => new SubGroupsVM(x, (SubGroups)y)) },
-            { typeof(Items),        ((x, y) => new ItemsVM(x, (Items)y)) } 
+            { typeof(Items),            ((x, y) => new ItemsVM(x, (Items)y)) },
+            { typeof(Recipe),           ((x, y) => new RecipeVM(x, (Recipe)y)) },
+            { typeof(Technology),       ((x, y) => new TechnologyVM(x, (Technology)y)) },
+            { typeof(Tile),             ((x, y) => new TileVM(x, (Tile)y)) }
         };
 
         public static ProjectItemVM Wrap(ProjectItemVM parent, ProjectItem item)

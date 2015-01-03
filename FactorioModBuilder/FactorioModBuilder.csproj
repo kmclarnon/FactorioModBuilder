@@ -62,11 +62,20 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Models\Main.cs" />
+    <Compile Include="Models\ProjectItems\Prototype\Entities.cs" />
+    <Compile Include="Models\ProjectItems\Prototype\Entity.cs" />
+    <Compile Include="Models\ProjectItems\Prototype\Equipment.cs" />
+    <Compile Include="Models\ProjectItems\Prototype\Equips.cs" />
+    <Compile Include="Models\ProjectItems\Prototype\Fluid.cs" />
     <Compile Include="Models\ProjectItems\Graphics.cs" />
+    <Compile Include="Models\ProjectItems\Prototype\Fluids.cs" />
     <Compile Include="Models\ProjectItems\Prototype\Item.cs" />
     <Compile Include="Models\ProjectItems\Prototype\Group.cs" />
     <Compile Include="Models\ProjectItems\Prototype\Groups.cs" />
     <Compile Include="Models\ProjectItems\Prototype\Items.cs" />
+    <Compile Include="Models\ProjectItems\Locale.cs" />
+    <Compile Include="Models\ProjectItems\Prototype\Recipes.cs" />
+    <Compile Include="Models\ProjectItems\Prototype\Recipe.cs" />
     <Compile Include="Models\ProjectItems\Prototype\SubGroup.cs" />
     <Compile Include="Models\ProjectItems\Prototype\SubGroups.cs" />
     <Compile Include="Models\ProjectItems\ModControl.cs" />
@@ -74,17 +83,33 @@
     <Compile Include="Models\ProjectItems\ModDataItem.cs" />
     <Compile Include="Models\ProjectItems\ProjectHeader.cs" />
     <Compile Include="Models\ProjectItems\Prototype\Prototypes.cs" />
+    <Compile Include="Models\ProjectItems\Prototype\Technologies.cs" />
     <Compile Include="Models\ProjectItems\Prototype\Technology.cs" />
+    <Compile Include="Models\ProjectItems\Prototype\Tile.cs" />
+    <Compile Include="Models\ProjectItems\Prototype\Tiles.cs" />
     <Compile Include="ViewModels\MainVM.cs" />
+    <Compile Include="ViewModels\ProjectItems\Prototype\EntitiesVM.cs" />
+    <Compile Include="ViewModels\ProjectItems\Prototype\EntityVM.cs" />
+    <Compile Include="ViewModels\ProjectItems\Prototype\EquipmentVM.cs" />
+    <Compile Include="ViewModels\ProjectItems\Prototype\EquipsVM.cs" />
+    <Compile Include="ViewModels\ProjectItems\Prototype\FluidsVM.cs" />
+    <Compile Include="ViewModels\ProjectItems\Prototype\FluidVM.cs" />
     <Compile Include="ViewModels\ProjectItems\Prototype\ItemVM.cs" />
     <Compile Include="ViewModels\ProjectItems\Prototype\GroupsVM.cs" />
     <Compile Include="ViewModels\ProjectItems\Prototype\GroupVM.cs" />
+    <Compile Include="ViewModels\ProjectItems\LocaleVM.cs" />
+    <Compile Include="ViewModels\ProjectItems\Prototype\RecipesVM.cs" />
+    <Compile Include="ViewModels\ProjectItems\Prototype\RecipeVM.cs" />
     <Compile Include="ViewModels\ProjectItems\Prototype\SubGroupsVM.cs" />
     <Compile Include="ViewModels\ProjectItems\Prototype\ItemsVM.cs" />
     <Compile Include="ViewModels\ProjectItems\ModDataItemVM.cs" />
     <Compile Include="ViewModels\ProjectItems\ProjectHeaderVM.cs" />
     <Compile Include="ViewModels\ProjectItems\Prototype\PrototypesVM.cs" />
     <Compile Include="ViewModels\ProjectItems\Prototype\SubGroupVM.cs" />
+    <Compile Include="ViewModels\ProjectItems\Prototype\TechnologiesVM.cs" />
+    <Compile Include="ViewModels\ProjectItems\Prototype\TechnologyVM.cs" />
+    <Compile Include="ViewModels\ProjectItems\Prototype\TilesVM.cs" />
+    <Compile Include="ViewModels\ProjectItems\Prototype\TileVM.cs" />
     <Compile Include="ViewTemplateSelectorcs.cs" />
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
