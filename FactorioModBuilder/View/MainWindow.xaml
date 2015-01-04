@@ -27,7 +27,13 @@
                 ItemGroupsTemplate="{StaticResource ItemGroups_Template}"
                 ItemSubGroupsTemplate="{StaticResource ItemSubGroups_Template}"
                 ItemsTemplate="{StaticResource Items_Template}"
-                PrototypeTemplate="{StaticResource Prototype_Template}"/>
+                PrototypeTemplate="{StaticResource Prototype_Template}"
+                EntitiesTemplate="{StaticResource Entities_Template}"
+                EquipsTemplate="{StaticResource Equipment_Template}"
+                FluidsTemplate="{StaticResource Fluids_Template}"
+                RecipesTemplate="{StaticResource Recipes_Template}"
+                TechnologyTemplate="{StaticResource Technology_Template}"
+                TilesTemplate="{StaticResource Tiles_Template}"/>
         </ResourceDictionary>
     </Window.Resources>
     <Grid>

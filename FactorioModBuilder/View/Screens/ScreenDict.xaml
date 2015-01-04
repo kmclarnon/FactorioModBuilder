@@ -9,5 +9,11 @@
         <ResourceDictionary Source="ItemsScreen.xaml"/>
         <ResourceDictionary Source="ItemSubGroupsScreen.xaml"/>
         <ResourceDictionary Source="PrototypeScreen.xaml"/>
+        <ResourceDictionary Source="EntitiesScreen.xaml"/>
+        <ResourceDictionary Source="FluidsScreen.xaml"/>
+        <ResourceDictionary Source="EquipmentScreen.xaml"/>
+        <ResourceDictionary Source="RecipesScreen.xaml"/>
+        <ResourceDictionary Source="TechnologyScreen.xaml"/>
+        <ResourceDictionary Source="TilesScreen.xaml"/>
     </ResourceDictionary.MergedDictionaries>    
 </ResourceDictionary>

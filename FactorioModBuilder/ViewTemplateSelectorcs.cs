@@ -20,6 +20,12 @@ namespace FactorioModBuilder
         public DataTemplate ItemSubGroupsTemplate { get; set; }
         public DataTemplate ItemsTemplate { get; set; }
         public DataTemplate PrototypeTemplate { get; set; }
+        public DataTemplate EntitiesTemplate { get; set; }
+        public DataTemplate EquipsTemplate { get; set; }
+        public DataTemplate FluidsTemplate { get; set; }
+        public DataTemplate RecipesTemplate { get; set; }
+        public DataTemplate TechnologyTemplate { get; set; }
+        public DataTemplate TilesTemplate { get; set; }
 
         private static Dictionary<Type, Func<ViewTemplateSelector, DataTemplate>> _typeDict = 
             new Dictionary<Type, Func<ViewTemplateSelector, DataTemplate>>()
@@ -28,10 +34,16 @@ namespace FactorioModBuilder
             { typeof(ModDataVM),        (x => x.ModDataTemplate) },
             { typeof(ModInfoVM),        (x => x.ModInfoTemplate) },
             { typeof(ProjectHeaderVM),  (x => x.ProjectHeaderTemplate) },
-            { typeof(GroupsVM),     (x => x.ItemGroupsTemplate) },
-            { typeof(SubGroupsVM),  (x => x.ItemSubGroupsTemplate) },
+            { typeof(GroupsVM),         (x => x.ItemGroupsTemplate) },
+            { typeof(SubGroupsVM),      (x => x.ItemSubGroupsTemplate) },
             { typeof(ItemsVM),          (x => x.ItemsTemplate) },
-            { typeof(PrototypesVM),     (x => x.PrototypeTemplate) }
+            { typeof(PrototypesVM),     (x => x.PrototypeTemplate) },
+            { typeof(EntitiesVM),       (x => x.EntitiesTemplate) },
+            { typeof(EquipsVM),         (x => x.EquipsTemplate) },
+            { typeof(FluidsVM),         (x => x.FluidsTemplate) },
+            { typeof(RecipesVM),        (x => x.RecipesTemplate) },
+            { typeof(TechnologiesVM),   (x => x.TechnologyTemplate) },
+            { typeof(TilesVM),          (x => x.TilesTemplate) }
         };
 
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
