@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FactorioModBuilder.Models.ProjectItems.Prototype
 {
-    public class SubGroup : ProjectItem
+    public class SubGroup : ProjectItem<SubGroup>
     {
         public string Type { get; set; }
         public string Group { get; set; }

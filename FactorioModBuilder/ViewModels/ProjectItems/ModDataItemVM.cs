@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems
 {
-    public class ModDataItemVM : ProjectItemVM
+    public class ModDataItemVM : ProjectItemVM<ModDataItem>
     {
         public string Type
         {
@@ -37,7 +37,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
 
         private ModDataItem _data { get { return (ModDataItem)_item; } }
 
-        public ModDataItemVM(ProjectItemVM parent, ModDataItem item)
+        public ModDataItemVM(ProjectItemVMBase parent, ModDataItem item)
             : base(parent, item)
         {
 

@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
-    public class FluidsVM : ProjectItemVM
+    public class FluidsVM : ProjectItemVM<Fluids>
     {
-        public FluidsVM(ProjectItemVM parent, Fluids fl) 
+        public FluidsVM(ProjectItemVMBase parent, Fluids fl) 
             : base(parent, fl)
         {
         }

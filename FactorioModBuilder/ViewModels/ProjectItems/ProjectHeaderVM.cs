@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems
 {
-    public class ProjectHeaderVM : ProjectItemVM
+    public class ProjectHeaderVM : ProjectItemVM<ProjectHeader>
     {
         public ProjectHeaderVM(ProjectHeader header)
             : base(null, header)

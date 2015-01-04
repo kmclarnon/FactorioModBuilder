@@ -11,7 +11,7 @@ using WpfUtils;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
-    public class ItemVM : ProjectItemVM
+    public class ItemVM : ProjectItemVM<Item>
     {
         public string Type { get { return _internal.Type; } }
 
@@ -96,7 +96,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         {
             get
             {
-                ProjectItemVM res;
+                ProjectItemVMBase res;
                 if (!this.TryFindElementWithPropertyUp(typeof(ObservableCollection<SubGroupVM>),
                     "PossibleSubgroups", out res))
                 {
@@ -107,9 +107,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
             }
         }
 
-        private GameItem _internal { get { return (GameItem)_item; } }
-
-        public ItemVM(ProjectItemVM parent, GameItem item)
+        public ItemVM(ProjectItemVMBase parent, Item item)
             : base(parent, item)
         {
 

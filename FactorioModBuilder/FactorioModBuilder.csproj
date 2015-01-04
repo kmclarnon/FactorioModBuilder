@@ -74,6 +74,7 @@
     <Compile Include="Models\ProjectItems\Prototype\Groups.cs" />
     <Compile Include="Models\ProjectItems\Prototype\Items.cs" />
     <Compile Include="Models\ProjectItems\Locale.cs" />
+    <Compile Include="Models\ProjectItems\ProjectItemBase.cs" />
     <Compile Include="Models\ProjectItems\Prototype\Recipes.cs" />
     <Compile Include="Models\ProjectItems\Prototype\Recipe.cs" />
     <Compile Include="Models\ProjectItems\Prototype\SubGroup.cs" />
@@ -87,7 +88,9 @@
     <Compile Include="Models\ProjectItems\Prototype\Technology.cs" />
     <Compile Include="Models\ProjectItems\Prototype\Tile.cs" />
     <Compile Include="Models\ProjectItems\Prototype\Tiles.cs" />
+    <Compile Include="Models\ProjectItems\Prototype\TileVariant.cs" />
     <Compile Include="ViewModels\MainVM.cs" />
+    <Compile Include="ViewModels\ProjectItems\ProjectItemVMBase.cs" />
     <Compile Include="ViewModels\ProjectItems\Prototype\EntitiesVM.cs" />
     <Compile Include="ViewModels\ProjectItems\Prototype\EntityVM.cs" />
     <Compile Include="ViewModels\ProjectItems\Prototype\EquipmentVM.cs" />

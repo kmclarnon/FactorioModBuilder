@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FactorioModBuilder.Models.ProjectItems.Prototype
 {
-    public class GameItem : ProjectItem
+    public class Item : ProjectItem<Item>
     {
         public string Type { get { return "item"; } }
         public string Subgroup { get; set; }
@@ -15,7 +15,7 @@ namespace FactorioModBuilder.Models.ProjectItems.Prototype
         public string IconPath { get; set; }
         public int StackSize { get; set; }
 
-        public GameItem(string name) : base(name)
+        public Item(string name) : base(name)
         {
         }
     }

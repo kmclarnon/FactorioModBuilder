@@ -9,7 +9,7 @@ using WpfUtils;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems
 {
-    public class ModInfoVM : ProjectItemVM
+    public class ModInfoVM : ProjectItemVM<ModInfo>
     {
         public string ModName
         {
@@ -126,7 +126,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
 
         private ModInfo _mItem { get { return (ModInfo)_item; } }
 
-        public ModInfoVM(ProjectItemVM parent, ModInfo info)
+        public ModInfoVM(ProjectItemVMBase parent, ModInfo info)
             : base(parent, info)
         {
 

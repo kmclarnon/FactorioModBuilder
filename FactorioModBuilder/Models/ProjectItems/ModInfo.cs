@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FactorioModBuilder.Models.ProjectItems
 {
-    public class ModInfo : ProjectItem
+    public class ModInfo : ProjectItem<ModInfo>
     {
         public string ModName { get; set; }
         public string Version { get; set; }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems
 {
-    public class ModDataVM : ProjectItemVM
+    public class ModDataVM : ProjectItemVM<ModData>
     {
         private bool _manualMode;
         public bool ManualMode
@@ -26,9 +26,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
 
         public ObservableCollection<ModDataItemVM> DataItems { get; private set; }
 
-        private ModData _internal { get { return (ModData)_item; } }
-
-        public ModDataVM(ProjectItemVM parent, ModData data)
+        public ModDataVM(ProjectItemVMBase parent, ModData data)
             : base(parent, data)
         {
             this.DataItems = new ObservableCollection<ModDataItemVM>();

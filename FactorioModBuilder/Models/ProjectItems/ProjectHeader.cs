@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FactorioModBuilder.Models.ProjectItems
 {
-    public class ProjectHeader : ProjectItem
+    public class ProjectHeader : ProjectItem<ProjectHeader>
     {
         public ProjectHeader(string name) : base(name)
         {

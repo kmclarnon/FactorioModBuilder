@@ -12,14 +12,14 @@ namespace FactorioModBuilder.ViewModels
 {
     public class ProjectVM : BaseVM
     {
-        public List<ProjectItemVM> ProjectItems { get; private set; }
+        public List<ProjectItemVMBase> ProjectItems { get; private set; }
 
         private Project _project;
 
         public ProjectVM(Project project)
         {
             _project = project;
-            this.ProjectItems = new List<ProjectItemVM>() { new ProjectHeaderVM(_project.ProjectItem) };
+            this.ProjectItems = new List<ProjectItemVMBase>() { new ProjectHeaderVM(_project.ProjectItem) };
         }
     }
 }

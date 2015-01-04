@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
-    public class EquipsVM : ProjectItemVM
+    public class EquipsVM : ProjectItemVM<Equips>
     {
-        public EquipsVM(ProjectItemVM parent, Equips eq)
+        public EquipsVM(ProjectItemVMBase parent, Equips eq)
             : base(parent, eq)
         {
         }

@@ -10,7 +10,7 @@ using WpfUtils;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
-    public class GroupsVM : ProjectItemVM
+    public class GroupsVM : ProjectItemVM<Groups>
     {
         public ObservableCollection<GroupVM> ItemList { get; private set; }
 
@@ -40,7 +40,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 
         private int _newCount = 1;
 
-        public GroupsVM(ProjectItemVM parent, Groups groups)
+        public GroupsVM(ProjectItemVMBase parent, Groups groups)
             : base(parent, groups)
         {
             this.ItemList = new ObservableCollection<GroupVM>();

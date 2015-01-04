@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FactorioModBuilder.Models.ProjectItems.Prototype
 {
-    public class Group : ProjectItem
+    public class Group : ProjectItem<Group>
     {
         public string Type { get; set; }
         public string IconPath { get; set; }

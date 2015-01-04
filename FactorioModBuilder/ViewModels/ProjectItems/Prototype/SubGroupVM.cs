@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
-    public class SubGroupVM : ProjectItemVM
+    public class SubGroupVM : ProjectItemVM<SubGroup>
     {
         public string Type
         {
@@ -48,9 +48,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
             }
         }
 
-        private SubGroup _internal { get { return (SubGroup)_item; } }
-
-        public SubGroupVM(ProjectItemVM parent, SubGroup item)
+        public SubGroupVM(ProjectItemVMBase parent, SubGroup item)
             : base(parent, item)
         {
         }

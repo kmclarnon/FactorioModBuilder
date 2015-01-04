@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
-    public class TechnologiesVM : ProjectItemVM
+    public class TechnologiesVM : ProjectItemVM<Technologies>
     {
-        public TechnologiesVM(ProjectItemVM parent, Technologies tech)
+        public TechnologiesVM(ProjectItemVMBase parent, Technologies tech)
             : base(parent, tech)
         {
         }

@@ -7,11 +7,9 @@ using System.Threading.Tasks;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems
 {
-    public class ModControlVM : ProjectItemVM
+    public class ModControlVM : ProjectItemVM<ModControl>
     {
-        private ModControl _mc { get { return (ModControl)_item; } }
-
-        public ModControlVM(ProjectItemVM parent, ModControl control)
+        public ModControlVM(ProjectItemVMBase parent, ModControl control)
             : base(parent, control)
         {
 

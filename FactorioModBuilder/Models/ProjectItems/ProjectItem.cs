@@ -7,13 +7,11 @@ using System.Threading.Tasks;
 
 namespace FactorioModBuilder.Models.ProjectItems
 {
-    public abstract class ProjectItem
+    public abstract class ProjectItem<T> : ProjectItemBase
+        where T : ProjectItem<T>
     {
-        public string Name { get; set; }
-
-        public ProjectItem(string name)
+        public ProjectItem(string name) : base(name)
         {
-            this.Name = name;
         }
     }
 }

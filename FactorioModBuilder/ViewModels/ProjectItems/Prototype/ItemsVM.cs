@@ -10,11 +10,9 @@ using WpfUtils;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
-    public class ItemsVM : ProjectItemVM
+    public class ItemsVM : ProjectItemVM<Items>
     {
         public ObservableCollection<ItemVM> ItemList { get; private set; }
-
-        private Items _internal { get { return (Items)_item; } }
 
         private ICommand _addItem;
         public ICommand AddItemCmd
@@ -42,7 +40,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 
         private int _newCount = 1;
 
-        public ItemsVM(ProjectItemVM parent, Items items)
+        public ItemsVM(ProjectItemVMBase parent, Items items)
             : base(parent, items)
         {
             this.ItemList = new ObservableCollection<ItemVM>();
@@ -56,7 +54,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         private void AddItem()
         {
             this.ItemList.Add(new ItemVM(this, 
-                new GameItem("New Item " + _newCount)));
+                new Item("New Item " + _newCount)));
             _newCount++;
         }
 

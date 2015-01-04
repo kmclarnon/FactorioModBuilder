@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems
 {
-    public class LocaleVM : ProjectItemVM
+    public class LocaleVM : ProjectItemVM<Locale>
     {
-        public LocaleVM(ProjectItemVM parent, Locale loc) 
+        public LocaleVM(ProjectItemVMBase parent, Locale loc) 
             : base(parent, loc)
         {
         }

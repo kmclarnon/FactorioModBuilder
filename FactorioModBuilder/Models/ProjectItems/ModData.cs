@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FactorioModBuilder.Models.ProjectItems
 {
-    public class ModData : ProjectItem
+    public class ModData : ProjectItem<ModData>
     {
         public ModData() : base("Mod Data")
         {

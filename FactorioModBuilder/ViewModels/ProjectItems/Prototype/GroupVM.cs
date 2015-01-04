@@ -10,7 +10,7 @@ using WpfUtils;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
-    public class GroupVM : ProjectItemVM
+    public class GroupVM : ProjectItemVM<Group>
     {
         public string Type
         {
@@ -89,9 +89,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
             }
         }
 
-        private Group _internal { get { return (Group)_item; } }
-
-        public GroupVM(ProjectItemVM parent, Group group)
+        public GroupVM(ProjectItemVMBase parent, Group group)
             : base(parent, group)
         {
         }

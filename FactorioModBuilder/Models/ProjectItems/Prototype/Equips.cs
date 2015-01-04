@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FactorioModBuilder.Models.ProjectItems.Prototype
 {
-    public class Equips : ProjectItem
+    public class Equips : ProjectItem<Equips>
     {
         public Equips() : base("Equipment")
         {

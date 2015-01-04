@@ -6,10 +6,13 @@ using System.Threading.Tasks;
 
 namespace FactorioModBuilder.Models.ProjectItems
 {
-    public class Locale : ProjectItem<Locale>
+    public abstract class ProjectItemBase
     {
-        public Locale() : base("Locale")
+        public string Name { get; set; }
+
+        public ProjectItemBase(string name)
         {
+            this.Name = name;
         }
     }
 }

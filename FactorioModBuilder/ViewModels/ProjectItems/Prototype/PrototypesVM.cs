@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
-    public class PrototypesVM : ProjectItemVM
+    public class PrototypesVM : ProjectItemVM<Prototypes>
     {
         public ObservableCollection<SubGroupVM> PossibleSubgroups
         {
@@ -21,7 +21,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
             }
         }
 
-        public PrototypesVM(ProjectItemVM parent, Prototypes types)
+        public PrototypesVM(ProjectItemVMBase parent, Prototypes types)
             : base(parent, types)
         {
             this.Children.Add(new GroupsVM(this, new Groups()));
