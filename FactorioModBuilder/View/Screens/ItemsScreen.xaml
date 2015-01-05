@@ -7,50 +7,46 @@
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <!-- Item List -->
-            <Grid Grid.Column="0" Grid.Row="0" Grid.RowSpan="1000">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
+            <DataGrid x:Name="itemList" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Margin="5"
+                      ItemsSource="{Binding Path=ItemList}" AutoGenerateColumns="False">
+                <DataGrid.RowStyle>
+                    <Style TargetType="{x:Type DataGridRow}">
+                        <Setter Property="IsSelected" Value="{Binding Path=IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    </Style>
+                </DataGrid.RowStyle>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Item" Width="5*" Binding="{Binding Path=Name}" />
+                    <DataGridTextColumn Header="Subgroup" Width="5*" Binding="{Binding Path=Subgroup}"/>
+                    <DataGridCheckBoxColumn Header="Enabled" Width="3*" Binding="{Binding Path=Enabled}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Label Content="Item Information" Grid.Column="0" Grid.Row="1" FontWeight="Bold" Margin="5"
+                   IsEnabled="{Binding Path=SelectedItem, Converter={conv:ObjectNotNull}, ElementName=itemList}"/>
+            <Grid Grid.Column="1" Grid.Row="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <DataGrid x:Name="itemList" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Margin="5"
-                      ItemsSource="{Binding Path=ItemList}" AutoGenerateColumns="False">
-                    <DataGrid.RowStyle>
-                        <Style TargetType="{x:Type DataGridRow}">
-                            <Setter Property="IsSelected" Value="{Binding Path=IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                        </Style>
-                    </DataGrid.RowStyle>
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Item" Width="5*" Binding="{Binding Path=Name}" />
-                        <DataGridTextColumn Header="Subgroup" Width="5*" Binding="{Binding Path=Subgroup}"/>
-                        <DataGridCheckBoxColumn Header="Enabled" Width="3*" Binding="{Binding Path=Enabled}"/>
-                    </DataGrid.Columns>
-                </DataGrid>
-                <Button Content="Add Item" Grid.Column="0" Grid.Row="1" Margin="5 5 2.5 5" Command="{Binding Path=AddItemCmd}"/>
-                <Button Content="Remove Item" Grid.Column="1" Grid.Row="1" Margin="2.5 5 5 5" Command="{Binding Path=RemoveItemCmd}"
+                <Button Content="Add Item" Grid.Column="1" Margin="5 5 2.5 5" Command="{Binding Path=AddItemCmd}"/>
+                <Button Content="Remove Item" Grid.Column="2" Margin="2.5 5 5 5" Command="{Binding Path=RemoveItemCmd}"
                         IsEnabled="{Binding Path=SelectedItem, Converter={conv:ObjectNotNull}, ElementName=itemList}"/>
             </Grid>
-            <!-- Item Image -->
-            <Image Grid.Column="1" Grid.Row="0" Margin="5" Source="{Binding Path=SelectedItem.IconPath, 
-                ElementName=itemList, Converter={conv:NullImage}}"/>
             <!-- Item Properties -->
-            <Grid Grid.Column="1" Grid.Row="1">
+            <Grid Grid.Column="0" Grid.Row="2" IsEnabled="{Binding Path=SelectedItem, Converter={conv:ObjectNotNull}, ElementName=itemList}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -59,54 +55,35 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <Label Content="Item Information" Grid.Column="0" Grid.ColumnSpan="2" 
-                       Grid.Row="1" FontWeight="Bold" Margin="5"
-                       IsEnabled="{Binding Path=SelectedItem, Converter={conv:ObjectNotNull}, ElementName=itemList}"/>
-                <Label Content="Type:" Grid.Column="0" Grid.Row="2" Margin="5"
-                       IsEnabled="{Binding Path=SelectedItem, Converter={conv:ObjectNotNull}, ElementName=itemList}"/>
+                <Label Content="Type:" Grid.Column="0" Grid.Row="0" Margin="5"/>
                 <TextBox Text="{Binding Path=SelectedItem.Type, ElementName=itemList, Mode=OneWay}" 
-                         IsReadOnly="True" Margin="5" Grid.Column="2" Grid.Row="2"
-                         VerticalContentAlignment="Center"
-                         IsEnabled="{Binding Path=SelectedItem, Converter={conv:ObjectNotNull}, ElementName=itemList}"/>
-                <Label Content="Name:" Grid.Column="0" Grid.Row="3" Margin="5"
-                       IsEnabled="{Binding Path=SelectedItem, Converter={conv:ObjectNotNull}, ElementName=itemList}"/>
+                         IsReadOnly="True" Margin="5" Grid.Column="2" Grid.Row="0"
+                         VerticalContentAlignment="Center"/>
+                <Label Content="Name:" Grid.Column="0" Grid.Row="1" Margin="5"/>
                 <TextBox Text="{Binding Path=SelectedItem.Name, ElementName=itemList}" 
-                         Margin="5" Grid.Column="1" Grid.Row="3" VerticalContentAlignment="Center"
-                         IsEnabled="{Binding Path=SelectedItem, Converter={conv:ObjectNotNull}, ElementName=itemList}"/>
-                <Label Content="Subgroup:" Grid.Column="0" Grid.Row="4" Margin="5"
-                       IsEnabled="{Binding Path=SelectedItem, Converter={conv:ObjectNotNull}, ElementName=itemList}"/>
+                         Margin="5" Grid.Column="1" Grid.Row="1" VerticalContentAlignment="Center"/>
+                <Label Content="Subgroup:" Grid.Column="0" Grid.Row="2" Margin="5"/>
                 <ComboBox ItemsSource="{Binding Path=SelectedItem.PossibleSubgroups, ElementName=itemList}"
                           DisplayMemberPath="Name" Background="LightGray" SelectedValuePath="Name"
                           SelectedValue="{Binding Path=SelectedItem.Subgroup, ElementName=itemList}"
-                          VerticalContentAlignment="Center" Margin="5" Grid.Column="1" Grid.Row="4"
-                          IsEnabled="{Binding Path=SelectedItem, Converter={conv:ObjectNotNull}, ElementName=itemList}"/>
-                <Label Content="Order:" Grid.Column="0" Grid.Row="5" Margin="5"
-                       IsEnabled="{Binding Path=SelectedItem, Converter={conv:ObjectNotNull}, ElementName=itemList}"/>
+                          VerticalContentAlignment="Center" Margin="5" Grid.Column="1" Grid.Row="2"/>
+                <Label Content="Order:" Grid.Column="0" Grid.Row="3" Margin="5"/>
                 <TextBox Text="{Binding Path=SelectedItem.Order, ElementName=itemList}" 
-                         Margin="5" Grid.Column="1" Grid.Row="5"
-                         VerticalContentAlignment="Center"
-                         IsEnabled="{Binding Path=SelectedItem, Converter={conv:ObjectNotNull}, ElementName=itemList}"/>
-                <Label Content="Icon Path:" Grid.Column="0" Grid.Row="6" Margin="5"
-                       IsEnabled="{Binding Path=SelectedItem, Converter={conv:ObjectNotNull}, ElementName=itemList}"/>
-                <Grid Grid.Column="1" Grid.Row="6">
+                         Margin="5" Grid.Column="1" Grid.Row="3" VerticalContentAlignment="Center"/>
+                <Label Content="Icon Path:" Grid.Column="0" Grid.Row="4" Margin="5"/>
+                <Grid Grid.Column="1" Grid.Row="4">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="50"/>
                     </Grid.ColumnDefinitions>
-                    <TextBox Text="{Binding Path=SelectedItem.IconPath, ElementName=itemList}"
-                             Margin="5 5 2.5 5" Grid.Column="0" IsReadOnly="True" Background="LightGray"
-                             VerticalContentAlignment="Center" 
-                             IsEnabled="{Binding Path=SelectedItem, Converter={conv:ObjectNotNull}, ElementName=itemList}"/>
+                    <TextBox Text="{Binding Path=SelectedItem.IconPath, ElementName=itemList}" Margin="5 5 2.5 5" 
+                             Grid.Column="0" IsReadOnly="True" Background="LightGray" VerticalContentAlignment="Center"/>
                     <Button Content="..." Grid.Column="1" Margin="2.5 5 5 5"
-                            Command="{Binding Path=SelectedItem.FindImageCmd, ElementName=itemList}"
-                            IsEnabled="{Binding Path=SelectedItem, Converter={conv:ObjectNotNull}, ElementName=itemList}"/>
+                            Command="{Binding Path=SelectedItem.FindImageCmd, ElementName=itemList}"/>
                 </Grid>
-                <Label Content="Stack Size:" Grid.Column="0" Grid.Row="7" Margin="5"
-                       IsEnabled="{Binding Path=SelectedItem, Converter={conv:ObjectNotNull}, ElementName=itemList}"/>
+                <Label Content="Stack Size:" Grid.Column="0" Grid.Row="7" Margin="5"/>
                 <TextBox Text="{bind:NumberBinding Path=SelectedItem.StackSize, ElementName=itemList}" 
-                         Grid.Column="1" Grid.Row="7" Margin="6"
-                         VerticalContentAlignment="Center"
-                         IsEnabled="{Binding Path=SelectedItem, Converter={conv:ObjectNotNull}, ElementName=itemList}"/>
+                         Grid.Column="1" Grid.Row="7" Margin="6" VerticalContentAlignment="Center"/>
             </Grid>
         </Grid>
     </DataTemplate>   
