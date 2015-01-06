@@ -11,6 +11,9 @@ using FactorioModBuilder.View;
 using FactorioModBuilder.Models.SolutionItems;
 using System.Collections.ObjectModel;
 using FactorioModBuilder.Models.ProjectItems;
+using FactorioModBuilder.ViewModels.Utility;
+using FactorioModBuilder.ViewModels.ProjectItems.Prototype;
+using FactorioModBuilder.Models.ProjectItems.Prototype;
 
 namespace FactorioModBuilder.ViewModels
 {
@@ -46,15 +49,15 @@ namespace FactorioModBuilder.ViewModels
             }
         }
 
-        private ObservableCollection<SolutionVM> _activeSolution;
-        public ObservableCollection<SolutionVM> ActiveSolution
+        private ObservableCollection<SolutionVM> _solutions;
+        public ObservableCollection<SolutionVM> Solutions
         {
-            get { return _activeSolution; }
+            get { return _solutions; }
             set
             {
-                if(_activeSolution != value)
+                if(_solutions != value)
                 {
-                    _activeSolution = value;
+                    _solutions = value;
                     this.NotifyPropertyChanged();
                 }
             }
@@ -137,11 +140,32 @@ namespace FactorioModBuilder.ViewModels
         public MainVM(Main m)
         {
             _main = m;
-            this.ActiveSolution = new ObservableCollection<SolutionVM>()
+            this.Solutions = new ObservableCollection<SolutionVM>()
             {
                 new SolutionVM(
                     new Solution("Test Solution"), 
-                    new List<Project>() { new Project("Test Project") })
+                    new List<ProjectVM>() 
+                    { 
+                        new ProjectVM(new Project("Test Project"), 
+                            new List<TreeItemVMBase>()
+                            {
+                                new ModInfoVM(new ModInfo()),
+                                new ModDataVM(new ModData()),
+                                new ModControlVM(new ModControl()),
+                                new PrototypesVM(new Prototypes(),
+                                    new List<TreeItemVMBase>()
+                                    {
+                                        new GroupsVM(new Groups()),
+                                        new SubGroupsVM(new SubGroups()),
+                                        new EquipsVM(new Equips()),
+                                        new FluidsVM(new Fluids()),
+                                        new ItemsVM(new Items()),
+                                        new RecipesVM(new Recipes()),
+                                        new TechnologiesVM(new Technologies()),
+                                        new TilesVM(new Tiles())
+                                    })
+                            }) 
+                    })
             };
         }
 
@@ -162,7 +186,7 @@ namespace FactorioModBuilder.ViewModels
                 switch (result.ResultSolutionType)
                 {
                     case SolutionType.CreateNew:
-                        this.ActiveSolution.Clear();
+                        this.Solutions.Clear();
 
                         break;
                     case SolutionType.AddExisting:
