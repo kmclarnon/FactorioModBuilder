@@ -1,4 +1,4 @@
-﻿<Window x:Class="FactorioModBuilder.View.NewProject"
+﻿<Window x:Class="FactorioModBuilder.View.NewProjectDialog"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:system="clr-namespace:System;assembly=mscorlib"
@@ -31,10 +31,10 @@
             </Grid.RowDefinitions>
             <Label Content="Name:" Grid.Row="0" VerticalContentAlignment="Center" Margin="5"/>
             <TextBox Grid.Row="0" Grid.Column="1" VerticalContentAlignment="Center" Margin="5"
-                     Text="{Binding Path=ResultProjectName}"/>
+                     Text="{Binding Path=ResultProjectName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             <Label Content="Location:" Grid.Row="1" VerticalContentAlignment="Center" Margin="5"/>
             <TextBox Grid.Row="1" Grid.Column="1" VerticalContentAlignment="Center" Margin="5"
-                     Text="{Binding Path=ResultLocation}"/>
+                     Text="{Binding Path=ResultLocation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             <Button Content="Browse" Grid.Row="1" Grid.Column="2" VerticalContentAlignment="Center" Margin="5"
                     Command="{Binding Path=BrowseLocationCmd}"/>
             <Label Content="Solution:" Grid.Row="2" VerticalContentAlignment="Center" Margin="5"/>
@@ -45,7 +45,7 @@
             </ComboBox>
             <Label Content="Solution Name:" Grid.Row="3" VerticalContentAlignment="Center" Margin="5"/>
             <TextBox Grid.Row="3" Grid.Column="1" VerticalContentAlignment="Center" Margin="5"
-                     Text="{Binding Path=ResultSolutionName}"/>
+                     Text="{Binding Path=ResultSolutionName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             <Grid Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="4">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="3*"/>
