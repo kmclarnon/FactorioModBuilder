@@ -15,8 +15,8 @@ namespace FactorioModBuilder.ViewModels
 {
     public class SolutionVM : TreeItemVM<Solution>
     {      
-        public SolutionVM(Solution sol, List<Project> projects)
-            : base(null, sol, projects)
+        public SolutionVM(Solution sol, IEnumerable<ProjectVM> projects)
+            : base(sol, projects)
         {
 
         }

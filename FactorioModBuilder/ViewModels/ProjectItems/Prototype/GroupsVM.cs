@@ -41,6 +41,11 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 
         private int _newCount = 1;
 
+        public GroupsVM(Groups groups)
+            : this(null, groups)
+        {
+        }
+
         public GroupsVM(TreeItemVMBase parent, Groups groups)
             : base(parent, groups)
         {
