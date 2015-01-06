@@ -127,10 +127,14 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
 
         private ModInfo _mItem { get { return (ModInfo)_item; } }
 
+        public ModInfoVM(ModInfo info)
+            : base(info)
+        {
+        }
+
         public ModInfoVM(TreeItemVMBase parent, ModInfo info)
             : base(parent, info)
         {
-
         }
 
         private bool CanCancel()

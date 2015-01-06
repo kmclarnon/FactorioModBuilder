@@ -90,6 +90,11 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
             }
         }
 
+        public GroupVM(Group group)
+            : base(group)
+        {
+        }
+
         public GroupVM(TreeItemVMBase parent, Group group)
             : base(parent, group)
         {

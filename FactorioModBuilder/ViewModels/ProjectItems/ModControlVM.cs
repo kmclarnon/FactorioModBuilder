@@ -10,10 +10,14 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
 {
     public class ModControlVM : TreeItemVM<ModControl>
     {
+        public ModControlVM(ModControl control)
+            : base(control)
+        {
+        }
+
         public ModControlVM(TreeItemVMBase parent, ModControl control)
             : base(parent, control)
         {
-
         }
     }
 }

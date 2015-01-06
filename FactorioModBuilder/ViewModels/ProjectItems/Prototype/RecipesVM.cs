@@ -10,6 +10,11 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
     public class RecipesVM : TreeItemVM<Recipes>
     {
+        public RecipesVM(Recipes rec)
+            : base(rec)
+        {
+        }
+
         public RecipesVM(TreeItemVMBase parent, Recipes rec)
             : base(parent, rec)
         {

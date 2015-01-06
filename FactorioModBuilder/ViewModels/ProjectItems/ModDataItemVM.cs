@@ -38,10 +38,14 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
 
         private ModDataItem _data { get { return (ModDataItem)_item; } }
 
+        public ModDataItemVM(ModDataItem item)
+            : base(item)
+        {
+        }
+
         public ModDataItemVM(TreeItemVMBase parent, ModDataItem item)
             : base(parent, item)
         {
-
         }
     }
 }

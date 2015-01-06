@@ -108,10 +108,14 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
             }
         }
 
+        public ItemVM(Item item)
+            : base(item)
+        {
+        }
+
         public ItemVM(TreeItemVMBase parent, Item item)
             : base(parent, item)
         {
-
         }
 
         private bool CanFindImage()

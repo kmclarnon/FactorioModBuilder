@@ -41,6 +41,11 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 
         private int _newCount = 1;
 
+        public ItemsVM(Items items)
+            : this(null, items)
+        {
+        }
+
         public ItemsVM(TreeItemVMBase parent, Items items)
             : base(parent, items)
         {

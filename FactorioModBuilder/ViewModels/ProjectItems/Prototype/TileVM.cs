@@ -10,6 +10,11 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
     public class TileVM : TreeItemVM<Tile>
     {
+        public TileVM(Tile tile)
+            : base(tile)
+        {
+        }
+
         public TileVM(TreeItemVMBase parent, Tile tile)
             : base(parent, tile)
         {

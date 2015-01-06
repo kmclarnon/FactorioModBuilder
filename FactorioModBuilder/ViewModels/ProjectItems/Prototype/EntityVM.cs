@@ -10,6 +10,11 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
     public class EntityVM : TreeItemVM<Entity>
     {
+        public EntityVM(Entity entity)
+            : base(entity)
+        {
+        }
+
         public EntityVM(TreeItemVMBase parent, Entity entity)
             : base(parent, entity)
         {

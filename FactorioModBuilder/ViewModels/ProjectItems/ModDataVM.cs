@@ -27,6 +27,11 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
 
         public ObservableCollection<ModDataItemVM> DataItems { get; private set; }
 
+        public ModDataVM(ModData data)
+            : this(null, data)
+        {
+        }
+
         public ModDataVM(TreeItemVMBase parent, ModData data)
             : base(parent, data)
         {

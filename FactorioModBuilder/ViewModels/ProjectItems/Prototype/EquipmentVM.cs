@@ -10,6 +10,11 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
     public class EquipmentVM : TreeItemVM<Equipment>
     {
+        public EquipmentVM(Equipment equip)
+            : base(equip)
+        {
+        }
+
         public EquipmentVM(TreeItemVMBase parent, Equipment equip)
             : base(parent, equip)
         {

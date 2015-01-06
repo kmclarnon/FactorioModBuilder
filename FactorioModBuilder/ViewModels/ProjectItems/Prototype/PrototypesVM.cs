@@ -22,18 +22,14 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
             }
         }
 
-        public PrototypesVM(TreeItemVMBase parent, Prototypes types)
-            : base(parent, types)
+        public PrototypesVM(Prototypes types, IEnumerable<TreeItemVMBase> children)
+            : base(types, children)
         {
-            this.Children.Add(new GroupsVM(this, new Groups()));
-            this.Children.Add(new SubGroupsVM(this, new SubGroups()));
-            this.Children.Add(new EntitiesVM(this, new Entities()));
-            this.Children.Add(new EquipsVM(this, new Equips()));
-            this.Children.Add(new FluidsVM(this, new Fluids()));
-            this.Children.Add(new ItemsVM(this, new Items()));
-            this.Children.Add(new RecipesVM(this, new Recipes()));
-            this.Children.Add(new TechnologiesVM(this, new Technologies()));
-            this.Children.Add(new TilesVM(this, new Tiles()));
+        }
+
+        public PrototypesVM(TreeItemVMBase parent, Prototypes types, IEnumerable<TreeItemVMBase> children)
+            : base(parent, types, children)
+        {
         }
     }
 }

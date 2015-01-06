@@ -10,7 +10,12 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
     public class FluidsVM : TreeItemVM<Fluids>
     {
-        public FluidsVM(TreeItemVMBase parent, Fluids fl) 
+        public FluidsVM(Fluids fl) 
+            : base(fl)
+        {
+        }
+
+        public FluidsVM(TreeItemVMBase parent, Fluids fl)
             : base(parent, fl)
         {
         }

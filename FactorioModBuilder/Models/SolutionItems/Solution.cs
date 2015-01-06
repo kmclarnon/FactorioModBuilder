@@ -11,7 +11,6 @@ namespace FactorioModBuilder.Models.SolutionItems
 {
     public class Solution : TreeItem<Solution>
     {
-
         public Solution(string name)
             : base(name)
         {

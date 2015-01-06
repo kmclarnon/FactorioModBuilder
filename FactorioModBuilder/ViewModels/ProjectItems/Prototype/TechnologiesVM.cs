@@ -10,6 +10,11 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
     public class TechnologiesVM : TreeItemVM<Technologies>
     {
+        public TechnologiesVM(Technologies tech)
+            : base(tech)
+        {
+        }
+
         public TechnologiesVM(TreeItemVMBase parent, Technologies tech)
             : base(parent, tech)
         {
