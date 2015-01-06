@@ -56,11 +56,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Models\NewProject.cs" />
+    <Compile Include="Models\Dialogs\NewProject.cs" />
     <Compile Include="Models\SolutionItems\Solution.cs" />
-    <Compile Include="ViewModels\NewProjectVM.cs" />
+    <Compile Include="ViewModels\Dialogs\NewProjectVM.cs" />
     <Compile Include="ViewModels\SolutionItems\SolutionVM.cs" />
-    <Compile Include="View\NewProjectDialog.xaml.cs">
+    <Compile Include="View\Dialogs\NewProjectDialog.xaml.cs">
       <DependentUpon>NewProjectDialog.xaml</DependentUpon>
     </Compile>
     <Page Include="View\MainWindow.xaml">
@@ -84,7 +84,7 @@
     <Compile Include="Models\ProjectItems\Prototype\Groups.cs" />
     <Compile Include="Models\ProjectItems\Prototype\Items.cs" />
     <Compile Include="Models\ProjectItems\Locale.cs" />
-    <Compile Include="Models\Utility\TreeItemBase.cs" />
+    <Compile Include="Models\Base\TreeItemBase.cs" />
     <Compile Include="Models\ProjectItems\Prototype\Recipes.cs" />
     <Compile Include="Models\ProjectItems\Prototype\Recipe.cs" />
     <Compile Include="Models\ProjectItems\Prototype\SubGroup.cs" />
@@ -100,7 +100,7 @@
     <Compile Include="Models\ProjectItems\Prototype\Tiles.cs" />
     <Compile Include="Models\ProjectItems\Prototype\TileVariant.cs" />
     <Compile Include="ViewModels\MainVM.cs" />
-    <Compile Include="ViewModels\Utility\TreeItemVMBase.cs" />
+    <Compile Include="ViewModels\Base\TreeItemVMBase.cs" />
     <Compile Include="ViewModels\ProjectItems\Prototype\EntitiesVM.cs" />
     <Compile Include="ViewModels\ProjectItems\Prototype\EntityVM.cs" />
     <Compile Include="ViewModels\ProjectItems\Prototype\EquipmentVM.cs" />
@@ -128,7 +128,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="View\NewProjectDialog.xaml">
+    <Page Include="View\Dialogs\NewProjectDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -194,12 +194,12 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Utility\TreeItem.cs" />
+    <Compile Include="Models\Base\TreeItem.cs" />
     <Compile Include="Models\ProjectItems\ModInfo.cs" />
     <Compile Include="ViewModels\ProjectItems\ModControlVM.cs" />
     <Compile Include="ViewModels\ProjectItems\ModDataVM.cs" />
     <Compile Include="ViewModels\ProjectItems\ModInfoVM.cs" />
-    <Compile Include="ViewModels\Utility\TreeItemVM.cs" />
+    <Compile Include="ViewModels\Base\TreeItemVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

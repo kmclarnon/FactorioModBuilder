@@ -14,6 +14,8 @@ using FactorioModBuilder.Models.ProjectItems;
 using FactorioModBuilder.ViewModels.Base;
 using FactorioModBuilder.ViewModels.ProjectItems.Prototype;
 using FactorioModBuilder.Models.ProjectItems.Prototype;
+using FactorioModBuilder.View.Dialogs;
+using FactorioModBuilder.Models.Dialogs;
 
 namespace FactorioModBuilder.ViewModels
 {

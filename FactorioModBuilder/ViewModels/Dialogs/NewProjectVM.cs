@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using WpfUtils;
 using FactorioModBuilder.Models;
+using FactorioModBuilder.Models.Dialogs;
 
-namespace FactorioModBuilder.ViewModels
+namespace FactorioModBuilder.ViewModels.Dialogs
 {
     public class NewProjectVM : BaseVM
     {

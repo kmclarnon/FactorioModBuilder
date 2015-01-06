@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FactorioModBuilder.Models
+namespace FactorioModBuilder.Models.Dialogs
 {
     public enum SolutionType
     {

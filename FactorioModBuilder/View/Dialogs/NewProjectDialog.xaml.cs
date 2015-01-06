@@ -1,5 +1,7 @@
 ﻿using FactorioModBuilder.Models;
+using FactorioModBuilder.Models.Dialogs;
 using FactorioModBuilder.ViewModels;
+using FactorioModBuilder.ViewModels.Dialogs;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -17,7 +19,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using WpfUtils;
 
-namespace FactorioModBuilder.View
+namespace FactorioModBuilder.View.Dialogs
 {
     /// <summary>
     /// Interaction logic for NewProject.xaml
