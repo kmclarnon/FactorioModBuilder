@@ -65,20 +65,31 @@ namespace FactorioModBuilder.ViewModels.Utility
 
         protected TreeItemBase _item;
 
-        public TreeItemVMBase(TreeItemVMBase parent, TreeItemBase item)
+        public TreeItemVMBase(TreeItemBase item)
+            : this(null, item)
         {
-            _item = item;
-            _parent = parent;
-            this.Children = new ObservableCollection<TreeItemVMBase>();
         }
 
-        public TreeItemVMBase(TreeItemVMBase parent, TreeItemBase item, IEnumerable<TreeItemBase> children)
+        public TreeItemVMBase(TreeItemVMBase parent, TreeItemBase item)
+            : this(parent, item, new List<TreeItemVMBase>())
         {
-            _item = item;
+        }
+
+        public TreeItemVMBase(TreeItemBase item, IEnumerable<TreeItemVMBase> children)
+            : this(null, item, children)
+        {
+        }
+
+        public TreeItemVMBase(TreeItemVMBase parent, TreeItemBase item, IEnumerable<TreeItemVMBase> children)
+        {
             _parent = parent;
+            _item = item;
             this.Children = new ObservableCollection<TreeItemVMBase>();
             foreach (var c in children)
-                this.Children.Add(Wrap(this, c));
+            {
+                c._parent = this;
+                this.Children.Add(c);
+            }
         }
 
         public void ExpandDown()
@@ -177,30 +188,6 @@ namespace FactorioModBuilder.ViewModels.Utility
             }
 
             return false;
-        }
-
-        private static readonly Dictionary<Type, Func<TreeItemVMBase, TreeItemBase, TreeItemVMBase>> _wrapDict =
-            new Dictionary<Type, Func<TreeItemVMBase, TreeItemBase, TreeItemVMBase>>()
-        {
-            { typeof(ModControl),       ((x, y) => new ModControlVM(x, (ModControl)y)) },
-            { typeof(ModData),          ((x, y) => new ModDataVM(x, (ModData)y)) },
-            { typeof(ModInfo),          ((x, y) => new ModInfoVM(x, (ModInfo)y)) },
-            { typeof(Project),    ((x, y) => new ProjectVM((Project)y)) },
-            { typeof(Prototypes),       ((x, y) => new PrototypesVM(x, (Prototypes)y)) },
-            { typeof(Groups),           ((x, y) => new GroupsVM(x, (Groups)y)) },
-            { typeof(SubGroups),        ((x, y) => new SubGroupsVM(x, (SubGroups)y)) },
-            { typeof(Items),            ((x, y) => new ItemsVM(x, (Items)y)) },
-            { typeof(Recipe),           ((x, y) => new RecipeVM(x, (Recipe)y)) },
-            { typeof(Technology),       ((x, y) => new TechnologyVM(x, (Technology)y)) },
-            { typeof(Tile),             ((x, y) => new TileVM(x, (Tile)y)) }
-        };
-
-        public static TreeItemVMBase Wrap(TreeItemVMBase parent, TreeItemBase item)
-        {
-            if (item == null)
-                throw new ArgumentNullException("Wrapped item cannot be null");
-
-            return _wrapDict[item.GetType()](parent, item);
         }
     }
 }
