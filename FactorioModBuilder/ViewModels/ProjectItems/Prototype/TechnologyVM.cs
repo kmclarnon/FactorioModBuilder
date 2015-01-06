@@ -1,4 +1,5 @@
 ﻿using FactorioModBuilder.Models.ProjectItems.Prototype;
+using FactorioModBuilder.ViewModels.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
-    public class TechnologyVM : ProjectItemVM<Technology>
+    public class TechnologyVM : TreeItemVM<Technology>
     {
-        public TechnologyVM(ProjectItemVMBase parent, Technology tech)
+        public TechnologyVM(TreeItemVMBase parent, Technology tech)
             : base(parent, tech)
         {
         }

@@ -10,14 +10,14 @@ using FactorioModBuilder.Models.ProjectItems;
 using FactorioModBuilder.Models.ProjectItems.Prototype;
 using FactorioModBuilder.ViewModels.ProjectItems.Prototype;
 
-namespace FactorioModBuilder.ViewModels.ProjectItems
+namespace FactorioModBuilder.ViewModels.Utility
 {
-    public abstract class ProjectItemVM<T> : ProjectItemVMBase
+    public abstract class TreeItemVM<T> : TreeItemVMBase
         where T : ProjectItem<T>
     {
         protected T _internal { get { return (T)_item; } }
 
-        public ProjectItemVM(ProjectItemVMBase parent, T item)
+        public TreeItemVM(TreeItemVMBase parent, T item)
             : base(parent, item)
         {
         }

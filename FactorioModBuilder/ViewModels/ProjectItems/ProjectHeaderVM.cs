@@ -1,6 +1,7 @@
 ﻿using FactorioModBuilder.Models.ProjectItems;
 using FactorioModBuilder.Models.ProjectItems.Prototype;
 using FactorioModBuilder.ViewModels.ProjectItems.Prototype;
+using FactorioModBuilder.ViewModels.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems
 {
-    public class ProjectHeaderVM : ProjectItemVM<ProjectHeader>
+    public class ProjectHeaderVM : TreeItemVM<ProjectHeader>
     {
         public ProjectHeaderVM(ProjectHeader header)
             : base(null, header)

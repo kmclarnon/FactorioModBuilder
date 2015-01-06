@@ -1,4 +1,5 @@
 ﻿using FactorioModBuilder.Models.ProjectItems.Prototype;
+using FactorioModBuilder.ViewModels.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
-    public class SubGroupVM : ProjectItemVM<SubGroup>
+    public class SubGroupVM : TreeItemVM<SubGroup>
     {
         public string Type
         {
@@ -48,7 +49,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
             }
         }
 
-        public SubGroupVM(ProjectItemVMBase parent, SubGroup item)
+        public SubGroupVM(TreeItemVMBase parent, SubGroup item)
             : base(parent, item)
         {
         }

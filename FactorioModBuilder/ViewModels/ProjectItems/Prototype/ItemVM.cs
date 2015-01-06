@@ -1,4 +1,5 @@
 ﻿using FactorioModBuilder.Models.ProjectItems.Prototype;
+using FactorioModBuilder.ViewModels.Utility;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ using WpfUtils;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
-    public class ItemVM : ProjectItemVM<Item>
+    public class ItemVM : TreeItemVM<Item>
     {
         public string Type { get { return _internal.Type; } }
 
@@ -96,7 +97,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         {
             get
             {
-                ProjectItemVMBase res;
+                TreeItemVMBase res;
                 if (!this.TryFindElementWithPropertyUp(typeof(ObservableCollection<SubGroupVM>),
                     "PossibleSubgroups", out res))
                 {
@@ -107,7 +108,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
             }
         }
 
-        public ItemVM(ProjectItemVMBase parent, Item item)
+        public ItemVM(TreeItemVMBase parent, Item item)
             : base(parent, item)
         {
 

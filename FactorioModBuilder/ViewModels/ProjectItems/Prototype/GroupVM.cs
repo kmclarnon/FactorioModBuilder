@@ -1,4 +1,5 @@
 ﻿using FactorioModBuilder.Models.ProjectItems.Prototype;
+using FactorioModBuilder.ViewModels.Utility;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ using WpfUtils;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
-    public class GroupVM : ProjectItemVM<Group>
+    public class GroupVM : TreeItemVM<Group>
     {
         public string Type
         {
@@ -89,7 +90,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
             }
         }
 
-        public GroupVM(ProjectItemVMBase parent, Group group)
+        public GroupVM(TreeItemVMBase parent, Group group)
             : base(parent, group)
         {
         }

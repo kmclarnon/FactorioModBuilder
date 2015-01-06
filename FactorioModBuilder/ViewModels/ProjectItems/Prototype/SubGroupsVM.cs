@@ -1,4 +1,5 @@
 ﻿using FactorioModBuilder.Models.ProjectItems.Prototype;
+using FactorioModBuilder.ViewModels.Utility;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,7 +11,7 @@ using WpfUtils;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
-    public class SubGroupsVM : ProjectItemVM<SubGroups>
+    public class SubGroupsVM : TreeItemVM<SubGroups>
     {
         public ObservableCollection<SubGroupVM> ItemList { get; private set; }
 
@@ -40,7 +41,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 
         private int _newCount = 1;
 
-        public SubGroupsVM(ProjectItemVMBase parent, SubGroups items)
+        public SubGroupsVM(TreeItemVMBase parent, SubGroups items)
             : base(parent, items)
         {
             this.ItemList = new ObservableCollection<SubGroupVM>();

@@ -1,4 +1,5 @@
 ﻿using FactorioModBuilder.Models.ProjectItems;
+using FactorioModBuilder.ViewModels.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems
 {
-    public class ModControlVM : ProjectItemVM<ModControl>
+    public class ModControlVM : TreeItemVM<ModControl>
     {
-        public ModControlVM(ProjectItemVMBase parent, ModControl control)
+        public ModControlVM(TreeItemVMBase parent, ModControl control)
             : base(parent, control)
         {
 

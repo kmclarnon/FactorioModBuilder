@@ -1,4 +1,5 @@
 ﻿using FactorioModBuilder.Models.ProjectItems.Prototype;
+using FactorioModBuilder.ViewModels.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
-    public class EntitiesVM : ProjectItemVM<Entities>
+    public class EntitiesVM : TreeItemVM<Entities>
     {
-        public EntitiesVM(ProjectItemVMBase parent, Entities en)
+        public EntitiesVM(TreeItemVMBase parent, Entities en)
             : base(parent, en)
         {
         }

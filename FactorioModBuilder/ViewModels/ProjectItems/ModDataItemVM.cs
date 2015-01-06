@@ -1,4 +1,5 @@
 ﻿using FactorioModBuilder.Models.ProjectItems;
+using FactorioModBuilder.ViewModels.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems
 {
-    public class ModDataItemVM : ProjectItemVM<ModDataItem>
+    public class ModDataItemVM : TreeItemVM<ModDataItem>
     {
         public string Type
         {
@@ -37,7 +38,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
 
         private ModDataItem _data { get { return (ModDataItem)_item; } }
 
-        public ModDataItemVM(ProjectItemVMBase parent, ModDataItem item)
+        public ModDataItemVM(TreeItemVMBase parent, ModDataItem item)
             : base(parent, item)
         {
 

@@ -1,5 +1,6 @@
 ﻿using FactorioModBuilder.Models.ProjectItems;
 using FactorioModBuilder.Models.ProjectItems.Prototype;
+using FactorioModBuilder.ViewModels.ProjectItems;
 using FactorioModBuilder.ViewModels.ProjectItems.Prototype;
 using System;
 using System.Collections.Generic;
@@ -9,13 +10,13 @@ using System.Text;
 using System.Threading.Tasks;
 using WpfUtils;
 
-namespace FactorioModBuilder.ViewModels.ProjectItems
+namespace FactorioModBuilder.ViewModels.Utility
 {
-    public abstract class ProjectItemVMBase : BaseVM
+    public abstract class TreeItemVMBase : BaseVM
     {
-        protected ProjectItemVMBase _parent;
+        protected TreeItemVMBase _parent;
 
-        public ObservableCollection<ProjectItemVMBase> Children { get; private set; }
+        public ObservableCollection<TreeItemVMBase> Children { get; private set; }
 
         private bool _isExpanded;
         public bool IsExpanded
@@ -63,11 +64,11 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
 
         protected ProjectItemBase _item;
 
-        public ProjectItemVMBase(ProjectItemVMBase parent, ProjectItemBase item)
+        public TreeItemVMBase(TreeItemVMBase parent, ProjectItemBase item)
         {
             _item = item;
             _parent = parent;
-            this.Children = new ObservableCollection<ProjectItemVMBase>();
+            this.Children = new ObservableCollection<TreeItemVMBase>();
         }
 
         public void ExpandDown()
@@ -86,7 +87,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
                 c.ExpandDown(levels - 1);
         }
 
-        public bool TryFindElementUp<T>(out T element) where T : ProjectItemVMBase
+        public bool TryFindElementUp<T>(out T element) where T : TreeItemVMBase
         {
             element = default(T);
             T res = (T)_parent;
@@ -104,7 +105,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
             return false;
         }
 
-        public bool TryFindElementDown<T>(out T element) where T : ProjectItemVMBase
+        public bool TryFindElementDown<T>(out T element) where T : TreeItemVMBase
         {
             element = default(T);
             foreach (var c in this.Children)
@@ -123,10 +124,10 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
         }
 
         public bool TryFindElementWithPropertyUp(Type propType,
-            string propName, out ProjectItemVMBase element)
+            string propName, out TreeItemVMBase element)
         {
             element = null;
-            ProjectItemVMBase res = _parent;
+            TreeItemVMBase res = _parent;
             while (res != null)
             {
                 var type = res.GetType();
@@ -146,7 +147,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
         }
 
         public bool TryFindElementWithPropertyDown(Type propType,
-            string propName, out ProjectItemVMBase element)
+            string propName, out TreeItemVMBase element)
         {
             element = null;
             foreach (var c in this.Children)
@@ -168,8 +169,8 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
             return false;
         }
 
-        private static readonly Dictionary<Type, Func<ProjectItemVMBase, ProjectItemBase, ProjectItemVMBase>> _wrapDict =
-            new Dictionary<Type, Func<ProjectItemVMBase, ProjectItemBase, ProjectItemVMBase>>()
+        private static readonly Dictionary<Type, Func<TreeItemVMBase, ProjectItemBase, TreeItemVMBase>> _wrapDict =
+            new Dictionary<Type, Func<TreeItemVMBase, ProjectItemBase, TreeItemVMBase>>()
         {
             { typeof(ModControl),       ((x, y) => new ModControlVM(x, (ModControl)y)) },
             { typeof(ModData),          ((x, y) => new ModDataVM(x, (ModData)y)) },
@@ -184,7 +185,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
             { typeof(Tile),             ((x, y) => new TileVM(x, (Tile)y)) }
         };
 
-        public static ProjectItemVMBase Wrap(ProjectItemVMBase parent, ProjectItemBase item)
+        public static TreeItemVMBase Wrap(TreeItemVMBase parent, ProjectItemBase item)
         {
             if (item == null)
                 throw new ArgumentNullException("Wrapped item cannot be null");

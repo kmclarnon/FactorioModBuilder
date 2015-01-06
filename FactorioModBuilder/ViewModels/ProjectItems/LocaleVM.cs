@@ -1,4 +1,5 @@
 ﻿using FactorioModBuilder.Models.ProjectItems;
+using FactorioModBuilder.ViewModels.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems
 {
-    public class LocaleVM : ProjectItemVM<Locale>
+    public class LocaleVM : TreeItemVM<Locale>
     {
-        public LocaleVM(ProjectItemVMBase parent, Locale loc) 
+        public LocaleVM(TreeItemVMBase parent, Locale loc) 
             : base(parent, loc)
         {
         }

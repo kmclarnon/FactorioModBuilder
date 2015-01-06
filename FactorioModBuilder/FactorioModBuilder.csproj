@@ -98,7 +98,7 @@
     <Compile Include="Models\ProjectItems\Prototype\Tiles.cs" />
     <Compile Include="Models\ProjectItems\Prototype\TileVariant.cs" />
     <Compile Include="ViewModels\MainVM.cs" />
-    <Compile Include="ViewModels\ProjectItems\ProjectItemVMBase.cs" />
+    <Compile Include="ViewModels\Utility\TreeItemVMBase.cs" />
     <Compile Include="ViewModels\ProjectItems\Prototype\EntitiesVM.cs" />
     <Compile Include="ViewModels\ProjectItems\Prototype\EntityVM.cs" />
     <Compile Include="ViewModels\ProjectItems\Prototype\EquipmentVM.cs" />
@@ -198,8 +198,8 @@
     <Compile Include="ViewModels\ProjectItems\ModControlVM.cs" />
     <Compile Include="ViewModels\ProjectItems\ModDataVM.cs" />
     <Compile Include="ViewModels\ProjectItems\ModInfoVM.cs" />
-    <Compile Include="ViewModels\ProjectItems\ProjectItemVM.cs" />
-    <Compile Include="ViewModels\ProjectVM.cs" />
+    <Compile Include="ViewModels\Utility\TreeItemVM.cs" />
+    <Compile Include="ViewModels\ProjectItems\ProjectVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

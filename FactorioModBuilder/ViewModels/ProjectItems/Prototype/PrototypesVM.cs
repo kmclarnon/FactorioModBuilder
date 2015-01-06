@@ -1,4 +1,5 @@
 ﻿using FactorioModBuilder.Models.ProjectItems.Prototype;
+using FactorioModBuilder.ViewModels.Utility;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
-    public class PrototypesVM : ProjectItemVM<Prototypes>
+    public class PrototypesVM : TreeItemVM<Prototypes>
     {
         public ObservableCollection<SubGroupVM> PossibleSubgroups
         {
@@ -21,7 +22,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
             }
         }
 
-        public PrototypesVM(ProjectItemVMBase parent, Prototypes types)
+        public PrototypesVM(TreeItemVMBase parent, Prototypes types)
             : base(parent, types)
         {
             this.Children.Add(new GroupsVM(this, new Groups()));

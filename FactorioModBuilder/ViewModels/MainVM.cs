@@ -43,15 +43,15 @@ namespace FactorioModBuilder.ViewModels
             }
         }
 
-        private ProjectVM _activeProject;
-        public ProjectVM ActiveProject
+        private SolutionVM _activeSolution;
+        public SolutionVM ActiveSolution
         {
-            get { return _activeProject; }
+            get { return _activeSolution; }
             set
             {
-                if(_activeProject != value)
+                if(_activeSolution != value)
                 {
-                    _activeProject = value;
+                    _activeSolution = value;
                     this.NotifyPropertyChanged();
                 }
             }
@@ -153,8 +153,9 @@ namespace FactorioModBuilder.ViewModels
                 switch (result.ResultSolutionType)
                 {
                     case SolutionType.CreateNew:
-                        this.ActiveProject = new ProjectVM(
-                            new Project(result.ResultProjectName));
+                        this.ActiveSolution = new SolutionVM(
+                            new Solution(result.ResultSolutionName, 
+                                new Project(result.ResultProjectName)));
                         break;
                     case SolutionType.AddExisting:
                         break;
