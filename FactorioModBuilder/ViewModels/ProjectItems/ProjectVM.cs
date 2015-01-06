@@ -1,8 +1,8 @@
 ﻿using FactorioModBuilder.Models.ProjectItems;
 using FactorioModBuilder.Models.ProjectItems.Prototype;
-using FactorioModBuilder.Models.Utility;
+using FactorioModBuilder.Models.Base;
 using FactorioModBuilder.ViewModels.ProjectItems.Prototype;
-using FactorioModBuilder.ViewModels.Utility;
+using FactorioModBuilder.ViewModels.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;

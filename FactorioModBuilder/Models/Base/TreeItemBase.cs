@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FactorioModBuilder.Models.Utility
+namespace FactorioModBuilder.Models.Base
 {
     public abstract class TreeItemBase
     {

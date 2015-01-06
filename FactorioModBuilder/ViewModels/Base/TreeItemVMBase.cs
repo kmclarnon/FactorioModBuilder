@@ -1,6 +1,6 @@
 ﻿using FactorioModBuilder.Models.ProjectItems;
 using FactorioModBuilder.Models.ProjectItems.Prototype;
-using FactorioModBuilder.Models.Utility;
+using FactorioModBuilder.Models.Base;
 using FactorioModBuilder.ViewModels.ProjectItems;
 using FactorioModBuilder.ViewModels.ProjectItems.Prototype;
 using System;
@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WpfUtils;
 
-namespace FactorioModBuilder.ViewModels.Utility
+namespace FactorioModBuilder.ViewModels.Base
 {
     public abstract class TreeItemVMBase : BaseVM
     {

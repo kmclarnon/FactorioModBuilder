@@ -2,7 +2,7 @@
 using FactorioModBuilder.Models.ProjectItems;
 using FactorioModBuilder.Models.SolutionItems;
 using FactorioModBuilder.ViewModels.ProjectItems;
-using FactorioModBuilder.ViewModels.Utility;
+using FactorioModBuilder.ViewModels.Base;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

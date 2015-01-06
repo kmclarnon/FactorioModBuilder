@@ -1,4 +1,4 @@
-﻿using FactorioModBuilder.Models.Utility;
+﻿using FactorioModBuilder.Models.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;

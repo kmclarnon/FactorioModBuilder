@@ -9,9 +9,9 @@ using FactorioModBuilder.Models;
 using FactorioModBuilder.Models.ProjectItems;
 using FactorioModBuilder.Models.ProjectItems.Prototype;
 using FactorioModBuilder.ViewModels.ProjectItems.Prototype;
-using FactorioModBuilder.Models.Utility;
+using FactorioModBuilder.Models.Base;
 
-namespace FactorioModBuilder.ViewModels.Utility
+namespace FactorioModBuilder.ViewModels.Base
 {
     public abstract class TreeItemVM<T> : TreeItemVMBase
         where T : TreeItem<T>
