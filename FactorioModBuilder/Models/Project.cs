@@ -11,9 +11,9 @@ namespace FactorioModBuilder
     {
         public ProjectHeader ProjectItem { get; private set; }
 
-        public Project()
+        public Project(string projectName)
         {
-            this.ProjectItem = new ProjectHeader("Realism Mod Project");
+            this.ProjectItem = new ProjectHeader(projectName);
         }
     }
 }

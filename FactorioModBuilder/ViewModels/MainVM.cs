@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using WpfUtils;
 using FactorioModBuilder.Models;
+using System.Windows.Input;
+using FactorioModBuilder.View;
 
 namespace FactorioModBuilder.ViewModels
 {
@@ -55,15 +57,161 @@ namespace FactorioModBuilder.ViewModels
             }
         }
 
+        private ICommand _newProjectCmd;
+        public ICommand NewProjectCmd
+        {
+            get
+            {
+                if (_newProjectCmd == null)
+                    _newProjectCmd = new RelayCommand(
+                        (x => this.NewProject()), (x => this.CanNewProject()));
+                return _newProjectCmd;
+            }
+        }
+
+        private ICommand _openProjectCmd;
+        public ICommand OpenProjectCmd
+        {
+            get
+            {
+                if (_openProjectCmd == null)
+                    _openProjectCmd = new RelayCommand(
+                        (x => this.OpenProject()), (x => this.CanOpenProject()));
+                return _openProjectCmd;
+            }
+        }
+
+        private ICommand _saveProjectCmd;
+        public ICommand SaveProjectCmd
+        {
+            get
+            {
+                if (_saveProjectCmd == null)
+                    _saveProjectCmd = new RelayCommand(
+                        (x => this.SaveProject()), (x => this.CanSaveProject()));
+                return _saveProjectCmd;
+            }
+        }
+
+        private ICommand _saveProjectAsCmd;
+        public ICommand SaveProjectAsCmd
+        {
+            get
+            {
+                if (_saveProjectCmd == null)
+                    _saveProjectCmd = new RelayCommand(
+                        (x => this.SaveProjectAs()), (x => this.CanSaveProjectAs()));
+                return _saveProjectAsCmd;
+            }
+        }
+
+        private ICommand _closeProjectCmd;
+        public ICommand CloseProjectCmd
+        {
+            get
+            {
+                if (_closeProjectCmd == null)
+                    _closeProjectCmd = new RelayCommand(
+                        (x => this.CloseProject()), (x => this.CanCloseProject()));
+                return _closeProjectCmd;
+            }
+        }
+
+        private ICommand _exitCmd;
+        public ICommand ExitCmd
+        {
+            get
+            {
+                if (_exitCmd == null)
+                    _exitCmd = new RelayCommand(
+                        (x => this.Exit()), (x => this.CanExit()));
+                return _exitCmd;
+            }
+        }
+
         private Main _main;
 
         public MainVM(Main m)
         {
             _main = m;
-            // test
-            this.ActiveProject = new ProjectVM(new Project());
-            foreach (var i in this.ActiveProject.ProjectItems)
-                i.ExpandDown();
+        }
+
+        private bool CanNewProject()
+        {
+            return true;
+        }
+
+        private void NewProject()
+        {
+            var npw = new NewProjectDialog();
+            npw.Owner = App.Current.MainWindow;
+            npw.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterOwner;
+            
+            if(npw.ShowDialog() == true)
+            {
+                var result = npw.NewProjectResult;
+                switch (result.ResultSolutionType)
+                {
+                    case SolutionType.CreateNew:
+                        this.ActiveProject = new ProjectVM(
+                            new Project(result.ResultProjectName));
+                        break;
+                    case SolutionType.AddExisting:
+                        break;
+                    case SolutionType.CreateInNewInstance:
+                        break;
+                    default:
+                        throw new ArgumentException("Unknown Solution Type");
+                }
+            }
+        }
+
+        private bool CanOpenProject()
+        {
+            return true;
+        }
+
+        private void OpenProject()
+        {
+        }
+
+        private bool CanSaveProject()
+        {
+            return true;
+        }
+
+        private void SaveProject()
+        {
+        }
+
+        private bool CanSaveProjectAs()
+        {
+            return true;
+        }
+
+        private void SaveProjectAs()
+        {
+
+        }
+
+        private bool CanCloseProject()
+        {
+            return true;
+        }
+
+        private void CloseProject()
+        {
+
+        }
+
+        private bool CanExit()
+        {
+            return true;
+        }
+
+        private void Exit()
+        {
+
         }
     }
 }

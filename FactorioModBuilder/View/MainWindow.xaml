@@ -50,16 +50,22 @@
         <!-- Main Menu -->
         <Menu IsMainMenu="True" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="1000">
             <MenuItem Header="_File">
-                <MenuItem Header="_New Project" />
-                <MenuItem Header="_Open Project" />
+                <MenuItem Header="_New Project" Command="{Binding Path=Data.NewProjectCmd, Source={StaticResource proxy}}" />
+                <MenuItem Header="_Open Project" Command="{Binding Path=Data.OpenProjectCmd, Source={StaticResource proxy}}" />
                 <Separator />
-                <MenuItem Header="_Save Project" />
-                <MenuItem Header="Save Project As..." />
+                <MenuItem Header="_Save Project" Command="{Binding Path=Data.SaveProjectCmd, Source={StaticResource proxy}}" />
+                <MenuItem Header="Save Project As..." Command="{Binding Path=Data.SaveProjectAsCmd, Source={StaticResource proxy}}" />
                 <Separator />
-                <MenuItem Header="_Exit" />
+                <MenuItem Header="_Close Project" Command="{Binding Path=Data.CloseProjectCmd, Source={StaticResource proxy}}"/>
+                <MenuItem Header="_Exit" Command="{Binding Path=Data.ExitCmd, Source={StaticResource proxy}}" />
             </MenuItem>
             <MenuItem Header="_Edit"/>
             <MenuItem Header="_View"/>
+            <MenuItem Header="_Build">
+                <MenuItem Header="Build Project"/>
+                <MenuItem Header="Rebuild Project"/>
+                <MenuItem Header="Clean Project"/>
+            </MenuItem>
             <MenuItem Header="_Window"/>
             <MenuItem Header="_Help"/>
         </Menu>
