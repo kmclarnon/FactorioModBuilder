@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>OpenDialog</id>
+    <version>1.1.1</version>
+    <title>WPF Open Dialog</title>
+    <authors>Christoph Gattnar</authors>
+    <owners>Christoph Gattnar</owners>
+    <licenseUrl>http://opendialog.codeplex.com/license</licenseUrl>
+    <projectUrl>http://opendialog.codeplex.com/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>WPF Open Dialog is a simple and free open/save file/folder dialog for WPF using MVVM pattern.</description>
+    <language />
+    <tags>directory file folder browser chooser picker explorer open save dialog</tags>
+    <dependencies>
+      <group targetFramework=".NETFramework3.5">
+        <dependency id="WPFToolkit" version="3.5.50211.1" />
+      </group>
+      <group targetFramework=".NETFramework4.0" />
+      <group targetFramework=".NETFramework4.5" />
+    </dependencies>
+  </metadata>
+</package>
