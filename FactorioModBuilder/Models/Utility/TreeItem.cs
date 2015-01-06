@@ -5,12 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FactorioModBuilder.Models.ProjectItems
+namespace FactorioModBuilder.Models.Utility
 {
-    public abstract class ProjectItem<T> : ProjectItemBase
-        where T : ProjectItem<T>
+    public abstract class TreeItem<T> : TreeItemBase
+        where T : TreeItem<T>
     {
-        public ProjectItem(string name) : base(name)
+        public TreeItem(string name) : base(name)
         {
         }
     }

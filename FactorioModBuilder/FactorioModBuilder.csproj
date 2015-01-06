@@ -57,7 +57,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Models\NewProject.cs" />
-    <Compile Include="Models\Solution.cs" />
+    <Compile Include="Models\SolutionItems\Solution.cs" />
     <Compile Include="ViewModels\NewProjectVM.cs" />
     <Compile Include="ViewModels\SolutionItems\SolutionVM.cs" />
     <Compile Include="View\NewProjectDialog.xaml.cs">
@@ -84,7 +84,7 @@
     <Compile Include="Models\ProjectItems\Prototype\Groups.cs" />
     <Compile Include="Models\ProjectItems\Prototype\Items.cs" />
     <Compile Include="Models\ProjectItems\Locale.cs" />
-    <Compile Include="Models\ProjectItems\ProjectItemBase.cs" />
+    <Compile Include="Models\Utility\TreeItemBase.cs" />
     <Compile Include="Models\ProjectItems\Prototype\Recipes.cs" />
     <Compile Include="Models\ProjectItems\Prototype\Recipe.cs" />
     <Compile Include="Models\ProjectItems\Prototype\SubGroup.cs" />
@@ -195,7 +195,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Project.cs" />
-    <Compile Include="Models\ProjectItems\ProjectItem.cs" />
+    <Compile Include="Models\Utility\TreeItem.cs" />
     <Compile Include="Models\ProjectItems\ModInfo.cs" />
     <Compile Include="ViewModels\ProjectItems\ModControlVM.cs" />
     <Compile Include="ViewModels\ProjectItems\ModDataVM.cs" />

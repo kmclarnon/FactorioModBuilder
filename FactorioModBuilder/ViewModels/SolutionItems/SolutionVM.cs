@@ -1,5 +1,7 @@
 ﻿using FactorioModBuilder.Models;
+using FactorioModBuilder.Models.SolutionItems;
 using FactorioModBuilder.ViewModels.ProjectItems;
+using FactorioModBuilder.ViewModels.Utility;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,31 +12,12 @@ using WpfUtils;
 
 namespace FactorioModBuilder.ViewModels
 {
-    public class SolutionVM : BaseVM
-    {
-        public ObservableCollection<ProjectVM> Projects { get; private set; }
-        
-        public string Name
-        {
-            get { return _sol.Name; }
-            set
-            {
-                if(_sol.Name != value)
-                {
-                    _sol.Name = value;
-                    this.NotifyPropertyChanged();
-                }
-            }
-        }
-
-        private Solution _sol;
-
+    public class SolutionVM : TreeItemVM<Solution>
+    {      
         public SolutionVM(Solution sol)
+            : base(null, sol)
         {
-            this.Projects = new ObservableCollection<ProjectVM>();
-            _sol = sol;
-            foreach (var p in _sol.Projects)
-                this.Projects.Add(new ProjectVM(p));
+
         }
     }
 }

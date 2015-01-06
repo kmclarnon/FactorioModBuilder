@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FactorioModBuilder.Models.Utility;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FactorioModBuilder.Models.ProjectItems.Prototype
 {
-    public class Technologies : ProjectItem<Technologies>
+    public class Technologies : TreeItem<Technologies>
     {
         public Technologies() : base("Technology")
         {

@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FactorioModBuilder.Models.ProjectItems
+namespace FactorioModBuilder.Models.Utility
 {
-    public abstract class ProjectItemBase
+    public abstract class TreeItemBase
     {
         public string Name { get; set; }
 
-        public ProjectItemBase(string name)
+        public TreeItemBase(string name)
         {
             this.Name = name;
         }

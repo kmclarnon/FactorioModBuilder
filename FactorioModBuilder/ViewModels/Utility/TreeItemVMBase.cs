@@ -1,5 +1,6 @@
 ﻿using FactorioModBuilder.Models.ProjectItems;
 using FactorioModBuilder.Models.ProjectItems.Prototype;
+using FactorioModBuilder.Models.Utility;
 using FactorioModBuilder.ViewModels.ProjectItems;
 using FactorioModBuilder.ViewModels.ProjectItems.Prototype;
 using System;
@@ -62,9 +63,9 @@ namespace FactorioModBuilder.ViewModels.Utility
             }
         }
 
-        protected ProjectItemBase _item;
+        protected TreeItemBase _item;
 
-        public TreeItemVMBase(TreeItemVMBase parent, ProjectItemBase item)
+        public TreeItemVMBase(TreeItemVMBase parent, TreeItemBase item)
         {
             _item = item;
             _parent = parent;
@@ -169,8 +170,8 @@ namespace FactorioModBuilder.ViewModels.Utility
             return false;
         }
 
-        private static readonly Dictionary<Type, Func<TreeItemVMBase, ProjectItemBase, TreeItemVMBase>> _wrapDict =
-            new Dictionary<Type, Func<TreeItemVMBase, ProjectItemBase, TreeItemVMBase>>()
+        private static readonly Dictionary<Type, Func<TreeItemVMBase, TreeItemBase, TreeItemVMBase>> _wrapDict =
+            new Dictionary<Type, Func<TreeItemVMBase, TreeItemBase, TreeItemVMBase>>()
         {
             { typeof(ModControl),       ((x, y) => new ModControlVM(x, (ModControl)y)) },
             { typeof(ModData),          ((x, y) => new ModDataVM(x, (ModData)y)) },
@@ -185,7 +186,7 @@ namespace FactorioModBuilder.ViewModels.Utility
             { typeof(Tile),             ((x, y) => new TileVM(x, (Tile)y)) }
         };
 
-        public static TreeItemVMBase Wrap(TreeItemVMBase parent, ProjectItemBase item)
+        public static TreeItemVMBase Wrap(TreeItemVMBase parent, TreeItemBase item)
         {
             if (item == null)
                 throw new ArgumentNullException("Wrapped item cannot be null");

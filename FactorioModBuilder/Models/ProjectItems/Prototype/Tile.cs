@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FactorioModBuilder.Models.Utility;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,7 +8,7 @@ using System.Windows.Media;
 
 namespace FactorioModBuilder.Models.ProjectItems.Prototype
 {
-    public class Tile : ProjectItem<Tile>
+    public class Tile : TreeItem<Tile>
     {
         public string Type { get; set; }
         public int Layer { get; set; }

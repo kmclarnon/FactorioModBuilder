@@ -8,6 +8,7 @@ using WpfUtils;
 using FactorioModBuilder.Models;
 using System.Windows.Input;
 using FactorioModBuilder.View;
+using FactorioModBuilder.Models.SolutionItems;
 
 namespace FactorioModBuilder.ViewModels
 {
@@ -134,6 +135,9 @@ namespace FactorioModBuilder.ViewModels
         public MainVM(Main m)
         {
             _main = m;
+            this.ActiveSolution = new SolutionVM(
+                new Solution("Test Solution",
+                    new Project("Test Project")));
         }
 
         private bool CanNewProject()
