@@ -9,6 +9,8 @@ using FactorioModBuilder.Models;
 using System.Windows.Input;
 using FactorioModBuilder.View;
 using FactorioModBuilder.Models.SolutionItems;
+using System.Collections.ObjectModel;
+using FactorioModBuilder.Models.ProjectItems;
 
 namespace FactorioModBuilder.ViewModels
 {
@@ -44,8 +46,8 @@ namespace FactorioModBuilder.ViewModels
             }
         }
 
-        private SolutionVM _activeSolution;
-        public SolutionVM ActiveSolution
+        private ObservableCollection<SolutionVM> _activeSolution;
+        public ObservableCollection<SolutionVM> ActiveSolution
         {
             get { return _activeSolution; }
             set
@@ -99,8 +101,8 @@ namespace FactorioModBuilder.ViewModels
         {
             get
             {
-                if (_saveProjectCmd == null)
-                    _saveProjectCmd = new RelayCommand(
+                if (_saveProjectAsCmd == null)
+                    _saveProjectAsCmd = new RelayCommand(
                         (x => this.SaveProjectAs()), (x => this.CanSaveProjectAs()));
                 return _saveProjectAsCmd;
             }
@@ -135,9 +137,12 @@ namespace FactorioModBuilder.ViewModels
         public MainVM(Main m)
         {
             _main = m;
-            this.ActiveSolution = new SolutionVM(
-                new Solution("Test Solution",
-                    new Project("Test Project")));
+            this.ActiveSolution = new ObservableCollection<SolutionVM>()
+            {
+                new SolutionVM(
+                    new Solution("Test Solution"), 
+                    new List<Project>() { new Project("Test Project") })
+            };
         }
 
         private bool CanNewProject()
@@ -157,9 +162,8 @@ namespace FactorioModBuilder.ViewModels
                 switch (result.ResultSolutionType)
                 {
                     case SolutionType.CreateNew:
-                        this.ActiveSolution = new SolutionVM(
-                            new Solution(result.ResultSolutionName, 
-                                new Project(result.ResultProjectName)));
+                        this.ActiveSolution.Clear();
+
                         break;
                     case SolutionType.AddExisting:
                         break;

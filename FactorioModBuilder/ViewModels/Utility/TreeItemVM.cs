@@ -22,5 +22,11 @@ namespace FactorioModBuilder.ViewModels.Utility
             : base(parent, item)
         {
         }
+
+        public TreeItemVM(TreeItemVMBase parent, T item, 
+            IEnumerable<TreeItemBase> children)
+            : base(parent, item, children)
+        {
+        }
     }
 }

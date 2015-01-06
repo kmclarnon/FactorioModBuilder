@@ -1,4 +1,5 @@
 ﻿using FactorioModBuilder.Models;
+using FactorioModBuilder.Models.ProjectItems;
 using FactorioModBuilder.Models.SolutionItems;
 using FactorioModBuilder.ViewModels.ProjectItems;
 using FactorioModBuilder.ViewModels.Utility;
@@ -14,8 +15,8 @@ namespace FactorioModBuilder.ViewModels
 {
     public class SolutionVM : TreeItemVM<Solution>
     {      
-        public SolutionVM(Solution sol)
-            : base(null, sol)
+        public SolutionVM(Solution sol, List<Project> projects)
+            : base(null, sol, projects)
         {
 
         }

@@ -72,6 +72,15 @@ namespace FactorioModBuilder.ViewModels.Utility
             this.Children = new ObservableCollection<TreeItemVMBase>();
         }
 
+        public TreeItemVMBase(TreeItemVMBase parent, TreeItemBase item, IEnumerable<TreeItemBase> children)
+        {
+            _item = item;
+            _parent = parent;
+            this.Children = new ObservableCollection<TreeItemVMBase>();
+            foreach (var c in children)
+                this.Children.Add(Wrap(this, c));
+        }
+
         public void ExpandDown()
         {
             this.IsExpanded = true;
@@ -176,7 +185,7 @@ namespace FactorioModBuilder.ViewModels.Utility
             { typeof(ModControl),       ((x, y) => new ModControlVM(x, (ModControl)y)) },
             { typeof(ModData),          ((x, y) => new ModDataVM(x, (ModData)y)) },
             { typeof(ModInfo),          ((x, y) => new ModInfoVM(x, (ModInfo)y)) },
-            { typeof(ProjectHeader),    ((x, y) => new ProjectHeaderVM((ProjectHeader)y)) },
+            { typeof(Project),    ((x, y) => new ProjectVM((Project)y)) },
             { typeof(Prototypes),       ((x, y) => new PrototypesVM(x, (Prototypes)y)) },
             { typeof(Groups),           ((x, y) => new GroupsVM(x, (Groups)y)) },
             { typeof(SubGroups),        ((x, y) => new SubGroupsVM(x, (SubGroups)y)) },
