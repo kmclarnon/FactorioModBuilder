@@ -18,7 +18,22 @@ namespace FactorioModBuilder.ViewModels
         public SolutionVM(Solution sol, IEnumerable<ProjectVM> projects)
             : base(sol, projects)
         {
+            this.Children.CollectionChanged += Children_CollectionChanged;
+        }
 
+        void Children_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            this.NotifyPropertyChanged("Name");
+        }
+
+        protected override string OnGetName(string name)
+        {
+            var res = "Solution '" + name + "' (" + this.Children.Count + " ";
+            if (this.Children.Count == 1)
+                res += " project)";
+            else
+                res += " projects)";
+            return res;
         }
     }
 }
