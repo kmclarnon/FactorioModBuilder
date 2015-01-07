@@ -26,7 +26,11 @@ namespace FactorioModBuilder
         public MainWindow()
         {
             InitializeComponent();
-            this.DataContext = new MainVM(new MainModel(1200, 800));
+            this.DataContext = new MainVM(
+                new MainModel(
+                    1200, 800,
+                    "Factorio Mod Builder",
+                    "0.0.2"));
         }
     }
 }
