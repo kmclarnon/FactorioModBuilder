@@ -142,33 +142,7 @@ namespace FactorioModBuilder.ViewModels
         public MainVM(Main m)
         {
             _main = m;
-            this.Solutions = new ObservableCollection<SolutionVM>()
-            {
-                new SolutionVM(
-                    new Solution("Test Solution"), 
-                    new List<ProjectVM>() 
-                    { 
-                        new ProjectVM(new Project("Test Project"), 
-                            new List<TreeItemVMBase>()
-                            {
-                                new ModInfoVM(new ModInfo()),
-                                new ModDataVM(new ModData()),
-                                new ModControlVM(new ModControl()),
-                                new PrototypesVM(new Prototypes(),
-                                    new List<TreeItemVMBase>()
-                                    {
-                                        new GroupsVM(new Groups()),
-                                        new SubGroupsVM(new SubGroups()),
-                                        new EquipsVM(new Equips()),
-                                        new FluidsVM(new Fluids()),
-                                        new ItemsVM(new Items()),
-                                        new RecipesVM(new Recipes()),
-                                        new TechnologiesVM(new Technologies()),
-                                        new TilesVM(new Tiles())
-                                    })
-                            }) 
-                    })
-            };
+            this.Solutions = new ObservableCollection<SolutionVM>();
         }
 
         private bool CanNewProject()
@@ -189,7 +163,33 @@ namespace FactorioModBuilder.ViewModels
                 {
                     case SolutionType.CreateNew:
                         this.Solutions.Clear();
-
+                        var vm = new SolutionVM(
+                            new Solution(result.ResultSolutionName, result.ResultLocation),
+                            new List<ProjectVM>() 
+                            { 
+                                new ProjectVM(new Project(result.ResultProjectName), 
+                                    new List<TreeItemVMBase>()
+                                    {
+                                        new ModInfoVM(new ModInfo()),
+                                        new ModDataVM(new ModData()),
+                                        new ModControlVM(new ModControl()),
+                                        new PrototypesVM(new Prototypes(),
+                                            new List<TreeItemVMBase>()
+                                            {
+                                                new GroupsVM(new Groups()),
+                                                new SubGroupsVM(new SubGroups()),
+                                                new EquipsVM(new Equips()),
+                                                new FluidsVM(new Fluids()),
+                                                new ItemsVM(new Items()),
+                                                new RecipesVM(new Recipes()),
+                                                new TechnologiesVM(new Technologies()),
+                                                new TilesVM(new Tiles())
+                                            }),
+                                        new LocaleVM(new Locale())
+                                    }),
+                            });
+                        vm.ExpandDown();
+                        this.Solutions.Add(vm);
                         break;
                     case SolutionType.AddExisting:
                         break;
