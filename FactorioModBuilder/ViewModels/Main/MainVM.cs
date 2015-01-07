@@ -16,6 +16,7 @@ using FactorioModBuilder.ViewModels.ProjectItems.Prototype;
 using FactorioModBuilder.Models.ProjectItems.Prototype;
 using FactorioModBuilder.View.Dialogs;
 using FactorioModBuilder.Models.Dialogs;
+using FactorioModBuilder.Models.Main;
 
 namespace FactorioModBuilder.ViewModels
 {
@@ -137,9 +138,9 @@ namespace FactorioModBuilder.ViewModels
             }
         }
 
-        private Main _main;
+        private MainModel _main;
 
-        public MainVM(Main m)
+        public MainVM(MainModel m)
         {
             _main = m;
             this.Solutions = new ObservableCollection<SolutionVM>();

@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using FactorioModBuilder.ViewModels;
 using FactorioModBuilder.Models;
+using FactorioModBuilder.Models.Main;
 
 namespace FactorioModBuilder
 {
@@ -25,7 +26,7 @@ namespace FactorioModBuilder
         public MainWindow()
         {
             InitializeComponent();
-            this.DataContext = new MainVM(new Main(1200, 800));
+            this.DataContext = new MainVM(new MainModel(1200, 800));
         }
     }
 }

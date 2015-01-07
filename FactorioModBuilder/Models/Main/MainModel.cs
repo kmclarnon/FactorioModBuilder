@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FactorioModBuilder.Models
+namespace FactorioModBuilder.Models.Main
 {
-    public class Main
+    public class MainModel
     {
         public string AppTitle { get { return this.AppName + " v" + this.AppVersion; } }
         public string AppName { get { return "Factorio Mod Builder"; } }
@@ -14,7 +14,7 @@ namespace FactorioModBuilder.Models
         public int AppHeight { get; set; }
         public int AppWidth { get; set; }
 
-        public Main(int width, int height)
+        public MainModel(int width, int height)
         {
             this.AppHeight = height;
             this.AppWidth = width;
