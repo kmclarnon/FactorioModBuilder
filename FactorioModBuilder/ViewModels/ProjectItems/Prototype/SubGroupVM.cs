@@ -49,6 +49,20 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
             }
         }
 
+        private bool _enabled;
+        public bool Enabled
+        {
+            get { return _enabled; }
+            set
+            {
+                if(_enabled != value)
+                {
+                    _enabled = value;
+                    this.NotifyPropertyChanged();
+                }
+            }
+        }
+
         public SubGroupVM(SubGroup item)
             : base(item)
         {
