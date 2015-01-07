@@ -11,9 +11,12 @@ namespace FactorioModBuilder.Models.SolutionItems
 {
     public class Solution : TreeItem<Solution>
     {
-        public Solution(string name)
+        public string Directory { get; set; }
+
+        public Solution(string name, string dir)
             : base(name)
         {
+            this.Directory = dir;
         }
     }
 }
