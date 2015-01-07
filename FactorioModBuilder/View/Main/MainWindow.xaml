@@ -13,7 +13,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <!-- Right Panel Screen Resources -->
-                <ResourceDictionary Source="Screens/ScreenDict.xaml" />
+                <ResourceDictionary Source="../Screens/ScreenDict.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <!-- Data context reference for consistent syntax -->
             <util:BindingProxy x:Key="proxy" Data="{Binding}"/>
@@ -50,14 +50,14 @@
         <!-- Main Menu -->
         <Menu IsMainMenu="True" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="1000">
             <MenuItem Header="_File">
-                <MenuItem Header="_New Project" Command="{Binding Path=Data.NewProjectCmd, Source={StaticResource proxy}}" />
-                <MenuItem Header="_Open Project" Command="{Binding Path=Data.OpenProjectCmd, Source={StaticResource proxy}}" />
+                <MenuItem Header="_New Project" Command="{Binding Path=Data.FileMenu.NewProjectCmd, Source={StaticResource proxy}}" />
+                <MenuItem Header="_Open Project" Command="{Binding Path=Data.FileMenu.OpenProjectCmd, Source={StaticResource proxy}}" />
                 <Separator />
-                <MenuItem Header="_Save Project" Command="{Binding Path=Data.SaveProjectCmd, Source={StaticResource proxy}}" />
-                <MenuItem Header="Save Project As..." Command="{Binding Path=Data.SaveProjectAsCmd, Source={StaticResource proxy}}" />
+                <MenuItem Header="_Save Project" Command="{Binding Path=Data.FileMenu.SaveProjectCmd, Source={StaticResource proxy}}" />
+                <MenuItem Header="Save Project As..." Command="{Binding Path=Data.FileMenu.SaveProjectAsCmd, Source={StaticResource proxy}}" />
                 <Separator />
-                <MenuItem Header="_Close Project" Command="{Binding Path=Data.CloseProjectCmd, Source={StaticResource proxy}}"/>
-                <MenuItem Header="_Exit" Command="{Binding Path=Data.ExitCmd, Source={StaticResource proxy}}" />
+                <MenuItem Header="_Close Project" Command="{Binding Path=Data.FileMenu.CloseProjectCmd, Source={StaticResource proxy}}"/>
+                <MenuItem Header="_Exit" Command="{Binding Path=Data.FileMenu.ExitCmd, Source={StaticResource proxy}}" />
             </MenuItem>
             <MenuItem Header="_Edit"/>
             <MenuItem Header="_View"/>
