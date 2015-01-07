@@ -15,6 +15,17 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
     {
         public ObservableCollection<SubGroupVM> ItemList { get; private set; }
 
+        public ObservableCollection<GroupVM> PossibleGroups
+        {
+            get
+            {
+                PrototypesVM res;
+                if (!this.TryFindElementUp<PrototypesVM>(out res))
+                    throw new Exception("Failed to find parent to supply PossibleGroups");
+                return res.PossibleGroups;
+            }
+        }
+
         private ICommand _addSubgroupCmd;
         public ICommand AddSubgroupCmd
         {

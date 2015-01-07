@@ -22,6 +22,17 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
             }
         }
 
+        public ObservableCollection<GroupVM> PossibleGroups
+        {
+            get
+            {
+                GroupsVM res;
+                if (!this.TryFindElementDown<GroupsVM>(out res))
+                    throw new Exception("Could not find groups child element");
+                return res.ItemList;
+            }
+        }
+
         public PrototypesVM(Prototypes types, IEnumerable<TreeItemVMBase> children)
             : base(types, children)
         {
