@@ -23,6 +23,22 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
             }
         }
 
+        private GroupVM _selectedGroup;
+        public GroupVM SelectedGroup
+        {
+            get { return _selectedGroup; }
+            set
+            {
+                if(_selectedGroup != value)
+                {
+                    _selectedGroup = value;
+                    this.NotifyPropertyChanged();
+                    if (value != null)
+                        this.Group = _selectedGroup.Name;
+                }
+            }
+        }
+
         public string Group
         {
             get { return _internal.Group; }
