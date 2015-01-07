@@ -52,7 +52,7 @@ namespace FactorioModBuilder.ViewModels.Base
 
         public string Name
         {
-            get { return _item.Name; }
+            get { return this.OnGetName(_item.Name); }
             set
             {
                 if (_item.Name != value)
@@ -90,6 +90,11 @@ namespace FactorioModBuilder.ViewModels.Base
                 c._parent = this;
                 this.Children.Add(c);
             }
+        }
+
+        protected virtual string OnGetName(string name)
+        {
+            return name;
         }
 
         public void ExpandDown()
