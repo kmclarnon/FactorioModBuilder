@@ -14,15 +14,36 @@
             </Grid.RowDefinitions>
             <DataGrid Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" AutoGenerateColumns="False"
                       x:Name="itemList" Margin="5" ItemsSource="{Binding Path=ItemList}">
+                <DataGrid.RowStyle>
+                    <Style TargetType="{x:Type DataGridRow}">
+                        <Setter Property="IsSelected" Value="{Binding Path=IsSelected, 
+                            Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    </Style>
+                </DataGrid.RowStyle>
                 <DataGrid.Columns>
-                    <DataGridComboBoxColumn Header="Type" ItemsSource="{Binding Path=EquipmentTypes}" 
-                                            SelectedItemBinding="{Binding Path=Type}" Width="*"/>
-                    <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}" Width="2*"/>
-                    <DataGridTextColumn Header="Shape Width" Binding="{Binding Path=Width}" Width="Auto"/>
-                    <DataGridTextColumn Header="Shape Height" Binding="{Binding Path=Height}" Width="Auto"/>
-                    <DataGridTextColumn Header="Shape Type" Binding="{Binding Path=ShapeType}" Width="Auto"/>
-                    <DataGridTextColumn Header="Max Shield Value" Binding="{Binding Path=MaxShieldValue}"/>
-                    <DataGridTextColumn Header="Energy Per Shield" Binding="{Binding Path=EnergyPerShield}"/>
+                    <DataGridTemplateColumn Header="Type">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <ComboBox VerticalContentAlignment="Center"
+                                    ItemsSource="{Binding Path=DataContext.EquipmentTypes, 
+                                    RelativeSource={RelativeSource AncestorType=DataGrid}}" 
+                                    SelectedItem="{Binding Path=Type, Mode=TwoWay, 
+                                    UpdateSourceTrigger=PropertyChanged}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Header="Name" Binding="{Binding Path=Name, 
+                        Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="2*"/>
+                    <DataGridTextColumn Header="Shape Width" Binding="{Binding Path=ShapeWidth, 
+                        Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="Auto"/>
+                    <DataGridTextColumn Header="Shape Height" Binding="{Binding Path=ShapeHeight, 
+                        Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="Auto"/>
+                    <DataGridTextColumn Header="Shape Type" Binding="{Binding Path=ShapeType, 
+                        Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="Auto"/>
+                    <DataGridTextColumn Header="Max Shield Value" Binding="{Binding Path=MaxShieldValue, 
+                        Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <DataGridTextColumn Header="Energy Per Shield" Binding="{Binding Path=EnergyPerShield, 
+                        Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 </DataGrid.Columns>
             </DataGrid>
             <Label Content="Equipment Information" Grid.Column="0" Grid.Row="1" FontSize="14"
@@ -61,35 +82,43 @@
                 </Grid.RowDefinitions>
                 <Label Content="Name:" Grid.Column="0" Grid.Row="0" VerticalContentAlignment="Center" Margin="5"/>
                 <TextBox Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="0" VerticalContentAlignment="Center" Margin="5"
-                         Text="{Binding Path=SelectedItem.Name, ElementName=itemList}"/>
+                         Text="{Binding Path=SelectedItem.Name, ElementName=itemList, Mode=TwoWay, 
+                         UpdateSourceTrigger=PropertyChanged}"/>
                 <Label Content="E. Input:" Grid.Column="0" Grid.Row="1" VerticalContentAlignment="Center" Margin="5"/>
                 <TextBox Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="1" VerticalContentAlignment="Center" Margin="5"
-                         Text="{Binding Path=SelectedItem.EnergyInput, ElementName=itemList}"/>
+                         Text="{Binding Path=SelectedItem.EnergyInput, ElementName=itemList, Mode=TwoWay, 
+                         UpdateSourceTrigger=PropertyChanged}"/>
                 <Label Content="Sprite" Grid.Column="0" Grid.Row="2" VerticalContentAlignment="Center" Margin="5"
                        FontSize="12" FontWeight="Bold" Grid.ColumnSpan="2"/>
                 <Label Content="Filename:" Grid.Column="0" Grid.Row="3" VerticalContentAlignment="Center" Margin="5"/>
                 <TextBox Grid.Column="1" Grid.Row="3" VerticalContentAlignment="Center" Margin="5"
-                         Grid.ColumnSpan="3" Text="{Binding Path=SelectedItem.SpriteFilename, ElementName=itemList}"/>
+                         Grid.ColumnSpan="3" Text="{Binding Path=SelectedItem.SpriteFilename, ElementName=itemList, 
+                         Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 <Label Content="Width:" Grid.Column="0" Grid.Row="4" VerticalContentAlignment="Center" Margin="5"/>
                 <TextBox Grid.Column="1" Grid.Row="4" VerticalContentAlignment="Center" Margin="5"
                          Text="{Binding Path=SelectedItem.SpriteWidth, ElementName=itemList}"/>
                 <Label Content="Height:" Grid.Column="2" Grid.Row="4" VerticalContentAlignment="Center" Margin="5"/>
                 <TextBox Grid.Column="3" Grid.Row="4" VerticalContentAlignment="Center" Margin="5"
-                         Text="{Binding Path=SelectedItem.SpriteHeight, ElementName=itemList}"/>
+                         Text="{Binding Path=SelectedItem.SpriteHeight, ElementName=itemList, Mode=TwoWay, 
+                         UpdateSourceTrigger=PropertyChanged}"/>
                 <Label Content="Priority:" Grid.Column="0" Grid.Row="5" VerticalContentAlignment="Center" Margin="5"/>
                 <TextBox Grid.Column="1" Grid.Row="5" VerticalContentAlignment="Center" Margin="5" Grid.ColumnSpan="3"
-                         Text="{Binding Path=SelectedItem.SpritePriority, ElementName=itemList}"/>
+                         Text="{Binding Path=SelectedItem.SpritePriority, ElementName=itemList, Mode=TwoWay, 
+                         UpdateSourceTrigger=PropertyChanged}"/>
                 <Label Content="Shape" Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2" FontSize="12" 
                        VerticalContentAlignment="Center" FontWeight="Bold" Margin="5"/>
                 <Label Content="Width:" Grid.Column="0" Grid.Row="7" VerticalContentAlignment="Center" Margin="5"/>
                 <TextBox Grid.Column="1" Grid.Row="7" VerticalContentAlignment="Center" Margin="5"
-                         Text="{Binding Path=SelectedItem.ShapeWidth, ElementName=itemList}"/>
+                         Text="{Binding Path=SelectedItem.ShapeWidth, ElementName=itemList, Mode=TwoWay, 
+                         UpdateSourceTrigger=PropertyChanged}"/>
                 <Label Content="Height:" Grid.Column="2" Grid.Row="7" VerticalContentAlignment="Center" Margin="5"/>
                 <TextBox Grid.Column="3" Grid.Row="7" VerticalContentAlignment="Center" Margin="5"
-                         Text="{Binding Path=SelectedItem.ShapeHeight, ElementName=itemList}"/>
+                         Text="{Binding Path=SelectedItem.ShapeHeight, ElementName=itemList, Mode=TwoWay,
+                         UpdateSourceTrigger=PropertyChanged}"/>
                 <Label Content="Type:" Grid.Column="0" Grid.Row="8" VerticalContentAlignment="Center" Margin="5"/>
-                <ComboBox ItemsSource="{Binding Path=PossibleShapeTypes}" Grid.Column="1" Grid.ColumnSpan="3" 
-                          Margin="5" Grid.Row="8" SelectedItem="{Binding Path=SelectedItem.ShapeType, ElementName=itemList}"/>
+                <ComboBox ItemsSource="{Binding Path=ShapeTypes}" Grid.Column="1" Grid.ColumnSpan="3" 
+                          Margin="5" Grid.Row="8" SelectedItem="{Binding Path=SelectedItem.ShapeType, 
+                          ElementName=itemList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             </Grid>
             <Grid Grid.Column="1" Grid.Row="2" IsEnabled="{Binding Path=SelectedItem, 
                 Converter={conv:ObjectNotNull}, ElementName=itemList}">
@@ -112,17 +141,17 @@
                        Grid.Column="0" Grid.Row="0" Margin="5" Grid.ColumnSpan="3"/>
                 <Label Content="Type:" Grid.Column="0" Grid.Row="1" Margin="5" VerticalContentAlignment="Center"/>
                 <ComboBox Grid.Column="1" Grid.Row="1" Margin="5" VerticalContentAlignment="Center"
-                          ItemsSource="{Binding Path=PossibleEnergySourceTypes}" Grid.ColumnSpan="3"
-                          SelectedItem="{Binding Path=SelectedItem.EnergySourceType}"/>
+                          ItemsSource="{Binding Path=EnergySourceTypes}" Grid.ColumnSpan="3"
+                          SelectedItem="{Binding Path=SelectedItem.EnergySourceType, ElementName=itemList}"/>
                 <Label Content="Buffer Cap:" Grid.Column="0" Grid.Row="2" Margin="5" VerticalContentAlignment="Center"/>
                 <TextBox Grid.Column="1" Grid.Row="2" Margin="5" VerticalContentAlignment="Center"
-                         Text="{Binding Path=SelectedItem.BufferCap}" Grid.ColumnSpan="3"/>
+                         Text="{Binding Path=SelectedItem.BufferCap, ElementName=itemList}" Grid.ColumnSpan="3"/>
                 <Label Content="Input Limit:" Grid.Column="0" Grid.Row="3" Margin="5" VerticalContentAlignment="Center"/>
                 <TextBox Grid.Column="1" Grid.Row="3" Margin="5" VerticalContentAlignment="Center"
-                         Text="{Binding Path=SelectedItem.InputLimit}" Grid.ColumnSpan="3"/>
+                         Text="{Binding Path=SelectedItem.InputLimit, ElementName=itemList}" Grid.ColumnSpan="3"/>
                 <Label Content="Usage Priority:" Grid.Column="0" Grid.Row="4" Margin="5" VerticalContentAlignment="Center"/>
                 <TextBox Grid.Column="1" Grid.Row="4" Margin="5" VerticalContentAlignment="Center"
-                         Text="{Binding Path=SelectedItem.UsagePriority}" Grid.ColumnSpan="3"/>
+                         Text="{Binding Path=SelectedItem.UsagePriority, ElementName=itemList}" Grid.ColumnSpan="3"/>
             </Grid>
         </Grid>
     </DataTemplate>
