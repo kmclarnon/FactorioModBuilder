@@ -12,12 +12,18 @@ namespace FactorioModBuilder.Build
     {
         public List<CompilerMessage> BuildMessages { get; private set; }
 
-        public int MaxErrorContinuation { get; set; }
+        public int MaxErrors { get; set; }
 
         private Dictionary<string, ICompilerExtension> _activeExtensions = new Dictionary<string,ICompilerExtension>();
 
         public Compiler()
+            : this(0)
         {
+        }
+
+        public Compiler(int maxErrors)
+        {
+            this.MaxErrors = maxErrors;
             this.BuildMessages = new List<CompilerMessage>();
         }
 
@@ -51,12 +57,14 @@ namespace FactorioModBuilder.Build
                     {
                         this.BuildMessages.Add(new ErrorMessage("Could not find compiler extension to support type: " + i.Key));
                         if(BuildMessages.Where(o => o.Type == CompilerMessage.MessageType.Error)
-                            .Count() > this.MaxErrorContinuation)
+                            .Count() > this.MaxErrors)
                         {
                             this.BuildMessages.Add(new ErrorMessage("Encountered greater than " + 
-                                this.MaxErrorContinuation + " errors. Build process halted."));
+                                this.MaxErrors + " errors. Build process halted."));
                             return false;
                         }
+                        // since we couldn't find an extension, we're done
+                        continue;
                     }
 
                     if(ext.SeparateFile)

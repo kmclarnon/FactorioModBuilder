@@ -1,4 +1,5 @@
 ﻿using FactorioModBuilder.Build;
+using FactorioModBuilder.Build.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace FactorioModBuilder.Models.Main
         public int AppHeight { get; set; }
         public int AppWidth { get; set; }
 
-        public Compiler Compiler { get; private set; }
+        public Compiler Compiler { get; set; }
 
         public MainModel(int width, int height, string name, string version)
         {
@@ -23,7 +24,8 @@ namespace FactorioModBuilder.Models.Main
             this.AppWidth = width;
             this.AppName = name;
             this.AppVersion = version;
-            this.Compiler = new Compiler();
+            this.Compiler = new Compiler(100);
+            this.Compiler.AddExtension(new LuaInfoExtension());
         }
 
         
