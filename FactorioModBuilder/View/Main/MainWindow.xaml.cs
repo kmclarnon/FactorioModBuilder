@@ -15,6 +15,8 @@ using System.Windows.Shapes;
 using FactorioModBuilder.ViewModels;
 using FactorioModBuilder.Models;
 using FactorioModBuilder.Models.Main;
+using FactorioModBuilder.Build;
+using FactorioModBuilder.Build.Extensions;
 
 namespace FactorioModBuilder
 {
@@ -31,7 +33,13 @@ namespace FactorioModBuilder
                     1200, 800,
                     "Factorio Mod Builder",
                     System.Reflection.Assembly.GetExecutingAssembly()
-                        .GetName().Version.ToString()));
+                        .GetName().Version.ToString(),
+                    new Build.Compiler(100, new List<ICompilerExtension>()
+                        {
+                            new ControlLuaExtension(),
+                            new InfoJsonExtension(),
+                            new DataLuaExtension()
+                        })));
         }
     }
 }

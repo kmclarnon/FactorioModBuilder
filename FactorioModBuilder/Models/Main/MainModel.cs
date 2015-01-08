@@ -16,16 +16,16 @@ namespace FactorioModBuilder.Models.Main
         public int AppHeight { get; set; }
         public int AppWidth { get; set; }
 
-        public Compiler Compiler { get; set; }
+        public Compiler Compiler { get; private set; }
 
-        public MainModel(int width, int height, string name, string version)
+        public MainModel(int width, int height, 
+            string name, string version, Compiler c)
         {
             this.AppHeight = height;
             this.AppWidth = width;
             this.AppName = name;
             this.AppVersion = version;
-            this.Compiler = new Compiler(100);
-            this.Compiler.AddExtension(new InfoJsonExtension());
+            this.Compiler = c;
         }
 
         

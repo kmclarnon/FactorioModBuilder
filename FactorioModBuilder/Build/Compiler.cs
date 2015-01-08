@@ -22,9 +22,16 @@ namespace FactorioModBuilder.Build
         }
 
         public Compiler(int maxErrors)
+            : this(maxErrors, new List<ICompilerExtension>())
+        {
+        }
+
+        public Compiler(int maxErrors, IEnumerable<ICompilerExtension> exts)
         {
             this.MaxErrors = maxErrors;
             this.BuildMessages = new List<CompilerMessage>();
+            foreach (var ext in exts)
+                this.AddExtension(ext);
         }
 
         public bool Build(string outDir, string tmpDir, List<CompileUnit> data)
@@ -52,17 +59,19 @@ namespace FactorioModBuilder.Build
                     return false;
                 foreach(var i in c.StructValues)
                 {
+                    // ensure that we can continue to compile
+                    if (BuildMessages.Where(o => o.Type == CompilerMessage.MessageType.Error)
+                        .Count() > this.MaxErrors)
+                    {
+                        this.BuildMessages.Add(new ErrorMessage("Encountered greater than " +
+                            this.MaxErrors + " errors. Build process halted."));
+                        return false;
+                    }
+
                     ICompilerExtension ext;
                     if(!_activeExtensions.TryGetValue(i.Key, out ext))
                     {
                         this.BuildMessages.Add(new ErrorMessage("Could not find compiler extension to support type: " + i.Key));
-                        if(BuildMessages.Where(o => o.Type == CompilerMessage.MessageType.Error)
-                            .Count() > this.MaxErrors)
-                        {
-                            this.BuildMessages.Add(new ErrorMessage("Encountered greater than " + 
-                                this.MaxErrors + " errors. Build process halted."));
-                            return false;
-                        }
                         // since we couldn't find an extension, we're done
                         continue;
                     }
