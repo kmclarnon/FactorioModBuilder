@@ -20,20 +20,20 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
                 return new CompileUnit(
                     new Dictionary<string, CompileUnit>()
                 {
-                    { "name", new CompileUnit(this.ModName) },
-                    { "version", new CompileUnit(this.Version) },
-                    { "title", new CompileUnit(this.Title) },
-                    { "author", new CompileUnit(this.Author) },
-                    { "contact", new CompileUnit(this.Contact) },
-                    { "homepage", new CompileUnit(this.Homepage) },
-                    { "description", new CompileUnit(this.Description) }
-                });
+                    { "\"name\"", new CompileUnit(this.ModName) },
+                    { "\"version\"", new CompileUnit(this.Version) },
+                    { "\"title\"", new CompileUnit(this.Title) },
+                    { "\"author\"", new CompileUnit(this.Author) },
+                    { "\"contact\"", new CompileUnit(this.Contact) },
+                    { "\"homepage\"", new CompileUnit(this.Homepage) },
+                    { "\"description\"", new CompileUnit(this.Description) }
+                }, " : ");
             }
         }
 
         public override string CompilerKey
         {
-            get { return "info"; }
+            get { return "info.lua"; }
         }
 
         public string ModName
