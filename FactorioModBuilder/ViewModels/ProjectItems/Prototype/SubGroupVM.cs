@@ -80,13 +80,14 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         }
 
         public SubGroupVM(SubGroup item)
-            : base(item)
+            : this(null, item)
         {
         }
 
         public SubGroupVM(TreeItemVMBase parent, SubGroup item)
             : base(parent, item)
         {
+            this.Enabled = true;
         }
     }
 }
