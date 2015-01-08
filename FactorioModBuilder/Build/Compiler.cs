@@ -36,20 +36,8 @@ namespace FactorioModBuilder.Build
 
         public bool Build(string outDir, string tmpDir, List<CompileUnit> data)
         {
-            // get and validate our temporary directory
-            var tmpDirInfo = new DirectoryInfo(tmpDir);
-            if(!tmpDirInfo.Exists)
-            {
-                tmpDirInfo.Create();
-            }
-            else
-            {
-                // clear out the temporary directory
-                foreach (var file in tmpDirInfo.GetFiles())
-                    file.Delete();
-                foreach (var dir in tmpDirInfo.GetDirectories())
-                    dir.Delete();
-            }
+            // prepare for the build
+            this.PreBuild();
 
             string curPath = "";
             // process each of our compilation units
@@ -77,9 +65,7 @@ namespace FactorioModBuilder.Build
                     }
 
                     if(ext.SeparateFile)
-                    {
                         curPath = Path.Combine(tmpDir, ext.Filename);
-                    }
 
                     try
                     {
@@ -102,7 +88,33 @@ namespace FactorioModBuilder.Build
                 }
             }
 
+            // finish up after our build
+            this.PostBuild();
+
             return true;
+        }
+
+        private void PreBuild(string tmpDir)
+        {
+            // get and validate our temporary directory
+            var tmpDirInfo = new DirectoryInfo(tmpDir);
+            if (!tmpDirInfo.Exists)
+            {
+                tmpDirInfo.Create();
+            }
+            else
+            {
+                // clear out the temporary directory
+                foreach (var file in tmpDirInfo.GetFiles())
+                    file.Delete();
+                foreach (var dir in tmpDirInfo.GetDirectories())
+                    dir.Delete();
+            }
+        }
+
+        private void PostBuild()
+        {
+
         }
 
         public bool AddExtension(ICompilerExtension ext)
