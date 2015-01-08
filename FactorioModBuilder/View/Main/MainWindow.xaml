@@ -62,9 +62,9 @@
             <MenuItem Header="_Edit"/>
             <MenuItem Header="_View"/>
             <MenuItem Header="_Build">
-                <MenuItem Header="Build Project"/>
-                <MenuItem Header="Rebuild Project"/>
-                <MenuItem Header="Clean Project"/>
+                <MenuItem Header="Build Project" Command="{Binding Path=Data.BuildMenu.BuildProjectCmd, Source={StaticResource proxy}}"/>
+                <MenuItem Header="Rebuild Project" Command="{Binding Path=Data.BuildMenu.RebuildProjectCmd, Source={StaticResource proxy}}"/>
+                <MenuItem Header="Clean Project" Command="{Binding Path=Data.BuildMenu.CleanProjectCmd, Source={StaticResource proxy}}"/>
             </MenuItem>
             <MenuItem Header="_Window"/>
             <MenuItem Header="_Help"/>
@@ -99,12 +99,12 @@
         <!-- Separators -->
         <GridSplitter Grid.Column="1" Grid.Row="1" Width="5" VerticalAlignment="Stretch" HorizontalAlignment="Center"/>
         <!-- Main Project Item View -->
-        <ContentPresenter Grid.Column="2" Grid.Row="1" Margin="5" Content="{Binding Path=SelectedItem, ElementName=projectView}" ContentTemplateSelector="{StaticResource selector}"/>
+        <ContentPresenter Grid.Column="2" Grid.Row="1" Margin="5" 
+                          Content="{Binding Path=SelectedItem, ElementName=projectView}" 
+                          ContentTemplateSelector="{StaticResource selector}"/>
         <!-- Status Bar -->
         <StatusBar Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="1000">
-            <StatusBarItem>
-                <TextBlock Text="Project:"/>
-            </StatusBarItem>
+
         </StatusBar>
     </Grid>
 </Window>

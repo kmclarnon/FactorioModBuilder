@@ -68,6 +68,7 @@ namespace FactorioModBuilder.ViewModels
         }
 
         public FileMenuVM FileMenu { get; private set; }
+        public BuildMenuVM BuildMenu { get; private set; }
 
         private MainModel _main;
 
@@ -76,6 +77,7 @@ namespace FactorioModBuilder.ViewModels
             _main = m;
             this.Solutions = new ObservableCollection<SolutionVM>();
             this.FileMenu = new FileMenuVM(this);
+            this.BuildMenu = new BuildMenuVM(this);
         }
     }
 }
