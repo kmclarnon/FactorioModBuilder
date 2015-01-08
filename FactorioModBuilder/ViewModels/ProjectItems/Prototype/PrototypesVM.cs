@@ -1,4 +1,5 @@
-﻿using FactorioModBuilder.Models.ProjectItems.Prototype;
+﻿using FactorioModBuilder.Build;
+using FactorioModBuilder.Models.ProjectItems.Prototype;
 using FactorioModBuilder.ViewModels.Base;
 using System;
 using System.Collections.Generic;
@@ -9,8 +10,18 @@ using System.Threading.Tasks;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
-    public class PrototypesVM : TreeItemVM<Prototypes>
+    public class PrototypesVM : ProjectItem<Prototypes>
     {
+        public override CompileUnit CompilerData
+        {
+            get { return new CompileUnit("test"); }
+        }
+
+        public override string CompilerKey
+        {
+            get { return "prototypes"; }
+        }
+
         public ObservableCollection<SubGroupVM> PossibleSubgroups
         {
             get

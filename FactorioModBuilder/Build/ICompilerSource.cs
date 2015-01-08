@@ -8,6 +8,8 @@ namespace FactorioModBuilder.Build
 {
     public interface ICompilerSource
     {
-        Dictionary<String, CompileUnit> CompileData { get; }
+        CompileUnit CompilerData { get; }
+        string CompilerKey { get; }
+        IEnumerable<ICompilerSource> SubUnits { get; }
     }
 }

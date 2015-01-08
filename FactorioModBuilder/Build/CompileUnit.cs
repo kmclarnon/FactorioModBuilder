@@ -15,42 +15,64 @@ namespace FactorioModBuilder.Build
             Struct
         }
 
-        public UnitType Type { get; private set; }
-        public string Value { get; private set; }
+        public enum ValueType
+        {
+            Number,
+            Text,
+            None
+        }
+
+        public UnitType UType { get; private set; }
+        public ValueType VType { get; private set; }
+        public string SValue { get; private set; }
+        public int IValue { get; private set; }
         public List<CompileUnit> ListValues { get; private set; }
         public Dictionary<string, CompileUnit> StructValues { get; private set; }
 
         public CompileUnit(string val)
         {
-            this.Type = UnitType.Value;
-            this.Value = val;
+            this.UType = UnitType.Value;
+            this.VType = ValueType.Text;
+            this.SValue = val;
+        }
+
+        public CompileUnit(int val)
+        {
+            this.UType = UnitType.Value;
+            this.VType = ValueType.Number;
+            this.IValue = val;
         }
 
         public CompileUnit(IEnumerable<CompileUnit> units)
         {
-            this.Type = UnitType.List;
+            this.UType = UnitType.List;
+            this.VType = ValueType.None;
             this.ListValues = units.ToList();
         }
 
         public CompileUnit(IDictionary<string, CompileUnit> members)
         {
-            this.Type = UnitType.Struct;
+            this.UType = UnitType.Struct;
+            this.VType = ValueType.None;
             this.StructValues = new Dictionary<string, CompileUnit>(members);
         }
 
-        public implicit operator CompileUnit(string value)
+        public override string ToString()
         {
-            return new CompileUnit(value);
-        }
+            switch (this.UType)
+            {
+                case UnitType.Value:
+                    switch (this.VType)
+                    {
+                        case ValueType.Number: return this.IValue.ToString();
+                        case ValueType.Text: return "\"" + this.SValue + "\"";
+                    }
+                    break;
+                case UnitType.List: return "Count = " + this.ListValues.Count;
+                case UnitType.Struct: return "Count = " + this.StructValues.Count;
+            }
 
-        public implicit operator CompileUnit(IEnumerable<CompileUnit> values)
-        {
-            return new CompileUnit(values);
-        }
-
-        public implicit operator CompileUnit(IDictionary<string, CompileUnit> values)
-        {
-            return new CompileUnit(values);
+            throw new Exception("Internal consistency error");
         }
     }
 }

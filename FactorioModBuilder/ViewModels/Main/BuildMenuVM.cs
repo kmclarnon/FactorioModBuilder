@@ -55,7 +55,7 @@ namespace FactorioModBuilder.ViewModels.Main
 
         private void BuildSolution()
         {
-
+            var data = _parent.GetSolutionData();
         }
 
         private bool CanBuildSolution()

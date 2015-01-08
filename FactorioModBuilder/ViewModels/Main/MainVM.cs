@@ -18,6 +18,7 @@ using FactorioModBuilder.View.Dialogs;
 using FactorioModBuilder.Models.Dialogs;
 using FactorioModBuilder.Models.Main;
 using FactorioModBuilder.ViewModels.Main;
+using FactorioModBuilder.Build;
 
 namespace FactorioModBuilder.ViewModels
 {
@@ -69,6 +70,7 @@ namespace FactorioModBuilder.ViewModels
 
         public FileMenuVM FileMenu { get; private set; }
         public BuildMenuVM BuildMenu { get; private set; }
+        public Compiler Compiler { get { return _main.Compiler; } }
 
         private MainModel _main;
 
@@ -78,6 +80,18 @@ namespace FactorioModBuilder.ViewModels
             this.Solutions = new ObservableCollection<SolutionVM>();
             this.FileMenu = new FileMenuVM(this);
             this.BuildMenu = new BuildMenuVM(this);
+        }
+
+        public List<CompileUnit> GetSolutionData()
+        {
+            if (this.Solutions.Count < 1)
+                throw new InvalidOperationException("Cannot create solution data when no solution exists");
+
+            List<CompileUnit> res = new List<CompileUnit>();
+            var sln = this.Solutions[0];
+            foreach(ProjectVM p in sln.Children)
+                res.Add(p.CompilerData);
+            return res;
         }
     }
 }

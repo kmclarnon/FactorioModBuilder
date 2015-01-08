@@ -1,4 +1,5 @@
-﻿using FactorioModBuilder.Models.ProjectItems;
+﻿using FactorioModBuilder.Build;
+using FactorioModBuilder.Models.ProjectItems;
 using FactorioModBuilder.ViewModels.Base;
 using System;
 using System.Collections.Generic;
@@ -10,8 +11,31 @@ using WpfUtils;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems
 {
-    public class ModInfoVM : TreeItemVM<ModInfo>
+    public class ModInfoVM : ProjectItem<ModInfo>
     {
+        public override CompileUnit CompilerData
+        {
+            get
+            {
+                return new CompileUnit(
+                    new Dictionary<string, CompileUnit>()
+                {
+                    { "name", new CompileUnit(this.ModName) },
+                    { "version", new CompileUnit(this.Version) },
+                    { "title", new CompileUnit(this.Title) },
+                    { "author", new CompileUnit(this.Author) },
+                    { "contact", new CompileUnit(this.Contact) },
+                    { "homepage", new CompileUnit(this.Homepage) },
+                    { "description", new CompileUnit(this.Description) }
+                });
+            }
+        }
+
+        public override string CompilerKey
+        {
+            get { return "info"; }
+        }
+
         public string ModName
         {
             get { return _mItem.ModName; }
@@ -156,6 +180,5 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
         {
 
         }
-
     }
 }

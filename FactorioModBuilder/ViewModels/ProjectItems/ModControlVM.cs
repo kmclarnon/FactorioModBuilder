@@ -1,4 +1,5 @@
-﻿using FactorioModBuilder.Models.ProjectItems;
+﻿using FactorioModBuilder.Build;
+using FactorioModBuilder.Models.ProjectItems;
 using FactorioModBuilder.ViewModels.Base;
 using System;
 using System.Collections.Generic;
@@ -8,8 +9,18 @@ using System.Threading.Tasks;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems
 {
-    public class ModControlVM : TreeItemVM<ModControl>
+    public class ModControlVM : ProjectItem<ModControl>
     {
+        public override CompileUnit CompilerData
+        {
+            get { return new CompileUnit("test data"); }
+        }
+
+        public override string CompilerKey
+        {
+            get { return "control"; }
+        }
+
         public ModControlVM(ModControl control)
             : base(control)
         {
