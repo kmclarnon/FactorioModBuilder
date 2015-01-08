@@ -57,8 +57,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Build\Compiler.cs" />
+    <Compile Include="Build\Extensions\ControlLuaExtension.cs" />
+    <Compile Include="Build\Extensions\DataLuaExtension.cs" />
     <Compile Include="Build\Extensions\ExtensionBase.cs" />
-    <Compile Include="Build\Extensions\LuaInfoExtension.cs" />
+    <Compile Include="Build\Extensions\InfoJsonExtension.cs" />
     <Compile Include="Build\ICompilerSource.cs" />
     <Compile Include="Build\Messages\ErrorMessage.cs" />
     <Compile Include="Build\ICompilerExtension.cs" />
