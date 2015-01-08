@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace FactorioModBuilder.Build.Extensions
 {
-    public class LuaInfoExtension : ExtensionBase
+    public class InfoJsonExtension : ExtensionBase
     {
         public override string SupportedUnitName
         {
-            get { return "info.lua"; }
+            get { return "info.json"; }
         }
 
         public override bool SeparateFile
@@ -20,7 +20,7 @@ namespace FactorioModBuilder.Build.Extensions
 
         public override string Filename
         {
-            get { return "info.lua"; }
+            get { return "info.json"; }
         }
 
         public override bool BuildUnit(CompileUnit unit, out string result)

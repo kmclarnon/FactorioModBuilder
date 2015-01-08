@@ -25,7 +25,7 @@ namespace FactorioModBuilder.Models.Main
             this.AppName = name;
             this.AppVersion = version;
             this.Compiler = new Compiler(100);
-            this.Compiler.AddExtension(new LuaInfoExtension());
+            this.Compiler.AddExtension(new InfoJsonExtension());
         }
 
         
