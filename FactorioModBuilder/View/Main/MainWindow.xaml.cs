@@ -30,7 +30,8 @@ namespace FactorioModBuilder
                 new MainModel(
                     1200, 800,
                     "Factorio Mod Builder",
-                    "0.0.2"));
+                    System.Reflection.Assembly.GetExecutingAssembly()
+                        .GetName().Version.ToString()));
         }
     }
 }
