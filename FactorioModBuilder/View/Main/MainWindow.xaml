@@ -51,20 +51,20 @@
         <Menu IsMainMenu="True" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="1000">
             <MenuItem Header="_File">
                 <MenuItem Header="_New Project" Command="{Binding Path=Data.FileMenu.NewProjectCmd, Source={StaticResource proxy}}" />
-                <MenuItem Header="_Open Project" Command="{Binding Path=Data.FileMenu.OpenProjectCmd, Source={StaticResource proxy}}" />
+                <MenuItem Header="_Open Project" Command="{Binding Path=Data.FileMenu.OpenSolutionCmd, Source={StaticResource proxy}}" />
                 <Separator />
-                <MenuItem Header="_Save Project" Command="{Binding Path=Data.FileMenu.SaveProjectCmd, Source={StaticResource proxy}}" />
-                <MenuItem Header="Save Project As..." Command="{Binding Path=Data.FileMenu.SaveProjectAsCmd, Source={StaticResource proxy}}" />
+                <MenuItem Header="_Save Solution" Command="{Binding Path=Data.FileMenu.SaveSolutionCmd, Source={StaticResource proxy}}" />
+                <MenuItem Header="Save Solution As..." Command="{Binding Path=Data.FileMenu.SaveSolutionAsCmd, Source={StaticResource proxy}}" />
                 <Separator />
-                <MenuItem Header="_Close Project" Command="{Binding Path=Data.FileMenu.CloseProjectCmd, Source={StaticResource proxy}}"/>
+                <MenuItem Header="_Close Solution" Command="{Binding Path=Data.FileMenu.CloseSolutionCmd, Source={StaticResource proxy}}"/>
                 <MenuItem Header="_Exit" Command="{Binding Path=Data.FileMenu.ExitCmd, Source={StaticResource proxy}}" />
             </MenuItem>
             <MenuItem Header="_Edit"/>
             <MenuItem Header="_View"/>
             <MenuItem Header="_Build">
-                <MenuItem Header="Build Project" Command="{Binding Path=Data.BuildMenu.BuildProjectCmd, Source={StaticResource proxy}}"/>
-                <MenuItem Header="Rebuild Project" Command="{Binding Path=Data.BuildMenu.RebuildProjectCmd, Source={StaticResource proxy}}"/>
-                <MenuItem Header="Clean Project" Command="{Binding Path=Data.BuildMenu.CleanProjectCmd, Source={StaticResource proxy}}"/>
+                <MenuItem Header="Build Solution" Command="{Binding Path=Data.BuildMenu.BuildSolutionCmd, Source={StaticResource proxy}}"/>
+                <MenuItem Header="Rebuild Solution" Command="{Binding Path=Data.BuildMenu.RebuildSolutionCmd, Source={StaticResource proxy}}"/>
+                <MenuItem Header="Clean Solution" Command="{Binding Path=Data.BuildMenu.CleanSolutionCmd, Source={StaticResource proxy}}"/>
             </MenuItem>
             <MenuItem Header="_Window"/>
             <MenuItem Header="_Help"/>

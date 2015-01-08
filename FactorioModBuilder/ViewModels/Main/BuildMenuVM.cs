@@ -60,7 +60,7 @@ namespace FactorioModBuilder.ViewModels.Main
 
         private bool CanBuildSolution()
         {
-            return true;
+            return _parent.Solutions.Count > 0;
         }
 
         private void RebuildSolution()
@@ -70,7 +70,7 @@ namespace FactorioModBuilder.ViewModels.Main
 
         private bool CanRebuildSolution()
         {
-            return true;
+            return _parent.Solutions.Count > 0;
         }
 
         private void CleanSolution()
@@ -80,7 +80,7 @@ namespace FactorioModBuilder.ViewModels.Main
 
         private bool CanCleanSolution()
         {
-            return true;
+            return _parent.Solutions.Count > 0;
         }
     }
 }

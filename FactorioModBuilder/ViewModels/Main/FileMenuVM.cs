@@ -30,51 +30,51 @@ namespace FactorioModBuilder.ViewModels.Main
             }
         }
 
-        private ICommand _openProjectCmd;
-        public ICommand OpenProjectCmd
+        private ICommand _openSolutionCmd;
+        public ICommand OpenSolutionCmd
         {
             get
             {
-                if (_openProjectCmd == null)
-                    _openProjectCmd = new RelayCommand(
-                        (x => this.OpenProject()), (x => this.CanOpenProject()));
-                return _openProjectCmd;
+                if (_openSolutionCmd == null)
+                    _openSolutionCmd = new RelayCommand(
+                        (x => this.OpenSolution()), (x => this.CanOpenSolution()));
+                return _openSolutionCmd;
             }
         }
 
-        private ICommand _saveProjectCmd;
-        public ICommand SaveProjectCmd
+        private ICommand _saveSolutionCmd;
+        public ICommand SaveSolutionCmd
         {
             get
             {
-                if (_saveProjectCmd == null)
-                    _saveProjectCmd = new RelayCommand(
-                        (x => this.SaveProject()), (x => this.CanSaveProject()));
-                return _saveProjectCmd;
+                if (_saveSolutionCmd == null)
+                    _saveSolutionCmd = new RelayCommand(
+                        (x => this.SaveSolution()), (x => this.CanSaveSolution()));
+                return _saveSolutionCmd;
             }
         }
 
-        private ICommand _saveProjectAsCmd;
-        public ICommand SaveProjectAsCmd
+        private ICommand _saveSolutionAsCmd;
+        public ICommand SaveSolutionAsCmd
         {
             get
             {
-                if (_saveProjectAsCmd == null)
-                    _saveProjectAsCmd = new RelayCommand(
-                        (x => this.SaveProjectAs()), (x => this.CanSaveProjectAs()));
-                return _saveProjectAsCmd;
+                if (_saveSolutionAsCmd == null)
+                    _saveSolutionAsCmd = new RelayCommand(
+                        (x => this.SaveSolutionAs()), (x => this.CanSaveSolutionAs()));
+                return _saveSolutionAsCmd;
             }
         }
 
-        private ICommand _closeProjectCmd;
-        public ICommand CloseProjectCmd
+        private ICommand _closeSolutionCmd;
+        public ICommand CloseSolutionCmd
         {
             get
             {
-                if (_closeProjectCmd == null)
-                    _closeProjectCmd = new RelayCommand(
-                        (x => this.CloseProject()), (x => this.CanCloseProject()));
-                return _closeProjectCmd;
+                if (_closeSolutionCmd == null)
+                    _closeSolutionCmd = new RelayCommand(
+                        (x => this.CloseSolution()), (x => this.CanCloseSolution()));
+                return _closeSolutionCmd;
             }
         }
 
@@ -153,40 +153,40 @@ namespace FactorioModBuilder.ViewModels.Main
             }
         }
 
-        private bool CanOpenProject()
+        private bool CanOpenSolution()
         {
             return true;
         }
 
-        private void OpenProject()
+        private void OpenSolution()
         {
         }
 
-        private bool CanSaveProject()
+        private bool CanSaveSolution()
         {
-            return true;
+            return _parent.Solutions.Count > 0;
         }
 
-        private void SaveProject()
+        private void SaveSolution()
         {
         }
 
-        private bool CanSaveProjectAs()
+        private bool CanSaveSolutionAs()
         {
-            return true;
+            return _parent.Solutions.Count > 0;
         }
 
-        private void SaveProjectAs()
+        private void SaveSolutionAs()
         {
 
         }
 
-        private bool CanCloseProject()
+        private bool CanCloseSolution()
         {
-            return true;
+            return _parent.Solutions.Count > 0;
         }
 
-        private void CloseProject()
+        private void CloseSolution()
         {
 
         }
