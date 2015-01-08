@@ -21,7 +21,7 @@ namespace FactorioModBuilder.Build
             this.BuildMessages = new List<CompilerMessage>();
         }
 
-        public bool Build(string outDir, string tmpDir, Dictionary<string, CompileUnit> data)
+        public bool Build(string outDir, string tmpDir, List<CompileUnit> data)
         {
             // get and validate our temporary directory
             var tmpDirInfo = new DirectoryInfo(tmpDir);
@@ -40,43 +40,48 @@ namespace FactorioModBuilder.Build
 
             string curPath = "";
             // process each of our compilation units
-            foreach(var kvp in data)
+            foreach(var c in data)
             {
-                ICompilerExtension ext;
-                if(!_activeExtensions.TryGetValue(kvp.Key, out ext))
+                if(c.UType != CompileUnit.UnitType.Struct)
+                    return false;
+                foreach(var i in c.StructValues)
                 {
-                    this.BuildMessages.Add(new ErrorMessage("Could not find compiler extension to support type: " + kvp.Key));
-                    if(BuildMessages.Where(o => o.Type == CompilerMessage.MessageType.Error)
-                        .Count() > this.MaxErrorContinuation)
+                    ICompilerExtension ext;
+                    if(!_activeExtensions.TryGetValue(i.Key, out ext))
                     {
-                        this.BuildMessages.Add(new ErrorMessage("Encountered greater than " + 
-                            this.MaxErrorContinuation + " errors. Build process halted."));
+                        this.BuildMessages.Add(new ErrorMessage("Could not find compiler extension to support type: " + i.Key));
+                        if(BuildMessages.Where(o => o.Type == CompilerMessage.MessageType.Error)
+                            .Count() > this.MaxErrorContinuation)
+                        {
+                            this.BuildMessages.Add(new ErrorMessage("Encountered greater than " + 
+                                this.MaxErrorContinuation + " errors. Build process halted."));
+                            return false;
+                        }
+                    }
+
+                    if(ext.SeparateFile)
+                    {
+                        curPath = Path.Combine(tmpDir, ext.Filename);
+                    }
+
+                    try
+                    {
+                        using (var fs = File.Open(curPath, FileMode.Append))
+                        using (var sw = new StreamWriter(fs))
+                        {
+                            string res;
+                            if (!ext.BuildUnit(i.Value, out res))
+                                this.BuildMessages.Add(new ErrorMessage("Failed to compile extension: " + i.Key));
+                            else
+                                sw.Write(res);
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        this.BuildMessages.Add(new ErrorMessage("Encountered internal compiler exception: " + e.Message));
+                        this.BuildMessages.Add(new ErrorMessage("Compiler encoutered a fatal error, build halted."));
                         return false;
                     }
-                }
-
-                if(ext.SeparateFile)
-                {
-                    curPath = Path.Combine(tmpDir, ext.Filename);
-                }
-
-                try
-                {
-                    using (var fs = File.Open(curPath, FileMode.Append))
-                    using (var sw = new StreamWriter(fs))
-                    {
-                        string res;
-                        if (!ext.BuildUnit(kvp.Value, out res))
-                            this.BuildMessages.Add(new ErrorMessage("Failed to compile extension: " + kvp.Key));
-                        else
-                            sw.Write(res);
-                    }
-                }
-                catch (Exception e)
-                {
-                    this.BuildMessages.Add(new ErrorMessage("Encountered internal compiler exception: " + e.Message));
-                    this.BuildMessages.Add(new ErrorMessage("Compiler encoutered a fatal error, build halted."));
-                    return false;
                 }
             }
 
