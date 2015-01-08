@@ -37,5 +37,20 @@ namespace FactorioModBuilder.Build
             this.Type = UnitType.Struct;
             this.StructValues = new Dictionary<string, CompileUnit>(members);
         }
+
+        public implicit operator CompileUnit(string value)
+        {
+            return new CompileUnit(value);
+        }
+
+        public implicit operator CompileUnit(IEnumerable<CompileUnit> values)
+        {
+            return new CompileUnit(values);
+        }
+
+        public implicit operator CompileUnit(IDictionary<string, CompileUnit> values)
+        {
+            return new CompileUnit(values);
+        }
     }
 }
