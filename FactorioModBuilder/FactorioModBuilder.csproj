@@ -17,7 +17,7 @@
     <UpdateAssemblyVersion>True</UpdateAssemblyVersion>
     <UpdateAssemblyFileVersion>False</UpdateAssemblyFileVersion>
     <UpdateAssemblyInfoVersion>False</UpdateAssemblyInfoVersion>
-    <AssemblyVersionSettings>IncrementOnDemand.Increment.DayOfYearStamp.TimeStamp</AssemblyVersionSettings>
+    <AssemblyVersionSettings>None.IncrementOnDemandWithReset.Increment.DayOfYearStamp</AssemblyVersionSettings>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>

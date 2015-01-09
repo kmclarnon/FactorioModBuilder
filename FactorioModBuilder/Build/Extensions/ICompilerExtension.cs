@@ -11,7 +11,6 @@ namespace FactorioModBuilder.Build.Extensions
     {
         string SupportedUnitName { get; }
         Compiler Parent { get; set; }
-
         bool BuildUnit(CompileUnit unit, DirectoryInfo outDir);
     }
 }
