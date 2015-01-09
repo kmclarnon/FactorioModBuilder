@@ -26,7 +26,7 @@ namespace FactorioModBuilder.Build.Extensions
         public override bool BuildUnit(CompileUnit unit, out string result)
         {
             result = "";
-            return false;
+            return true;
         }
     }
 }
