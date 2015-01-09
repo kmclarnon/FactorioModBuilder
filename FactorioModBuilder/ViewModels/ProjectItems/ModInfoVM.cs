@@ -33,7 +33,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
 
         public override string CompilerKey
         {
-            get { return "info.lua"; }
+            get { return "info.json"; }
         }
 
         public string ModName
