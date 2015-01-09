@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FactorioModBuilder.Build;
+using FactorioModBuilder.ViewModels.ProjectItems;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -55,8 +57,15 @@ namespace FactorioModBuilder.ViewModels.Main
 
         private void BuildSolution()
         {
-            var data = _parent.GetSolutionData();
-            _parent.Compiler.Build("test", "tmp", data);
+            if (_parent.Solutions.Count < 1)
+                throw new InvalidOperationException("Cannot create solution data when no solution exists");
+
+            List<CompileUnit> res = new List<CompileUnit>();
+            var sln = _parent.Solutions[0];
+            foreach (ProjectVM p in sln.Children)
+                res.Add(p.CompilerData);
+
+            _parent.Compiler.Build(res);
         }
 
         private bool CanBuildSolution()

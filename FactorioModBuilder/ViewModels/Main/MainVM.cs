@@ -81,17 +81,5 @@ namespace FactorioModBuilder.ViewModels
             this.FileMenu = new FileMenuVM(this);
             this.BuildMenu = new BuildMenuVM(this);
         }
-
-        public List<CompileUnit> GetSolutionData()
-        {
-            if (this.Solutions.Count < 1)
-                throw new InvalidOperationException("Cannot create solution data when no solution exists");
-
-            List<CompileUnit> res = new List<CompileUnit>();
-            var sln = this.Solutions[0];
-            foreach(ProjectVM p in sln.Children)
-                res.Add(p.CompilerData);
-            return res;
-        }
     }
 }
