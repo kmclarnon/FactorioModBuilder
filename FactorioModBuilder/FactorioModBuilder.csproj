@@ -63,6 +63,7 @@
     <Compile Include="Build\Extensions\ControlLuaExtension.cs" />
     <Compile Include="Build\Extensions\DataLuaExtension.cs" />
     <Compile Include="Build\Extensions\ExtensionBase.cs" />
+    <Compile Include="Build\Extensions\GroupsExtension.cs" />
     <Compile Include="Build\Extensions\InfoJsonExtension.cs" />
     <Compile Include="Build\Extensions\PrototypesExtension.cs" />
     <Compile Include="Build\ICompilerSource.cs" />
