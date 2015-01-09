@@ -20,6 +20,12 @@ namespace FactorioModBuilder.Models.ProjectItems
         public ModInfo(string modName) : base("Mod Info")
         {
             this.ModName = modName;
+            this.Version = String.Empty;
+            this.Title = String.Empty;
+            this.Author = String.Empty;
+            this.Contact = String.Empty;
+            this.Homepage = String.Empty;
+            this.Description = String.Empty;
         }
     }
 }
