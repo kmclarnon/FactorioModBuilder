@@ -50,7 +50,7 @@ namespace FactorioModBuilder.Build
 
         public CompileUnit(IEnumerable<CompileUnit> units)
             : this(0, null, units, null, null, UnitType.List, ValueType.None,
-                   units.Select(o => o.SingleLine).Aggregate((a, b) => a && b))
+                  units != null ? units.Select(o => o.SingleLine).Aggregate((a, b) => a && b) : true)
         {
         }
 
