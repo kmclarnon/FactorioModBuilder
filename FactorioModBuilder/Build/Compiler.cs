@@ -134,7 +134,7 @@ namespace FactorioModBuilder.Build
                 foreach (var file in tmpDirInfo.GetFiles())
                     file.Delete();
                 foreach (var dir in tmpDirInfo.GetDirectories())
-                    dir.Delete();
+                    dir.Delete(true);
             }
 
             // get and validate our output directory
