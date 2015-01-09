@@ -72,9 +72,11 @@ namespace FactorioModBuilder.Build
             this.VType = vType;
             this.IValue = iVal;
             this.SValue = sVal;
-            this.ListValues = listVal.ToList();
-            this.StructValues = new Dictionary<string, CompileUnit>(members);
-            this.KeyValueSeparator = KeyValueSeparator;
+            if(listVal != null)
+                this.ListValues = new List<CompileUnit>(listVal);
+            if(members != null)
+                this.StructValues = new Dictionary<string, CompileUnit>(members);
+            this.KeyValueSeparator = keyValueSeparator;
             this.Directives = new List<CompilerDirective>();
         }
 
