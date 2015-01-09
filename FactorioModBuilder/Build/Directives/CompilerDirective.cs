@@ -11,7 +11,8 @@ namespace FactorioModBuilder.Build.Directives
         public enum DirectiveType
         {
             TemporaryDirectory,
-            OutputDirectory
+            OutputDirectory,
+            ProjectName
         }
 
         public DirectiveType Type { get; private set; }

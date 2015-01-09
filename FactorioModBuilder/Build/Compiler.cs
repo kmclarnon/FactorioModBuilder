@@ -1,5 +1,6 @@
-﻿using FactorioModBuilder.Build.Messages;
+﻿using FactorioModBuilder.Build.Directives;
 using FactorioModBuilder.Build.Extensions;
+using FactorioModBuilder.Build.Messages;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,6 +17,23 @@ namespace FactorioModBuilder.Build
         public int MaxErrors { get; set; }
 
         private Dictionary<string, ICompilerExtension> _activeExtensions = new Dictionary<string,ICompilerExtension>();
+
+        private class CompileSettings
+        {
+            public string TempDir { get; set; }
+            public string OutDir { get; set; }
+            public string ProjectName { get; set; }
+            public string BaseTempDirectory { get { return Path.Combine(TempDir, ProjectName); } }
+            public string BaseOutDirectory { get { return Path.Combine(OutDir, ProjectName); } }
+            public bool Complete
+            {
+                get
+                {
+                    return TempDir != null && 
+                        OutDir != null && ProjectName != null;
+                }
+            }
+        }
 
         public Compiler()
             : this(0)
@@ -35,15 +53,15 @@ namespace FactorioModBuilder.Build
                 this.AddExtension(ext);
         }
 
-        public bool Build(string outDir, string tmpDir, List<CompileUnit> data)
+        public bool Build(List<CompileUnit> data)
         {
-            // prepare for the build
-            this.PreBuild();
-
             string curPath = "";
             // process each of our compilation units
             foreach(var c in data)
             {
+                // prepare for the build
+                var settings = this.PreBuild(c);
+
                 if(c.UType != CompileUnit.UnitType.Struct)
                     return false;
                 foreach(var i in c.StructValues)
@@ -66,7 +84,7 @@ namespace FactorioModBuilder.Build
                     }
 
                     if(ext.SeparateFile)
-                        curPath = Path.Combine(tmpDir, ext.Filename);
+                        curPath = Path.Combine(settings.BaseTempDirectory, ext.Filename);
 
                     try
                     {
@@ -87,18 +105,40 @@ namespace FactorioModBuilder.Build
                         return false;
                     }
                 }
-            }
 
-            // finish up after our build
-            this.PostBuild();
+                // finish up after our build
+                this.PostBuild(settings);
+            }
 
             return true;
         }
 
-        private void PreBuild(string tmpDir)
+        private CompileSettings PreBuild(CompileUnit c)
         {
+            CompileSettings settings = new CompileSettings();
+            // get all of our compiler directives
+            foreach(var cd in c.Directives)
+            {
+                switch (cd.Type)
+                {
+                    case CompilerDirective.DirectiveType.TemporaryDirectory:
+                        settings.TempDir = cd.Data;
+                        break;
+                    case CompilerDirective.DirectiveType.OutputDirectory:
+                        settings.OutDir = cd.Data;
+                        break;
+                    case CompilerDirective.DirectiveType.ProjectName:
+                        settings.ProjectName = cd.Data;
+                        break;
+                }
+            }
+
+            // ensure that we have our required settings
+            if (!settings.Complete)
+                throw new Exception("Compiler settings are incomplete");
+
             // get and validate our temporary directory
-            var tmpDirInfo = new DirectoryInfo(tmpDir);
+            var tmpDirInfo = new DirectoryInfo(settings.BaseTempDirectory);
             if (!tmpDirInfo.Exists)
             {
                 tmpDirInfo.Create();
@@ -111,9 +151,16 @@ namespace FactorioModBuilder.Build
                 foreach (var dir in tmpDirInfo.GetDirectories())
                     dir.Delete();
             }
+
+            // get and validate our output directory
+            var outDirInfo = new DirectoryInfo(settings.BaseOutDirectory);
+            if(!outDirInfo.Exists)
+                outDirInfo.Create();
+
+            return settings;
         }
 
-        private void PostBuild()
+        private void PostBuild(CompileSettings settings)
         {
 
         }

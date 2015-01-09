@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FactorioModBuilder.Build;
+using FactorioModBuilder.Build.Directives;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems
 {
@@ -22,8 +23,11 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
                 foreach (var c in this.SubUnits)
                     res.Add(c.CompilerKey, c.CompilerData);
 
-                var c = new CompileUnit(res);
-                return new CompileUnit(res);
+                var cu = new CompileUnit(res);
+                cu.Directives.Add(new OutputDirectory(this.OutDir));
+                cu.Directives.Add(new TempDirectory(this.TempDir));
+                cu.Directives.Add(new ProjectName(this.Name));
+                return cu;
             }
         }
 

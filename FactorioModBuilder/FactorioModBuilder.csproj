@@ -57,11 +57,15 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Build\Compiler.cs" />
+    <Compile Include="Build\Directives\OutputDirectory.cs" />
+    <Compile Include="Build\Directives\ProjectName.cs" />
+    <Compile Include="Build\Directives\TempDirectory.cs" />
     <Compile Include="Build\Extensions\ControlLuaExtension.cs" />
     <Compile Include="Build\Extensions\DataLuaExtension.cs" />
     <Compile Include="Build\Extensions\ExtensionBase.cs" />
     <Compile Include="Build\Extensions\InfoJsonExtension.cs" />
     <Compile Include="Build\ICompilerSource.cs" />
+    <Compile Include="Build\Directives\CompilerDirective.cs" />
     <Compile Include="Build\Messages\ErrorMessage.cs" />
     <Compile Include="Build\Extensions\ICompilerExtension.cs" />
     <Compile Include="Build\Messages\CompilerMessage.cs" />
