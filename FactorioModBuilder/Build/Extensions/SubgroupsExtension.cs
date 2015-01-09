@@ -32,7 +32,6 @@ namespace FactorioModBuilder.Build.Extensions
                 {
                     // wrap in data:extend factorio api call
                     sr.WriteLine("data:extend({");
-                    StringBuilder sb = new StringBuilder();
                     var res = unit.ListValues.Select(o => this.BuildTable(o).TrimEnd(Environment.NewLine.ToArray()));
                     sr.WriteLine(String.Join("," + Environment.NewLine, res));
                     sr.WriteLine("})");
