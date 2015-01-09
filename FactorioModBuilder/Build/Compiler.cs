@@ -45,6 +45,11 @@ namespace FactorioModBuilder.Build
         {
         }
 
+        public Compiler(int maxErrors, params ICompilerExtension[] exts)
+            : this(maxErrors, exts.ToList())
+        {
+        }
+
         public Compiler(int maxErrors, IEnumerable<ICompilerExtension> exts)
         {
             this.MaxErrors = maxErrors;

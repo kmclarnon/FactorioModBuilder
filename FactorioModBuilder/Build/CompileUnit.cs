@@ -48,6 +48,11 @@ namespace FactorioModBuilder.Build
         {
         }
 
+        public CompileUnit(params CompileUnit[] units)
+            : this(units.ToList())
+        {
+        }
+
         public CompileUnit(IEnumerable<CompileUnit> units)
             : this(0, null, units, null, null, UnitType.List, ValueType.None,
             (units != null && units.Count() > 0) ? 

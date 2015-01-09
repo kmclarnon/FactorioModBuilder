@@ -34,12 +34,12 @@ namespace FactorioModBuilder
                     "Factorio Mod Builder",
                     System.Reflection.Assembly.GetExecutingAssembly()
                         .GetName().Version.ToString(),
-                    new Build.Compiler(100, new List<ICompilerExtension>()
-                        {
-                            new ControlLuaExtension(),
-                            new InfoJsonExtension(),
-                            new DataLuaExtension()
-                        })));
+                    new Build.Compiler(
+                        100,
+                        new ControlLuaExtension(),
+                        new InfoJsonExtension(),
+                        new DataLuaExtension(),
+                        new PrototypesExtension())));
         }
     }
 }
