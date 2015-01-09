@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,10 +11,6 @@ namespace FactorioModBuilder.Build.Extensions
     {
         public abstract string SupportedUnitName { get; }
 
-        public abstract bool SeparateFile { get; }
-
-        public abstract string Filename { get; }
-
         public Compiler Parent { get; set; }
 
         public string Indent { get; set; }
@@ -23,7 +20,7 @@ namespace FactorioModBuilder.Build.Extensions
             this.Indent = "    ";
         }
 
-        public abstract bool BuildUnit(CompileUnit unit, out string result);
+        public abstract bool BuildUnit(CompileUnit unit, DirectoryInfo outDir);
 
         protected string BuildTable(CompileUnit data)
         {

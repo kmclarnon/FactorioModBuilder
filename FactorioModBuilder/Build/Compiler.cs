@@ -55,7 +55,6 @@ namespace FactorioModBuilder.Build
 
         public bool Build(List<CompileUnit> data)
         {
-            string curPath = "";
             // process each of our compilation units
             foreach(var c in data)
             {
@@ -83,27 +82,8 @@ namespace FactorioModBuilder.Build
                         continue;
                     }
 
-                    if(ext.SeparateFile)
-                        curPath = Path.Combine(settings.BaseTempDirectory, ext.Filename);
-
-                    try
-                    {
-                        using (var fs = File.Open(curPath, FileMode.Append))
-                        using (var sw = new StreamWriter(fs))
-                        {
-                            string res;
-                            if (!ext.BuildUnit(i.Value, out res))
-                                this.BuildMessages.Add(new ErrorMessage("Failed to compile extension: " + i.Key));
-                            else
-                                sw.Write(res);
-                        }
-                    }
-                    catch (Exception e)
-                    {
-                        this.BuildMessages.Add(new ErrorMessage("Encountered internal compiler exception: " + e.Message));
-                        this.BuildMessages.Add(new ErrorMessage("Compiler encoutered a fatal error, build halted."));
-                        return false;
-                    }
+                    if (!ext.BuildUnit(i.Value, new DirectoryInfo(settings.BaseTempDirectory)))
+                        this.BuildMessages.Add(new ErrorMessage("Failed to compile extension: " + i.Key));
                 }
 
                 // finish up after our build

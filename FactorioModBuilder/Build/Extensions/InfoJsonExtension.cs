@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,23 +14,18 @@ namespace FactorioModBuilder.Build.Extensions
             get { return "info.json"; }
         }
 
-        public override bool SeparateFile
+        public override bool BuildUnit(CompileUnit unit, DirectoryInfo outDir)
         {
-            get { return true; }
-        }
-
-        public override string Filename
-        {
-            get { return "info.json"; }
-        }
-
-        public override bool BuildUnit(CompileUnit unit, out string result)
-        {
-            result = String.Empty;
             if (unit.UType != CompileUnit.UnitType.Struct)
                 return false;
 
-            result = this.BuildTable(unit);
+            var res = this.BuildTable(unit);
+            // create our file
+            using(var fs = File.Open(Path.Combine(outDir.FullName, "info.json"), FileMode.Create))
+            using(StreamWriter sr = new StreamWriter(fs))
+            {
+                sr.Write(res);
+            }
 
             return true;
         }

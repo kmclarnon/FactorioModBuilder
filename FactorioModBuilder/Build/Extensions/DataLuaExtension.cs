@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,19 +14,8 @@ namespace FactorioModBuilder.Build.Extensions
             get { return "data.lua"; }
         }
 
-        public override bool SeparateFile
+        public override bool BuildUnit(CompileUnit unit, DirectoryInfo result)
         {
-            get { return true; }
-        }
-
-        public override string Filename
-        {
-            get { return "data.lua"; }
-        }
-
-        public override bool BuildUnit(CompileUnit unit, out string result)
-        {
-            result = "";
             return true;
         }
     }
