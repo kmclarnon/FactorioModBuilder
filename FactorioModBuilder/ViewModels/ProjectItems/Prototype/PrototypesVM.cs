@@ -14,7 +14,19 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
     {
         public override CompileUnit CompilerData
         {
-            get { return new CompileUnit("test"); }
+            get
+            {
+                Dictionary<string, CompileUnit> res = new Dictionary<string, CompileUnit>();
+                GroupsVM gres;
+                if(!this.TryFindElementDown<GroupsVM>(out gres))
+                    throw new Exception("Could not find groups child element");
+                res.Add(gres.CompilerKey, gres.CompilerData);
+                SubGroupsVM sgres;
+                if(!this.TryFindElementDown<SubGroupsVM>(out sgres))
+                    throw new Exception("Could not find subgroups child element");
+                res.Add(sgres.CompilerKey, sgres.CompilerData);
+                return new CompileUnit(res);
+            }
         }
 
         public override string CompilerKey
