@@ -1,4 +1,5 @@
-﻿using FactorioModBuilder.Models.ProjectItems.Prototype;
+﻿using FactorioModBuilder.Build;
+using FactorioModBuilder.Models.ProjectItems.Prototype;
 using FactorioModBuilder.ViewModels.Base;
 using System;
 using System.Collections.Generic;
@@ -11,9 +12,24 @@ using WpfUtils;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
-    public class GroupsVM : TreeItemVM<Groups>
+    public class GroupsVM : ProjectItem<Groups>
     {
         public ObservableCollection<GroupVM> ItemList { get; private set; }
+
+        public override CompileUnit CompilerData
+        {
+            get 
+            { 
+                return new CompileUnit(this.ItemList
+                    .Where(o => o.Enabled)
+                    .Select(o => o.CompilerData)); 
+            }
+        }
+
+        public override string CompilerKey
+        {
+            get { return "prototypes.groups"; }
+        }
 
         private ICommand _addGroupCmd;
         public ICommand AddGroupCmd

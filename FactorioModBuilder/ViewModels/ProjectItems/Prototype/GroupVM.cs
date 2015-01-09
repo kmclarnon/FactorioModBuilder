@@ -1,4 +1,5 @@
-﻿using FactorioModBuilder.Models.ProjectItems.Prototype;
+﻿using FactorioModBuilder.Build;
+using FactorioModBuilder.Models.ProjectItems.Prototype;
 using FactorioModBuilder.ViewModels.Base;
 using Microsoft.Win32;
 using System;
@@ -11,8 +12,27 @@ using WpfUtils;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
-    public class GroupVM : TreeItemVM<Group>
+    public class GroupVM : ProjectItem<Group>
     {
+        public override CompileUnit CompilerData
+        {
+            get
+            {
+                Dictionary<string, CompileUnit> res = new Dictionary<string, CompileUnit>();
+                res.Add("type", new CompileUnit(this.Type));
+                res.Add("name", new CompileUnit(this.Name));
+                res.Add("icon", new CompileUnit(this.IconPath));
+                res.Add("iventory_order", new CompileUnit(this.InvOrder));
+                res.Add("order", new CompileUnit(this.Order));
+                return new CompileUnit(res);
+            }
+        }
+
+        public override string CompilerKey
+        {
+            get { return "prototypes.groups.group"; }
+        }
+
         public string Type
         {
             get { return _internal.Type; }
