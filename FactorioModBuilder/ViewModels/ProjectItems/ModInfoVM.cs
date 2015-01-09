@@ -187,7 +187,12 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
         {
             ProjectVM res;
             if (this.TryFindElementUp<ProjectVM>(out res))
-                res.Name = this.ModName + "_" + this.Version;
+            {
+                if (this.Version == null || this.Version == String.Empty)
+                    res.Name = this.ModName;
+                else
+                    res.Name = this.ModName + "_" + this.Version;
+            }
         }
     }
 }
