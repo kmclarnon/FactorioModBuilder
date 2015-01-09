@@ -119,7 +119,7 @@ namespace FactorioModBuilder.ViewModels.Main
                             new Solution(result.ResultSolutionName, result.ResultLocation),
                             new List<ProjectVM>() 
                             { 
-                                new ProjectVM(new Project(result.ResultProjectName), 
+                                new ProjectVM(new Project(result.ResultProjectName, "", ""), 
                                     new List<TreeItemVMBase>()
                                     {
                                         new ModInfoVM(new ModInfo()),
