@@ -17,8 +17,9 @@ namespace FactorioModBuilder.Models.ProjectItems
         public string Homepage { get; set; }
         public string Description { get; set; }
 
-        public ModInfo() : base("Mod Info")
+        public ModInfo(string modName) : base("Mod Info")
         {
+            this.ModName = modName;
         }
     }
 }

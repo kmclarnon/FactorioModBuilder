@@ -119,10 +119,9 @@ namespace FactorioModBuilder.ViewModels.Main
                             new Solution(result.ResultSolutionName, result.ResultLocation),
                             new List<ProjectVM>() 
                             { 
-                                new ProjectVM(new Project(result.ResultProjectName, "", ""), 
                                     new List<TreeItemVMBase>()
                                     {
-                                        new ModInfoVM(new ModInfo()),
+                                        new ModInfoVM(new ModInfo(result.ResultProjectName)),
                                         new ModDataVM(new ModData()),
                                         new ModControlVM(new ModControl()),
                                         new PrototypesVM(new Prototypes(),
