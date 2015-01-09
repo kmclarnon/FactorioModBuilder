@@ -1,4 +1,6 @@
-﻿using System;
+﻿
+using FactorioModBuilder.Build.Directives;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -29,32 +31,27 @@ namespace FactorioModBuilder.Build
         public int IValue { get; private set; }
 
         public List<CompileUnit> ListValues { get; private set; }
+        public List<CompilerDirective> Directives { get; private set; }
         public Dictionary<string, CompileUnit> StructValues { get; private set; }
         public string KeyValueSeparator { get; private set; }
         public bool SingleLine { get; private set; }
 
+        private CompileUnit() { }
+
         public CompileUnit(string val)
+            : this(0, val, null, null, null, UnitType.Value, ValueType.Text, true)
         {
-            this.UType = UnitType.Value;
-            this.VType = ValueType.Text;
-            this.SValue = val;
-            this.SingleLine = true;
         }
 
         public CompileUnit(int val)
+            : this(val, null, null, null, null, UnitType.Value, ValueType.Number, true)
         {
-            this.UType = UnitType.Value;
-            this.VType = ValueType.Number;
-            this.IValue = val;
-            this.SingleLine = true;
         }
 
         public CompileUnit(IEnumerable<CompileUnit> units)
+            : this(0, null, units, null, null, UnitType.List, ValueType.None,
+                   units.Select(o => o.SingleLine).Aggregate((a, b) => a && b))
         {
-            this.UType = UnitType.List;
-            this.VType = ValueType.None;
-            this.ListValues = units.ToList();
-            this.SingleLine = units.Select(o => o.SingleLine).Aggregate((a, b) => a && b);
         }
 
         public CompileUnit(IDictionary<string, CompileUnit> members)
@@ -63,12 +60,22 @@ namespace FactorioModBuilder.Build
         }
 
         public CompileUnit(IDictionary<string, CompileUnit> members, string keyValueSeparator)
+            : this(0, null, null, members, keyValueSeparator, UnitType.Struct, ValueType.None, false)
         {
-            this.UType = UnitType.Struct;
-            this.VType = ValueType.None;
+        }
+
+        protected CompileUnit(int iVal, string sVal, IEnumerable<CompileUnit> listVal, 
+            IDictionary<string, CompileUnit> members, string keyValueSeparator, 
+            UnitType uType, ValueType vType, bool singleLine)
+        {
+            this.UType = uType;
+            this.VType = vType;
+            this.IValue = iVal;
+            this.SValue = sVal;
+            this.ListValues = listVal.ToList();
             this.StructValues = new Dictionary<string, CompileUnit>(members);
-            this.KeyValueSeparator = keyValueSeparator;
-            this.SingleLine = false;
+            this.KeyValueSeparator = KeyValueSeparator;
+            this.Directives = new List<CompilerDirective>();
         }
 
         public override string ToString()
