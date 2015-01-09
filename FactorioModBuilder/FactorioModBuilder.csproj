@@ -66,6 +66,7 @@
     <Compile Include="Build\Extensions\GroupsExtension.cs" />
     <Compile Include="Build\Extensions\InfoJsonExtension.cs" />
     <Compile Include="Build\Extensions\PrototypesExtension.cs" />
+    <Compile Include="Build\Extensions\SubgroupsExtension.cs" />
     <Compile Include="Build\ICompilerSource.cs" />
     <Compile Include="Build\Directives\CompilerDirective.cs" />
     <Compile Include="Build\Messages\ErrorMessage.cs" />
