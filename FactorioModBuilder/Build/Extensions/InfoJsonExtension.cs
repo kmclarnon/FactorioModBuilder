@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FactorioModBuilder.Build.Messages;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -20,11 +21,20 @@ namespace FactorioModBuilder.Build.Extensions
                 return false;
 
             var res = this.BuildTable(unit);
-            // create our file
-            using(var fs = File.Open(Path.Combine(outDir.FullName, "info.json"), FileMode.Create))
-            using(StreamWriter sr = new StreamWriter(fs))
+            // create our file and wirte our data to it
+            try
             {
-                sr.Write(res);
+                using (var fs = File.Open(Path.Combine(outDir.FullName, "info.json"), FileMode.Create))
+                using (StreamWriter sr = new StreamWriter(fs))
+                {
+                    sr.Write(res);
+                }
+            }
+            catch(Exception e)
+            {
+                Parent.BuildMessages.Add(new ErrorMessage(
+                    "Encountered exception building info.json: " + e.Message));
+                return false;
             }
 
             return true;
