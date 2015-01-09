@@ -21,7 +21,35 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
                 Dictionary<string, CompileUnit> res = new Dictionary<string, CompileUnit>();
                 foreach (var c in this.SubUnits)
                     res.Add(c.CompilerKey, c.CompilerData);
+
+                var c = new CompileUnit(res);
                 return new CompileUnit(res);
+            }
+        }
+
+        public string TempDir
+        {
+            get { return _internal.TempDir; }
+            set
+            {
+                if(_internal.TempDir != value)
+                {
+                    _internal.TempDir = value;
+                    this.NotifyPropertyChanged();
+                }
+            }
+        }
+
+        public string OutDir
+        {
+            get { return _internal.OutDir; }
+            set
+            {
+                if(_internal.OutDir != value)
+                {
+                    _internal.OutDir = value;
+                    this.NotifyPropertyChanged();
+                }
             }
         }
 
