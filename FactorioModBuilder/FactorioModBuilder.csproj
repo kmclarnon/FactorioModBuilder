@@ -63,7 +63,7 @@
     <Compile Include="Build\Extensions\InfoJsonExtension.cs" />
     <Compile Include="Build\ICompilerSource.cs" />
     <Compile Include="Build\Messages\ErrorMessage.cs" />
-    <Compile Include="Build\ICompilerExtension.cs" />
+    <Compile Include="Build\Extensions\ICompilerExtension.cs" />
     <Compile Include="Build\Messages\CompilerMessage.cs" />
     <Compile Include="Build\CompileUnit.cs" />
     <Compile Include="Build\Messages\InfoMessage.cs" />

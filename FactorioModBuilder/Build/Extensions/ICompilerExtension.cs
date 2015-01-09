@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FactorioModBuilder.Build
+namespace FactorioModBuilder.Build.Extensions
 {
     public interface ICompilerExtension
     {

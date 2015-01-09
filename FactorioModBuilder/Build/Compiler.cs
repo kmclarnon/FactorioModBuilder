@@ -1,4 +1,5 @@
 ﻿using FactorioModBuilder.Build.Messages;
+using FactorioModBuilder.Build.Extensions;
 using System;
 using System.Collections.Generic;
 using System.IO;
