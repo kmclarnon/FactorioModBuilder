@@ -1,4 +1,5 @@
-﻿using FactorioModBuilder.Models.ProjectItems.Prototype;
+﻿using FactorioModBuilder.Build;
+using FactorioModBuilder.Models.ProjectItems.Prototype;
 using FactorioModBuilder.ViewModels.Base;
 using System;
 using System.Collections.Generic;
@@ -8,8 +9,26 @@ using System.Threading.Tasks;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
-    public class SubGroupVM : TreeItemVM<SubGroup>
+    public class SubGroupVM : ProjectItem<SubGroup>
     {
+        public override CompileUnit CompilerData
+        {
+            get
+            {
+                Dictionary<string, CompileUnit> res = new Dictionary<string, CompileUnit>();
+                res.Add("type", new CompileUnit(this.Type));
+                res.Add("name", new CompileUnit(this.Name));
+                res.Add("group", new CompileUnit(this.Group));
+                res.Add("order", new CompileUnit(this.Order));
+                return new CompileUnit(res);
+            }
+        }
+
+        public override string CompilerKey
+        {
+            get { return "prototypes.subgroups"; }
+        }
+
         public string Type
         {
             get { return _internal.Type; }
