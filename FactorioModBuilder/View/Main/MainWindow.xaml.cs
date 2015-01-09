@@ -39,7 +39,9 @@ namespace FactorioModBuilder
                         new ControlLuaExtension(),
                         new InfoJsonExtension(),
                         new DataLuaExtension(),
-                        new PrototypesExtension())));
+                        new PrototypesExtension(),
+                        new GroupsExtension(),
+                        new SubgroupsExtension())));
         }
     }
 }
