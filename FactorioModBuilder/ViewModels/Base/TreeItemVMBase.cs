@@ -10,10 +10,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WpfUtils;
+using System.ComponentModel;
 
 namespace FactorioModBuilder.ViewModels.Base
 {
-    public abstract class TreeItemVMBase : BaseVM
+    public abstract class TreeItemVMBase : BaseVM, IDataErrorInfo
     {
         protected TreeItemVMBase _parent;
 
@@ -62,6 +63,13 @@ namespace FactorioModBuilder.ViewModels.Base
                 }
             }
         }
+
+        public string Error
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public abstract string this[string name] { get; }
 
         protected TreeItemBase _item;
 

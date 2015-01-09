@@ -11,7 +11,7 @@ using WpfUtils;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems
 {
-    public class ModInfoVM : ProjectItem<ModInfo>
+    public class ModInfoVM : ProjectItem<ModInfo, ModInfoVM>
     {
         public override CompileUnit CompilerData
         {

@@ -13,7 +13,7 @@ using WpfUtils;
 
 namespace FactorioModBuilder.ViewModels
 {
-    public class SolutionVM : TreeItemVM<Solution>
+    public class SolutionVM : TreeItemVM<Solution, SolutionVM>
     {      
         public SolutionVM(Solution sol, IEnumerable<ProjectVM> projects)
             : base(sol, projects)

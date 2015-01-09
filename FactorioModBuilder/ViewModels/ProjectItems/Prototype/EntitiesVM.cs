@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
-    public class EntitiesVM : TreeItemVM<Entities>
+    public class EntitiesVM : TreeItemVM<Entities, EntitiesVM>
     {
         public EntitiesVM(Entities en)
             : base(en)

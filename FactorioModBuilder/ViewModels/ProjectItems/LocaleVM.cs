@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems
 {
-    public class LocaleVM : ProjectItem<Locale>
+    public class LocaleVM : ProjectItem<Locale, LocaleVM>
     {
         public override CompileUnit CompilerData
         {

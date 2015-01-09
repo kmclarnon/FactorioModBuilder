@@ -13,7 +13,7 @@ using FactorioModBuilder.Build.Directives;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems
 {
-    public class ProjectVM : ProjectItem<Project>
+    public class ProjectVM : ProjectItem<Project, ProjectVM>
     {
         public override CompileUnit CompilerData
         {

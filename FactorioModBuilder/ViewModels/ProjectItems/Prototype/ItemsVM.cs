@@ -11,7 +11,7 @@ using WpfUtils;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
-    public class ItemsVM : TreeItemVM<Items>
+    public class ItemsVM : TreeItemVM<Items, ItemsVM>
     {
         public ObservableCollection<ItemVM> ItemList { get; private set; }
 

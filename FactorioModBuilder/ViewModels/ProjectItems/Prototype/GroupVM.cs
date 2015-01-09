@@ -12,7 +12,7 @@ using WpfUtils;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
-    public class GroupVM : ProjectItem<Group>
+    public class GroupVM : ProjectItem<Group, GroupVM>
     {
         public override CompileUnit CompilerData
         {

@@ -12,7 +12,7 @@ using WpfUtils;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
-    public class ItemVM : TreeItemVM<Item>
+    public class ItemVM : TreeItemVM<Item, ItemVM>
     {
         public string Type { get { return _internal.Type; } }
 

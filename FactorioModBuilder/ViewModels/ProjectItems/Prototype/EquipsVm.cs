@@ -11,7 +11,7 @@ using WpfUtils;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
-    public class EquipsVM : TreeItemVM<Equips>
+    public class EquipsVM : TreeItemVM<Equips, EquipsVM>
     {
         private ICommand _addEquipmentCmd;
         public ICommand AddEquipmentCmd

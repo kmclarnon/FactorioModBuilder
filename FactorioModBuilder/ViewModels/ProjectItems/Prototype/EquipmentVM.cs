@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
-    public class EquipmentVM : TreeItemVM<Equipment>
+    public class EquipmentVM : TreeItemVM<Equipment, EquipmentVM>
     {
         public string Type
         {

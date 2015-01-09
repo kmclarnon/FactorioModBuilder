@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
-    public class SubGroupVM : ProjectItem<SubGroup>
+    public class SubGroupVM : ProjectItem<SubGroup, SubGroupVM>
     {
         public override CompileUnit CompilerData
         {

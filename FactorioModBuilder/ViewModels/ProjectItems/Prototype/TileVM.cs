@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
-    public class TileVM : TreeItemVM<Tile>
+    public class TileVM : TreeItemVM<Tile, TileVM>
     {
         public TileVM(Tile tile)
             : base(tile)

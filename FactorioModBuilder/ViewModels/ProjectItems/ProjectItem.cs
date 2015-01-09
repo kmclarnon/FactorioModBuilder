@@ -9,7 +9,9 @@ using System.Threading.Tasks;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems
 {
-    public abstract class ProjectItem<T> : TreeItemVM<T>, ICompilerSource where T : TreeItem<T>
+    public abstract class ProjectItem<T, U> : TreeItemVM<T, U>, ICompilerSource 
+        where T : TreeItem<T>
+        where U : TreeItemVM<T, U>
     {
         public abstract CompileUnit CompilerData { get; }
         public abstract string CompilerKey { get; }

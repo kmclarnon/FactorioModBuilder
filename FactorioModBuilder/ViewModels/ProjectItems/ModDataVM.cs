@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems
 {
-    public class ModDataVM : ProjectItem<ModData>
+    public class ModDataVM : ProjectItem<ModData, ModDataVM>
     {
         public override CompileUnit CompilerData
         {

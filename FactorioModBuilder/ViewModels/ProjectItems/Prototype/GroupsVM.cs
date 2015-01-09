@@ -12,7 +12,7 @@ using WpfUtils;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
-    public class GroupsVM : ProjectItem<Groups>
+    public class GroupsVM : ProjectItem<Groups, GroupsVM>
     {
         public ObservableCollection<GroupVM> ItemList { get; private set; }
 
