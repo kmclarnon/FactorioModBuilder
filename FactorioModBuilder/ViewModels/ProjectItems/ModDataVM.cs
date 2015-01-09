@@ -19,7 +19,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
 
         public override string CompilerKey
         {
-            get { return "data"; }
+            get { return "data.lua"; }
         }
 
         private bool _manualMode;

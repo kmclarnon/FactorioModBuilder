@@ -18,7 +18,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
 
         public override string CompilerKey
         {
-            get { return "control"; }
+            get { return "control.lua"; }
         }
 
         public ModControlVM(ModControl control)
