@@ -45,6 +45,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
                 {
                     _mItem.ModName = value;
                     this.NotifyPropertyChanged();
+                    this.UpdateProjectName();
                 }
             }
         }
@@ -58,6 +59,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
                 {
                     _mItem.Version = value;
                     this.NotifyPropertyChanged();
+                    this.UpdateProjectName();
                 }
             }
         }
@@ -179,6 +181,13 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
         private void DoApply()
         {
 
+        }
+
+        private void UpdateProjectName()
+        {
+            ProjectVM res;
+            if (this.TryFindElementUp<ProjectVM>(out res))
+                res.Name = this.ModName + "_" + this.Version;
         }
     }
 }
