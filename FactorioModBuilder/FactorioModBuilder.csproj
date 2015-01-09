@@ -64,6 +64,7 @@
     <Compile Include="Build\Extensions\DataLuaExtension.cs" />
     <Compile Include="Build\Extensions\ExtensionBase.cs" />
     <Compile Include="Build\Extensions\InfoJsonExtension.cs" />
+    <Compile Include="Build\Extensions\PrototypesExtension.cs" />
     <Compile Include="Build\ICompilerSource.cs" />
     <Compile Include="Build\Directives\CompilerDirective.cs" />
     <Compile Include="Build\Messages\ErrorMessage.cs" />
