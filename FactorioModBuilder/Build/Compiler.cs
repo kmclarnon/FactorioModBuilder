@@ -148,14 +148,9 @@ namespace FactorioModBuilder.Build
         private void PostBuild(CompileSettings settings)
         {
             // move the temporary directory project contents to the output directory
-            string srcPath = Path.Combine(settings.BaseTempDirectory, settings.ProjectName);
-            string destPath = Path.Combine(settings.BaseOutDirectory, settings.ProjectName);
-            if (Directory.Exists(destPath))
-                Directory.Delete(destPath, true);
-            Directory.CreateDirectory(destPath);
-            Directory.Move(
-                Path.Combine(settings.BaseTempDirectory, settings.ProjectName),
-                Path.Combine(settings.BaseOutDirectory, settings.ProjectName));
+            if (Directory.Exists(settings.BaseOutDirectory))
+                Directory.Delete(settings.BaseOutDirectory, true);
+            Directory.Move(settings.BaseTempDirectory, settings.BaseOutDirectory);
         }
 
         public bool AddExtension(ICompilerExtension ext)
