@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using WpfUtils;
@@ -152,6 +153,13 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
         }
 
         private ModInfo _mItem { get { return (ModInfo)_item; } }
+
+        static ModInfoVM()
+        {
+            ModInfoVM.AddPropertyValidation("Version",
+                (x => Regex.IsMatch(x.Version, @"^\d{1,4}.\d{1,4}.\d{1,4}$")),
+                "Version must be in the form Major.Middle.Minor");
+        }
 
         public ModInfoVM(ModInfo info)
             : base(info)
