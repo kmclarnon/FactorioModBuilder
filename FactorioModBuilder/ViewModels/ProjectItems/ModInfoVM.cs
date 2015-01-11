@@ -40,88 +40,44 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
         public string ModName
         {
             get { return _mItem.ModName; }
-            set
-            {
-                if(_mItem.ModName != value)
-                {
-                    _mItem.ModName = value;
-                    this.NotifyPropertyChanged();
-                    this.UpdateProjectName();
-                }
-            }
+            set { this.SetProperty(_mItem, value, false, this.UpdateProjectName); }
         }
 
         public string Version
         {
             get { return _mItem.Version; }
-            set
-            {
-                if(_mItem.Version != value)
-                {
-                    _mItem.Version = value;
-                    this.NotifyPropertyChanged();
-                    this.UpdateProjectName();
-                }
-            }
+            set { this.SetProperty(_mItem, value, false, this.UpdateProjectName); }
+
         }
 
         public string Title
         {
             get { return _mItem.Title; }
-            set
-            {
-                if(_mItem.Title != value)
-                {
-                    _mItem.Title = value;
-                    this.NotifyPropertyChanged();
-                }
-            }
+            set { this.SetProperty(_mItem, value); }
         }
 
         public string Author
         {
             get { return _mItem.Author; }
-            set
-            {
-                if(_mItem.Author != value)
-                {
-                    _mItem.Author = value;
-                    this.NotifyPropertyChanged();
-                }
-            }
+            set { this.SetProperty(_mItem, value); }
         }
 
         public string Contact
         {
             get { return _mItem.Contact; }
-            set
-            {
-                if(_mItem.Contact != value)
-                {
-                    _mItem.Contact = value;
-                    this.NotifyPropertyChanged();
-                }
-            }
+            set { this.SetProperty(_mItem, value); }
         }
 
         public string Homepage
         {
             get { return _mItem.Homepage; }
-            set
-            {
-                _mItem.Homepage = value;
-                this.NotifyPropertyChanged();
-            }
+            set { this.SetProperty(_mItem, value); }
         }
 
         public string Description
         {
             get { return _mItem.Description; }
-            set
-            {
-                _mItem.Description = value;
-                this.NotifyPropertyChanged();
-            }
+            set { this.SetProperty(_mItem, value); }
         }
 
         private ICommand _cancelCmd;

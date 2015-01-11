@@ -19,66 +19,31 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         public string Subgroup
         {
             get { return _internal.Subgroup; }
-            set
-            {
-                if (_internal.Subgroup != value)
-                {
-                    _internal.Subgroup = value;
-                    this.NotifyPropertyChanged();
-                }
-            }
+            set { this.SetProperty(_internal, value); }
         }
 
         public string Order
         {
             get { return _internal.Order; }
-            set
-            {
-                if(_internal.Order != value)
-                {
-                    _internal.Order = value;
-                    this.NotifyPropertyChanged();
-                }
-            }
+            set { this.SetProperty(_internal, value); }
         }
 
         public bool Enabled
         {
             get { return _internal.Enabled; }
-            set
-            {
-                if (_internal.Enabled != value)
-                {
-                    _internal.Enabled = value;
-                    this.NotifyPropertyChanged();
-                }
-            }
+            set { this.SetProperty(_internal, value); }
         }
 
         public string IconPath
         {
             get { return _internal.IconPath; }
-            set
-            {
-                if (_internal.IconPath != value)
-                {
-                    _internal.IconPath = value;
-                    this.NotifyPropertyChanged();
-                }
-            }
+            set { this.SetProperty(_internal, value); }
         }
 
         public int StackSize
         {
             get { return _internal.StackSize; }
-            set
-            {
-                if (_internal.StackSize != value)
-                {
-                    _internal.StackSize = value;
-                    this.NotifyPropertyChanged();
-                }
-            }
+            set { this.SetProperty(_internal, value); }
         }
 
         private ICommand _findImageCmd;

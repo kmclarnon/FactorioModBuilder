@@ -26,14 +26,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
         public bool ManualMode
         {
             get { return _manualMode; }
-            set
-            {
-                if(_manualMode != value)
-                {
-                    _manualMode = value;
-                    this.NotifyPropertyChanged();
-                }
-            }
+            set { this.SetProperty(ref _manualMode, value); }
         }
 
         public ObservableCollection<ModDataItemVM> DataItems { get; private set; }
