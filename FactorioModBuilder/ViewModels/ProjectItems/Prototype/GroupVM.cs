@@ -36,79 +36,34 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         public string Type
         {
             get { return _internal.Type; }
-            set
-            {
-                if(_internal.Type != value)
-                {
-                    _internal.Type = value;
-                    this.NotifyPropertyChanged();
-                }
-            }
+            set { this.SetProperty(_internal, value); }
         }
 
         public string IconPath
         {
             get { return _internal.IconPath; }
-            set
-            {
-                if(_internal.IconPath != value)
-                {
-                    _internal.IconPath = value;
-                    this.NotifyPropertyChanged();
-                }
-            }
+            set { this.SetProperty(_internal, value); }
         }
 
         public string InvOrder
         {
             get { return _internal.InvOrder; }
-            set
-            {
-                if(_internal.InvOrder != value)
-                {
-                    _internal.InvOrder = value;
-                    this.NotifyPropertyChanged();
-                }
-            }
+            set { this.SetProperty(_internal, value); }
         }
 
         public string Order
         {
             get { return _internal.Order; }
-            set
-            {
-                if(_internal.Order != value)
-                {
-                    _internal.Order = value;
-                    this.NotifyPropertyChanged();
-                }
-            }
+            set { this.SetProperty(_internal, value); }
         }
 
         public bool Enabled
         {
             get { return _internal.Enabled; }
-            set
-            {
-                if(_internal.Enabled != value)
-                {
-                    _internal.Enabled = value;
-                    this.NotifyPropertyChanged();
-                }
-            }
+            set { this.SetProperty(_internal, value); }
         }
 
-        private ICommand _findImageCmd;
-        public ICommand FindImageCmd
-        {
-            get
-            {
-                if (_findImageCmd == null)
-                    _findImageCmd = new RelayCommand(
-                        (x => this.FindImage()), (x => this.CanFindImage()));
-                return _findImageCmd;
-            }
-        }
+        public ICommand FindImageCmd { get { return this.GetCommand(this.FindImage, this.CanFindImage); } }
 
         public GroupVM(Group group)
             : base(group)
