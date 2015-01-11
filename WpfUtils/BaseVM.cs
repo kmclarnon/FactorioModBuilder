@@ -139,51 +139,25 @@ namespace WpfUtils
         /// <summary>
         /// Provides a convenient way to implement command binding in the view model
         /// </summary>
+        /// <param name="execute">Action to be performed by the command</param>
         /// <param name="canExecute">Func that returns true if the command can be executed</param>
-        /// <param name="execute">Action to be performed by the command</param>
         /// <param name="propertyName">Property name to associate the command with.  Defaults to CallerMemberName</param>
         /// <returns>The command composed of the supplied functions</returns>
-        protected ICommand GetCommand(Func<bool> canExecute,
-            Action execute, [CallerMemberName] string propertyName = "default")
+        protected ICommand GetCommand(Action execute, Func<bool> canExecute = null,
+            [CallerMemberName] string propertyName = "default")
         {
-            return this.GetCommand((x => canExecute()), (x => execute()), propertyName);
+            return this.GetCommand((x => execute()), (x => canExecute()), propertyName);
         }
 
         /// <summary>
         /// Provides a convenient way to implement command binding in the view model
         /// </summary>
-        /// <param name="canExecute">Func that returns true if the command can be executed</param>
         /// <param name="execute">Action to be performed by the command</param>
-        /// <param name="propertyName">Property name to associate the command with.  Defaults to CallerMemberName</param>
-        /// <returns>The command composed of the supplied functions</returns>
-        protected ICommand GetCommand(Func<bool> canExecute,
-            Action<object> execute, [CallerMemberName] string propertyName = "default")
-        {
-            return this.GetCommand((x => canExecute()), execute, propertyName);
-        }
-
-        /// <summary>
-        /// Provides a convenient way to implement command binding in the view model
-        /// </summary>
-        /// <param name="canExecute">Predicate that returns true if the command can be executed</param>
-        /// <param name="execute">Action to be performed by the command</param>
-        /// <param name="propertyName">Property name to associate the command with.  Defaults to CallerMemberName</param>
-        /// <returns>The command composed of the supplied functions</returns>
-        protected ICommand GetCommand(Predicate<object> canExecute,
-            Action execute, [CallerMemberName] string propertyName = "default")
-        {
-            return this.GetCommand(canExecute, (x => execute()), propertyName);
-        }
-
-        /// <summary>
-        /// Provides a convenient way to implement command binding in the view model
-        /// </summary>
         /// <param name="canExecute">Predicate that is used to determine if the command can be executed</param>
-        /// <param name="execute">Action to be performed by the command</param>
         /// <param name="propertyName">Property name to associate the command with.  Defaults to CallerMemberName</param>
         /// <returns>The command composed of the supplied functions</returns>
-        protected ICommand GetCommand(Predicate<object> canExecute, 
-            Action<object> execute, [CallerMemberName] string propertyName = "default")
+        protected ICommand GetCommand(Action<object> execute, Predicate<object> canExecute = null, 
+            [CallerMemberName] string propertyName = "default")
         {
             // find the command, and create it if it doesn't exist
             RelayCommand res;
