@@ -39,45 +39,45 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
 
         public string ModName
         {
-            get { return _mItem.ModName; }
-            set { this.SetProperty(_mItem, value, false, this.UpdateProjectName); }
+            get { return _internal.ModName; }
+            set { this.SetProperty(_internal, value, false, this.UpdateProjectName); }
         }
 
         public string Version
         {
-            get { return _mItem.Version; }
-            set { this.SetProperty(_mItem, value, false, this.UpdateProjectName); }
+            get { return _internal.Version; }
+            set { this.SetProperty(_internal, value, false, this.UpdateProjectName); }
 
         }
 
         public string Title
         {
-            get { return _mItem.Title; }
-            set { this.SetProperty(_mItem, value); }
+            get { return _internal.Title; }
+            set { this.SetProperty(_internal, value); }
         }
 
         public string Author
         {
-            get { return _mItem.Author; }
-            set { this.SetProperty(_mItem, value); }
+            get { return _internal.Author; }
+            set { this.SetProperty(_internal, value); }
         }
 
         public string Contact
         {
-            get { return _mItem.Contact; }
-            set { this.SetProperty(_mItem, value); }
+            get { return _internal.Contact; }
+            set { this.SetProperty(_internal, value); }
         }
 
         public string Homepage
         {
-            get { return _mItem.Homepage; }
-            set { this.SetProperty(_mItem, value); }
+            get { return _internal.Homepage; }
+            set { this.SetProperty(_internal, value); }
         }
 
         public string Description
         {
-            get { return _mItem.Description; }
-            set { this.SetProperty(_mItem, value); }
+            get { return _internal.Description; }
+            set { this.SetProperty(_internal, value); }
         }
 
         private ICommand _cancelCmd;
@@ -108,7 +108,6 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
             }
         }
 
-        private ModInfo _mItem { get { return (ModInfo)_item; } }
 
         static ModInfoVM()
         {
