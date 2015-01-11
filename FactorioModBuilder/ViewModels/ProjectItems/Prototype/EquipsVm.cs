@@ -13,29 +13,8 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
     public class EquipsVM : TreeItemVM<Equips, EquipsVM>
     {
-        private ICommand _addEquipmentCmd;
-        public ICommand AddEquipmentCmd
-        {
-            get
-            {
-                if (_addEquipmentCmd == null)
-                    _addEquipmentCmd = new RelayCommand(
-                        (x => this.AddEquipment()), (x => this.CanAddEquipment()));
-                return _addEquipmentCmd;
-            }
-        }
-
-        private ICommand _removeEquipmentCmd;
-        public ICommand RemoveEquipmentCmd
-        {
-            get
-            {
-                if (_removeEquipmentCmd == null)
-                    _removeEquipmentCmd = new RelayCommand(
-                        (x => this.RemoveEquipment()), (x => this.CanRemoveEquipment()));
-                return _removeEquipmentCmd;
-            }
-        }
+        public ICommand AddEquipmentCmd { get { return this.GetCommand(this.AddEquipment, this.CanAddEquipment); } }
+        public ICommand RemoveEquipmentCmd { get { return this.GetCommand(this.RemoveEquipment, this.CanRemoveEquipment); } }
 
         public ObservableCollection<EquipmentVM> ItemList { get; private set; }
         public ObservableCollection<String> ShapeTypes { get; private set; }

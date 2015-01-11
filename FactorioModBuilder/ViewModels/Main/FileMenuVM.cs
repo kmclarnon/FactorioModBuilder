@@ -16,79 +16,14 @@ using WpfUtils;
 
 namespace FactorioModBuilder.ViewModels.Main
 {
-    public class FileMenuVM
+    public class FileMenuVM : BaseVM
     {
-        private ICommand _newProjectCmd;
-        public ICommand NewProjectCmd
-        {
-            get
-            {
-                if (_newProjectCmd == null)
-                    _newProjectCmd = new RelayCommand(
-                        (x => this.NewProject()), (x => this.CanNewProject()));
-                return _newProjectCmd;
-            }
-        }
-
-        private ICommand _openSolutionCmd;
-        public ICommand OpenSolutionCmd
-        {
-            get
-            {
-                if (_openSolutionCmd == null)
-                    _openSolutionCmd = new RelayCommand(
-                        (x => this.OpenSolution()), (x => this.CanOpenSolution()));
-                return _openSolutionCmd;
-            }
-        }
-
-        private ICommand _saveSolutionCmd;
-        public ICommand SaveSolutionCmd
-        {
-            get
-            {
-                if (_saveSolutionCmd == null)
-                    _saveSolutionCmd = new RelayCommand(
-                        (x => this.SaveSolution()), (x => this.CanSaveSolution()));
-                return _saveSolutionCmd;
-            }
-        }
-
-        private ICommand _saveSolutionAsCmd;
-        public ICommand SaveSolutionAsCmd
-        {
-            get
-            {
-                if (_saveSolutionAsCmd == null)
-                    _saveSolutionAsCmd = new RelayCommand(
-                        (x => this.SaveSolutionAs()), (x => this.CanSaveSolutionAs()));
-                return _saveSolutionAsCmd;
-            }
-        }
-
-        private ICommand _closeSolutionCmd;
-        public ICommand CloseSolutionCmd
-        {
-            get
-            {
-                if (_closeSolutionCmd == null)
-                    _closeSolutionCmd = new RelayCommand(
-                        (x => this.CloseSolution()), (x => this.CanCloseSolution()));
-                return _closeSolutionCmd;
-            }
-        }
-
-        private ICommand _exitCmd;
-        public ICommand ExitCmd
-        {
-            get
-            {
-                if (_exitCmd == null)
-                    _exitCmd = new RelayCommand(
-                        (x => this.Exit()), (x => this.CanExit()));
-                return _exitCmd;
-            }
-        }
+        public ICommand NewProjectCmd { get { return this.GetCommand(this.NewProject, this.CanNewProject); } }
+        public ICommand OpenSolutionCmd { get { return this.GetCommand(this.OpenSolution, this.CanOpenSolution); } }
+        public ICommand SaveSolutionCmd { get { return this.GetCommand(this.SaveSolution, this.CanSaveSolution); } }
+        public ICommand SaveSolutionAsCmd { get { return this.GetCommand(this.SaveSolutionAs, this.CanSaveSolutionAs); } }
+        public ICommand CloseSolutionCmd { get { return this.GetCommand(this.CloseSolution, this.CanCloseSolution); } }
+        public ICommand ExitCmd { get { return this.GetCommand(this.Exit, this.CanExit); } }
 
         private MainVM _parent;
 

@@ -31,29 +31,8 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
             get { return "prototypes.groups"; }
         }
 
-        private ICommand _addGroupCmd;
-        public ICommand AddGroupCmd
-        {
-            get
-            {
-                if (_addGroupCmd == null)
-                    _addGroupCmd = new RelayCommand(
-                        (x => this.AddGroup()), (x => this.CanAddGroup()));
-                return _addGroupCmd;
-            }
-        }
-
-        private ICommand _removeGroupCmd;
-        public ICommand RemoveGroupCmd
-        {
-            get
-            {
-                if (_removeGroupCmd == null)
-                    _removeGroupCmd = new RelayCommand(
-                        (x => this.RemoveGroup()), (x => this.CanRemoveGroup()));
-                return _removeGroupCmd;
-            }
-        }
+        public ICommand AddGroupCmd { get { return this.GetCommand(this.AddGroup, this.CanAddGroup);} }
+        public ICommand RemoveGroupCmd { get { return this.GetCommand(this.RemoveGroup, this.CanRemoveGroup); } }
 
         private int _newCount = 1;
 

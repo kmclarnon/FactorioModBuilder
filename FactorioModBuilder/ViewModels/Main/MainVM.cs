@@ -31,42 +31,16 @@ namespace FactorioModBuilder.ViewModels
         public int AppHeight
         {
             get { return _main.AppHeight; }
-            set
-            {
-                if(_main.AppHeight != value)
-                {
-                    _main.AppHeight = value;
-                    this.NotifyPropertyChanged();
-                }
-            }
+            set { this.SetProperty(_main, value); }
         }
 
         public int AppWidth
         {
             get { return _main.AppWidth; }
-            set
-            {
-                if(_main.AppWidth != value)
-                {
-                    _main.AppWidth = value;
-                    this.NotifyPropertyChanged();
-                }
-            }
+            set { this.SetProperty(_main, value); }
         }
 
-        private ObservableCollection<SolutionVM> _solutions;
-        public ObservableCollection<SolutionVM> Solutions
-        {
-            get { return _solutions; }
-            set
-            {
-                if(_solutions != value)
-                {
-                    _solutions = value;
-                    this.NotifyPropertyChanged();
-                }
-            }
-        }
+        public ObservableCollection<SolutionVM> Solutions { get; private set; }
 
         public FileMenuVM FileMenu { get; private set; }
         public BuildMenuVM BuildMenu { get; private set; }

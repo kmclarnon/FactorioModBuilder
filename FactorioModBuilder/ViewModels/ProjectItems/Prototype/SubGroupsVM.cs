@@ -42,29 +42,8 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
             }
         }
 
-        private ICommand _addSubgroupCmd;
-        public ICommand AddSubgroupCmd
-        {
-            get
-            {
-                if (_addSubgroupCmd == null)
-                    _addSubgroupCmd = new RelayCommand(
-                        (x => this.AddSubgroup()), (x => this.CanAddSubgroup()));
-                return _addSubgroupCmd;
-            }
-        }
-
-        private ICommand _removeSubgroupCmd;
-        public ICommand RemoveSubgroupCmd
-        {
-            get
-            {
-                if (_removeSubgroupCmd == null)
-                    _removeSubgroupCmd = new RelayCommand(
-                        (x => this.RemoveSubgroup()), (x => this.CanRemoveSubgroup()));
-                return _removeSubgroupCmd;
-            }
-        }
+        public ICommand AddSubgroupCmd { get { return this.GetCommand(this.AddSubgroup, this.CanAddSubgroup); } }
+        public ICommand RemoveSubgroupCmd { get { return this.GetCommand(this.RemoveSubgroup, this.CanRemoveSubgroup); } }
 
         private int _newCount = 1;
 

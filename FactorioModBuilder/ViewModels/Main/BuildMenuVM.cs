@@ -10,43 +10,11 @@ using WpfUtils;
 
 namespace FactorioModBuilder.ViewModels.Main
 {
-    public class BuildMenuVM
+    public class BuildMenuVM : BaseVM
     {
-        private ICommand _buildSolutionCmd;
-        public ICommand BuildSolutionCmd
-        {
-            get
-            {
-                if (_buildSolutionCmd == null)
-                    _buildSolutionCmd = new RelayCommand(
-                        (x => this.BuildSolution()), (x => this.CanBuildSolution()));
-                return _buildSolutionCmd;
-            }
-        }
-
-        private ICommand _rebuildSolutionCmd;
-        public ICommand RebuildSolutionCmd
-        {
-            get
-            {
-                if (_rebuildSolutionCmd == null)
-                    _rebuildSolutionCmd = new RelayCommand(
-                        (x => this.RebuildSolution()), (x => this.CanRebuildSolution()));
-                return _rebuildSolutionCmd;
-            }
-        }
-
-        private ICommand _cleanSolutionCmd;
-        public ICommand CleanSolutionCmd
-        {
-            get
-            {
-                if (_cleanSolutionCmd == null)
-                    _cleanSolutionCmd = new RelayCommand(
-                        (x => this.CleanSolution()), (x => this.CanCleanSolution()));
-                return _cleanSolutionCmd;
-            }
-        }
+        public ICommand BuildSolutionCmd { get { return this.GetCommand(this.BuildSolution, this.CanBuildSolution); } }
+        public ICommand RebuildSolutionCmd { get { return this.GetCommand(this.RebuildSolution, this.CanRebuildSolution); } }
+        public ICommand CleanSolutionCmd { get { return this.GetCommand(this.CleanSolution, this.CanCleanSolution); } }
 
         private MainVM _parent;
 

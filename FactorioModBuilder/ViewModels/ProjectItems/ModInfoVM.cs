@@ -80,34 +80,8 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
             set { this.SetProperty(_internal, value); }
         }
 
-        private ICommand _cancelCmd;
-        public ICommand CancelCmd
-        {
-            get
-            {
-                if (_cancelCmd == null)
-                {
-                    _cancelCmd = new RelayCommand((x => this.DoCancel()),
-                        (x => this.CanCancel()));
-                }
-                return _cancelCmd;
-            }
-        }
-
-        private ICommand _applyCmd;
-        public ICommand ApplyCmd
-        {
-            get
-            {
-                if(_applyCmd == null)
-                {
-                    _applyCmd = new RelayCommand((x => this.DoApply()),
-                        (x => this.CanApply()));
-                }
-                return _applyCmd;
-            }
-        }
-
+        public ICommand CancelCmd { get { return this.GetCommand(this.DoCancel, this.CanCancel); } }
+        public ICommand ApplyCmd { get { return this.GetCommand(this.DoApply, this.CanApply); } }
 
         static ModInfoVM()
         {

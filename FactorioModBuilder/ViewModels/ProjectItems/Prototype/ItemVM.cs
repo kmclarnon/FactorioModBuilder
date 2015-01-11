@@ -46,17 +46,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
             set { this.SetProperty(_internal, value); }
         }
 
-        private ICommand _findImageCmd;
-        public ICommand FindImageCmd
-        {
-            get
-            {
-                if (_findImageCmd == null)
-                    _findImageCmd = new RelayCommand((x => this.FindImage()),
-                        (x => this.CanFindImage()));
-                return _findImageCmd;
-            }
-        }
+        public ICommand FindImageCmd { get { return this.GetCommand(this.FindImage, this.CanFindImage); } }
 
         public ObservableCollection<SubGroupVM> PossibleSubgroups
         {

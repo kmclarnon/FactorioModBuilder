@@ -15,29 +15,8 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
     {
         public ObservableCollection<ItemVM> ItemList { get; private set; }
 
-        private ICommand _addItem;
-        public ICommand AddItemCmd
-        {
-            get
-            {
-                if (_addItem == null)
-                    _addItem = new RelayCommand(
-                        (x => this.AddItem()), (x => this.CanAddItem()));
-                return _addItem;
-            }
-        }
-
-        private ICommand _removeItem;
-        public ICommand RemoveItemCmd
-        {
-            get
-            {
-                if (_removeItem == null)
-                    _removeItem = new RelayCommand(
-                        (x => this.RemoveItem()), (x => this.CanRemoveItem()));
-                return _removeItem;
-            }
-        }
+        public ICommand AddItemCmd { get { return this.GetCommand(this.AddItem, this.CanAddItem); } }
+        public ICommand RemoveItemCmd { get { return this.GetCommand(this.RemoveItem, this.CanRemoveItem); } }
 
         private int _newCount = 1;
 
