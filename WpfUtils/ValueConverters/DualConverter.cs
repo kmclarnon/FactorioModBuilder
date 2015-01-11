@@ -7,15 +7,15 @@ using System.Windows.Data;
 
 namespace WpfUtils.ValueConverters
 {
-    public class DualConverter : BaseConverter, IValueConverter
     /// <summary>
     /// Provides an interface to chain two separate value converters together
     /// </summary>
+    public class DualConverter : BaseConverter
     {
         public IValueConverter Stage1 { get; set; }
         public IValueConverter Stage2 { get; set; }
 
-        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        public override object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             return Stage2.Convert(
                 Stage1.Convert(
@@ -23,7 +23,7 @@ namespace WpfUtils.ValueConverters
                 targetType, parameter, culture);
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        public override object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             return Stage1.ConvertBack(
                 Stage2.ConvertBack(

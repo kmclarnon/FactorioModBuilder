@@ -11,14 +11,14 @@ namespace WpfUtils.ValueConverters
     /// Provides a converter that returns false if the object is null
     /// </summary>
     [ValueConversion(typeof(object), typeof(bool))]
-    public class ObjectNotNull : BaseConverter, IValueConverter
+    public class ObjectNotNull : BaseConverter
     {
-        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        public override object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             return value != null;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        public override object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             throw new NotImplementedException();
         }

@@ -11,14 +11,14 @@ namespace WpfUtils.ValueConverters
     /// Value converter that negates a provided boolean value
     /// </summary>
     [ValueConversion(typeof(object), typeof(bool))]
-    public class BooleanNot : BaseConverter, IValueConverter
+    public class BooleanNot : BaseConverter
     {
-        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        public override object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             return !((bool)value);
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        public override object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             return !((bool)value);
         }

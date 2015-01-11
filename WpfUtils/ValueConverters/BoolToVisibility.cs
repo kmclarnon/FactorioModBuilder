@@ -7,13 +7,13 @@ using System.Windows.Data;
 
 namespace WpfUtils.ValueConverters
 {
-    public class BoolToVisibility : BaseConverter, IValueConverter
     /// <summary>
     /// Provides a conversion between boolean and visibility values
     /// </summary>
     [ValueConversion(typeof(bool), typeof(System.Windows.Visibility))]
+    public class BoolToVisibility : BaseConverter
     {
-        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        public override object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             bool val = (bool)value;
             if (val)
@@ -22,7 +22,7 @@ namespace WpfUtils.ValueConverters
                 return System.Windows.Visibility.Collapsed;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        public override object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             throw new NotImplementedException();
         }
