@@ -38,7 +38,7 @@ namespace WpfUtils
         /// property on the model is not the same as on the view model</param>
         /// <param name="vmProperty">The name of the property that should be passed to NotifyPropertyChanged.  This must be
         /// filled out if this function is not called from the property itself</param>
-        protected void PropertySet<T>(object target, T newValue, 
+        protected void SetProperty<T>(object target, T newValue, 
             bool allowNull = false, Action secondaryAction = null,
             [CallerMemberName] string targetProperty = "default property", 
             [CallerMemberName] string vmProperty = "view model property")
@@ -92,7 +92,7 @@ namespace WpfUtils
         /// property on the model is not the same as on the view model</param>
         /// <param name="vmProperty">The name of the property that should be passed to NotifyPropertyChanged.  This must be
         /// filled out if this function is not called from the property itself</param>
-        protected void PropertySet<T>(ref T target, T newValue,
+        protected void SetProperty<T>(ref T target, T newValue,
             bool allowNull = false, Action secondaryAction = null,
             [CallerMemberName] string targetProperty = "default property",
             [CallerMemberName] string vmProperty = "view model property")
