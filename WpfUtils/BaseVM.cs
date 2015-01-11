@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace WpfUtils
 {
@@ -13,6 +14,9 @@ namespace WpfUtils
     /// </summary>
     public class BaseVM : INotifyPropertyChanged
     {
+        /// <summary>
+        /// INotifyPropertyChanged Event
+        /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
@@ -125,6 +129,71 @@ namespace WpfUtils
                 if (secondaryAction != null)
                     secondaryAction();
             }
+        }
+
+        /// <summary>
+        /// Dictionary to contain command bindings created by the GetCommand function
+        /// </summary>
+        private Dictionary<string, RelayCommand> _commands = new Dictionary<string, RelayCommand>();
+
+        /// <summary>
+        /// Provides a convenient way to implement command binding in the view model
+        /// </summary>
+        /// <param name="canExecute">Func that returns true if the command can be executed</param>
+        /// <param name="execute">Action to be performed by the command</param>
+        /// <param name="propertyName">Property name to associate the command with.  Defaults to CallerMemberName</param>
+        /// <returns>The command composed of the supplied functions</returns>
+        protected ICommand GetCommand(Func<bool> canExecute,
+            Action execute, [CallerMemberName] string propertyName = "default")
+        {
+            return this.GetCommand((x => canExecute()), (x => execute()), propertyName);
+        }
+
+        /// <summary>
+        /// Provides a convenient way to implement command binding in the view model
+        /// </summary>
+        /// <param name="canExecute">Func that returns true if the command can be executed</param>
+        /// <param name="execute">Action to be performed by the command</param>
+        /// <param name="propertyName">Property name to associate the command with.  Defaults to CallerMemberName</param>
+        /// <returns>The command composed of the supplied functions</returns>
+        protected ICommand GetCommand(Func<bool> canExecute,
+            Action<object> execute, [CallerMemberName] string propertyName = "default")
+        {
+            return this.GetCommand((x => canExecute()), execute, propertyName);
+        }
+
+        /// <summary>
+        /// Provides a convenient way to implement command binding in the view model
+        /// </summary>
+        /// <param name="canExecute">Predicate that returns true if the command can be executed</param>
+        /// <param name="execute">Action to be performed by the command</param>
+        /// <param name="propertyName">Property name to associate the command with.  Defaults to CallerMemberName</param>
+        /// <returns>The command composed of the supplied functions</returns>
+        protected ICommand GetCommand(Predicate<object> canExecute,
+            Action execute, [CallerMemberName] string propertyName = "default")
+        {
+            return this.GetCommand(canExecute, (x => execute()), propertyName);
+        }
+
+        /// <summary>
+        /// Provides a convenient way to implement command binding in the view model
+        /// </summary>
+        /// <param name="canExecute">Predicate that is used to determine if the command can be executed</param>
+        /// <param name="execute">Action to be performed by the command</param>
+        /// <param name="propertyName">Property name to associate the command with.  Defaults to CallerMemberName</param>
+        /// <returns>The command composed of the supplied functions</returns>
+        protected ICommand GetCommand(Predicate<object> canExecute, 
+            Action<object> execute, [CallerMemberName] string propertyName = "default")
+        {
+            // find the command, and create it if it doesn't exist
+            RelayCommand res;
+            if(!_commands.TryGetValue(propertyName, out res))
+            {
+                res = new RelayCommand(execute, canExecute);
+                _commands.Add(propertyName, res);
+            }
+
+            return res;
         }
     }
 }
