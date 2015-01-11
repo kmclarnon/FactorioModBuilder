@@ -8,6 +8,10 @@ using System.Windows.Data;
 namespace WpfUtils.ValueConverters
 {
     public class BoolToVisibility : BaseConverter, IValueConverter
+    /// <summary>
+    /// Provides a conversion between boolean and visibility values
+    /// </summary>
+    [ValueConversion(typeof(bool), typeof(System.Windows.Visibility))]
     {
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {

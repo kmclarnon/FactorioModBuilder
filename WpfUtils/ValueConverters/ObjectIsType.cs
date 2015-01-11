@@ -8,6 +8,9 @@ using System.Windows.Data;
 namespace WpfUtils.ValueConverters
 {
     public class ObjectIsType : BaseConverter, IValueConverter
+    /// <summary>
+    /// Provides a converter that checks if an object is the provided type
+    /// </summary>
     {
         public Type Type { get; set; }
 

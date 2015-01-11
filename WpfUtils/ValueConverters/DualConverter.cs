@@ -8,6 +8,9 @@ using System.Windows.Data;
 namespace WpfUtils.ValueConverters
 {
     public class DualConverter : BaseConverter, IValueConverter
+    /// <summary>
+    /// Provides an interface to chain two separate value converters together
+    /// </summary>
     {
         public IValueConverter Stage1 { get; set; }
         public IValueConverter Stage2 { get; set; }

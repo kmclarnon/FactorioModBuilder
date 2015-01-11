@@ -8,10 +8,15 @@ using System.Windows.Input;
 
 namespace WpfUtils
 {
+    /// <summary>
+    /// This class provides a convienient way to support data bindning to view model functions
+    /// </summary>
     public class RelayCommand : ICommand 
     { 
-        #region Fields 
+        #region Fields
+        // provided delegate that is invoked by the ICommand
         readonly Action<object> _execute; 
+        // provided delegate that determines if the delegate can be invoked
         readonly Predicate<object> _canExecute; 
         #endregion // Fields 
         

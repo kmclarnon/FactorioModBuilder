@@ -7,6 +7,9 @@ using System.Windows.Data;
 
 namespace WpfUtils.ValueConverters
 {
+    /// <summary>
+    /// Value converter that negates a provided boolean value
+    /// </summary>
     [ValueConversion(typeof(object), typeof(bool))]
     public class BooleanNot : BaseConverter, IValueConverter
     {

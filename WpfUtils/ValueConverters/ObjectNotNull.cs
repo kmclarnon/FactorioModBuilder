@@ -7,6 +7,9 @@ using System.Windows.Data;
 
 namespace WpfUtils.ValueConverters
 {
+    /// <summary>
+    /// Provides a converter that returns false if the object is null
+    /// </summary>
     [ValueConversion(typeof(object), typeof(bool))]
     public class ObjectNotNull : BaseConverter, IValueConverter
     {
