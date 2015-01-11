@@ -51,7 +51,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         public bool Enabled
         {
             get { return _enabled; }
-            set { this.SetProperty(_internal, value); }
+            set { this.SetProperty(ref _enabled, value); }
         }
 
         public SubGroupVM(SubGroup item)
