@@ -57,8 +57,6 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
             }
         }
 
-        public override string CompilerKey { get { return "project"; } }
-
         public ProjectVM(Project header, IEnumerable<TreeItemVMBase> projectChildren)
             : base(header, projectChildren)
         {

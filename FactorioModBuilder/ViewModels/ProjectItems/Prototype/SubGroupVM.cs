@@ -15,18 +15,8 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         {
             get
             {
-                Dictionary<string, CompileUnit> res = new Dictionary<string, CompileUnit>();
-                res.Add("type", new CompileUnit(this.Type));
-                res.Add("name", new CompileUnit(this.Name));
-                res.Add("group", new CompileUnit(this.GroupName));
-                res.Add("order", new CompileUnit(this.Order));
-                return new CompileUnit(res);
-            }
-        }
 
-        public override string CompilerKey
-        {
-            get { return "prototypes.subgroups"; }
+            }
         }
 
         public string Type

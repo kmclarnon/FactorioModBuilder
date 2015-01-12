@@ -9,7 +9,5 @@ namespace FactorioModBuilder.Build
     public interface ICompilerSource
     {
         CompileUnit CompilerData { get; }
-        string CompilerKey { get; }
-        IEnumerable<ICompilerSource> SubUnits { get; }
     }
 }

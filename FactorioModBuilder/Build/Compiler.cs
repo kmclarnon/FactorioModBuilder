@@ -16,24 +16,7 @@ namespace FactorioModBuilder.Build
 
         public int MaxErrors { get; set; }
 
-        private Dictionary<string, ICompilerExtension> _activeExtensions = new Dictionary<string,ICompilerExtension>();
-
-        private class CompileSettings
-        {
-            public string TempDir { get; set; }
-            public string OutDir { get; set; }
-            public string ProjectName { get; set; }
-            public string BaseTempDirectory { get { return Path.Combine(TempDir, ProjectName); } }
-            public string BaseOutDirectory { get { return Path.Combine(OutDir, ProjectName); } }
-            public bool Complete
-            {
-                get
-                {
-                    return TempDir != null && 
-                        OutDir != null && ProjectName != null;
-                }
-            }
-        }
+        private Dictionary<ExtensionType, ICompilerExtension> _activeExtensions = new Dictionary<ExtensionType,ICompilerExtension>();
 
         public Compiler()
             : this(0)
@@ -66,30 +49,7 @@ namespace FactorioModBuilder.Build
                 // prepare for the build
                 var settings = this.PreBuild(c);
 
-                if(c.UType != CompileUnit.UnitType.Struct)
-                    return false;
-                foreach(var i in c.StructValues)
-                {
-                    // ensure that we can continue to compile
-                    if (BuildMessages.Where(o => o.Type == CompilerMessage.MessageType.Error)
-                        .Count() > this.MaxErrors)
-                    {
-                        this.BuildMessages.Add(new ErrorMessage("Encountered greater than " +
-                            this.MaxErrors + " errors. Build process halted."));
-                        return false;
-                    }
-
-                    ICompilerExtension ext;
-                    if(!_activeExtensions.TryGetValue(i.Key, out ext))
-                    {
-                        this.BuildMessages.Add(new ErrorMessage("Could not find compiler extension to support type: " + i.Key));
-                        // since we couldn't find an extension, we're done
-                        continue;
-                    }
-
-                    if (!ext.BuildUnit(i.Value, new DirectoryInfo(settings.BaseTempDirectory)))
-                        this.BuildMessages.Add(new ErrorMessage("Failed to compile extension: " + i.Key));
-                }
+                
 
                 // finish up after our build
                 this.PostBuild(settings);
@@ -98,9 +58,9 @@ namespace FactorioModBuilder.Build
             return true;
         }
 
-        private CompileSettings PreBuild(CompileUnit c)
+        private CompilerSettings PreBuild(CompileUnit c)
         {
-            CompileSettings settings = new CompileSettings();
+            CompilerSettings settings = new CompilerSettings();
             // get all of our compiler directives
             foreach(var cd in c.Directives)
             {
@@ -145,7 +105,7 @@ namespace FactorioModBuilder.Build
             return settings;
         }
 
-        private void PostBuild(CompileSettings settings)
+        private void PostBuild(CompilerSettings settings)
         {
             // move the temporary directory project contents to the output directory
             if (Directory.Exists(settings.BaseOutDirectory))
@@ -155,16 +115,16 @@ namespace FactorioModBuilder.Build
 
         public bool AddExtension(ICompilerExtension ext)
         {
-            if (_activeExtensions.ContainsKey(ext.SupportedUnitName))
+            if (_activeExtensions.ContainsKey(ext.Extension))
                 return false;
             ext.Parent = this;
-            _activeExtensions.Add(ext.SupportedUnitName, ext);
+            _activeExtensions.Add(ext.Extension, ext);
             return true;
         }
 
-        public bool TryGetExtension(string name, out ICompilerExtension ext)
+        public bool TryGetExtension(ExtensionType type, out ICompilerExtension ext)
         {
-            return _activeExtensions.TryGetValue(name, out ext);
+            return _activeExtensions.TryGetValue(type, out ext);
         }
     }
 }

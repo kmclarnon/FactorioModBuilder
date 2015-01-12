@@ -54,6 +54,9 @@ namespace FactorioModBuilder.ViewModels.Main
                             new Solution(result.ResultSolutionName, result.ResultLocation),
                             new List<ProjectVM>() 
                             { 
+                                new ProjectVM(new Project(result.ResultProjectName,
+                                    "C:\\Users\\Kevin\\Desktop\\FactorioModBuilder\\temp",
+                                    "C:\\Users\\Kevin\\Desktop\\Factorio_0.11.8.12921\\mods"), 
                                     new List<TreeItemVMBase>()
                                     {
                                         new ModInfoVM(new ModInfo(result.ResultProjectName)),

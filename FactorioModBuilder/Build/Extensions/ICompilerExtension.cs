@@ -9,7 +9,7 @@ namespace FactorioModBuilder.Build.Extensions
 {
     public interface ICompilerExtension
     {
-        string SupportedUnitName { get; }
+        ExtensionType Extension { get; }
         Compiler Parent { get; set; }
         bool BuildUnit(CompileUnit unit, DirectoryInfo outDir);
     }

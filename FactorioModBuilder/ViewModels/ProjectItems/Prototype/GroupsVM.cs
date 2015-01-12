@@ -20,16 +20,10 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         {
             get 
             { 
-                return new CompileUnit(this.ItemList
-                    .Where(o => o.Enabled)
-                    .Select(o => o.CompilerData)); 
+
             }
         }
 
-        public override string CompilerKey
-        {
-            get { return "prototypes.groups"; }
-        }
 
         public ICommand AddGroupCmd { get { return this.GetCommand(this.AddGroup, this.CanAddGroup);} }
         public ICommand RemoveGroupCmd { get { return this.GetCommand(this.RemoveGroup, this.CanRemoveGroup); } }

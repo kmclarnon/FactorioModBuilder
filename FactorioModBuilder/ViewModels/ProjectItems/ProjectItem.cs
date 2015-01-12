@@ -14,11 +14,6 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
         where U : TreeItemVM<T, U>
     {
         public abstract CompileUnit CompilerData { get; }
-        public abstract string CompilerKey { get; }
-        public IEnumerable<ICompilerSource> SubUnits
-        {
-            get { return this.Children.Cast<ICompilerSource>(); }
-        }
 
         public ProjectItem(T item) 
             : base(item)

@@ -13,12 +13,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
     {
         public override CompileUnit CompilerData
         {
-            get { return new CompileUnit("test data"); }
-        }
-
-        public override string CompilerKey
-        {
-            get { return "control.lua"; }
+            get { }
         }
 
         public ModControlVM(ModControl control)

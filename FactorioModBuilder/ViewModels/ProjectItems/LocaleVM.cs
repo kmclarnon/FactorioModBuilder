@@ -13,13 +13,9 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
     {
         public override CompileUnit CompilerData
         {
-            get { return new CompileUnit("test"); }
+            get {  }
         }
 
-        public override string CompilerKey
-        {
-            get { return "locale"; }
-        }
 
         public LocaleVM(Locale loc) 
             : base(loc)

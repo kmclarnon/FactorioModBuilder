@@ -3,6 +3,7 @@ using FactorioModBuilder.Models.ProjectItems;
 using FactorioModBuilder.ViewModels.Base;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -18,24 +19,11 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
         {
             get
             {
-                return new CompileUnit(
-                    new Dictionary<string, CompileUnit>()
-                {
-                    { "\"name\"", new CompileUnit(this.ModName) },
-                    { "\"version\"", new CompileUnit(this.Version) },
-                    { "\"title\"", new CompileUnit(this.Title) },
-                    { "\"author\"", new CompileUnit(this.Author) },
-                    { "\"contact\"", new CompileUnit(this.Contact) },
-                    { "\"homepage\"", new CompileUnit(this.Homepage) },
-                    { "\"description\"", new CompileUnit(this.Description) }
-                }, " : ");
+
             }
         }
 
-        public override string CompilerKey
-        {
-            get { return "info.json"; }
-        }
+        public ObservableCollection<ModInfoDependencyVM> Dependencies { get; private set; }
 
         public string ModName
         {
@@ -80,8 +68,8 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
             set { this.SetProperty(_internal, value); }
         }
 
-        public ICommand CancelCmd { get { return this.GetCommand(this.DoCancel, this.CanCancel); } }
-        public ICommand ApplyCmd { get { return this.GetCommand(this.DoApply, this.CanApply); } }
+        public ICommand RemoveDependencyCmd { get { return this.GetCommand(this.RemoveDependency, this.CanRemoveDependency); } }
+        public ICommand AddDependencyCmd { get { return this.GetCommand(this.AddDependency, this.CanAddDependency); } }
 
         static ModInfoVM()
         {
@@ -90,9 +78,12 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
                 "Version must be in the form Major.Middle.Minor");
         }
 
+        private int _depCount = 1;
+
         public ModInfoVM(ModInfo info)
             : base(info)
         {
+            this.Dependencies = new ObservableCollection<ModInfoDependencyVM>();
         }
 
         public ModInfoVM(TreeItemVMBase parent, ModInfo info)
@@ -100,24 +91,28 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
         {
         }
 
-        private bool CanCancel()
+        private bool CanRemoveDependency()
+        {
+            return this.Dependencies.Where(o => o.IsSelected).Any();
+        }
+
+        private void RemoveDependency()
+        {
+            var lst = this.Dependencies.Where(o => o.IsSelected).ToList();
+            foreach (var l in lst)
+                this.Dependencies.Remove(l);
+        }
+
+        private bool CanAddDependency()
         {
             return true;
         }
 
-        private void DoCancel()
+        private void AddDependency()
         {
-
-        }
-
-        private bool CanApply()
-        {
-            return true;
-        }
-
-        private void DoApply()
-        {
-
+            this.Dependencies.Add(new ModInfoDependencyVM(
+                new ModInfoDependency("New Dependency " + _depCount)));
+            _depCount++;
         }
 
         private void UpdateProjectName()
