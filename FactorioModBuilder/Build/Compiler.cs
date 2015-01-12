@@ -1,4 +1,5 @@
-﻿using FactorioModBuilder.Build.Directives;
+﻿using FactorioModBuilder.Build.Data;
+using FactorioModBuilder.Build.Directives;
 using FactorioModBuilder.Build.Extensions;
 using FactorioModBuilder.Build.Messages;
 using System;
@@ -42,7 +43,7 @@ namespace FactorioModBuilder.Build
                 this.AddExtension(ext);
         }
 
-        public bool Build(List<CompileUnit> data)
+        public bool Build(List<DataUnit> data)
         {
             // process each of our compilation units
             foreach(var c in data)
@@ -50,7 +51,6 @@ namespace FactorioModBuilder.Build
                 // prepare for the build
                 var settings = this.PreBuild(c);
 
-                
 
                 // finish up after our build
                 this.PostBuild(settings);
@@ -59,7 +59,7 @@ namespace FactorioModBuilder.Build
             return true;
         }
 
-        private CompilerSettings PreBuild(CompileUnit c)
+        private CompilerSettings PreBuild(DataUnit c)
         {
             CompilerSettings settings = new CompilerSettings();
             // get all of our compiler directives

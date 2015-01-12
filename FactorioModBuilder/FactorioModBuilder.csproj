@@ -59,6 +59,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -78,16 +79,18 @@
     </ApplicationDefinition>
     <Compile Include="Build\Compiler.cs" />
     <Compile Include="Build\CompilerSettings.cs" />
+    <Compile Include="Build\Data\DataUnit.cs" />
+    <Compile Include="Build\Data\ModInfoData.cs" />
     <Compile Include="Build\Directives\OutputDirectory.cs" />
     <Compile Include="Build\Directives\ProjectName.cs" />
     <Compile Include="Build\Directives\TempDirectory.cs" />
     <Compile Include="Build\Extensions\ExtensionBase.cs" />
+    <Compile Include="Build\Extensions\ModInfoExtension.cs" />
     <Compile Include="Build\ICompilerSource.cs" />
     <Compile Include="Build\Directives\CompilerDirective.cs" />
     <Compile Include="Build\Messages\ErrorMessage.cs" />
     <Compile Include="Build\Extensions\ICompilerExtension.cs" />
     <Compile Include="Build\Messages\CompilerMessage.cs" />
-    <Compile Include="Build\CompileUnit.cs" />
     <Compile Include="Build\Messages\InfoMessage.cs" />
     <Compile Include="Build\Messages\WarningMessage.cs" />
     <Compile Include="Models\Dialogs\NewProject.cs" />

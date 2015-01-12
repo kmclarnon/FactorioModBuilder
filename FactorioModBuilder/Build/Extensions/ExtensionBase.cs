@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Json;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace FactorioModBuilder.Build.Extensions
@@ -40,15 +42,5 @@ namespace FactorioModBuilder.Build.Extensions
         public abstract bool BuildUnit(CompileUnit unit, DirectoryInfo outDir);
 
         public abstract bool BuildUnit(CompileUnit unit, out string value);
-
-        protected string CompileToJson(CompileUnit unit)
-        {
-            throw new NotImplementedException();
-        }
-
-        protected string CompileToLuaTable(CompileUnit unit)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
