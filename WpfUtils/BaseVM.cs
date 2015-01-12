@@ -35,7 +35,7 @@ namespace WpfUtils
         /// it can be called safely with the default paramater
         /// </summary>
         /// <param name="property">The name of the property that is changing. This defaults to [CallerMemberName]</param>
-        protected void NotifyPropertyChanged([CallerMemberName] string property = "no property")
+        protected void NotifyPropertyChanged([CallerMemberName] string property = "")
         {
             if (this.PropertyChanged != null)
                 this.PropertyChanged(this, new PropertyChangedEventArgs(property));
@@ -43,7 +43,7 @@ namespace WpfUtils
     
         /// <summary>
         /// A convenience function for simplifying setters in derived classes.  Uses reflection to 
-        /// determine appropriate properties to set and attempts to compare using IComparable&lt;T&lt;
+        /// determine appropriate properties to set and attempts to compare using IComparable&lt;T&gt;
         /// </summary>
         /// <param name="target">The model that contains the data backing the property</param>
         /// <param name="newValue">The value parameter of the setter</param>
@@ -55,8 +55,8 @@ namespace WpfUtils
         /// filled out if this function is not called from the property itself</param>
         protected void SetProperty<T>(object target, T newValue, 
             bool allowNull = false, Action secondaryAction = null,
-            [CallerMemberName] string targetProperty = "default property", 
-            [CallerMemberName] string vmProperty = "view model property")
+            [CallerMemberName] string targetProperty = "", 
+            [CallerMemberName] string vmProperty = "")
         {
             if (target == null)
                 throw new ArgumentNullException("Target object cannot be null");
@@ -65,27 +65,38 @@ namespace WpfUtils
             var tType = target.GetType();
             // get our target property's value to work with
             var tProp = tType.GetProperty(targetProperty);
-            var tValue = tProp.GetValue(target);
-            if (tValue.GetType() != typeof(T))
+            if (tProp.PropertyType != typeof(T))
                 throw new ArgumentException("Referenced property is not of type: " + typeof(T).FullName);
+            
             if (!allowNull && newValue == null)
-                return;
-            // prefer using the comparable interface
-            var tValComp = tValue as IComparable<T>;
-            if (tValComp != null)
+                return; // not allowed
+
+            var tValue = tProp.GetValue(target);
+            if(tValue != null)
             {
-                if (tValComp.CompareTo(newValue) != 0)
+                // prefer using the comparable interface
+                var tValComp = tValue as IComparable<T>;
+                if (tValComp != null)
+                {
+                    if (tValComp.CompareTo(newValue) != 0)
+                    {
+                        tProp.SetValue(target, newValue);
+                        changed = true;
+                    }
+                }
+                // fall back on object equality
+                else if (!tValue.Equals(newValue))
                 {
                     tProp.SetValue(target, newValue);
                     changed = true;
                 }
             }
-            // fall back on object equality
-            else if (!tValue.Equals(newValue))
+            else
             {
                 tProp.SetValue(target, newValue);
                 changed = true;
             }
+
             
             if(changed)
             {
@@ -109,8 +120,8 @@ namespace WpfUtils
         /// filled out if this function is not called from the property itself</param>
         protected void SetProperty<T>(ref T target, T newValue,
             bool allowNull = false, Action secondaryAction = null,
-            [CallerMemberName] string targetProperty = "default property",
-            [CallerMemberName] string vmProperty = "view model property")
+            [CallerMemberName] string targetProperty = "",
+            [CallerMemberName] string vmProperty = "")
         {
             if (!allowNull && newValue == null)
                 return;
