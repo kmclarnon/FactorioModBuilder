@@ -96,10 +96,12 @@
     <Compile Include="Build\Messages\InfoMessage.cs" />
     <Compile Include="Build\Messages\WarningMessage.cs" />
     <Compile Include="Models\Dialogs\NewProject.cs" />
+    <Compile Include="Models\ProjectItems\ModInfoDependency.cs" />
     <Compile Include="Models\SolutionItems\Solution.cs" />
     <Compile Include="ViewModels\Dialogs\NewProjectVM.cs" />
     <Compile Include="ViewModels\Main\BuildMenuVM.cs" />
     <Compile Include="ViewModels\Main\FileMenuVM.cs" />
+    <Compile Include="ViewModels\ProjectItems\ModInfoDependencyVM.cs" />
     <Compile Include="ViewModels\ProjectItems\ProjectItem.cs" />
     <Compile Include="ViewModels\SolutionItems\SolutionVM.cs" />
     <Compile Include="View\Dialogs\NewProjectDialog.xaml.cs">
