@@ -61,15 +61,17 @@ namespace WpfUtils
             if (target == null)
                 throw new ArgumentNullException("Target object cannot be null");
 
+            // we must check for null before comparing types because
+            // a null value will fail the type comparison
+            if (!allowNull && newValue == null)
+                return; // not allowed
+
             bool changed = false;
             var tType = target.GetType();
             // get our target property's value to work with
             var tProp = tType.GetProperty(targetProperty);
-            if (tProp.PropertyType != typeof(T))
+            if (newValue != null && tProp.PropertyType != typeof(T))
                 throw new ArgumentException("Referenced property is not of type: " + typeof(T).FullName);
-            
-            if (!allowNull && newValue == null)
-                return; // not allowed
 
             var tValue = tProp.GetValue(target);
             if(tValue != null)
@@ -97,7 +99,6 @@ namespace WpfUtils
                 changed = true;
             }
 
-            
             if(changed)
             {
                 this.NotifyPropertyChanged(vmProperty);
@@ -123,6 +124,8 @@ namespace WpfUtils
             [CallerMemberName] string targetProperty = "",
             [CallerMemberName] string vmProperty = "")
         {
+            // we must check for null before comparing types because
+            // a null value will fail the type comparison
             if (!allowNull && newValue == null)
                 return;
 
@@ -165,13 +168,15 @@ namespace WpfUtils
             Action secondaryAction = null,
             [CallerMemberName] string propertyName = "")
         {
+            // we must check for null before comparing types because
+            // a null value will fail the type comparison
             if (!allowNull && value == null)
                 return; // not allowed
 
             // check for type consistency.  We use reflection here because the
             // initial value of the property can be null
             var pInfo = this.GetType().GetProperty(propertyName);
-            if (pInfo.PropertyType != typeof(T))
+            if (value != null && pInfo.PropertyType != typeof(T))
                 throw new ArgumentException("Supplied type does not match property type");
 
             bool changed = false;
