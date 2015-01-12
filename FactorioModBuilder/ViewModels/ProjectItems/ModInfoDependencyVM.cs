@@ -1,4 +1,5 @@
 ﻿using FactorioModBuilder.Build;
+using FactorioModBuilder.Build.Extensions;
 using FactorioModBuilder.Models.ProjectItems;
 using FactorioModBuilder.ViewModels.Base;
 using System;
@@ -15,7 +16,11 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
         {
             get
             {
-
+                return new CompileUnit()
+                {
+                    { "Optional", new CompileUnit(this.Optional) },
+                    { "Version", new CompileUnit(this.Version) }
+                };
             }
         }
 

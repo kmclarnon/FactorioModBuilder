@@ -19,15 +19,10 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
         {
             get
             {
-                Dictionary<string, CompileUnit> res = new Dictionary<string, CompileUnit>();
-                foreach (var c in this.SubUnits)
-                    res.Add(c.CompilerKey, c.CompilerData);
-
-                var cu = new CompileUnit(res);
-                cu.Directives.Add(new OutputDirectory(this.OutDir));
-                cu.Directives.Add(new TempDirectory(this.TempDir));
-                cu.Directives.Add(new ProjectName(this.Name));
-                return cu;
+                CompileUnit res = new CompileUnit();
+                res.Directives.Add(new OutputDirectory(this.OutDir));
+                res.Directives.Add(new TempDirectory(this.TempDir));
+                return res;
             }
         }
 

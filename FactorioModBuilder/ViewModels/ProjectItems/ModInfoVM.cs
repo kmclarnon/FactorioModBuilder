@@ -1,4 +1,5 @@
 ﻿using FactorioModBuilder.Build;
+using FactorioModBuilder.Build.Extensions;
 using FactorioModBuilder.Models.ProjectItems;
 using FactorioModBuilder.ViewModels.Base;
 using System;
@@ -19,7 +20,17 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
         {
             get
             {
-
+                return new CompileUnit()
+                {
+                    { "Name", new CompileUnit(this.ModName) },
+                    { "Version", new CompileUnit(this.Version) },
+                    { "Title", new CompileUnit(this.Title) },
+                    { "Author", new CompileUnit(this.Author) },
+                    { "Contact", new CompileUnit(this.Contact) },
+                    { "Homepage", new CompileUnit(this.Homepage) }, 
+                    { "Description", new CompileUnit(this.Description) },
+                    { "Dependencies", new CompileUnit(this.Dependencies.Select(o => o.CompilerData), ExtensionType.FactorioDependencies) }
+                };
             }
         }
 

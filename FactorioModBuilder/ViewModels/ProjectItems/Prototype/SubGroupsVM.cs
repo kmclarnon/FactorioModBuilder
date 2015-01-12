@@ -1,4 +1,5 @@
 ﻿using FactorioModBuilder.Build;
+using FactorioModBuilder.Build.Extensions;
 using FactorioModBuilder.Models.ProjectItems.Prototype;
 using FactorioModBuilder.ViewModels.Base;
 using System;
@@ -16,11 +17,11 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
     {
         public ObservableCollection<SubGroupVM> ItemList { get; private set; }
 
-        public override Build.CompileUnit CompilerData
+        public override CompileUnit CompilerData
         {
             get
             {
-
+                return new CompileUnit(this.ItemList.Select(o => o.CompilerData), ExtensionType.PrototypeSubgroups);
             }
         }
 

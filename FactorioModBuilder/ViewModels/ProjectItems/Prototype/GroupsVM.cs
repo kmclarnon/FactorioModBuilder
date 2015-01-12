@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using WpfUtils;
+using FactorioModBuilder.Build.Extensions;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
@@ -19,8 +20,8 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         public override CompileUnit CompilerData
         {
             get 
-            { 
-
+            {
+                return new CompileUnit(this.ItemList.Select(o => o.CompilerData), ExtensionType.PrototypeGroups);
             }
         }
 

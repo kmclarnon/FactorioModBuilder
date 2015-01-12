@@ -1,4 +1,5 @@
 ﻿using FactorioModBuilder.Build;
+using FactorioModBuilder.Build.Extensions;
 using FactorioModBuilder.Models.ProjectItems.Prototype;
 using FactorioModBuilder.ViewModels.Base;
 using System;
@@ -16,7 +17,11 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         {
             get
             {
-
+                return new CompileUnit()
+                {
+                    { "Groups", new CompileUnit(this.PossibleGroups.Select(o => o.CompilerData), ExtensionType.PrototypeGroups) },
+                    { "Subgroups", new CompileUnit(this.PossibleSubgroups.Select(o => o.CompilerData), ExtensionType.PrototypeSubgroups) }
+                };
             }
         }
 

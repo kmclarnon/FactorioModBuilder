@@ -82,7 +82,6 @@
     <Compile Include="Build\Directives\ProjectName.cs" />
     <Compile Include="Build\Directives\TempDirectory.cs" />
     <Compile Include="Build\Extensions\ExtensionBase.cs" />
-    <Compile Include="Build\Extensions\Extensions.cs" />
     <Compile Include="Build\ICompilerSource.cs" />
     <Compile Include="Build\Directives\CompilerDirective.cs" />
     <Compile Include="Build\Messages\ErrorMessage.cs" />

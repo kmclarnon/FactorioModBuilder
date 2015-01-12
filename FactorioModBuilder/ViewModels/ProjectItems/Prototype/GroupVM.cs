@@ -18,7 +18,13 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         {
             get
             {
-
+                return new CompileUnit()
+                {
+                    { "Type", new CompileUnit(this.Type) },
+                    { "Icon", new CompileUnit(this.IconPath) },
+                    { "InvOrder", new CompileUnit(this.InvOrder) },
+                    { "Order", new CompileUnit(this.Order) }
+                };
             }
         }
 

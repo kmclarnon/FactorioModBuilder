@@ -35,13 +35,7 @@ namespace FactorioModBuilder
                     System.Reflection.Assembly.GetExecutingAssembly()
                         .GetName().Version.ToString(),
                     new Build.Compiler(
-                        100,
-                        new ControlLuaExtension(),
-                        new InfoJsonExtension(),
-                        new DataLuaExtension(),
-                        new PrototypesExtension(),
-                        new GroupsExtension(),
-                        new SubgroupsExtension())));
+                        100)));
         }
     }
 }

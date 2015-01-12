@@ -14,7 +14,10 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
     {
         public override CompileUnit CompilerData
         {
-            get {  }
+            get 
+            {
+                return null;
+            }
         }
 
         private bool _manualMode;

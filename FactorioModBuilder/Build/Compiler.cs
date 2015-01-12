@@ -16,7 +16,8 @@ namespace FactorioModBuilder.Build
 
         public int MaxErrors { get; set; }
 
-        private Dictionary<ExtensionType, ICompilerExtension> _activeExtensions = new Dictionary<ExtensionType,ICompilerExtension>();
+        private Dictionary<ExtensionType, ICompilerExtension> _activeExtensions = 
+            new Dictionary<ExtensionType, ICompilerExtension>();
 
         public Compiler()
             : this(0)
