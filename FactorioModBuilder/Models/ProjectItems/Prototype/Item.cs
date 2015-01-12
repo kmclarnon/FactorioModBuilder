@@ -10,7 +10,7 @@ namespace FactorioModBuilder.Models.ProjectItems.Prototype
     public class Item : TreeItem<Item>
     {
         public string Type { get { return "item"; } }
-        public string Subgroup { get; set; }
+        public string SubGroup { get; set; }
         public string Order { get; set; }
         public bool Enabled { get; set; }
         public string IconPath { get; set; }

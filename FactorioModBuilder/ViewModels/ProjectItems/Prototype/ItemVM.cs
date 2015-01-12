@@ -16,10 +16,16 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
     {
         public string Type { get { return _internal.Type; } }
 
-        public string Subgroup
+        public SubGroupVM SubGroup
         {
-            get { return _internal.Subgroup; }
-            set { this.SetProperty(_internal, value); }
+            get { return this.GetProperty<SubGroupVM>(); }
+            set { this.SetProperty(value, false, (() => this.SubGroupName = (value == null) ? String.Empty : value.Name)); }
+        }
+
+        public string SubGroupName
+        {
+            get { return _internal.SubGroup; }
+            set { this.SetProperty(_internal, value, false, null, "SubGroup"); }
         }
 
         public string Order
@@ -47,21 +53,6 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         }
 
         public ICommand FindImageCmd { get { return this.GetCommand(this.FindImage, this.CanFindImage); } }
-
-        public ObservableCollection<SubGroupVM> PossibleSubgroups
-        {
-            get
-            {
-                TreeItemVMBase res;
-                if (!this.TryFindElementWithPropertyUp(typeof(ObservableCollection<SubGroupVM>),
-                    "PossibleSubgroups", out res))
-                {
-                    throw new Exception("Failed to find parent to supply Possible Subgroups");
-                }
-                return (ObservableCollection<SubGroupVM>)res.GetType()
-                    .GetProperty("PossibleSubgroups").GetValue(res);
-            }
-        }
 
         public ItemVM(Item item)
             : base(item)

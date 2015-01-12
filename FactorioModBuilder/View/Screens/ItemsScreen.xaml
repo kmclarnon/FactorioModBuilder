@@ -24,6 +24,15 @@
                 </DataGrid.RowStyle>
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Item" Width="5*" Binding="{Binding Path=Name}" />
+                    <DataGridTemplateColumn Header="Subgroup" Width="Auto">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <ComboBox VerticalContentAlignment="Center" DisplayMemberPath="Name"
+                                          ItemsSource="{Binding Path=DataContext.PossibleSubgroups, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                          SelectedItem="{Binding Path=SubGroup, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                     <DataGridTextColumn Header="Subgroup" Width="5*" Binding="{Binding Path=Subgroup}"/>
                     <DataGridCheckBoxColumn Header="Enabled" Width="3*" Binding="{Binding Path=Enabled}"/>
                 </DataGrid.Columns>
@@ -63,9 +72,9 @@
                 <TextBox Text="{Binding Path=SelectedItem.Name, ElementName=itemList}" 
                          Margin="5" Grid.Column="1" Grid.Row="1" VerticalContentAlignment="Center"/>
                 <Label Content="Subgroup:" Grid.Column="0" Grid.Row="2" Margin="5"/>
-                <ComboBox ItemsSource="{Binding Path=SelectedItem.PossibleSubgroups, ElementName=itemList}"
-                          DisplayMemberPath="Name" Background="LightGray" SelectedValuePath="Name"
-                          SelectedValue="{Binding Path=SelectedItem.Subgroup, ElementName=itemList}"
+                <ComboBox ItemsSource="{Binding Path=PossibleSubgroups}"
+                          DisplayMemberPath="Name" Background="LightGray"
+                          SelectedValue="{Binding Path=SelectedItem.SubGroup, ElementName=itemList}"
                           VerticalContentAlignment="Center" Margin="5" Grid.Column="1" Grid.Row="2"/>
                 <Label Content="Order:" Grid.Column="0" Grid.Row="3" Margin="5"/>
                 <TextBox Text="{Binding Path=SelectedItem.Order, ElementName=itemList}" 
