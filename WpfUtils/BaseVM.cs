@@ -19,6 +19,17 @@ namespace WpfUtils
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
+
+        /// <summary>
+        /// Dictionary to contain command bindings created by the GetCommand function
+        /// </summary>
+        private Dictionary<string, RelayCommand> _commands = new Dictionary<string, RelayCommand>();
+
+        /// <summary>
+        /// Dictionary to contain properties generated with SetProperty&lt;T&gt;(T value).  Can be retrieved through GetProperty&lt;T&gt;()
+        /// </summary>
+        protected Dictionary<string, object> _properties = new Dictionary<string, object>();
+
         /// <summary>
         /// Provides a convenient way to send notifications.  When called inside a property,
         /// it can be called safely with the default paramater
@@ -132,9 +143,93 @@ namespace WpfUtils
         }
 
         /// <summary>
-        /// Dictionary to contain command bindings created by the GetCommand function
+        /// Sets the property indicated by the propertyName argument to the given value.  
+        /// Creates a new property and assigns it the given value if it does not exist yet
         /// </summary>
-        private Dictionary<string, RelayCommand> _commands = new Dictionary<string, RelayCommand>();
+        /// <param name="value">The new property value</param>
+        /// <param name="allowNull">Whether the property can be set to null or not</param>
+        /// <param name="secondaryAction">An action that should be performed after a the value has changed</param>
+        /// <param name="propertyName">The name of the property.  Defaults to CallerMemberName and only needs to be set when invoked outside a property setter</param>
+        protected void SetProperty<T>(T value, bool allowNull = false,
+            Action secondaryAction = null,
+            [CallerMemberName] string propertyName = "")
+        {
+            if (!allowNull && value == null)
+                return; // not allowed
+
+            // check for type consistency.  We use reflection here because the
+            // initial value of the property can be null
+            var pInfo = this.GetType().GetProperty(propertyName);
+            if (pInfo.PropertyType != typeof(T))
+                throw new ArgumentException("Supplied type does not match property type");
+
+            bool changed = false;
+            // ensure type consistency
+            object res;
+            if (_properties.TryGetValue(propertyName, out res))
+            {
+                if(res == null)
+                {
+                    _properties[propertyName] = value;
+                    changed = true;
+                }
+                else
+                {
+                    // prefer IComparable
+                    var compRes = res as IComparable<T>;
+                    if (compRes != null)
+                    {
+                        if (compRes.CompareTo(value) != 0)
+                        {
+                            _properties[propertyName] = value;
+                            changed = true;
+                        }
+                    }
+                    // fall back on objet equality
+                    else if (!res.Equals(value))
+                    {
+                        _properties[propertyName] = value;
+                        changed = true;
+                    }
+                }
+            }
+            // create the property if it doesn't already exist
+            else
+            {
+                _properties[propertyName] = value;
+                changed = true;
+            }
+
+            if(changed)
+            {
+                this.NotifyPropertyChanged(propertyName);
+                // perform any other actions requested of the setter
+                if (secondaryAction != null)
+                    secondaryAction();
+            }
+
+        }
+
+        /// <summary>
+        /// Gets the property indiciated by the propertyName argument to the given value.  
+        /// Creates a new property entry and returns the default value if the property does not exist yet
+        /// </summary>
+        /// <param name="propertyName">The name of the property to retrieve the value for.  Defaults to CallerMemberName and only needs to be set when invoked outside of the property get</param>
+        /// <returns>The value associated with the property or default(T) if the property does not exist yet</returns>
+        protected T GetProperty<T>([CallerMemberName] string propertyName = "")
+        {
+            object res;
+            if (!_properties.TryGetValue(propertyName, out res))
+            {
+                _properties.Add(propertyName, default(T));
+                return default(T);
+            }
+
+            var pInfo = this.GetType().GetProperty(propertyName);
+            if (!pInfo.PropertyType.IsAssignableFrom(typeof(T)))
+                throw new ArgumentException("Property type does not match expected type");
+            return (T)res;
+        }
 
         /// <summary>
         /// Provides a convenient way to implement command binding in the view model
