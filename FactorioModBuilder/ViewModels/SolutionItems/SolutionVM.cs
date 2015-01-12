@@ -19,6 +19,7 @@ namespace FactorioModBuilder.ViewModels
             : base(sol, projects)
         {
             this.Children.CollectionChanged += Children_CollectionChanged;
+            this.InitComplete();
         }
 
         void Children_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)

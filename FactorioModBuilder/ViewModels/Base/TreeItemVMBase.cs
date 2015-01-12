@@ -16,6 +16,9 @@ namespace FactorioModBuilder.ViewModels.Base
 {
     public abstract class TreeItemVMBase : BaseVM, IDataErrorInfo
     {
+        public delegate void InitCompleteHandler(TreeItemVMBase sender, EventArgs e);
+        public event InitCompleteHandler OnInitComplete;
+
         protected TreeItemVMBase _parent;
 
         public ObservableCollection<TreeItemVMBase> Children { get; private set; }
@@ -73,6 +76,8 @@ namespace FactorioModBuilder.ViewModels.Base
 
         protected TreeItemBase _item;
 
+        private bool _initOnce = false;
+
         public TreeItemVMBase(TreeItemBase item)
             : this(null, item)
         {
@@ -96,7 +101,31 @@ namespace FactorioModBuilder.ViewModels.Base
             foreach (var c in children)
             {
                 c._parent = this;
+                this.OnInitComplete += c.parent_OnInitComplete;
                 this.Children.Add(c);
+            }
+
+            if(_parent != null)
+                parent.OnInitComplete += parent_OnInitComplete;
+        }
+
+        private void parent_OnInitComplete(TreeItemVMBase sender, EventArgs e)
+        {
+            this.Initialize();
+            this.InitComplete();
+        }
+
+        protected virtual void Initialize()
+        {
+
+        }
+
+        protected void InitComplete()
+        {
+            if(!_initOnce && this.OnInitComplete != null)
+            {
+                this.OnInitComplete(this, new EventArgs());
+                _initOnce = true;
             }
         }
 
