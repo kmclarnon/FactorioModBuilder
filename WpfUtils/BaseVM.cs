@@ -161,11 +161,12 @@ namespace WpfUtils
         /// Creates a new property and assigns it the given value if it does not exist yet
         /// </summary>
         /// <param name="value">The new property value</param>
+        /// <param name="secondaryAction">An action that should be performed after a the value has changed</param>        
         /// <param name="allowNull">Whether the property can be set to null or not</param>
-        /// <param name="secondaryAction">An action that should be performed after a the value has changed</param>
         /// <param name="propertyName">The name of the property.  Defaults to CallerMemberName and only needs to be set when invoked outside a property setter</param>
-        protected void SetProperty<T>(T value, bool allowNull = false,
+        protected void SetProperty<T>(T value,
             Action secondaryAction = null,
+            bool allowNull = false,
             [CallerMemberName] string propertyName = "")
         {
             // we must check for null before comparing types because

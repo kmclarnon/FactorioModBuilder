@@ -38,7 +38,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         public GroupVM Group
         {
             get { return this.GetProperty<GroupVM>(); }
-            set { this.SetProperty(value, false, (() => this.GroupName = (value == null) ? String.Empty : value.Name)); }
+            set { this.SetProperty(value, (() => this.GroupName = (value == null) ? String.Empty : value.Name)); }
         }
 
         public string GroupName
@@ -72,7 +72,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 
         public void ForceRemoveGroup()
         {
-            this.SetProperty<Group>(null, true, null, "Group");
+            this.SetProperty<Group>(null, null, false, "Group");
             this.GroupName = String.Empty;
         }
     }
