@@ -23,6 +23,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
                 CompileUnit res = new CompileUnit(ExtensionType.Project);
                 res.Directives.Add(new OutputDirectory(this.OutDir));
                 res.Directives.Add(new TempDirectory(this.TempDir));
+                res.Directives.Add(new ProjectName(this.Name));
                 ModInfoVM miRes;
                 if (!this.TryFindElementDown<ModInfoVM>(out miRes))
                     throw new Exception("Failed to find mod info child");

@@ -20,7 +20,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
         {
             get
             {
-                return new CompileUnit()
+                return new CompileUnit(ExtensionType.FactorioInfo)
                 {
                     { "Name", new CompileUnit(this.ModName) },
                     { "Version", new CompileUnit(this.Version) },
