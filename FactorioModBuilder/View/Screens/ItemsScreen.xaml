@@ -33,7 +33,6 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTextColumn Header="Subgroup" Width="5*" Binding="{Binding Path=Subgroup}"/>
                     <DataGridCheckBoxColumn Header="Enabled" Width="3*" Binding="{Binding Path=Enabled}"/>
                 </DataGrid.Columns>
             </DataGrid>
