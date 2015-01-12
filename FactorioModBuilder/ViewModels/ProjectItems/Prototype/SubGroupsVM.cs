@@ -52,6 +52,37 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         {
         }
 
+        protected override void Initialize()
+        {
+            this.PossibleGroups.CollectionChanged += HandlePossibleGroupsChanged;
+        }
+
+        private void HandlePossibleGroupsChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            // the only case we are about is the removal of a group.  Typically this
+            // would be handled by the databinding seamlessly, however there is a bug
+            // with comboboxes and the selectedItem binding being set to null when
+            // the visual tree changes (which happens whenever a user selects a different
+            // screen in this app.  The only way to prevent this is to by default disallow 
+            // null in the Group property setter of the SubGroupVM.  However this becomes a
+            // problem when the selected group is removed from the list of possible groups. 
+            // Visually it looks correct to the user but the Group (and subsequently the GroupName)
+            // property still contain the group that has been removed.  In order to work around this
+            // we use this event handler to detect those changes and force the value to be null
+
+            if(e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove)
+            {
+                foreach (GroupVM g in e.OldItems)
+                {
+                    foreach (var sg in this.ItemList)
+                    {
+                        if (sg.Group == g)
+                            sg.ForceRemoveGroup();
+                    }
+                }
+            }
+        }
+
         public SubGroupsVM(TreeItemVMBase parent, SubGroups items)
             : base(parent, items)
         {

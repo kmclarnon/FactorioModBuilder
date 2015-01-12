@@ -18,7 +18,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
                 Dictionary<string, CompileUnit> res = new Dictionary<string, CompileUnit>();
                 res.Add("type", new CompileUnit(this.Type));
                 res.Add("name", new CompileUnit(this.Name));
-                res.Add("group", new CompileUnit(this.Group));
+                res.Add("group", new CompileUnit(this.GroupName));
                 res.Add("order", new CompileUnit(this.Order));
                 return new CompileUnit(res);
             }
@@ -35,10 +35,16 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
             set { this.SetProperty(_internal, value); }
         }
 
-        public string Group
+        public GroupVM Group
+        {
+            get { return this.GetProperty<GroupVM>(); }
+            set { this.SetProperty(value, false, (() => this.GroupName = (value == null) ? String.Empty : value.Name)); }
+        }
+
+        public string GroupName
         {
             get { return _internal.Group; }
-            set { this.SetProperty(_internal, value); }
+            set { this.SetProperty(_internal, value, false, null, "Group"); }
         }
 
         public string Order
@@ -47,11 +53,10 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
             set { this.SetProperty(_internal, value); }
         }
 
-        private bool _enabled;
         public bool Enabled
         {
-            get { return _enabled; }
-            set { this.SetProperty(ref _enabled, value); }
+            get { return this.GetProperty<bool>(); }
+            set { this.SetProperty(value); }
         }
 
         public SubGroupVM(SubGroup item)
@@ -63,6 +68,12 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
             : base(parent, item)
         {
             this.Enabled = true;
+        }
+
+        public void ForceRemoveGroup()
+        {
+            this.SetProperty<Group>(null, true, null, "Group");
+            this.GroupName = String.Empty;
         }
     }
 }
