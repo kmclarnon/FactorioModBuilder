@@ -63,11 +63,10 @@ namespace FactorioModBuilder.Build
 
         private CompileUnit(object data, DataType type, ExtensionType extType)
         {
-            if (data == null)
-                throw new ArgumentNullException("data");
             this.Type = type;
             this.Data = data;
             this.ExtensionType = extType;
+            this.Directives = new List<CompilerDirective>();
         }
 
         public void Add(CompileUnit unit)
@@ -75,7 +74,10 @@ namespace FactorioModBuilder.Build
             if (!(this.Type == DataType.None || this.Type == DataType.List))
                 throw new InvalidOperationException("Inconsistent invocation of the add method");
             if (this.Type == DataType.None)
+            {
                 this.Data = new List<CompileUnit>();
+                this.Type = DataType.List;
+            }
             ((List<CompileUnit>)this.Data).Add(unit);
         }
 
@@ -84,12 +86,17 @@ namespace FactorioModBuilder.Build
             if (!(this.Type == DataType.None || this.Type == DataType.Dictionary))
                 throw new InvalidOperationException("Inconsisten invocation of the add method");
             if (this.Type == DataType.None)
+            {
                 this.Data = new Dictionary<string, CompileUnit>();
+                this.Type = DataType.Dictionary;
+            }
             ((Dictionary<string, CompileUnit>)this.Data).Add(key, value);
         }
 
         public override string ToString()
         {
+            if (this.Data == null)
+                return "";
             switch (this.Type)
             {
                 case DataType.Text:
