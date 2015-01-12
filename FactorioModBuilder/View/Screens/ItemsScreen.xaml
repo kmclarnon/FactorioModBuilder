@@ -36,8 +36,11 @@
                     <DataGridCheckBoxColumn Header="Enabled" Width="3*" Binding="{Binding Path=Enabled}"/>
                 </DataGrid.Columns>
             </DataGrid>
-            <Label Content="Item Information" Grid.Column="0" Grid.Row="1" FontWeight="Bold" Margin="5"
-                   IsEnabled="{Binding Path=SelectedItem, Converter={conv:ObjectNotNull}, ElementName=itemList}"/>
+            <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="1" 
+                        IsEnabled="{Binding Path=SelectedItem, Converter={conv:ObjectNotNull}, ElementName=itemList}">
+                <Label Content="Item Information:" FontWeight="Bold" Margin="5 5 0 5" FontSize="14"/>
+                <Label Content="{Binding Path=SelectedItem.Name, ElementName=itemList}" FontWeight="Bold" Margin="0 5 5 5" FontSize="14"/>
+            </StackPanel>
             <Grid Grid.Column="1" Grid.Row="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
