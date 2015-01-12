@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using FactorioModBuilder.Build;
 using FactorioModBuilder.Build.Directives;
+using FactorioModBuilder.Build.Extensions;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems
 {
@@ -19,9 +20,29 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
         {
             get
             {
-                CompileUnit res = new CompileUnit();
+                CompileUnit res = new CompileUnit(ExtensionType.Project);
                 res.Directives.Add(new OutputDirectory(this.OutDir));
                 res.Directives.Add(new TempDirectory(this.TempDir));
+                ModInfoVM miRes;
+                if (!this.TryFindElementDown<ModInfoVM>(out miRes))
+                    throw new Exception("Failed to find mod info child");
+                res.Add(miRes.CompilerData);
+                ModControlVM mcRes;
+                if (!this.TryFindElementDown<ModControlVM>(out mcRes))
+                    throw new Exception("Failed to find mod control child");
+                res.Add(mcRes.CompilerData);
+                ModDataVM mdRes;
+                if (!this.TryFindElementDown<ModDataVM>(out mdRes))
+                    throw new Exception("Failed to find mod data child");
+                res.Add(mdRes.CompilerData);
+                PrototypesVM prot;
+                if (!this.TryFindElementDown<PrototypesVM>(out prot))
+                    throw new Exception("Failed to find prototypes child");
+                res.Add(prot.CompilerData);
+                LocaleVM loc;
+                if (!this.TryFindElementDown<LocaleVM>(out loc))
+                    throw new Exception("Failed to find locale child");
+                res.Add(loc.CompilerData);
                 return res;
             }
         }
