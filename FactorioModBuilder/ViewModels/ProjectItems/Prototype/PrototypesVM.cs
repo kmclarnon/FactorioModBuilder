@@ -18,7 +18,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         {
             get
             {
-                return null;
+                return new PrototypesData();
             }
         }
 

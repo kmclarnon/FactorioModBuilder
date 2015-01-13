@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace FactorioModBuilder.Build.Data
 {
-    public class PrototypesData
+    public class PrototypesData : DataUnit
     {
-
+        public PrototypesData()
+            : base(Extensions.ExtensionType.Prototypes)
+        {
+        }
     }
 }
