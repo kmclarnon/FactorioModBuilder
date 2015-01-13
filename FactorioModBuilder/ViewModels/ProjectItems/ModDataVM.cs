@@ -17,7 +17,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
         {
             get 
             {
-                return null;
+                return new ModDataData();
             }
         }
 

@@ -14,9 +14,8 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
     {
         public override DataUnit CompilerData
         {
-            get { return null; }
+            get { return new LocaleData(); }
         }
-
 
         public LocaleVM(Locale loc) 
             : base(loc)

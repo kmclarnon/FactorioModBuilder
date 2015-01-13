@@ -13,11 +13,6 @@ namespace FactorioModBuilder.Build.Extensions
     {
         public ModInfoExtension() : base(ExtensionType.FactorioInfo) { }
 
-        public override bool BuildUnit(DataUnit unit)
-        {
-            throw new NotImplementedException();
-        }
-
         public override bool BuildUnit(DataUnit unit, DirectoryInfo outDir)
         {
             string res;

@@ -20,28 +20,25 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
         {
             get
             {
-                ProjectData pd = new ProjectData(this.Name, this.TempDir, this.OutDir);
                 ModInfoVM miRes;
                 if (!this.TryFindElementDown<ModInfoVM>(out miRes))
                     throw new Exception("Failed to find mod info child");
-                pd.SubUnits.Add(miRes.CompilerData);
                 ModControlVM mcRes;
                 if (!this.TryFindElementDown<ModControlVM>(out mcRes))
                     throw new Exception("Failed to find mod control child");
-                pd.SubUnits.Add(mcRes.CompilerData);
                 ModDataVM mdRes;
                 if (!this.TryFindElementDown<ModDataVM>(out mdRes))
                     throw new Exception("Failed to find mod data child");
-                pd.SubUnits.Add(mdRes.CompilerData);
                 PrototypesVM prot;
                 if (!this.TryFindElementDown<PrototypesVM>(out prot))
                     throw new Exception("Failed to find prototypes child");
-                pd.SubUnits.Add(prot.CompilerData);
                 LocaleVM loc;
                 if (!this.TryFindElementDown<LocaleVM>(out loc))
                     throw new Exception("Failed to find locale child");
-                pd.SubUnits.Add(loc.CompilerData);
-                return pd;
+                return new ProjectData(this.Name, this.TempDir, this.OutDir,
+                    (ModInfoData)miRes.CompilerData, (ModControlData)mcRes.CompilerData,
+                    (ModDataData)mdRes.CompilerData, (PrototypesData)prot.CompilerData,
+                    (LocaleData)loc.CompilerData);
             }
         }
 

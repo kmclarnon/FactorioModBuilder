@@ -18,7 +18,14 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         {
             get
             {
-                return new PrototypesData();
+                GroupsVM gres;
+                if (!this.TryFindElementDown<GroupsVM>(out gres))
+                    throw new Exception("Could not find group child element");
+                SubGroupsVM sgres;
+                if (!this.TryFindElementDown<SubGroupsVM>(out sgres))
+                    throw new Exception("Could not fond subgroup child element");
+                return new PrototypesData((GroupsData)gres.CompilerData, 
+                    (SubGroupsData)sgres.CompilerData);
             }
         }
 

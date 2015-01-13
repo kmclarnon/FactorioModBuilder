@@ -68,16 +68,6 @@ namespace FactorioModBuilder.Build.Extensions
             return true;
         }
 
-        public override bool BuildUnit(DataUnit unit, out string value)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override bool BuildUnit(DataUnit unit, DirectoryInfo outDir)
-        {
-            throw new NotImplementedException();
-        }
-
         protected bool PrepareProject(ProjectData pd)
         {
             try

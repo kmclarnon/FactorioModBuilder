@@ -8,9 +8,11 @@ namespace FactorioModBuilder.Build.Data
 {
     public class PrototypesData : DataUnit
     {
-        public PrototypesData()
+        public PrototypesData(GroupsData groups, SubGroupsData subgroups)
             : base(Extensions.ExtensionType.Prototypes)
         {
+            this.SubUnits.Add(groups);
+            this.SubUnits.Add(subgroups);
         }
     }
 }
