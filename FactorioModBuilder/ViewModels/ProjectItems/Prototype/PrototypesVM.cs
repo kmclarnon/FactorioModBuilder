@@ -1,4 +1,5 @@
 ﻿using FactorioModBuilder.Build;
+using FactorioModBuilder.Build.Data;
 using FactorioModBuilder.Build.Extensions;
 using FactorioModBuilder.Models.ProjectItems.Prototype;
 using FactorioModBuilder.ViewModels.Base;
@@ -13,15 +14,11 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
     public class PrototypesVM : ProjectItem<Prototypes, PrototypesVM>
     {
-        public override CompileUnit CompilerData
+        public override DataUnit CompilerData
         {
             get
             {
-                return new CompileUnit()
-                {
-                    { "Groups", new CompileUnit(this.PossibleGroups.Select(o => o.CompilerData), ExtensionType.PrototypeGroups) },
-                    { "Subgroups", new CompileUnit(this.PossibleSubgroups.Select(o => o.CompilerData), ExtensionType.PrototypeSubgroups) }
-                };
+                return null;
             }
         }
 

@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using WpfUtils;
 using FactorioModBuilder.Build.Extensions;
+using FactorioModBuilder.Build.Data;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
@@ -17,11 +18,12 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
     {
         public ObservableCollection<GroupVM> ItemList { get; private set; }
 
-        public override CompileUnit CompilerData
+        public override DataUnit CompilerData
         {
             get 
             {
-                return new CompileUnit(this.ItemList.Select(o => o.CompilerData), ExtensionType.PrototypeGroups);
+                return new GroupsData(this.ItemList
+                    .Select(o => (GroupData)o.CompilerData));
             }
         }
 

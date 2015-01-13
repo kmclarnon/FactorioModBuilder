@@ -1,5 +1,4 @@
 ﻿using FactorioModBuilder.Build.Data;
-using FactorioModBuilder.Build.Directives;
 using FactorioModBuilder.Build.Extensions;
 using FactorioModBuilder.Build.Messages;
 using System;
@@ -49,42 +48,33 @@ namespace FactorioModBuilder.Build
             foreach(var c in data)
             {
                 // prepare for the build
-                var settings = this.PreBuild(c);
+                this.PreBuild(c);
 
+                ICompilerExtension ext;
+                if(!_activeExtensions.TryGetValue(c.Type, out ext))
+                {
+
+                }
+                else
+                {
+                    
+                }
 
                 // finish up after our build
-                this.PostBuild(settings);
+                this.PostBuild(c);
             }
 
             return true;
         }
 
-        private CompilerSettings PreBuild(DataUnit c)
+        private void PreBuild(DataUnit unit)
         {
-            CompilerSettings settings = new CompilerSettings();
-            // get all of our compiler directives
-            foreach(var cd in c.Directives)
-            {
-                switch (cd.Type)
-                {
-                    case CompilerDirective.DirectiveType.TemporaryDirectory:
-                        settings.TempDir = cd.Data;
-                        break;
-                    case CompilerDirective.DirectiveType.OutputDirectory:
-                        settings.OutDir = cd.Data;
-                        break;
-                    case CompilerDirective.DirectiveType.ProjectName:
-                        settings.ProjectName = cd.Data;
-                        break;
-                }
-            }
-
-            // ensure that we have our required settings
-            if (!settings.Complete)
-                throw new Exception("Compiler settings are incomplete");
+            ProjectData data = unit as ProjectData;
+            if (data == null)
+                throw new ArgumentException("c is not a ProjectData object");
 
             // get and validate our temporary directory
-            var tmpDirInfo = new DirectoryInfo(settings.BaseTempDirectory);
+            var tmpDirInfo = new DirectoryInfo(data.BaseTempDirectory);
             if (!tmpDirInfo.Exists)
             {
                 tmpDirInfo.Create();
@@ -99,19 +89,21 @@ namespace FactorioModBuilder.Build
             }
 
             // get and validate our output directory
-            var outDirInfo = new DirectoryInfo(settings.BaseOutDirectory);
+            var outDirInfo = new DirectoryInfo(data.BaseOutDirectory);
             if(!outDirInfo.Exists)
                 outDirInfo.Create();
-
-            return settings;
         }
 
-        private void PostBuild(CompilerSettings settings)
+        private void PostBuild(DataUnit unit)
         {
+            ProjectData data = unit as ProjectData;
+            if (data == null)
+                throw new ArgumentException("c is not a ProjectData object");
+
             // move the temporary directory project contents to the output directory
-            if (Directory.Exists(settings.BaseOutDirectory))
-                Directory.Delete(settings.BaseOutDirectory, true);
-            Directory.Move(settings.BaseTempDirectory, settings.BaseOutDirectory);
+            if (Directory.Exists(data.BaseOutDirectory))
+                Directory.Delete(data.BaseOutDirectory, true);
+            Directory.Move(data.BaseTempDirectory, data.BaseOutDirectory);
         }
 
         public bool AddExtension(ICompilerExtension ext)

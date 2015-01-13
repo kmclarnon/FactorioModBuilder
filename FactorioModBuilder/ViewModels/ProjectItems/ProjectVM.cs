@@ -9,42 +9,39 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FactorioModBuilder.Build;
-using FactorioModBuilder.Build.Directives;
 using FactorioModBuilder.Build.Extensions;
+using FactorioModBuilder.Build.Data;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems
 {
     public class ProjectVM : ProjectItem<Project, ProjectVM>
     {
-        public override CompileUnit CompilerData
+        public override DataUnit CompilerData
         {
             get
             {
-                CompileUnit res = new CompileUnit(ExtensionType.Project);
-                res.Directives.Add(new OutputDirectory(this.OutDir));
-                res.Directives.Add(new TempDirectory(this.TempDir));
-                res.Directives.Add(new ProjectName(this.Name));
+                ProjectData pd = new ProjectData(this.Name, this.TempDir, this.OutDir);
                 ModInfoVM miRes;
                 if (!this.TryFindElementDown<ModInfoVM>(out miRes))
                     throw new Exception("Failed to find mod info child");
-                res.Add(miRes.CompilerData);
+                pd.SubUnits.Add(miRes.CompilerData);
                 ModControlVM mcRes;
                 if (!this.TryFindElementDown<ModControlVM>(out mcRes))
                     throw new Exception("Failed to find mod control child");
-                res.Add(mcRes.CompilerData);
+                pd.SubUnits.Add(mcRes.CompilerData);
                 ModDataVM mdRes;
                 if (!this.TryFindElementDown<ModDataVM>(out mdRes))
                     throw new Exception("Failed to find mod data child");
-                res.Add(mdRes.CompilerData);
+                pd.SubUnits.Add(mdRes.CompilerData);
                 PrototypesVM prot;
                 if (!this.TryFindElementDown<PrototypesVM>(out prot))
                     throw new Exception("Failed to find prototypes child");
-                res.Add(prot.CompilerData);
+                pd.SubUnits.Add(prot.CompilerData);
                 LocaleVM loc;
                 if (!this.TryFindElementDown<LocaleVM>(out loc))
                     throw new Exception("Failed to find locale child");
-                res.Add(loc.CompilerData);
-                return res;
+                pd.SubUnits.Add(loc.CompilerData);
+                return pd;
             }
         }
 

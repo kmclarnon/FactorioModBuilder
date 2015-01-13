@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FactorioModBuilder.Build.Data;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -39,8 +40,8 @@ namespace FactorioModBuilder.Build.Extensions
         {
         }
 
-        public abstract bool BuildUnit(CompileUnit unit, DirectoryInfo outDir);
+        public abstract bool BuildUnit(DataUnit unit, DirectoryInfo outDir);
 
-        public abstract bool BuildUnit(CompileUnit unit, out string value);
+        public abstract bool BuildUnit(DataUnit unit, out string value);
     }
 }

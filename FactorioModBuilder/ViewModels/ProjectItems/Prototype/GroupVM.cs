@@ -1,4 +1,5 @@
 ﻿using FactorioModBuilder.Build;
+using FactorioModBuilder.Build.Data;
 using FactorioModBuilder.Models.ProjectItems.Prototype;
 using FactorioModBuilder.ViewModels.Base;
 using Microsoft.Win32;
@@ -14,17 +15,12 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
     public class GroupVM : ProjectItem<Group, GroupVM>
     {
-        public override CompileUnit CompilerData
+        public override DataUnit CompilerData
         {
             get
             {
-                return new CompileUnit()
-                {
-                    { "Type", new CompileUnit(this.Type) },
-                    { "Icon", new CompileUnit(this.IconPath) },
-                    { "InvOrder", new CompileUnit(this.InvOrder) },
-                    { "Order", new CompileUnit(this.Order) }
-                };
+                return new GroupData(this.Type, 
+                    this.IconPath, this.InvOrder, this.Order);
             }
         }
 

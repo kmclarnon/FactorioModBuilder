@@ -1,4 +1,5 @@
 ﻿using FactorioModBuilder.Build;
+using FactorioModBuilder.Build.Data;
 using FactorioModBuilder.Build.Extensions;
 using FactorioModBuilder.Models.ProjectItems.Prototype;
 using FactorioModBuilder.ViewModels.Base;
@@ -17,11 +18,12 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
     {
         public ObservableCollection<SubGroupVM> ItemList { get; private set; }
 
-        public override CompileUnit CompilerData
+        public override DataUnit CompilerData
         {
             get
             {
-                return new CompileUnit(this.ItemList.Select(o => o.CompilerData), ExtensionType.PrototypeSubgroups);
+                return new SubGroupsData(this.ItemList
+                    .Select(o => (SubGroupData)o.CompilerData));
             }
         }
 

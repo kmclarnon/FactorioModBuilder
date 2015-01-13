@@ -1,4 +1,5 @@
 ﻿using FactorioModBuilder.Build;
+using FactorioModBuilder.Build.Data;
 using FactorioModBuilder.ViewModels.ProjectItems;
 using System;
 using System.Collections.Generic;
@@ -28,7 +29,7 @@ namespace FactorioModBuilder.ViewModels.Main
             if (_parent.Solutions.Count < 1)
                 throw new InvalidOperationException("Cannot create solution data when no solution exists");
 
-            List<CompileUnit> res = new List<CompileUnit>();
+            List<DataUnit> res = new List<DataUnit>();
             var sln = _parent.Solutions[0];
             foreach (ProjectVM p in sln.Children)
                 res.Add(p.CompilerData);

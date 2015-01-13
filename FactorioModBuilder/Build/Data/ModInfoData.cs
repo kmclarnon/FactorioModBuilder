@@ -11,21 +11,26 @@ namespace FactorioModBuilder.Build.Data
     public class ModInfoData : DataUnit
     {
         [DataMember]
-        internal string name;
+        public string name { get; private set; }
         [DataMember]
-        internal string version;
+        public string version { get; private set; }
         [DataMember]
-        internal string title;
+        public string title { get; private set; }
         [DataMember]
-        internal string author;
+        public string author { get; private set; }
         [DataMember]
-        internal string contact;
+        public string contact { get; private set; }
         [DataMember]
-        internal string homepage;
+        public string homepage { get; private set; }
         [DataMember]
-        internal string description;
+        public string description { get; private set; }
+        [DataMember]
+        public List<string> dependencies { get; private set; }
         
-        public ModInfoData(string name, string version, string title, string author, string contact, string homepage, string description)
+        public ModInfoData(string name, string version, string title, string author, 
+            string contact, string homepage, string description,
+            List<ModInfoDependencyData> dependencies)
+            : base(Extensions.ExtensionType.FactorioInfo)
         {
             this.name = name;
             this.version = version;
@@ -34,6 +39,7 @@ namespace FactorioModBuilder.Build.Data
             this.contact = contact;
             this.homepage = homepage;
             this.description = description;
+            this.dependencies = dependencies.Select(o => o.Value).ToList();
         }
     }
 }

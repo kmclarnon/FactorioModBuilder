@@ -78,16 +78,18 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Build\Compiler.cs" />
-    <Compile Include="Build\CompilerSettings.cs" />
     <Compile Include="Build\Data\DataUnit.cs" />
+    <Compile Include="Build\Data\GroupData.cs" />
+    <Compile Include="Build\Data\GroupsData.cs" />
     <Compile Include="Build\Data\ModInfoData.cs" />
-    <Compile Include="Build\Directives\OutputDirectory.cs" />
-    <Compile Include="Build\Directives\ProjectName.cs" />
-    <Compile Include="Build\Directives\TempDirectory.cs" />
+    <Compile Include="Build\Data\ModInfoDependencyData.cs" />
+    <Compile Include="Build\Data\ProjectData.cs" />
+    <Compile Include="Build\Data\PrototypesData.cs" />
+    <Compile Include="Build\Data\SubGroupData.cs" />
+    <Compile Include="Build\Data\SubGroupsData.cs" />
     <Compile Include="Build\Extensions\ExtensionBase.cs" />
     <Compile Include="Build\Extensions\ModInfoExtension.cs" />
     <Compile Include="Build\ICompilerSource.cs" />
-    <Compile Include="Build\Directives\CompilerDirective.cs" />
     <Compile Include="Build\Messages\ErrorMessage.cs" />
     <Compile Include="Build\Extensions\ICompilerExtension.cs" />
     <Compile Include="Build\Messages\CompilerMessage.cs" />

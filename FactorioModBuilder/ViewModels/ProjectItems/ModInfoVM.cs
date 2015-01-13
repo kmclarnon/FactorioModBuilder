@@ -1,4 +1,5 @@
 ﻿using FactorioModBuilder.Build;
+using FactorioModBuilder.Build.Data;
 using FactorioModBuilder.Build.Extensions;
 using FactorioModBuilder.Models.ProjectItems;
 using FactorioModBuilder.ViewModels.Base;
@@ -16,21 +17,20 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
 {
     public class ModInfoVM : ProjectItem<ModInfo, ModInfoVM>
     {
-        public override CompileUnit CompilerData
+        public override DataUnit CompilerData
         {
             get
             {
-                return new CompileUnit(ExtensionType.FactorioInfo)
-                {
-                    { "Name", new CompileUnit(this.ModName) },
-                    { "Version", new CompileUnit(this.Version) },
-                    { "Title", new CompileUnit(this.Title) },
-                    { "Author", new CompileUnit(this.Author) },
-                    { "Contact", new CompileUnit(this.Contact) },
-                    { "Homepage", new CompileUnit(this.Homepage) }, 
-                    { "Description", new CompileUnit(this.Description) },
-                    { "Dependencies", new CompileUnit(this.Dependencies.Select(o => o.CompilerData), ExtensionType.FactorioDependencies) }
-                };
+                return new ModInfoData(this.ModName,
+                    this.Version,
+                    this.Title,
+                    this.Author,
+                    this.Contact,
+                    this.Homepage,
+                    this.Description,
+                    this.Dependencies.Select(o => 
+                        (ModInfoDependencyData)o.CompilerData)
+                        .ToList());
             }
         }
 

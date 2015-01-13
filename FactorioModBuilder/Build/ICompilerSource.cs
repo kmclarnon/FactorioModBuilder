@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FactorioModBuilder.Build.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace FactorioModBuilder.Build
 {
     public interface ICompilerSource
     {
-        CompileUnit CompilerData { get; }
+        DataUnit CompilerData { get; }
     }
 }

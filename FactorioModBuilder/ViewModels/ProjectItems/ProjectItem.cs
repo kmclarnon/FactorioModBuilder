@@ -1,4 +1,5 @@
 ﻿using FactorioModBuilder.Build;
+using FactorioModBuilder.Build.Data;
 using FactorioModBuilder.Models.Base;
 using FactorioModBuilder.ViewModels.Base;
 using System;
@@ -13,7 +14,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
         where T : TreeItem<T>
         where U : TreeItemVM<T, U>
     {
-        public abstract CompileUnit CompilerData { get; }
+        public abstract DataUnit CompilerData { get; }
 
         public ProjectItem(T item) 
             : base(item)

@@ -1,4 +1,5 @@
 ﻿using FactorioModBuilder.Build;
+using FactorioModBuilder.Build.Data;
 using FactorioModBuilder.Models.ProjectItems;
 using FactorioModBuilder.ViewModels.Base;
 using System;
@@ -11,7 +12,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
 {
     public class LocaleVM : ProjectItem<Locale, LocaleVM>
     {
-        public override CompileUnit CompilerData
+        public override DataUnit CompilerData
         {
             get { return null; }
         }

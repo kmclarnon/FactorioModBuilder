@@ -1,4 +1,5 @@
 ﻿using FactorioModBuilder.Build;
+using FactorioModBuilder.Build.Data;
 using FactorioModBuilder.Models.ProjectItems.Prototype;
 using FactorioModBuilder.ViewModels.Base;
 using System;
@@ -11,16 +12,12 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
     public class SubGroupVM : ProjectItem<SubGroup, SubGroupVM>
     {
-        public override CompileUnit CompilerData
+        public override DataUnit CompilerData
         {
             get
             {
-                return new CompileUnit()
-                {
-                    { "Type", new CompileUnit(this.Type) },
-                    { "Group", new CompileUnit(this.GroupName) },
-                    { "Order", new CompileUnit(this.Order) }
-                };
+                return new SubGroupData(this.Type, 
+                    this.GroupName, this.Order);
             }
         }
 
