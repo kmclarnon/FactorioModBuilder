@@ -10,9 +10,9 @@ namespace FactorioModBuilder.Build.Extensions
 {
     public class ModDataExtension : ExtensionBase
     {
-        public override bool BuildUnit(DataUnit unit)
+        public ModDataExtension()
+            : base(ExtensionType.FactorioData)
         {
-            throw new NotImplementedException();
         }
 
         public override bool BuildUnit(DataUnit unit, DirectoryInfo outDir)

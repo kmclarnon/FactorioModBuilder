@@ -19,6 +19,7 @@ namespace FactorioModBuilder.Build.Extensions
         FactorioDependencies,
         FactorioControl,
         FactorioData,
+        FactorioLocale,
         Prototypes,
         PrototypeEntities,
         PrototypeEquipment,
@@ -47,11 +48,20 @@ namespace FactorioModBuilder.Build.Extensions
             this._compiler = c;
         }
 
-        public abstract bool BuildUnit(DataUnit unit);
+        public virtual bool BuildUnit(DataUnit unit)
+        {
+            throw new NotImplementedException();
+        }
 
-        public abstract bool BuildUnit(DataUnit unit, DirectoryInfo outDir);
+        public virtual bool BuildUnit(DataUnit unit, DirectoryInfo outDir)
+        {
+            throw new NotImplementedException();
+        }
 
-        public abstract bool BuildUnit(DataUnit unit, out string value);
+        public virtual bool BuildUnit(DataUnit unit, out string value)
+        {
+            throw new NotImplementedException();
+        }
 
         protected void Info(string format, params object[] args)
         {
@@ -87,6 +97,28 @@ namespace FactorioModBuilder.Build.Extensions
             if (_compiler == null)
                 return false;
             return _compiler.TryGetExtension(type, out ext);
+        }
+
+        protected DirectoryInfo CreateCleanDirectory(string path)
+        {
+            DirectoryInfo di = new DirectoryInfo(path);
+            if(!di.Exists)
+            {
+                di.Create();
+            }
+            else
+            {
+                this.CleanDirectory(di);
+            }
+            return di;
+        }
+
+        protected void CleanDirectory(DirectoryInfo di)
+        {
+            foreach (var file in di.GetFiles())
+                file.Delete();
+            foreach (var dir in di.GetDirectories())
+                dir.Delete(true);
         }
 
         protected bool CanContinue()
