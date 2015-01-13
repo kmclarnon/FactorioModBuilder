@@ -49,7 +49,11 @@ namespace FactorioModBuilder.Build.Extensions
                         case ExtensionType.FactorioData:
                         case ExtensionType.Prototypes:
                         case ExtensionType.FactorioLocale:
-                            ext.BuildUnit(s, new DirectoryInfo(pd.BaseTempDirectory));
+                            if(!ext.BuildUnit(s, new DirectoryInfo(pd.BaseTempDirectory)))
+                            {
+                                this.Error("Failed to build: {0}", ext.Extension);
+                                continue;
+                            }
                             break;
                         default:
                             this.Error("ProjectData contains an unsupported subunit: {0}", s.Type);

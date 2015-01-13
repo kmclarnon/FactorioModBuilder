@@ -28,28 +28,40 @@ namespace FactorioModBuilder.Build.Extensions
             var di = this.CreateCleanDirectory(Path.Combine(outDir.FullName, "prototypes"));
             foreach(var s in pd.SubUnits)
             {
-                switch (s.Type)
+                if (!this.CanContinue())
+                    return false;
+
+                if (s == null)
                 {
-                    case ExtensionType.PrototypeEntities:
-                        break;
-                    case ExtensionType.PrototypeEquipment:
-                        break;
-                    case ExtensionType.PrototypeFluids:
-                        break;
-                    case ExtensionType.PrototypeGroups:
-                        break;
-                    case ExtensionType.PrototypeSubgroups:
-                        break;
-                    case ExtensionType.PrototypeItems:
-                        break;
-                    case ExtensionType.PrototypeRecipes:
-                        break;
-                    case ExtensionType.PrototypeTechnologies:
-                        break;
-                    case ExtensionType.PrototypeTiles:
-                        break;
-                    default:
-                        throw new InvalidOperationException("Unknown Prototype extension type: " + s.Type);
+                    this.Error("Encountered null subunit in project data");
+                    continue;
+                }
+
+                ICompilerExtension ext;
+                if(!this.TryGetCompilerExtension(s.Type, out ext))
+                    this.Error("Could not find appropriate extension for: {0}", s.Type);
+                else
+                {
+                    switch (s.Type)
+                    {
+                        case ExtensionType.PrototypeEntities:
+                        case ExtensionType.PrototypeEquipment:
+                        case ExtensionType.PrototypeFluids:
+                        case ExtensionType.PrototypeGroups:
+                        case ExtensionType.PrototypeSubgroups:
+                        case ExtensionType.PrototypeItems:
+                        case ExtensionType.PrototypeRecipes:
+                        case ExtensionType.PrototypeTechnologies:
+                        case ExtensionType.PrototypeTiles:
+                            if (!ext.BuildUnit(s, di))
+                            {
+                                this.Error("Failed to build: {0}", ext.Extension);
+                                continue;
+                            }
+                            break;
+                        default:
+                            throw new InvalidOperationException("Unknown Prototype extension type: " + s.Type);
+                    }
                 }
             }
 
