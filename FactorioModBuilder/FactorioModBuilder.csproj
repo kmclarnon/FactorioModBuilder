@@ -91,6 +91,7 @@
     <Compile Include="Build\Data\SubGroupData.cs" />
     <Compile Include="Build\Data\SubGroupsData.cs" />
     <Compile Include="Build\Extensions\ExtensionBase.cs" />
+    <Compile Include="Build\Extensions\LocaleExtension.cs" />
     <Compile Include="Build\Extensions\ModControlExtension.cs" />
     <Compile Include="Build\Extensions\ModDataExtension.cs" />
     <Compile Include="Build\Extensions\ModInfoExtension.cs" />
