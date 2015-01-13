@@ -18,21 +18,39 @@ namespace FactorioModBuilder.Build.Extensions
             throw new NotImplementedException();
         }
 
-        public override bool BuildUnit(DataUnit unit, System.IO.DirectoryInfo outDir)
+        public override bool BuildUnit(DataUnit unit, DirectoryInfo outDir)
         {
-            throw new NotImplementedException();
+            string res;
+            if (!this.BuildUnit(unit, out res))
+                return false;
+            try
+            {
+                using (var fs = File.Open(Path.Combine(outDir.FullName, "info.json"), FileMode.Create))
+                using (var sw = new StreamWriter(fs))
+                {
+                    sw.Write(res);
+                }
+            }
+            catch(Exception e)
+            {
+                this.Fatal("Encountered exception creating info.json: {0}", e.Message);
+                return false;
+            }
+
+            return true;
         }
 
         public override bool BuildUnit(DataUnit unit, out string value)
         {
             MemoryStream ms = new MemoryStream();
-            DataContractJsonSerializerSettings settings = new DataContractJsonSerializerSettings();
-            settings.EmitTypeInformation = System.Runtime.Serialization.EmitTypeInformation.AsNeeded;
-            DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(ModInfoData), settings);
+
+            DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(ModInfoData));
             ser.WriteObject(ms, unit);
+
             ms.Position = 0;
             StreamReader sr = new StreamReader(ms);
             value = sr.ReadToEnd();
+
             return true;
         }
     }

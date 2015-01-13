@@ -31,6 +31,12 @@ namespace FactorioModBuilder.Build.Extensions
                 if (!this.CanContinue())
                     return false;
 
+                if(s == null)
+                {
+                    this.Error("Encountered null subunit in project data");
+                    continue;
+                }
+
                 ICompilerExtension ext;
                 if(!this.TryGetCompilerExtension(s.Type, out ext))
                     this.Error("Could not find appropriate extension for: {0}", s.Type);
