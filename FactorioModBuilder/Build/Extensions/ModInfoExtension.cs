@@ -11,9 +11,11 @@ namespace FactorioModBuilder.Build.Extensions
 {
     public class ModInfoExtension : ExtensionBase
     {
-        public override ExtensionType Extension
+        public ModInfoExtension() : base(ExtensionType.FactorioInfo) { }
+
+        public override bool BuildUnit(DataUnit unit)
         {
-            get { return ExtensionType.FactorioInfo; }
+            throw new NotImplementedException();
         }
 
         public override bool BuildUnit(DataUnit unit, System.IO.DirectoryInfo outDir)
@@ -24,7 +26,9 @@ namespace FactorioModBuilder.Build.Extensions
         public override bool BuildUnit(DataUnit unit, out string value)
         {
             MemoryStream ms = new MemoryStream();
-            DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(ModInfoData));
+            DataContractJsonSerializerSettings settings = new DataContractJsonSerializerSettings();
+            settings.EmitTypeInformation = System.Runtime.Serialization.EmitTypeInformation.AsNeeded;
+            DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(ModInfoData), settings);
             ser.WriteObject(ms, unit);
             ms.Position = 0;
             StreamReader sr = new StreamReader(ms);

@@ -47,70 +47,33 @@ namespace FactorioModBuilder.Build
             // process each of our compilation units
             foreach(var c in data)
             {
-                // prepare for the build
-                this.PreBuild(c);
+                if (!this.CanContinue())
+                    return false;
 
                 ICompilerExtension ext;
                 if(!_activeExtensions.TryGetValue(c.Type, out ext))
                 {
-
+                    this.BuildMessages.Add(
+                        new ErrorMessage("Could not find appropriate extension to handle project data"));
                 }
                 else
                 {
-                    
+                    if(!ext.BuildUnit(c))
+                    {
+                        this.BuildMessages.Add(new ErrorMessage(
+                            "Extension: {0} failed to build {1}", ext.Extension, c.GetType().Name));
+                    }
                 }
-
-                // finish up after our build
-                this.PostBuild(c);
             }
 
             return true;
-        }
-
-        private void PreBuild(DataUnit unit)
-        {
-            ProjectData data = unit as ProjectData;
-            if (data == null)
-                throw new ArgumentException("c is not a ProjectData object");
-
-            // get and validate our temporary directory
-            var tmpDirInfo = new DirectoryInfo(data.BaseTempDirectory);
-            if (!tmpDirInfo.Exists)
-            {
-                tmpDirInfo.Create();
-            }
-            else
-            {
-                // clear out the temporary directory
-                foreach (var file in tmpDirInfo.GetFiles())
-                    file.Delete();
-                foreach (var dir in tmpDirInfo.GetDirectories())
-                    dir.Delete(true);
-            }
-
-            // get and validate our output directory
-            var outDirInfo = new DirectoryInfo(data.BaseOutDirectory);
-            if(!outDirInfo.Exists)
-                outDirInfo.Create();
-        }
-
-        private void PostBuild(DataUnit unit)
-        {
-            ProjectData data = unit as ProjectData;
-            if (data == null)
-                throw new ArgumentException("c is not a ProjectData object");
-
-            // move the temporary directory project contents to the output directory
-            if (Directory.Exists(data.BaseOutDirectory))
-                Directory.Delete(data.BaseOutDirectory, true);
-            Directory.Move(data.BaseTempDirectory, data.BaseOutDirectory);
         }
 
         public bool AddExtension(ICompilerExtension ext)
         {
             if (_activeExtensions.ContainsKey(ext.Extension))
                 return false;
-            ext.Parent = this;
+            ext.AttachToCompiler(this);
             _activeExtensions.Add(ext.Extension, ext);
             return true;
         }
@@ -118,6 +81,15 @@ namespace FactorioModBuilder.Build
         public bool TryGetExtension(ExtensionType type, out ICompilerExtension ext)
         {
             return _activeExtensions.TryGetValue(type, out ext);
+        }
+
+        public bool CanContinue()
+        {
+            if (this.BuildMessages.Where(o => o.Type == MessageType.Fatal).Any())
+                return false;
+            if (this.BuildMessages.Where(o => o.Type == MessageType.Error).Count() > this.MaxErrors)
+                return false;
+            return true;
         }
     }
 }

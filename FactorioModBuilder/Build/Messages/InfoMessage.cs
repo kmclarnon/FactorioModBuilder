@@ -12,5 +12,10 @@ namespace FactorioModBuilder.Build.Messages
             : base(MessageType.Info, msg)
         {
         }
+
+        public InfoMessage(string format, params object[] args)
+            : base(MessageType.Info, format, args)
+        {
+        }
     }
 }

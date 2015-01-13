@@ -1,4 +1,5 @@
 ﻿using FactorioModBuilder.Build.Data;
+using FactorioModBuilder.Build.Messages;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -32,16 +33,67 @@ namespace FactorioModBuilder.Build.Extensions
 
     public abstract class ExtensionBase : ICompilerExtension
     {
-        public abstract ExtensionType Extension { get; }
+        public ExtensionType Extension { get; private set; }
 
-        public Compiler Parent { get; set; }
+        private Compiler _compiler;
 
-        public ExtensionBase()
+        public ExtensionBase(ExtensionType extension)
         {
+            this.Extension = extension;
         }
+
+        public void AttachToCompiler(Compiler c)
+        {
+            this._compiler = c;
+        }
+
+        public abstract bool BuildUnit(DataUnit unit);
 
         public abstract bool BuildUnit(DataUnit unit, DirectoryInfo outDir);
 
         public abstract bool BuildUnit(DataUnit unit, out string value);
+
+        protected void Info(string format, params object[] args)
+        {
+            if (_compiler != null)
+                _compiler.BuildMessages.Add(
+                    new InfoMessage(format, args));
+        }
+
+        protected void Warning(WarningLevel level, string format, params object[] args)
+        {
+            if (_compiler != null)
+                _compiler.BuildMessages.Add(
+                    new WarningMessage(level, format, args));
+        }
+
+        protected void Error(string format, params object[] args)
+        {
+            if (_compiler != null)
+                _compiler.BuildMessages.Add(
+                    new ErrorMessage(format, args));
+        }
+
+        protected void Fatal(string format, params object[] args)
+        {
+            if (_compiler != null)
+                _compiler.BuildMessages.Add(
+                    new FatalMessage(format, args));
+        }
+
+        protected bool TryGetCompilerExtension(ExtensionType type, out ICompilerExtension ext)
+        {
+            ext = null;
+            if (_compiler == null)
+                return false;
+            return _compiler.TryGetExtension(type, out ext);
+        }
+
+        protected bool CanContinue()
+        {
+            if (_compiler != null)
+                return _compiler.CanContinue();
+            return false;
+        }
     }
 }

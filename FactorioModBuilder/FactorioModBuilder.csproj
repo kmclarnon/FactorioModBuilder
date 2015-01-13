@@ -89,10 +89,12 @@
     <Compile Include="Build\Data\SubGroupsData.cs" />
     <Compile Include="Build\Extensions\ExtensionBase.cs" />
     <Compile Include="Build\Extensions\ModInfoExtension.cs" />
+    <Compile Include="Build\Extensions\ProjectExtension.cs" />
     <Compile Include="Build\ICompilerSource.cs" />
     <Compile Include="Build\Messages\ErrorMessage.cs" />
     <Compile Include="Build\Extensions\ICompilerExtension.cs" />
     <Compile Include="Build\Messages\CompilerMessage.cs" />
+    <Compile Include="Build\Messages\FatalMessage.cs" />
     <Compile Include="Build\Messages\InfoMessage.cs" />
     <Compile Include="Build\Messages\WarningMessage.cs" />
     <Compile Include="Models\Dialogs\NewProject.cs" />

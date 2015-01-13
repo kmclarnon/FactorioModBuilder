@@ -12,5 +12,10 @@ namespace FactorioModBuilder.Build.Messages
             : base(MessageType.Error, msg)
         {
         }
+
+        public ErrorMessage(string format, params object[] args)
+            : base(MessageType.Error, format, args)
+        {
+        }
     }
 }
