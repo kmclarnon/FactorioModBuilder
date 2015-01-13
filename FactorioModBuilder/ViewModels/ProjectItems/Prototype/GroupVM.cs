@@ -19,7 +19,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         {
             get
             {
-                return new GroupData(this.Type, 
+                return new GroupData(this.Name, 
                     this.IconPath, this.InvOrder, this.Order);
             }
         }

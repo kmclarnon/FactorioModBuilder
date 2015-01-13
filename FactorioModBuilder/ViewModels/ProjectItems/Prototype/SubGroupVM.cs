@@ -16,7 +16,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         {
             get
             {
-                return new SubGroupData(this.Type, 
+                return new SubGroupData(this.Name, 
                     this.GroupName, this.Order);
             }
         }

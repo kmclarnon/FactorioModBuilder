@@ -20,7 +20,7 @@ namespace FactorioModBuilder.Build.Data
             if (optional)
                 this.Value = "? ";
             this.Value += name;
-            this.Value += version;
+            this.Value += " " + version;
         }
     }
 }

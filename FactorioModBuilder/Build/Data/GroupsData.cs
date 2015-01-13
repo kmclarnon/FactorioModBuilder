@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace FactorioModBuilder.Build.Data
 {
-    [DataContract]
     public class GroupsData : DataUnit
     {
         public GroupsData(IEnumerable<GroupData> groups)

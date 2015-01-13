@@ -24,10 +24,39 @@ namespace FactorioModBuilder.Build.Extensions
                 return false;
             }
 
-            using(var fs = File.Open(Path.Combine(outDir.FullName, "item-groups.lua"), FileMode.Create))
-            using(var sw = new StreamWriter(fs))
+            StringBuilder sb = new StringBuilder();
+            foreach (var su in gd.SubUnits)
             {
+                var g = su as GroupData;
+                if (g == null)
+                {
+                    this.Error("Expected subunit to be group data, recieved {0}", g.GetType().Name);
+                    continue;
+                }
 
+                sb.AppendLine("  {");
+                sb.AppendLine("    type = " + "\"item-group\",");
+                sb.AppendLine("    name = " + "\"" + g.Name + "\",");
+                sb.AppendLine("    icon = " + "\"" + g.Icon + "\",");
+                sb.AppendLine("    inventory_order = " + "\"" + g.InvOrder + "\",");
+                sb.AppendLine("    order = " + "\"" + g.Order + "\"");
+                sb.AppendLine("  },");
+            }
+
+            string res = "data:extend(\n{\n" + sb.ToString(0, sb.Length - 1) + "})";
+
+            try
+            {
+                using (var fs = File.Open(Path.Combine(outDir.FullName, "item-groups.lua"), FileMode.Create))
+                using (var sw = new StreamWriter(fs))
+                {
+                    sw.Write(res);
+                }
+            }
+            catch(Exception e)
+            {
+                this.Error("Encountered an exception creating item-groups.lua: {0}", e.Message);
+                return false;
             }
 
             return true;
