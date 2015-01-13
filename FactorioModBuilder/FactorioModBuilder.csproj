@@ -96,7 +96,9 @@
     <Compile Include="Build\Extensions\ModDataExtension.cs" />
     <Compile Include="Build\Extensions\ModInfoExtension.cs" />
     <Compile Include="Build\Extensions\ProjectExtension.cs" />
+    <Compile Include="Build\Extensions\PrototypeGroupsExtension.cs" />
     <Compile Include="Build\Extensions\PrototypesExtension.cs" />
+    <Compile Include="Build\Extensions\PrototypeSubGroupsExtension.cs" />
     <Compile Include="Build\ICompilerSource.cs" />
     <Compile Include="Build\Messages\ErrorMessage.cs" />
     <Compile Include="Build\Extensions\ICompilerExtension.cs" />
