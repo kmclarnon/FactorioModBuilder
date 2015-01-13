@@ -81,6 +81,9 @@
     <Compile Include="Build\Data\DataUnit.cs" />
     <Compile Include="Build\Data\GroupData.cs" />
     <Compile Include="Build\Data\GroupsData.cs" />
+    <Compile Include="Build\Data\LocaleData.cs" />
+    <Compile Include="Build\Data\ModControlData.cs" />
+    <Compile Include="Build\Data\ModDataData.cs" />
     <Compile Include="Build\Data\ModInfoData.cs" />
     <Compile Include="Build\Data\ModInfoDependencyData.cs" />
     <Compile Include="Build\Data\ProjectData.cs" />
@@ -88,8 +91,11 @@
     <Compile Include="Build\Data\SubGroupData.cs" />
     <Compile Include="Build\Data\SubGroupsData.cs" />
     <Compile Include="Build\Extensions\ExtensionBase.cs" />
+    <Compile Include="Build\Extensions\ModControlExtension.cs" />
+    <Compile Include="Build\Extensions\ModDataExtension.cs" />
     <Compile Include="Build\Extensions\ModInfoExtension.cs" />
     <Compile Include="Build\Extensions\ProjectExtension.cs" />
+    <Compile Include="Build\Extensions\PrototypesExtension.cs" />
     <Compile Include="Build\ICompilerSource.cs" />
     <Compile Include="Build\Messages\ErrorMessage.cs" />
     <Compile Include="Build\Extensions\ICompilerExtension.cs" />
