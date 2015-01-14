@@ -1,5 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!-- Common style for textboxes that shows validation errors as tooltips-->
     <Style TargetType="{x:Type TextBox}">
         <Style.Triggers>
             <Trigger Property="Validation.HasError" Value="True">
@@ -8,6 +9,7 @@
             </Trigger>
         </Style.Triggers>
         <Style.Setters>
+            <!--`Center align to match labels etc -->
             <Setter Property="VerticalContentAlignment" Value="Center"/>
         </Style.Setters>
     </Style>
