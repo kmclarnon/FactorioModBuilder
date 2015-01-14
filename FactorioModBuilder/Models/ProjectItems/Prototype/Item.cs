@@ -18,6 +18,7 @@ namespace FactorioModBuilder.Models.ProjectItems.Prototype
 
         public Item(string name) : base(name)
         {
+            this.Enabled = true;
         }
     }
 }
