@@ -22,6 +22,8 @@ namespace FactorioModBuilder.Build.Extensions
                 return false;
             }
 
+            this.Info("Build Started: Project: {0}", pd.ProjectName);
+
             if (!this.PrepareProject(pd))
                 return false;
 

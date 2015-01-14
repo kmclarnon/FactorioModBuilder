@@ -70,12 +70,12 @@
             <MenuItem Header="_Help"/>
         </Menu>
         <!-- Project View -->
-        <Grid Grid.Column="0" Grid.Row="1">
+        <Grid Grid.Column="0" Grid.Row="1" Grid.RowSpan="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <!-- Main project view -->
-            <TreeView x:Name="projectView" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="100" Margin="10"
+            <TreeView x:Name="projectView" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="100" Margin="10 10 5 10"
                       ItemsSource="{Binding Path=Data.Solutions, Source={StaticResource proxy}}">
                 <TreeView.ItemContainerStyle>
                     <Style TargetType="{x:Type TreeViewItem}">
@@ -98,10 +98,28 @@
         </Grid>
         <!-- Separators -->
         <GridSplitter Grid.Column="1" Grid.Row="1" Width="5" VerticalAlignment="Stretch" HorizontalAlignment="Center"/>
-        <!-- Main Project Item View -->
-        <ContentPresenter Grid.Column="2" Grid.Row="1" Margin="5" 
+        <Grid Grid.Column="2" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <!-- Main Project Item View -->
+            <ContentPresenter Grid.Row="0" Margin="5" 
                           Content="{Binding Path=SelectedItem, ElementName=projectView}" 
                           ContentTemplateSelector="{StaticResource selector}"/>
+            <GridSplitter Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" Height="5"/>
+            <Grid Grid.Row="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Label Content="Output" Grid.Row="0" FontSize="12"/>
+                <DataGrid Grid.Row="1" AutoGenerateColumns="True" ItemsSource="{Binding Path=Data.Compiler.BuildMessages, Source={StaticResource proxy}}"
+                          Margin="5 0 10 10">
+                </DataGrid>
+            </Grid>
+        </Grid>
         <!-- Status Bar -->
         <StatusBar Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="1000">
 

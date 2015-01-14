@@ -67,6 +67,12 @@ namespace FactorioModBuilder.Build.Extensions
                 }
             }
 
+            if (groups.Length < 1)
+            {
+                this.Info("No item groups detected, skipping");
+                return true;
+            }
+
             string res = "data:extend(\n{\n" + groups.ToString(0, groups.Length - 1) + "})";
 
             try

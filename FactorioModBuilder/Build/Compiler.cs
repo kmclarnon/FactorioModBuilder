@@ -3,6 +3,7 @@ using FactorioModBuilder.Build.Extensions;
 using FactorioModBuilder.Build.Messages;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -12,7 +13,7 @@ namespace FactorioModBuilder.Build
 {
     public class Compiler
     {
-        public List<CompilerMessage> BuildMessages { get; private set; }
+        public ObservableCollection<CompilerMessage> BuildMessages { get; private set; }
 
         public int MaxErrors { get; set; }
 
@@ -37,7 +38,7 @@ namespace FactorioModBuilder.Build
         public Compiler(int maxErrors, IEnumerable<ICompilerExtension> exts)
         {
             this.MaxErrors = maxErrors;
-            this.BuildMessages = new List<CompilerMessage>();
+            this.BuildMessages = new ObservableCollection<CompilerMessage>();
             foreach (var ext in exts)
                 this.AddExtension(ext);
         }
