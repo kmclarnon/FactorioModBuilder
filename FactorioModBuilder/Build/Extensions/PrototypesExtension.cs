@@ -26,7 +26,9 @@ namespace FactorioModBuilder.Build.Extensions
 
             // create our prototypes directory
             var di = this.CreateCleanDirectory(Path.Combine(outDir.FullName, "prototypes"));
-            foreach(var s in pd.SubUnits)
+            foreach(var s in pd.SubUnits.Where(o => 
+                o.Type != ExtensionType.PrototypeGroups && 
+                o.Type != ExtensionType.PrototypeSubgroups))
             {
                 if (!this.CanContinue())
                     return false;
@@ -47,8 +49,6 @@ namespace FactorioModBuilder.Build.Extensions
                         case ExtensionType.PrototypeEntities:
                         case ExtensionType.PrototypeEquipment:
                         case ExtensionType.PrototypeFluids:
-                        case ExtensionType.PrototypeGroups:
-                        case ExtensionType.PrototypeSubgroups:
                         case ExtensionType.PrototypeItems:
                         case ExtensionType.PrototypeRecipes:
                         case ExtensionType.PrototypeTechnologies:
@@ -62,6 +62,21 @@ namespace FactorioModBuilder.Build.Extensions
                         default:
                             throw new InvalidOperationException("Unknown Prototype extension type: " + s.Type);
                     }
+                }
+            }
+
+            var elms = pd.SubUnits.Where(o => 
+                o.Type == ExtensionType.PrototypeSubgroups || 
+                o.Type == ExtensionType.PrototypeGroups);
+            if(elms.Any())
+            {
+                ICompilerExtension ext;
+                if (!this.TryGetCompilerExtension(ExtensionType.PrototypeGroups, out ext))
+                    this.Error("Could not find appropriate extension for: PrototypeGroups");
+                else
+                {
+                    if(!ext.BuildUnit(elms, di))
+                        this.Error("Failed to build: {0}", ext.Extension);
                 }
             }
 

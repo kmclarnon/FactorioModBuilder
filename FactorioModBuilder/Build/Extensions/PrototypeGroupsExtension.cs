@@ -15,35 +15,59 @@ namespace FactorioModBuilder.Build.Extensions
         {
         }
 
-        public override bool BuildUnit(DataUnit unit, DirectoryInfo outDir)
+        public override bool BuildUnit(IEnumerable<DataUnit> units, DirectoryInfo outDir)
         {
-            var gd = unit as GroupsData;
-            if(gd == null)
+            StringBuilder groups = new StringBuilder();
+            foreach(var u in units)
             {
-                this.Error("Expected input to be groups data, received: {0}", unit.GetType().Name);
-                return false;
-            }
-
-            StringBuilder sb = new StringBuilder();
-            foreach (var su in gd.SubUnits)
-            {
-                var g = su as GroupData;
-                if (g == null)
+                if(u is GroupsData)
                 {
-                    this.Error("Expected subunit to be group data, recieved {0}", g.GetType().Name);
-                    continue;
-                }
+                    var gd = (GroupsData)u;
+                    foreach (var su in gd.SubUnits)
+                    {
+                        var g = su as GroupData;
+                        if (g == null)
+                        {
+                            this.Error("Expected subunit to be group data, recieved {0}", g.GetType().Name);
+                            continue;
+                        }
 
-                sb.AppendLine("  {");
-                sb.AppendLine("    type = " + "\"item-group\",");
-                sb.AppendLine("    name = " + "\"" + g.Name + "\",");
-                sb.AppendLine("    icon = " + "\"" + g.Icon + "\",");
-                sb.AppendLine("    inventory_order = " + "\"" + g.InvOrder + "\",");
-                sb.AppendLine("    order = " + "\"" + g.Order + "\"");
-                sb.AppendLine("  },");
+                        groups.AppendLine("  {");
+                        groups.AppendLine("    type = " + "\"item-group\",");
+                        groups.AppendLine("    name = " + "\"" + g.Name + "\",");
+                        groups.AppendLine("    icon = " + "\"" + g.Icon + "\",");
+                        groups.AppendLine("    inventory_order = " + "\"" + g.InvOrder + "\",");
+                        groups.AppendLine("    order = " + "\"" + g.Order + "\"");
+                        groups.AppendLine("  },");
+                    }
+                }
+                else if(u is SubGroupsData)
+                {
+                    var gd = (SubGroupsData)u;
+                    foreach (var su in gd.SubUnits)
+                    {
+                        var sg = su as SubGroupData;
+                        if (sg == null)
+                        {
+                            this.Error("Expected subunit to be group data, recieved {0}", sg.GetType().Name);
+                            continue;
+                        }
+
+                        groups.AppendLine("  {");
+                        groups.AppendLine("    type = " + "\"item-subgroup\",");
+                        groups.AppendLine("    name = " + "\"" + sg.Name + "\",");
+                        groups.AppendLine("    group = " + "\"" + sg.Group + "\",");
+                        groups.AppendLine("    order = " + "\"" + sg.Order + "\"");
+                        groups.AppendLine("  },");
+                    }
+                }
+                else
+                {
+                    this.Error("Encountered unexpected type building item-groups.lua: {0}", u.Type);
+                }
             }
 
-            string res = "data:extend(\n{\n" + sb.ToString(0, sb.Length - 1) + "})";
+            string res = "data:extend(\n{\n" + groups.ToString(0, groups.Length - 1) + "})";
 
             try
             {
