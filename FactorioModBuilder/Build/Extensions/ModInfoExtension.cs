@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Json;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace FactorioModBuilder.Build.Extensions
@@ -37,6 +38,22 @@ namespace FactorioModBuilder.Build.Extensions
 
         public override bool BuildUnit(DataUnit unit, out string value)
         {
+            // check that the modinfo data is valid
+            var mi = unit as ModInfoData;
+            if(mi == null)
+            {
+                value = null;
+                this.Error("Expected to recieve mod info data, recieved: {0}", unit.GetType().FullName);
+                return false;
+            }
+
+            // verify our version number is the correct format
+            if(!Regex.IsMatch(mi.version, @"^\d{1,4}\.\d{1,4}\.\d{1,4}$"))
+            {
+                this.Error("Version format incorrect.  Version must be in Major.Mid.Minor format");
+                return false;
+            }
+
             MemoryStream ms = new MemoryStream();
 
             DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(ModInfoData));

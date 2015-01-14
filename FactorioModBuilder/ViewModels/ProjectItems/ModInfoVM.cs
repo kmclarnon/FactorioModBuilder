@@ -85,7 +85,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
         static ModInfoVM()
         {
             ModInfoVM.AddPropertyValidation("Version",
-                (x => Regex.IsMatch(x.Version, @"^\d{1,4}.\d{1,4}.\d{1,4}$")),
+                (x => Regex.IsMatch(x.Version, @"^\d{1,4}\.\d{1,4}\.\d{1,4}$")),
                 "Version must be in the form Major.Middle.Minor");
         }
 
