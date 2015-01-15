@@ -30,7 +30,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
                     this.Homepage,
                     this.Description,
                     this.Dependencies.SelectMany(o => 
-                        o.CompilerData.Cast<ModInfoDependencyData>())).ToList();
+                        o.CompilerData.Cast<ModInfoDependencyData>())).ListWrap();
             }
         }
 

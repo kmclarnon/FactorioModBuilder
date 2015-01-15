@@ -21,7 +21,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
             get
             {
                 return new GroupData(this.Name, 
-                    this.IconPath, this.InvOrder, this.Order).ToList();
+                    this.IconPath, this.InvOrder, this.Order).ListWrap();
             }
         }
 

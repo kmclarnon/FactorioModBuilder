@@ -18,7 +18,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
         {
             get
             {
-                return new ModInfoDependencyData(this.Name, this.Version, this.Optional).ToList();
+                return new ModInfoDependencyData(this.Name, this.Version, this.Optional).ListWrap();
             }
         }
 

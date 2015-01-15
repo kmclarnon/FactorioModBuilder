@@ -36,7 +36,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
                 LocaleVM loc;
                 if (!this.TryFindElementDown<LocaleVM>(out loc))
                     throw new Exception("Failed to find locale child");
-                return new ProjectData(this.Name, this.TempDir, this.OutDir).ToList()
+                return new ProjectData(this.Name, this.TempDir, this.OutDir).ListWrap()
                     .ConcatMany(miRes.CompilerData, mcRes.CompilerData, mdRes.CompilerData, 
                         prot.CompilerData, loc.CompilerData);
             }

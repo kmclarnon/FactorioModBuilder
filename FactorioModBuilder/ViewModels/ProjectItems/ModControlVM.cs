@@ -17,7 +17,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
         {
             get
             {
-                return new ModControlData().ToList();
+                return new ModControlData().ListWrap();
             }
         }
 
