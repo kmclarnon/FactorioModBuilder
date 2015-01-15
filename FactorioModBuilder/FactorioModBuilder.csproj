@@ -88,6 +88,7 @@
     <Compile Include="Build\Data\ModInfoDependencyData.cs" />
     <Compile Include="Build\Data\ProjectData.cs" />
     <Compile Include="Build\Data\PrototypesData.cs" />
+    <Compile Include="Build\Data\RecipeData.cs" />
     <Compile Include="Build\Data\SubGroupData.cs" />
     <Compile Include="Build\Data\SubGroupsData.cs" />
     <Compile Include="Build\Extensions\ExtensionBase.cs" />
@@ -98,6 +99,7 @@
     <Compile Include="Build\Extensions\ProjectExtension.cs" />
     <Compile Include="Build\Extensions\PrototypeGroupsExtension.cs" />
     <Compile Include="Build\Extensions\PrototypesExtension.cs" />
+    <Compile Include="Build\Extensions\RecipeExtension.cs" />
     <Compile Include="Build\ICompilerSource.cs" />
     <Compile Include="Build\Messages\ErrorMessage.cs" />
     <Compile Include="Build\Extensions\ICompilerExtension.cs" />

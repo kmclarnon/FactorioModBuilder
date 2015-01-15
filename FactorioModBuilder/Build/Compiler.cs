@@ -84,6 +84,11 @@ namespace FactorioModBuilder.Build
             return _activeExtensions.TryGetValue(type, out ext);
         }
 
+        public ICompilerExtension GetExtension(ExtensionType type)
+        {
+            return _activeExtensions[type];
+        }
+
         public bool CanContinue()
         {
             if (this.BuildMessages.Where(o => o.Type == MessageType.Fatal).Any())
@@ -91,6 +96,34 @@ namespace FactorioModBuilder.Build
             if (this.BuildMessages.Where(o => o.Type == MessageType.Error).Count() > this.MaxErrors)
                 return false;
             return true;
+        }
+
+        public IEnumerable<ICompilerExtension> GetProcessOrder(IEnumerable<ICompilerExtension> extensions)
+        {
+            if (extensions == null)
+                throw new ArgumentNullException("extensions");
+            List<ICompilerExtension> res = new List<ICompilerExtension>();
+            List<ICompilerExtension> src = extensions.ToList();
+
+            int srcCnt = src.Count;
+            int oldCnt = res.Count;
+            while(res.Count < srcCnt)
+            {
+                var curExts = res.Select(o => o.Extension);
+                foreach(var s in src)
+                {
+                    bool depChk = true;
+                    foreach (var d in s.Dependencies)
+                        depChk &= curExts.Contains(d);
+                    if (depChk)
+                        res.Add(s);
+                }
+
+                if (res.Count == oldCnt)
+                    throw new Exception("Unabled to determine dependency tree");
+            }
+
+            return res;
         }
     }
 }

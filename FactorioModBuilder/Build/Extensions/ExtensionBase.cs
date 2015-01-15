@@ -35,12 +35,18 @@ namespace FactorioModBuilder.Build.Extensions
     public abstract class ExtensionBase : ICompilerExtension
     {
         public ExtensionType Extension { get; private set; }
+        public IEnumerable<ExtensionType> Dependencies { get; private set; }
 
         private Compiler _compiler;
 
-        public ExtensionBase(ExtensionType extension)
+        public ExtensionBase(ExtensionType extension, 
+            params ExtensionType[] dependencies)
         {
             this.Extension = extension;
+            if (dependencies != null)
+                this.Dependencies = dependencies.ToList();
+            else
+                this.Dependencies = new List<ExtensionType>();
         }
 
         public void AttachToCompiler(Compiler c)

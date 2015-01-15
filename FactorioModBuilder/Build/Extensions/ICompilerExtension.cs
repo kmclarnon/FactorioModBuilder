@@ -11,6 +11,7 @@ namespace FactorioModBuilder.Build.Extensions
     public interface ICompilerExtension
     {
         ExtensionType Extension { get; }
+        IEnumerable<ExtensionType> Dependencies { get; }
         void AttachToCompiler(Compiler c);
         bool BuildUnit(DataUnit unit);
         bool BuildUnit(DataUnit unit, DirectoryInfo outDir);
