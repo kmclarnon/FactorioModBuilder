@@ -80,18 +80,16 @@
     <Compile Include="Build\Compiler.cs" />
     <Compile Include="Build\Data\DataUnit.cs" />
     <Compile Include="Build\Data\GroupData.cs" />
-    <Compile Include="Build\Data\GroupsData.cs" />
     <Compile Include="Build\Data\LocaleData.cs" />
     <Compile Include="Build\Data\ModControlData.cs" />
     <Compile Include="Build\Data\ModDataData.cs" />
     <Compile Include="Build\Data\ModInfoData.cs" />
     <Compile Include="Build\Data\ModInfoDependencyData.cs" />
     <Compile Include="Build\Data\ProjectData.cs" />
-    <Compile Include="Build\Data\PrototypesData.cs" />
     <Compile Include="Build\Data\RecipeData.cs" />
     <Compile Include="Build\Data\SubGroupData.cs" />
-    <Compile Include="Build\Data\SubGroupsData.cs" />
     <Compile Include="Build\Extensions\ExtensionBase.cs" />
+    <Compile Include="Build\Extensions\ItemsExtension.cs" />
     <Compile Include="Build\Extensions\LocaleExtension.cs" />
     <Compile Include="Build\Extensions\ModControlExtension.cs" />
     <Compile Include="Build\Extensions\ModDataExtension.cs" />
@@ -107,6 +105,7 @@
     <Compile Include="Build\Messages\FatalMessage.cs" />
     <Compile Include="Build\Messages\InfoMessage.cs" />
     <Compile Include="Build\Messages\WarningMessage.cs" />
+    <Compile Include="Extensions\CollectionMethods.cs" />
     <Compile Include="Models\Dialogs\NewProject.cs" />
     <Compile Include="Models\ProjectItems\ModInfoDependency.cs" />
     <Compile Include="Models\SolutionItems\Solution.cs" />
