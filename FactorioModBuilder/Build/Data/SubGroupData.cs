@@ -14,7 +14,7 @@ namespace FactorioModBuilder.Build.Data
         public string Name { get; private set; }
 
         public SubGroupData(string name, string group, string order)
-            : base(Extensions.ExtensionType.PrototypeSubgroups)
+            : base(Extensions.ExtensionType.PrototypeGroups)
         {
             this.Group = group;
             this.Order = order;

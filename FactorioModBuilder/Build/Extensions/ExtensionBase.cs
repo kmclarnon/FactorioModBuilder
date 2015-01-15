@@ -25,7 +25,6 @@ namespace FactorioModBuilder.Build.Extensions
         PrototypeEquipment,
         PrototypeFluids,
         PrototypeGroups,
-        PrototypeSubgroups,
         PrototypeItems,
         PrototypeRecipes,
         PrototypeTechnologies,
