@@ -26,7 +26,6 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
             }
         }
 
-
         public ICommand AddGroupCmd { get { return this.GetCommand(this.AddGroup, this.CanAddGroup);} }
         public ICommand RemoveGroupCmd { get { return this.GetCommand(this.RemoveGroup, this.CanRemoveGroup); } }
 

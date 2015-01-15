@@ -45,27 +45,13 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
         public string TempDir
         {
             get { return _internal.TempDir; }
-            set
-            {
-                if(_internal.TempDir != value)
-                {
-                    _internal.TempDir = value;
-                    this.NotifyPropertyChanged();
-                }
-            }
+            set { this.SetProperty(_internal, value); }
         }
 
         public string OutDir
         {
             get { return _internal.OutDir; }
-            set
-            {
-                if(_internal.OutDir != value)
-                {
-                    _internal.OutDir = value;
-                    this.NotifyPropertyChanged();
-                }
-            }
+            set { this.SetProperty(_internal, value); }
         }
 
         public ProjectVM(Project header, IEnumerable<TreeItemVMBase> projectChildren)
