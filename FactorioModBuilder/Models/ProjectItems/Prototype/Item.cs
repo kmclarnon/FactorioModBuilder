@@ -9,12 +9,12 @@ namespace FactorioModBuilder.Models.ProjectItems.Prototype
 {
     public class Item : TreeItem<Item>
     {
-        public string Type { get { return "item"; } }
         public string SubGroup { get; set; }
         public string Order { get; set; }
         public bool Enabled { get; set; }
         public string IconPath { get; set; }
         public int StackSize { get; set; }
+        public string PlaceResult { get; set; }
 
         public Item(string name) : base(name)
         {

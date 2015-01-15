@@ -3,6 +3,7 @@ using FactorioModBuilder.Build.Data;
 using FactorioModBuilder.Build.Extensions;
 using FactorioModBuilder.Models.ProjectItems.Prototype;
 using FactorioModBuilder.ViewModels.Base;
+using FactorioModBuilder.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -23,8 +24,11 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
                     throw new Exception("Could not find group child element");
                 SubGroupsVM sgres;
                 if (!this.TryFindElementDown<SubGroupsVM>(out sgres))
-                    throw new Exception("Could not fond subgroup child element");
-                return gres.CompilerData.Concat(sgres.CompilerData);
+                    throw new Exception("Could not find subgroup child element");
+                ItemsVM ires;
+                if (!this.TryFindElementDown<ItemsVM>(out ires))
+                    throw new Exception("Could not find items child element");
+                return gres.CompilerData.ConcatMany(sgres.CompilerData, ires.CompilerData);
             }
         }
 

@@ -1,5 +1,7 @@
-﻿using FactorioModBuilder.Models.ProjectItems.Prototype;
+﻿using FactorioModBuilder.Build.Data;
+using FactorioModBuilder.Models.ProjectItems.Prototype;
 using FactorioModBuilder.ViewModels.Base;
+using FactorioModBuilder.Extensions;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -12,9 +14,17 @@ using WpfUtils;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
-    public class ItemVM : TreeItemVM<Item, ItemVM>
+    public class ItemVM : ProjectItem<Item, ItemVM>
     {
-        public string Type { get { return _internal.Type; } }
+        public override IEnumerable<DataUnit> CompilerData
+        {
+            get 
+            { 
+                return new ItemData(this.Name, this.IconPath, 
+                this.SubGroupName, this.Order, 
+                this.PlaceResult, this.StackSize).ListWrap(); 
+            }
+        }
 
         public SubGroupVM SubGroup
         {
@@ -49,6 +59,12 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         public int StackSize
         {
             get { return _internal.StackSize; }
+            set { this.SetProperty(_internal, value); }
+        }
+
+        public string PlaceResult
+        {
+            get { return _internal.PlaceResult; }
             set { this.SetProperty(_internal, value); }
         }
 

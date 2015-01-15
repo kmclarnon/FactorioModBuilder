@@ -1,4 +1,5 @@
-﻿using FactorioModBuilder.Models.ProjectItems.Prototype;
+﻿using FactorioModBuilder.Build.Data;
+using FactorioModBuilder.Models.ProjectItems.Prototype;
 using FactorioModBuilder.ViewModels.Base;
 using System;
 using System.Collections.Generic;
@@ -11,9 +12,17 @@ using WpfUtils;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
-    public class ItemsVM : TreeItemVM<Items, ItemsVM>
+    public class ItemsVM : ProjectItem<Items, ItemsVM>
     {
         public ObservableCollection<ItemVM> ItemList { get; private set; }
+
+        public override IEnumerable<DataUnit> CompilerData
+        {
+            get
+            {
+                return this.ItemList.SelectMany(o => o.CompilerData);
+            }
+        }
 
         public ObservableCollection<SubGroupVM> PossibleSubgroups
         {
