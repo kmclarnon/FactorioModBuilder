@@ -1,6 +1,7 @@
 ﻿using FactorioModBuilder.Build.Data;
 using FactorioModBuilder.Build.Extensions;
 using FactorioModBuilder.Build.Messages;
+using FactorioModBuilder.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -45,25 +46,22 @@ namespace FactorioModBuilder.Build
 
         public bool Build(List<DataUnit> data)
         {
+            
+            IEnumerable<ICompilerExtension> exts;
+            if(!this.TryGetRequiredExtensions(data, out exts))
+            {
+                return false;
+            }
+
             // process each of our compilation units
-            foreach(var c in data)
+            foreach(var ext in this.GetProcessOrder(exts))
             {
                 if (!this.CanContinue())
                     return false;
 
-                ICompilerExtension ext;
-                if(!_activeExtensions.TryGetValue(c.Type, out ext))
+                if(!ext.BuildUnit(data.Where(o => o.Type == ext.Extension)))
                 {
-                    this.BuildMessages.Add(
-                        new ErrorMessage("Could not find appropriate extension to handle project data"));
-                }
-                else
-                {
-                    if(!ext.BuildUnit(c))
-                    {
-                        this.BuildMessages.Add(new ErrorMessage(
-                            "Extension: {0} failed to build {1}", ext.Extension, c.GetType().Name));
-                    }
+                    continue;
                 }
             }
 
@@ -82,11 +80,6 @@ namespace FactorioModBuilder.Build
         public bool TryGetExtension(ExtensionType type, out ICompilerExtension ext)
         {
             return _activeExtensions.TryGetValue(type, out ext);
-        }
-
-        public ICompilerExtension GetExtension(ExtensionType type)
-        {
-            return _activeExtensions[type];
         }
 
         public bool CanContinue()
@@ -124,6 +117,22 @@ namespace FactorioModBuilder.Build
             }
 
             return res;
+        }
+
+        private bool TryGetRequiredExtensions(IEnumerable<DataUnit> data, out IEnumerable<ICompilerExtension> result)
+        {
+            result = null;
+            var res = new List<ICompilerExtension>();
+            foreach(var d in data.DistinctBy(o => o.Type))
+            {
+                ICompilerExtension ext;
+                if (!this.TryGetExtension(d.Type, out ext))
+                    return false;
+                res.Add(ext);
+            }
+
+            result = res;
+            return true;
         }
     }
 }
