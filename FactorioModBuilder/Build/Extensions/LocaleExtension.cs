@@ -14,10 +14,5 @@ namespace FactorioModBuilder.Build.Extensions
             : base(ExtensionType.FactorioLocale)
         {
         }
-
-        public override bool BuildUnit(DataUnit unit, DirectoryInfo outDir)
-        {
-            return true;
-        }
     }
 }

@@ -15,14 +15,14 @@ namespace FactorioModBuilder.Build.Extensions
         {
         }
 
-        public override bool BuildUnit(DataUnit unit, DirectoryInfo outDir)
+        public override bool BuildUnit(IEnumerable<DataUnit> unit, DirectoryInfo outDir)
         {
             
 
             return true;
         }
 
-        public override bool BuildUnit(DataUnit unit, out string value)
+        public override bool BuildUnit(IEnumerable<DataUnit> unit, out string value)
         {
             throw new NotImplementedException();
         }

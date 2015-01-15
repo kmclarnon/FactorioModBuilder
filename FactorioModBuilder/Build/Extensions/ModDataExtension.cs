@@ -15,12 +15,12 @@ namespace FactorioModBuilder.Build.Extensions
         {
         }
 
-        public override bool BuildUnit(DataUnit unit, DirectoryInfo outDir)
+        public override bool BuildUnit(IEnumerable<DataUnit> units, DirectoryInfo outDir)
         {
             try
             {
                 string res;
-                if(!this.BuildUnit(unit, out res))
+                if(!this.BuildUnit(units, out res))
                 {
                     this.Error("Failed to build data.lua");
                     return false;
@@ -41,7 +41,7 @@ namespace FactorioModBuilder.Build.Extensions
             return true;
         }
 
-        public override bool BuildUnit(DataUnit unit, out string value)
+        public override bool BuildUnit(IEnumerable<DataUnit> units, out string value)
         {
             value = " ";
             return true;

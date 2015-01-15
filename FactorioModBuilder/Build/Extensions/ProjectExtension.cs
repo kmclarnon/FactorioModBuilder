@@ -13,8 +13,9 @@ namespace FactorioModBuilder.Build.Extensions
     {
         public ProjectExtension() : base(ExtensionType.Project) { }
 
-        public override bool BuildUnit(DataUnit unit)
+        public override bool BuildUnit(IEnumerable<DataUnit> units)
         {
+            var unit = units.Single();
             var pd = unit as ProjectData;
             if (pd == null)
             {

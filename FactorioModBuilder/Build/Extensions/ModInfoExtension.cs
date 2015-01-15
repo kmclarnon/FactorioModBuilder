@@ -14,10 +14,10 @@ namespace FactorioModBuilder.Build.Extensions
     {
         public ModInfoExtension() : base(ExtensionType.FactorioInfo) { }
 
-        public override bool BuildUnit(DataUnit unit, DirectoryInfo outDir)
+        public override bool BuildUnit(IEnumerable<DataUnit> units, DirectoryInfo outDir)
         {
             string res;
-            if (!this.BuildUnit(unit, out res))
+            if (!this.BuildUnit(units, out res))
                 return false;
             try
             {
@@ -36,9 +36,10 @@ namespace FactorioModBuilder.Build.Extensions
             return true;
         }
 
-        public override bool BuildUnit(DataUnit unit, out string value)
+        public override bool BuildUnit(IEnumerable<DataUnit> units, out string value)
         {
             // check that the modinfo data is valid
+            var unit = units.Single();
             var mi = unit as ModInfoData;
             if(mi == null)
             {

@@ -54,21 +54,6 @@ namespace FactorioModBuilder.Build.Extensions
             this._compiler = c;
         }
 
-        public virtual bool BuildUnit(DataUnit unit)
-        {
-            throw new NotImplementedException();
-        }
-
-        public virtual bool BuildUnit(DataUnit unit, DirectoryInfo outDir)
-        {
-            throw new NotImplementedException();
-        }
-
-        public virtual bool BuildUnit(DataUnit unit, out string value)
-        {
-            throw new NotImplementedException();
-        }
-
         public virtual bool BuildUnit(IEnumerable<DataUnit> units)
         {
             throw new NotImplementedException();
