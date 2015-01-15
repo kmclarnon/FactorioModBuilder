@@ -2,6 +2,7 @@
 using FactorioModBuilder.Build.Data;
 using FactorioModBuilder.Models.ProjectItems;
 using FactorioModBuilder.ViewModels.Base;
+using FactorioModBuilder.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,9 +13,9 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
 {
     public class LocaleVM : ProjectItem<Locale, LocaleVM>
     {
-        public override DataUnit CompilerData
+        public override IEnumerable<DataUnit> CompilerData
         {
-            get { return new LocaleData(); }
+            get { return new LocaleData().ToList(); }
         }
 
         public LocaleVM(Locale loc) 

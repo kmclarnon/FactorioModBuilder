@@ -13,13 +13,10 @@ namespace FactorioModBuilder.Build.Data
     {
         [IgnoreDataMember]
         public ExtensionType Type { get; private set; }
-        [IgnoreDataMember]
-        public List<DataUnit> SubUnits { get; private set; }
 
         public DataUnit(ExtensionType type)
         {
             this.Type = type;
-            this.SubUnits = new List<DataUnit>();
         }
     }
 }

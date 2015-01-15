@@ -3,6 +3,7 @@ using FactorioModBuilder.Models.ProjectItems.Prototype;
 using FactorioModBuilder.Models.Base;
 using FactorioModBuilder.ViewModels.ProjectItems.Prototype;
 using FactorioModBuilder.ViewModels.Base;
+using FactorioModBuilder.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
 {
     public class ProjectVM : ProjectItem<Project, ProjectVM>
     {
-        public override DataUnit CompilerData
+        public override IEnumerable<DataUnit> CompilerData
         {
             get
             {
@@ -35,10 +36,9 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
                 LocaleVM loc;
                 if (!this.TryFindElementDown<LocaleVM>(out loc))
                     throw new Exception("Failed to find locale child");
-                return new ProjectData(this.Name, this.TempDir, this.OutDir,
-                    (ModInfoData)miRes.CompilerData, (ModControlData)mcRes.CompilerData,
-                    (ModDataData)mdRes.CompilerData, (PrototypesData)prot.CompilerData,
-                    (LocaleData)loc.CompilerData);
+                return new ProjectData(this.Name, this.TempDir, this.OutDir).ToList()
+                    .ConcatMany(miRes.CompilerData, mcRes.CompilerData, mdRes.CompilerData, 
+                        prot.CompilerData, loc.CompilerData);
             }
         }
 

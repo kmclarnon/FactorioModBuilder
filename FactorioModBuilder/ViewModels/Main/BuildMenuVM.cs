@@ -32,9 +32,7 @@ namespace FactorioModBuilder.ViewModels.Main
             List<DataUnit> res = new List<DataUnit>();
             var sln = _parent.Solutions[0];
             foreach (ProjectVM p in sln.Children)
-                res.Add(p.CompilerData);
-
-            _parent.Compiler.Build(res);
+                _parent.Compiler.Build(p.CompilerData.ToList());
         }
 
         private bool CanBuildSolution()

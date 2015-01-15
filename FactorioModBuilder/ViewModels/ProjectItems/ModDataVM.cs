@@ -2,6 +2,7 @@
 using FactorioModBuilder.Build.Data;
 using FactorioModBuilder.Models.ProjectItems;
 using FactorioModBuilder.ViewModels.Base;
+using FactorioModBuilder.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,11 +14,11 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
 {
     public class ModDataVM : ProjectItem<ModData, ModDataVM>
     {
-        public override DataUnit CompilerData
+        public override IEnumerable<DataUnit> CompilerData
         {
             get 
             {
-                return new ModDataData();
+                return new ModDataData().ToList();
             }
         }
 

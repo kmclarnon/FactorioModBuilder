@@ -18,12 +18,11 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
     {
         public ObservableCollection<SubGroupVM> ItemList { get; private set; }
 
-        public override DataUnit CompilerData
+        public override IEnumerable<DataUnit> CompilerData
         {
             get
             {
-                return new SubGroupsData(this.ItemList
-                    .Select(o => (SubGroupData)o.CompilerData));
+                return this.ItemList.SelectMany(o => o.CompilerData);
             }
         }
 

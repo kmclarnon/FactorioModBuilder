@@ -48,7 +48,7 @@ namespace FactorioModBuilder.Build.Extensions
             }
 
             // verify our version number is the correct format
-            if(!Regex.IsMatch(mi.version, @"^\d{1,4}\.\d{1,4}\.\d{1,4}$"))
+            if(!Regex.IsMatch(mi.Version, @"^\d{1,4}\.\d{1,4}\.\d{1,4}$"))
             {
                 value = null;
                 this.Error("Version format incorrect.  Version must be in Major.Mid.Minor format");

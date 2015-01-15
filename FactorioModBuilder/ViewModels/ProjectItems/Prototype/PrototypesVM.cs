@@ -14,7 +14,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
     public class PrototypesVM : ProjectItem<Prototypes, PrototypesVM>
     {
-        public override DataUnit CompilerData
+        public override IEnumerable<DataUnit> CompilerData
         {
             get
             {
@@ -24,8 +24,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
                 SubGroupsVM sgres;
                 if (!this.TryFindElementDown<SubGroupsVM>(out sgres))
                     throw new Exception("Could not fond subgroup child element");
-                return new PrototypesData((GroupsData)gres.CompilerData, 
-                    (SubGroupsData)sgres.CompilerData);
+                return gres.CompilerData.Concat(sgres.CompilerData);
             }
         }
 

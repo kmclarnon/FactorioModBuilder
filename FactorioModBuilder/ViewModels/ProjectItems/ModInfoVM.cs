@@ -3,6 +3,7 @@ using FactorioModBuilder.Build.Data;
 using FactorioModBuilder.Build.Extensions;
 using FactorioModBuilder.Models.ProjectItems;
 using FactorioModBuilder.ViewModels.Base;
+using FactorioModBuilder.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -17,7 +18,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
 {
     public class ModInfoVM : ProjectItem<ModInfo, ModInfoVM>
     {
-        public override DataUnit CompilerData
+        public override IEnumerable<DataUnit> CompilerData
         {
             get
             {
@@ -28,9 +29,8 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
                     this.Contact,
                     this.Homepage,
                     this.Description,
-                    this.Dependencies.Select(o => 
-                        (ModInfoDependencyData)o.CompilerData)
-                        .ToList());
+                    this.Dependencies.SelectMany(o => 
+                        o.CompilerData.Cast<ModInfoDependencyData>())).ToList();
             }
         }
 

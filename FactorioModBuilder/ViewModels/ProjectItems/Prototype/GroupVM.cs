@@ -2,6 +2,7 @@
 using FactorioModBuilder.Build.Data;
 using FactorioModBuilder.Models.ProjectItems.Prototype;
 using FactorioModBuilder.ViewModels.Base;
+using FactorioModBuilder.Extensions;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -15,12 +16,12 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
     public class GroupVM : ProjectItem<Group, GroupVM>
     {
-        public override DataUnit CompilerData
+        public override IEnumerable<DataUnit> CompilerData
         {
             get
             {
                 return new GroupData(this.Name, 
-                    this.IconPath, this.InvOrder, this.Order);
+                    this.IconPath, this.InvOrder, this.Order).ToList();
             }
         }
 

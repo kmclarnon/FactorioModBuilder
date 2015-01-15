@@ -9,6 +9,6 @@ namespace FactorioModBuilder.Build
 {
     public interface ICompilerSource
     {
-        DataUnit CompilerData { get; }
+        IEnumerable<DataUnit> CompilerData { get; }
     }
 }

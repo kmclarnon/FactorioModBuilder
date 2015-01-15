@@ -2,6 +2,7 @@
 using FactorioModBuilder.Build.Data;
 using FactorioModBuilder.Models.ProjectItems.Prototype;
 using FactorioModBuilder.ViewModels.Base;
+using FactorioModBuilder.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,12 +13,12 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
     public class SubGroupVM : ProjectItem<SubGroup, SubGroupVM>
     {
-        public override DataUnit CompilerData
+        public override IEnumerable<DataUnit> CompilerData
         {
             get
             {
                 return new SubGroupData(this.Name, 
-                    this.GroupName, this.Order);
+                    this.GroupName, this.Order).ToList();
             }
         }
 

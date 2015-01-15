@@ -14,7 +14,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
         where T : TreeItem<T>
         where U : TreeItemVM<T, U>
     {
-        public abstract DataUnit CompilerData { get; }
+        public abstract IEnumerable<DataUnit> CompilerData { get; }
 
         public ProjectItem(T item) 
             : base(item)

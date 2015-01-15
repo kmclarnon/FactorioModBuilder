@@ -3,6 +3,7 @@ using FactorioModBuilder.Build.Data;
 using FactorioModBuilder.Build.Extensions;
 using FactorioModBuilder.Models.ProjectItems;
 using FactorioModBuilder.ViewModels.Base;
+using FactorioModBuilder.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,11 +14,11 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
 {
     public class ModInfoDependencyVM : ProjectItem<ModInfoDependency, ModInfoDependencyVM>
     {
-        public override DataUnit CompilerData
+        public override IEnumerable<DataUnit> CompilerData
         {
             get
             {
-                return new ModInfoDependencyData(this.Name, this.Version, this.Optional);
+                return new ModInfoDependencyData(this.Name, this.Version, this.Optional).ToList();
             }
         }
 

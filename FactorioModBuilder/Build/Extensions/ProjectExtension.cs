@@ -27,42 +27,6 @@ namespace FactorioModBuilder.Build.Extensions
             if (!this.PrepareProject(pd))
                 return false;
 
-            // process our actual project data
-            foreach(var s in pd.SubUnits)
-            {
-                if (!this.CanContinue())
-                    return false;
-
-                if(s == null)
-                {
-                    this.Error("Encountered null subunit in project data");
-                    continue;
-                }
-
-                ICompilerExtension ext;
-                if(!this.TryGetCompilerExtension(s.Type, out ext))
-                    this.Error("Could not find appropriate extension for: {0}", s.Type);
-                else
-                {
-                    switch (s.Type)
-                    {
-                        case ExtensionType.FactorioInfo:
-                        case ExtensionType.FactorioControl:
-                        case ExtensionType.FactorioData:
-                        case ExtensionType.Prototypes:
-                        case ExtensionType.FactorioLocale:
-                            if(!ext.BuildUnit(s, new DirectoryInfo(pd.BaseTempDirectory)))
-                            {
-                                this.Error("Failed to build: {0}", ext.Extension);
-                                continue;
-                            }
-                            break;
-                        default:
-                            this.Error("ProjectData contains an unsupported subunit: {0}", s.Type);
-                            continue;
-                    }
-                }
-            }
 
             // move the temporary directory project contents to the output directory
             if (Directory.Exists(pd.BaseOutDirectory))
