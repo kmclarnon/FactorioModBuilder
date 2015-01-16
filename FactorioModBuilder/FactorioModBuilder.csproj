@@ -79,6 +79,7 @@
     </ApplicationDefinition>
     <Compile Include="Build\Compiler.cs" />
     <Compile Include="Build\Data\DataUnit.cs" />
+    <Compile Include="Build\Data\GroupBaseData.cs" />
     <Compile Include="Build\Data\GroupData.cs" />
     <Compile Include="Build\Data\ItemData.cs" />
     <Compile Include="Build\Data\LocaleData.cs" />

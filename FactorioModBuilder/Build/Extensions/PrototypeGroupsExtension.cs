@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FactorioModBuilder.Build.Extensions
 {
-    public class PrototypeGroupsExtension : ExtensionBase<GroupData>
+    public class PrototypeGroupsExtension : ExtensionBase<GroupBaseData>
     {
         public PrototypeGroupsExtension()
             : base(ExtensionType.PrototypeGroups)

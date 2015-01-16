@@ -7,14 +7,11 @@ using System.Threading.Tasks;
 
 namespace FactorioModBuilder.Build.Data
 {
-    public class SubGroupData : DataUnit
+    public class SubGroupData : GroupBaseData
     {
         public string Group { get; private set; }
-        public string Order { get; private set; }
-        public string Name { get; private set; }
 
         public SubGroupData(string name, string group, string order)
-            : base(Extensions.ExtensionType.PrototypeGroups)
         {
             this.Group = group;
             this.Order = order;

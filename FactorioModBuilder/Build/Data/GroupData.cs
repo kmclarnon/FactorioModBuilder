@@ -7,15 +7,12 @@ using System.Threading.Tasks;
 
 namespace FactorioModBuilder.Build.Data
 {
-    public class GroupData : DataUnit
+    public class GroupData : GroupBaseData
     {
         public string Icon { get; private set; }
         public string InvOrder { get; private set; }
-        public string Order { get; private set; }
-        public string Name { get; private set; }
 
         public GroupData(string name, string iconPath, string invOrder, string order)
-            : base(Extensions.ExtensionType.PrototypeGroups)
         {
             this.Name = name;
             this.Icon = iconPath;
