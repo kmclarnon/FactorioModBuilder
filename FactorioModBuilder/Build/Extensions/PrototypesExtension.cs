@@ -8,23 +8,11 @@ using System.Threading.Tasks;
 
 namespace FactorioModBuilder.Build.Extensions
 {
-    public class PrototypesExtension : ExtensionBase
+    public class PrototypesExtension : ExtensionBase<PrototypeData>
     {
         public PrototypesExtension()
             : base(ExtensionType.Prototypes)
         {
-        }
-
-        public override bool BuildUnit(IEnumerable<DataUnit> unit, DirectoryInfo outDir)
-        {
-            
-
-            return true;
-        }
-
-        public override bool BuildUnit(IEnumerable<DataUnit> unit, out string value)
-        {
-            throw new NotImplementedException();
         }
     }
 }

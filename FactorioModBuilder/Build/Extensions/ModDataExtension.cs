@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace FactorioModBuilder.Build.Extensions
 {
-    public class ModDataExtension : ExtensionBase
+    public class ModDataExtension : ExtensionBase<ModDataData>
     {
         public ModDataExtension()
             : base(ExtensionType.FactorioData)
         {
         }
 
-        public override bool BuildUnit(IEnumerable<DataUnit> units, DirectoryInfo outDir)
+        protected override bool BuildUnit(IEnumerable<ModDataData> units, DirectoryInfo outDir)
         {
             try
             {
@@ -41,7 +41,7 @@ namespace FactorioModBuilder.Build.Extensions
             return true;
         }
 
-        public override bool BuildUnit(IEnumerable<DataUnit> units, out string value)
+        protected override bool BuildUnit(IEnumerable<ModDataData> units, out string value)
         {
             value = " ";
             return true;

@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace FactorioModBuilder.Build.Extensions
 {
-    public class ModInfoExtension : ExtensionBase
+    public class ModInfoExtension : ExtensionBase<ModInfoData>
     {
         public ModInfoExtension() : base(ExtensionType.FactorioInfo) { }
 
-        public override bool BuildUnit(IEnumerable<DataUnit> units, DirectoryInfo outDir)
+        protected override bool BuildUnit(IEnumerable<ModInfoData> units, DirectoryInfo outDir)
         {
             string res;
             if (!this.BuildUnit(units, out res))
@@ -36,17 +36,10 @@ namespace FactorioModBuilder.Build.Extensions
             return true;
         }
 
-        public override bool BuildUnit(IEnumerable<DataUnit> units, out string value)
+        protected override bool BuildUnit(IEnumerable<ModInfoData> units, out string value)
         {
             // check that the modinfo data is valid
-            var unit = units.Single();
-            var mi = unit as ModInfoData;
-            if(mi == null)
-            {
-                value = null;
-                this.Error("Expected to recieve mod info data, recieved: {0}", unit.GetType().FullName);
-                return false;
-            }
+            var mi = units.Single();
 
             // verify our version number is the correct format
             if(!Regex.IsMatch(mi.Version, @"^\d{1,4}\.\d{1,4}\.\d{1,4}$"))
@@ -59,7 +52,7 @@ namespace FactorioModBuilder.Build.Extensions
             MemoryStream ms = new MemoryStream();
 
             DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(ModInfoData));
-            ser.WriteObject(ms, unit);
+            ser.WriteObject(ms, mi);
 
             ms.Position = 0;
             StreamReader sr = new StreamReader(ms);

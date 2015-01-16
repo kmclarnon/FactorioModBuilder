@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FactorioModBuilder.Build.Extensions
 {
-    public class LocaleExtension : ExtensionBase
+    public class LocaleExtension : ExtensionBase<LocaleData>
     {
         public LocaleExtension()
             : base(ExtensionType.FactorioLocale)

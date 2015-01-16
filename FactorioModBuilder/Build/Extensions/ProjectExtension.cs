@@ -9,30 +9,18 @@ using System.Threading.Tasks;
 
 namespace FactorioModBuilder.Build.Extensions
 {
-    public class ProjectExtension : ExtensionBase
+    public class ProjectExtension : ExtensionBase<ProjectData>
     {
         public ProjectExtension() : base(ExtensionType.Project) { }
 
-        public override bool BuildUnit(IEnumerable<DataUnit> units)
+        protected override bool BuildUnit(IEnumerable<ProjectData> units)
         {
-            var unit = units.Single();
-            var pd = unit as ProjectData;
-            if (pd == null)
-            {
-                this.Error("Expected input to be project data, received: {0}", unit.GetType().Name);
-                return false;
-            }
+            var pd = units.Single();
 
             this.Info("Build Started: Project: {0}", pd.ProjectName);
 
             if (!this.PrepareProject(pd))
                 return false;
-
-
-            // move the temporary directory project contents to the output directory
-            if (Directory.Exists(pd.BaseOutDirectory))
-                Directory.Delete(pd.BaseOutDirectory, true);
-            Directory.Move(pd.BaseTempDirectory, pd.BaseOutDirectory);
 
             return true;
         }

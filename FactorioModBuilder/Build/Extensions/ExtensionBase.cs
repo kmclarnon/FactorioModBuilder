@@ -31,7 +31,7 @@ namespace FactorioModBuilder.Build.Extensions
         PrototypeTiles
     }
 
-    public abstract class ExtensionBase : ICompilerExtension
+    public abstract class ExtensionBase<T> : ICompilerExtension where T : DataUnit
     {
         public ExtensionType Extension { get; private set; }
         public IEnumerable<ExtensionType> Dependencies { get; private set; }
@@ -77,17 +77,69 @@ namespace FactorioModBuilder.Build.Extensions
             this._compiler = c;
         }
 
-        public virtual bool BuildUnit(IEnumerable<DataUnit> units)
+        public bool BuildUnit(IEnumerable<DataUnit> units)
+        {
+            if(units == null)
+                throw new ArgumentNullException("units");
+
+            try
+            {
+                return this.BuildUnit(units.Cast<T>());
+            }
+            catch(InvalidCastException)
+            {
+                this.Error("Expected {0}, recieved {1}", typeof(T).Name, 
+                    units.Any() ? units.First().GetType().Name : "null");
+                return false;
+            }
+        }
+
+        public bool BuildUnit(IEnumerable<DataUnit> units, DirectoryInfo outDir)
+        {
+            if (units == null)
+                throw new ArgumentNullException("units");
+
+            try
+            {
+                return this.BuildUnit(units.Cast<T>(), outDir);
+            }
+            catch (InvalidCastException)
+            {
+                this.Error("Expected {0}, recieved {1}", typeof(T).Name,
+                    units.Any() ? units.First().GetType().Name : "null");
+                return false;
+            }
+        }
+
+        public bool BuildUnit(IEnumerable<DataUnit> units, out string result)
+        {
+            if (units == null)
+                throw new ArgumentNullException("units");
+
+            try
+            {
+                return this.BuildUnit(units.Cast<T>(), out result);
+            }
+            catch (InvalidCastException)
+            {
+                this.Error("Expected {0}, recieved {1}", typeof(T).Name,
+                    units.Any() ? units.First().GetType().Name : "null");
+                result = String.Empty;
+                return false;
+            }
+        }
+
+        protected virtual bool BuildUnit(IEnumerable<T> units)
         {
             throw new NotImplementedException();
         }
 
-        public virtual bool BuildUnit(IEnumerable<DataUnit> units, DirectoryInfo outDir)
+        protected virtual bool BuildUnit(IEnumerable<T> units, DirectoryInfo outDir)
         {
             throw new NotImplementedException();
         }
 
-        public virtual bool BuildUnit(IEnumerable<DataUnit> units, out string result)
+        protected virtual bool BuildUnit(IEnumerable<T> units, out string result)
         {
             throw new NotImplementedException();
         }
@@ -120,41 +172,12 @@ namespace FactorioModBuilder.Build.Extensions
                     new FatalMessage(format, args));
         }
 
-        protected bool TryGetCompilerExtension(ExtensionType type, out ICompilerExtension ext)
+        protected ICompilerExtension GetCompilerExtension(ExtensionType type)
         {
-            ext = null;
-            if (_compiler == null)
-                return false;
-            return _compiler.TryGetExtension(type, out ext);
-        }
-
-        protected DirectoryInfo CreateCleanDirectory(string path)
-        {
-            DirectoryInfo di = new DirectoryInfo(path);
-            if(!di.Exists)
-            {
-                di.Create();
-            }
-            else
-            {
-                this.CleanDirectory(di);
-            }
-            return di;
-        }
-
-        protected void CleanDirectory(DirectoryInfo di)
-        {
-            foreach (var file in di.GetFiles())
-                file.Delete();
-            foreach (var dir in di.GetDirectories())
-                dir.Delete(true);
-        }
-
-        protected bool CanContinue()
-        {
-            if (_compiler != null)
-                return _compiler.CanContinue();
-            return false;
+            ICompilerExtension ext;
+            if (!_compiler.TryGetExtension(type, out ext))
+                throw new Exception("Could not resolve compiler extension for type: " + ext.GetType().Name);
+            return ext;
         }
     }
 }

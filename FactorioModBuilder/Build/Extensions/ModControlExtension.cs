@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace FactorioModBuilder.Build.Extensions
 {
-    public class ModControlExtension : ExtensionBase
+    public class ModControlExtension : ExtensionBase<ModControlData>
     {
         public ModControlExtension()
             : base(ExtensionType.FactorioControl)
         {
         }
 
-        public override bool BuildUnit(IEnumerable<DataUnit> units, DirectoryInfo outDir)
+        protected override bool BuildUnit(IEnumerable<ModControlData> units, DirectoryInfo outDir)
         {
             try
             {
@@ -26,13 +26,13 @@ namespace FactorioModBuilder.Build.Extensions
                     return false;
                 }
 
-                using(var fs = File.Open(Path.Combine(outDir.FullName, "control.lua"), FileMode.Create))
-                using(var sw = new StreamWriter(fs))
+                using (var fs = File.Open(Path.Combine(outDir.FullName, "control.lua"), FileMode.Create))
+                using (var sw = new StreamWriter(fs))
                 {
                     sw.Write(res);
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 this.Fatal("Encountered exception creating control.lua: {0}", e.Message);
                 return false;
@@ -41,9 +41,9 @@ namespace FactorioModBuilder.Build.Extensions
             return true;
         }
 
-        public override bool BuildUnit(IEnumerable<DataUnit> unit, out string value)
+        protected override bool BuildUnit(IEnumerable<ModControlData> units, out string result)
         {
-            value = " ";
+            result = " ";
             return true;
         }
     }

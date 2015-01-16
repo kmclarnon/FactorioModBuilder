@@ -8,18 +8,11 @@ using System.Threading.Tasks;
 
 namespace FactorioModBuilder.Build.Extensions
 {
-    public class PrototypeGroupsExtension : ExtensionBase
+    public class PrototypeGroupsExtension : ExtensionBase<GroupData>
     {
         public PrototypeGroupsExtension()
             : base(ExtensionType.PrototypeGroups)
         {
-        }
-
-        public override bool BuildUnit(IEnumerable<DataUnit> units, DirectoryInfo outDir)
-        {
-            
-
-            return true;
         }
     }
 }
