@@ -92,6 +92,12 @@ namespace FactorioModBuilder.Build.Extensions
                     units.Any() ? units.First().GetType().Name : "null");
                 return false;
             }
+            catch(Exception e)
+            {
+                this.Fatal("Encountered an exception in {0} building data unit: {1}",
+                    this.GetType().Name, e.Message);
+                return false;
+            }
         }
 
         protected abstract bool BuildUnit(IEnumerable<T> units);
