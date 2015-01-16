@@ -21,6 +21,13 @@ namespace FactorioModBuilder.Build
         private Dictionary<ExtensionType, ICompilerExtension> _activeExtensions = 
             new Dictionary<ExtensionType, ICompilerExtension>();
 
+        public string ProjectName { get; set; }
+        public string TemporaryDirectory { get; set; }
+        public string OutputDirectory { get; set; }
+        public HashSet<string> GroupNames { get; private set; }
+        public HashSet<string> SubGroupNames { get; private set; }
+        public HashSet<string> ItemNames { get; private set; }
+
         public Compiler()
             : this(0)
         {
@@ -42,6 +49,11 @@ namespace FactorioModBuilder.Build
             this.BuildMessages = new ObservableCollection<CompilerMessage>();
             foreach (var ext in exts)
                 this.AddExtension(ext);
+
+
+            this.GroupNames = new HashSet<string>();
+            this.SubGroupNames = new HashSet<string>();
+            this.ItemNames = new HashSet<string>();
         }
 
         public bool Build(List<DataUnit> data)
@@ -80,15 +92,6 @@ namespace FactorioModBuilder.Build
         public bool TryGetExtension(ExtensionType type, out ICompilerExtension ext)
         {
             return _activeExtensions.TryGetValue(type, out ext);
-        }
-
-        public bool CanContinue()
-        {
-            if (this.BuildMessages.Where(o => o.Type == MessageType.Fatal).Any())
-                return false;
-            if (this.BuildMessages.Where(o => o.Type == MessageType.Error).Count() > this.MaxErrors)
-                return false;
-            return true;
         }
 
         public IEnumerable<ICompilerExtension> GetProcessOrder(IEnumerable<ICompilerExtension> extensions)
@@ -133,6 +136,25 @@ namespace FactorioModBuilder.Build
 
             result = res;
             return true;
+        }
+
+        private bool CanContinue()
+        {
+            if (this.BuildMessages.Where(o => o.Type == MessageType.Fatal).Any())
+                return false;
+            if (this.BuildMessages.Where(o => o.Type == MessageType.Error).Count() > this.MaxErrors)
+                return false;
+            return true;
+        }
+
+        private void ResetProjectStorage()
+        {
+            this.ProjectName = String.Empty;
+            this.OutputDirectory = String.Empty;
+            this.TemporaryDirectory = String.Empty;
+            this.GroupNames = new HashSet<string>();
+            this.SubGroupNames = new HashSet<string>();
+            this.ItemNames = new HashSet<string>();
         }
     }
 }

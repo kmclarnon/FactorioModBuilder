@@ -38,6 +38,30 @@ namespace FactorioModBuilder.Build.Extensions
 
         private Compiler _compiler;
 
+        protected string ProjectName 
+        { 
+            get { return _compiler.ProjectName; }
+            set { _compiler.ProjectName = value; }
+        }
+
+        protected string TemporaryDirectory
+        {
+            get { return _compiler.TemporaryDirectory; }
+            set { _compiler.TemporaryDirectory = value; }
+        }
+
+        protected string OutputDirectory
+        {
+            get { return _compiler.OutputDirectory; }
+            set { _compiler.OutputDirectory = value; }
+        }
+
+        protected HashSet<string> GroupNames { get { return _compiler.GroupNames; } }
+
+        protected HashSet<string> SubGroupNames { get { return _compiler.SubGroupNames; } }
+
+        protected HashSet<string> ItemNames { get { return _compiler.ItemNames; } }
+
         public ExtensionBase(ExtensionType extension, 
             params ExtensionType[] dependencies)
         {
