@@ -14,5 +14,10 @@ namespace FactorioModBuilder.Build.Extensions
             ExtensionType.PrototypeEntities)
         {
         }
+
+        protected override bool BuildUnit(IEnumerable<ItemData> units)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -14,5 +14,10 @@ namespace FactorioModBuilder.Build.Extensions
             : base(ExtensionType.PrototypeGroups)
         {
         }
+
+        protected override bool BuildUnit(IEnumerable<GroupBaseData> units)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

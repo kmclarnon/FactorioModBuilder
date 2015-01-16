@@ -15,36 +15,9 @@ namespace FactorioModBuilder.Build.Extensions
         {
         }
 
-        protected override bool BuildUnit(IEnumerable<ModDataData> units, DirectoryInfo outDir)
+        protected override bool BuildUnit(IEnumerable<ModDataData> units)
         {
-            try
-            {
-                string res;
-                if(!this.BuildUnit(units, out res))
-                {
-                    this.Error("Failed to build data.lua");
-                    return false;
-                }
-
-                using (var fs = File.Open(Path.Combine(outDir.FullName, "data.lua"), FileMode.Create))
-                using (var sw = new StreamWriter(fs))
-                {
-                    sw.Write(res);
-                }
-            }
-            catch (Exception e)
-            {
-                this.Fatal("Encountered exception creating data.lua: {0}", e.Message);
-                return false;
-            }
-
-            return true;
-        }
-
-        protected override bool BuildUnit(IEnumerable<ModDataData> units, out string value)
-        {
-            value = " ";
-            return true;
+            throw new NotImplementedException();
         }
     }
 }

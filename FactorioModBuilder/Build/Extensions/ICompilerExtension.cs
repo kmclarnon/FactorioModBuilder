@@ -14,7 +14,5 @@ namespace FactorioModBuilder.Build.Extensions
         IEnumerable<ExtensionType> Dependencies { get; }
         void AttachToCompiler(Compiler c);
         bool BuildUnit(IEnumerable<DataUnit> units);
-        bool BuildUnit(IEnumerable<DataUnit> units, DirectoryInfo outDir);
-        bool BuildUnit(IEnumerable<DataUnit> units, out string result);
     }
 }

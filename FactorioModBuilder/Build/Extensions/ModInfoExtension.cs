@@ -14,14 +14,14 @@ namespace FactorioModBuilder.Build.Extensions
     {
         public ModInfoExtension() : base(ExtensionType.FactorioInfo) { }
 
-        protected override bool BuildUnit(IEnumerable<ModInfoData> units, DirectoryInfo outDir)
+        protected override bool BuildUnit(IEnumerable<ModInfoData> units)
         {
             string res;
-            if (!this.BuildUnit(units, out res))
+            if (!this.Build(units, out res))
                 return false;
             try
             {
-                using (var fs = File.Open(Path.Combine(outDir.FullName, "info.json"), FileMode.Create))
+                using (var fs = File.Open(Path.Combine(this.TemporaryDirectory, "info.json"), FileMode.Create))
                 using (var sw = new StreamWriter(fs))
                 {
                     sw.Write(res);
@@ -36,7 +36,7 @@ namespace FactorioModBuilder.Build.Extensions
             return true;
         }
 
-        protected override bool BuildUnit(IEnumerable<ModInfoData> units, out string value)
+        private bool Build(IEnumerable<ModInfoData> units, out string value)
         {
             // check that the modinfo data is valid
             var mi = units.Single();

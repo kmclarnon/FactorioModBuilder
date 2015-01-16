@@ -94,55 +94,7 @@ namespace FactorioModBuilder.Build.Extensions
             }
         }
 
-        public bool BuildUnit(IEnumerable<DataUnit> units, DirectoryInfo outDir)
-        {
-            if (units == null)
-                throw new ArgumentNullException("units");
-
-            try
-            {
-                return this.BuildUnit(units.Cast<T>(), outDir);
-            }
-            catch (InvalidCastException)
-            {
-                this.Error("Expected {0}, recieved {1}", typeof(T).Name,
-                    units.Any() ? units.First().GetType().Name : "null");
-                return false;
-            }
-        }
-
-        public bool BuildUnit(IEnumerable<DataUnit> units, out string result)
-        {
-            if (units == null)
-                throw new ArgumentNullException("units");
-
-            try
-            {
-                return this.BuildUnit(units.Cast<T>(), out result);
-            }
-            catch (InvalidCastException)
-            {
-                this.Error("Expected {0}, recieved {1}", typeof(T).Name,
-                    units.Any() ? units.First().GetType().Name : "null");
-                result = String.Empty;
-                return false;
-            }
-        }
-
-        protected virtual bool BuildUnit(IEnumerable<T> units)
-        {
-            throw new NotImplementedException();
-        }
-
-        protected virtual bool BuildUnit(IEnumerable<T> units, DirectoryInfo outDir)
-        {
-            throw new NotImplementedException();
-        }
-
-        protected virtual bool BuildUnit(IEnumerable<T> units, out string result)
-        {
-            throw new NotImplementedException();
-        }
+        protected abstract bool BuildUnit(IEnumerable<T> units);
 
         protected void Info(string format, params object[] args)
         {

@@ -14,5 +14,10 @@ namespace FactorioModBuilder.Build.Extensions
             : base(ExtensionType.FactorioLocale)
         {
         }
+
+        protected override bool BuildUnit(IEnumerable<LocaleData> units)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
