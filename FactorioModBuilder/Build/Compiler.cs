@@ -135,9 +135,15 @@ namespace FactorioModBuilder.Build
                 if (!this.TryGetExtension(d.Type, out ext))
                     return false;
                 res.Add(ext);
+                foreach (var e in ext.Dependencies)
+                {
+                    if (!this.TryGetExtension(e, out ext))
+                        return false;
+                    res.Add(ext);
+                }
             }
 
-            result = res;
+            result = res.DistinctBy(o => o.Extension);
             return true;
         }
 
