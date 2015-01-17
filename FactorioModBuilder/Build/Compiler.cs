@@ -119,6 +119,7 @@ namespace FactorioModBuilder.Build
 
                 if (res.Count == oldCnt)
                     throw new Exception("Unabled to determine dependency tree");
+                oldCnt = res.Count;
             }
 
             return res;
