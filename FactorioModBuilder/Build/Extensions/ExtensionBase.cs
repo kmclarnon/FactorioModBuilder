@@ -62,7 +62,8 @@ namespace FactorioModBuilder.Build.Extensions
 
         protected HashSet<string> ItemNames { get { return _compiler.ItemNames; } }
 
-        public ExtensionBase(ExtensionType extension, 
+
+        public ExtensionBase(ExtensionType extension,
             params ExtensionType[] dependencies)
         {
             this.Extension = extension;
@@ -84,7 +85,17 @@ namespace FactorioModBuilder.Build.Extensions
 
             try
             {
-                return this.BuildUnit(units.Cast<T>());
+                string path;
+                if(this.GetOutputPath(out path))
+                    return this.BuildUnit(units.Cast<T>(), null);
+                else
+                {
+                    using(var fs = File.Open(path, FileMode.Create))
+                    using(var sw = new StreamWriter(fs))
+                    {
+                        return this.BuildUnit(units.Cast<T>(), sw);
+                    }
+                }
             }
             catch(InvalidCastException)
             {
@@ -100,7 +111,13 @@ namespace FactorioModBuilder.Build.Extensions
             }
         }
 
-        protected abstract bool BuildUnit(IEnumerable<T> units);
+        protected abstract bool BuildUnit(IEnumerable<T> units, StreamWriter sr);
+
+        protected virtual bool GetOutputPath(out string path)
+        {
+            path = null;
+            return false;
+        }
 
         protected void Info(string format, params object[] args)
         {

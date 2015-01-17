@@ -12,27 +12,12 @@ namespace FactorioModBuilder.Build.Extensions
 {
     public class ModInfoExtension : ExtensionBase<ModInfoData>
     {
-        public ModInfoExtension() : base(ExtensionType.FactorioInfo) { }
+        public ModInfoExtension() 
+            : base(ExtensionType.FactorioInfo) 
+        { }
 
-        protected override bool BuildUnit(IEnumerable<ModInfoData> units)
+        protected override bool BuildUnit(IEnumerable<ModInfoData> units, StreamWriter sw)
         {
-            string res;
-            if (!this.Build(units, out res))
-                return false;
-            try
-            {
-                using (var fs = File.Open(Path.Combine(this.TemporaryDirectory, "info.json"), FileMode.Create))
-                using (var sw = new StreamWriter(fs))
-                {
-                    sw.Write(res);
-                }
-            }
-            catch(Exception e)
-            {
-                this.Fatal("Encountered exception creating info.json: {0}", e.Message);
-                return false;
-            }
-
             return true;
         }
 

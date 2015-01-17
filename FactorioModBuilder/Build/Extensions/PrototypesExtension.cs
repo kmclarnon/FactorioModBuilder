@@ -15,7 +15,7 @@ namespace FactorioModBuilder.Build.Extensions
         {
         }
 
-        protected override bool BuildUnit(IEnumerable<PrototypeData> units)
+        protected override bool BuildUnit(IEnumerable<PrototypeData> units, StreamWriter sw)
         {
             throw new NotImplementedException();
         }

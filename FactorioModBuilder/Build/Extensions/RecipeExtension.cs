@@ -1,6 +1,7 @@
 ﻿using FactorioModBuilder.Build.Data;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,7 +16,7 @@ namespace FactorioModBuilder.Build.Extensions
         {
         }
 
-        protected override bool BuildUnit(IEnumerable<RecipeData> units)
+        protected override bool BuildUnit(IEnumerable<RecipeData> units, StreamWriter sw)
         {
             throw new NotImplementedException();
         }

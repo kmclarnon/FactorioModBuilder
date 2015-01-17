@@ -13,7 +13,7 @@ namespace FactorioModBuilder.Build.Extensions
     {
         public ProjectExtension() : base(ExtensionType.Project) { }
 
-        protected override bool BuildUnit(IEnumerable<ProjectData> units)
+        protected override bool BuildUnit(IEnumerable<ProjectData> units, StreamWriter sw)
         {
             var pd = units.Single();
 
