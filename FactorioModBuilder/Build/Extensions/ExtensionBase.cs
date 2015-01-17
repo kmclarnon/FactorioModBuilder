@@ -62,6 +62,12 @@ namespace FactorioModBuilder.Build.Extensions
             set { _compiler.PrototypeDirectory = value; }
         }
 
+        protected string DependencyString
+        {
+            get { return _compiler.DependencyString; }
+            set { _compiler.DependencyString = value; }
+        }
+
         protected HashSet<string> GroupNames { get { return _compiler.GroupNames; } }
 
         protected HashSet<string> SubGroupNames { get { return _compiler.SubGroupNames; } }
