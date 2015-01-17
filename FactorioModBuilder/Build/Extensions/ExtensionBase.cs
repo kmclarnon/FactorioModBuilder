@@ -92,7 +92,7 @@ namespace FactorioModBuilder.Build.Extensions
             try
             {
                 string path;
-                if(this.GetOutputPath(out path))
+                if(!this.GetOutputPath(out path))
                     return this.BuildUnit(units.Cast<T>(), null);
                 else
                 {
