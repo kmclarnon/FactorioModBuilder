@@ -12,7 +12,7 @@ namespace FactorioModBuilder.Build.Extensions
     {
         public PrototypeItemsExtension()
             : base(ExtensionType.PrototypeItems,
-            ExtensionType.PrototypeEntities)
+            ExtensionType.PrototypeEntities, ExtensionType.Prototypes)
         {
         }
 

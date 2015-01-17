@@ -12,7 +12,7 @@ namespace FactorioModBuilder.Build.Extensions
     public class PrototypeGroupsExtension : ExtensionBase<GroupBaseData>
     {
         public PrototypeGroupsExtension()
-            : base(ExtensionType.PrototypeGroups)
+            : base(ExtensionType.PrototypeGroups, ExtensionType.Prototypes)
         {
         }
 
