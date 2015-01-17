@@ -28,6 +28,7 @@ namespace FactorioModBuilder.Build
         public HashSet<string> GroupNames { get; private set; }
         public HashSet<string> SubGroupNames { get; private set; }
         public HashSet<string> ItemNames { get; private set; }
+        public HashSet<string> EntityNames { get; private set; }
 
         public Compiler()
             : this(0)
