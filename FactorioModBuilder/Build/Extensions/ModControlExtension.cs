@@ -17,7 +17,14 @@ namespace FactorioModBuilder.Build.Extensions
 
         protected override bool BuildUnit(IEnumerable<ModControlData> units, StreamWriter sw)
         {
-            throw new NotImplementedException();
+            sw.Write(" ");
+            return true;
+        }
+
+        protected override bool GetOutputPath(out string path)
+        {
+            path = Path.Combine(this.TemporaryDirectory, "control.lua");
+            return true;
         }
     }
 }

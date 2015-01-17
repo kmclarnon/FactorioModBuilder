@@ -18,6 +18,10 @@ namespace FactorioModBuilder.Build.Extensions
 
         protected override bool BuildUnit(IEnumerable<ModInfoData> units, StreamWriter sw)
         {
+            string val;
+            if (!this.Build(units, out val))
+                return false;
+            sw.Write(val);
             return true;
         }
 

@@ -17,7 +17,8 @@ namespace FactorioModBuilder.Build.Extensions
 
         protected override bool BuildUnit(IEnumerable<PrototypeData> units, StreamWriter sw)
         {
-            throw new NotImplementedException();
+            this.PrototypeDirectory = Path.Combine(this.TemporaryDirectory, "prototypes");
+            return true;
         }
     }
 }
