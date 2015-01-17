@@ -68,6 +68,8 @@ namespace FactorioModBuilder.Build.Extensions
 
         protected HashSet<string> ItemNames { get { return _compiler.ItemNames; } }
 
+        protected HashSet<string> EntityNames { get { return _compiler.EntityNames; } }
+
 
         public ExtensionBase(ExtensionType extension,
             params ExtensionType[] dependencies)
