@@ -56,6 +56,12 @@ namespace FactorioModBuilder.Build.Extensions
             set { _compiler.OutputDirectory = value; }
         }
 
+        protected string PrototypeDirectory
+        {
+            get { return _compiler.PrototypeDirectory; }
+            set { _compiler.PrototypeDirectory = value; }
+        }
+
         protected HashSet<string> GroupNames { get { return _compiler.GroupNames; } }
 
         protected HashSet<string> SubGroupNames { get { return _compiler.SubGroupNames; } }

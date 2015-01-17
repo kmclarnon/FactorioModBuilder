@@ -24,6 +24,7 @@ namespace FactorioModBuilder.Build
         public string ProjectName { get; set; }
         public string TemporaryDirectory { get; set; }
         public string OutputDirectory { get; set; }
+        public string PrototypeDirectory { get; set; }
         public HashSet<string> GroupNames { get; private set; }
         public HashSet<string> SubGroupNames { get; private set; }
         public HashSet<string> ItemNames { get; private set; }
