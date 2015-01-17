@@ -37,6 +37,7 @@ namespace FactorioModBuilder
                     new Build.Compiler(
                         100,
                         new ModInfoExtension(),
+                        new ModDependenciesExtension(),
                         new ProjectExtension(),
                         new ModDataExtension(),
                         new ModControlExtension(),
