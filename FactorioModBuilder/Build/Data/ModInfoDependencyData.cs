@@ -7,20 +7,18 @@ using System.Threading.Tasks;
 
 namespace FactorioModBuilder.Build.Data
 {
-    [DataContract]
     public class ModInfoDependencyData : DataUnit
     {
-        [DataMember]
-        public string Value { get; private set; }
+        public string Name { get; private set; }
+        public string Version { get; private set; }
+        public bool Optional { get; private set; }
 
         public ModInfoDependencyData(string name, string version, bool optional)
             : base(Extensions.ExtensionType.FactorioDependencies)
         {
-            this.Value = String.Empty;
-            if (optional)
-                this.Value = "? ";
-            this.Value += name;
-            this.Value += " " + version;
+            this.Name = name;
+            this.Version = version;
+            this.Optional = optional;
         }
     }
 }

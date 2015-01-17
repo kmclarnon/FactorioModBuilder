@@ -13,40 +13,17 @@ namespace FactorioModBuilder.Build.Extensions
     public class ModInfoExtension : ExtensionBase<ModInfoData>
     {
         public ModInfoExtension() 
-            : base(ExtensionType.FactorioInfo) 
+            : base(ExtensionType.FactorioInfo, ExtensionType.FactorioDependencies) 
         { }
 
         protected override bool BuildUnit(IEnumerable<ModInfoData> units, StreamWriter sw)
         {
-            string val;
-            if (!this.Build(units, out val))
-                return false;
-            sw.Write(val);
-            return true;
+            var unit = units.Single();
         }
 
-        private bool Build(IEnumerable<ModInfoData> units, out string value)
+        protected override bool GetOutputPath(out string path)
         {
-            // check that the modinfo data is valid
-            var mi = units.Single();
-
-            // verify our version number is the correct format
-            if(!Regex.IsMatch(mi.Version, @"^\d{1,4}\.\d{1,4}\.\d{1,4}$"))
-            {
-                value = null;
-                this.Error("Version format incorrect.  Version must be in Major.Mid.Minor format");
-                return false;
-            }
-
-            MemoryStream ms = new MemoryStream();
-
-            DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(ModInfoData));
-            ser.WriteObject(ms, mi);
-
-            ms.Position = 0;
-            StreamReader sr = new StreamReader(ms);
-            value = sr.ReadToEnd();
-
+            path = Path.Combine(this.TemporaryDirectory, "info.json");
             return true;
         }
     }
