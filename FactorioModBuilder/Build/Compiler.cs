@@ -101,8 +101,8 @@ namespace FactorioModBuilder.Build
         {
             if (extensions == null)
                 throw new ArgumentNullException("extensions");
-            List<ICompilerExtension> res = new List<ICompilerExtension>();
             List<ICompilerExtension> src = extensions.ToList();
+            HashSet<ICompilerExtension> res = new HashSet<ICompilerExtension>(src.Where(o => !o.Dependencies.Any()))
 
             int srcCnt = src.Count;
             int oldCnt = res.Count;
