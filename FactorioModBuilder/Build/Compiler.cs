@@ -108,7 +108,7 @@ namespace FactorioModBuilder.Build
             while(res.Count < srcCnt)
             {
                 var curExts = res.Select(o => o.Extension);
-                foreach(var s in src)
+                foreach(var s in src.Where(o => !res.Contains(o)))
                 {
                     bool depChk = true;
                     foreach (var d in s.Dependencies)
