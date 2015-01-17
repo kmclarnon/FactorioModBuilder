@@ -28,9 +28,8 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
                     this.Author,
                     this.Contact,
                     this.Homepage,
-                    this.Description,
-                    this.Dependencies.SelectMany(o => 
-                        o.CompilerData.Cast<ModInfoDependencyData>())).ListWrap();
+                    this.Description).ListWrap()
+                    .Concat(this.Dependencies.SelectMany(o => o.CompilerData));
             }
         }
 

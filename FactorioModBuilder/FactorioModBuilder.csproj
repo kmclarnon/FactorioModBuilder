@@ -92,6 +92,7 @@
     <Compile Include="Build\Data\RecipeData.cs" />
     <Compile Include="Build\Data\SubGroupData.cs" />
     <Compile Include="Build\Extensions\ExtensionBase.cs" />
+    <Compile Include="Build\Extensions\ModDependenciesExtension.cs" />
     <Compile Include="Build\Extensions\PrototypeEntitiesExtension.cs" />
     <Compile Include="Build\Extensions\PrototypeItemsExtension.cs" />
     <Compile Include="Build\Extensions\LocaleExtension.cs" />
