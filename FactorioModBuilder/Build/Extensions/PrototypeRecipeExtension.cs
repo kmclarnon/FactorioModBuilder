@@ -25,6 +25,16 @@ namespace FactorioModBuilder.Build.Extensions
             {
                 foreach (var r in units)
                 {
+                    if (r.Ingredients.Count < 1)
+                        return false;
+                    if (!this.ItemNames.Contains(r.Result))
+                        return false;
+                    if (r.EnergyReq < 0)
+                        return false;
+                    foreach (var i in r.Ingredients)
+                        if (!this.ItemNames.Contains(i.Item1))
+                            return false;
+
                     sb.AppendLine("  {");
                     sb.AppendLine("    type = \"recipe\",");
                     sb.AppendLine("    name = \"" + r.Name + "\",");
@@ -53,6 +63,8 @@ namespace FactorioModBuilder.Build.Extensions
                 sb.AppendLine();
             }
             sb.AppendLine("})");
+
+            return true;
         }
 
         protected override bool GetOutputPath(out string path)
