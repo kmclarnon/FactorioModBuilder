@@ -28,6 +28,8 @@ namespace FactorioModBuilder.Build.Extensions
                     return false;
                 if (!this.EntityNames.Contains(i.PlaceResult))
                     return false;
+                if (!this.ItemNames.Add(i.Name))
+                    return false;
 
                 // write out the item
                 sb.AppendLine("  {");
