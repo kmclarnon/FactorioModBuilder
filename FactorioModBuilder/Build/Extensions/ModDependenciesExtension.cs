@@ -18,7 +18,8 @@ namespace FactorioModBuilder.Build.Extensions
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("[");
-            sb.Append(units.Select(o => this.GetDepString(o)).Aggregate((a, b) => a + ", " + b));
+            if(units != null && units.Any())
+                sb.Append(units.Select(o => this.GetDepString(o)).Aggregate((a, b) => a + ", " + b));
             sb.Append("]");
             this.DependencyString = sb.ToString();
             return true;
