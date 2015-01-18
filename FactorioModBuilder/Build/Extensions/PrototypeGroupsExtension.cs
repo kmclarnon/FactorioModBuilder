@@ -59,10 +59,10 @@ namespace FactorioModBuilder.Build.Extensions
                     }
 
                     sb.AppendLine("  {");
-                    sb.AppendLine("  type = \"item-subgroup\",");
-                    sb.AppendLine("  name = \"" + sg.Name + "\",");
-                    sb.AppendLine("  group = \"" + sg.Group + "\",");
-                    sb.AppendLine("  order = \"" + sg.Order + "\"");
+                    sb.AppendLine("    type = \"item-subgroup\",");
+                    sb.AppendLine("    name = \"" + sg.Name + "\",");
+                    sb.AppendLine("    group = \"" + sg.Group + "\",");
+                    sb.AppendLine("    order = \"" + sg.Order + "\"");
                     sb.AppendLine("  },");
                 }
             }
