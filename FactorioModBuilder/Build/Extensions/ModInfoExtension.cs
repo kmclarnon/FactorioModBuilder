@@ -36,7 +36,8 @@ namespace FactorioModBuilder.Build.Extensions
             sb.AppendLine("  \"dependencies\" : " + this.DependencyString);
             sb.AppendLine("}");
 
-            sw.Write(sb.ToString());
+            string res = sb.ToString();
+            sw.Write(res);
             return true;
         }
 

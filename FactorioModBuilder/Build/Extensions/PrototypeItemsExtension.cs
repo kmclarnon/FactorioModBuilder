@@ -45,7 +45,8 @@ namespace FactorioModBuilder.Build.Extensions
                 sb.Remove(sb.Length - 1, 1);
             sb.AppendLine("})");
 
-            sw.Write(sb.ToString());
+            string res = sb.ToString();
+            sw.Write(res);
             return true;
         }
 
