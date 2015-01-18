@@ -102,6 +102,7 @@
     <Compile Include="Build\Extensions\ProjectExtension.cs" />
     <Compile Include="Build\Data\PrototypeData.cs" />
     <Compile Include="Build\Extensions\PrototypeGroupsExtension.cs" />
+    <Compile Include="Build\Extensions\PrototypeRecipeExtension.cs" />
     <Compile Include="Build\Extensions\PrototypesExtension.cs" />
     <Compile Include="Build\Extensions\RecipeExtension.cs" />
     <Compile Include="Build\ICompilerSource.cs" />
