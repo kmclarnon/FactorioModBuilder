@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using WpfUtils;
+using System.Text.RegularExpressions;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
@@ -69,6 +70,13 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         }
 
         public ICommand FindImageCmd { get { return this.GetCommand(this.FindImage, this.CanFindImage); } }
+
+        static ItemVM()
+        {
+            ItemVM.AddPropertyValidation("StackSize",
+                (x => Regex.IsMatch(x.StackSize.ToString(), @"^\d+$")),
+                "Stacksize must be a positive whole number");
+        }
 
         public ItemVM(Item item)
             : base(item)

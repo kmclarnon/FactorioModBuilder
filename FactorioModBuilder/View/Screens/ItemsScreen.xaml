@@ -65,7 +65,8 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Label Content="Name:" Grid.Column="0" Grid.Row="0" Margin="5"/>
-                <TextBox Text="{Binding Path=SelectedItem.Name, ElementName=itemList}" 
+                <TextBox Text="{Binding Path=SelectedItem.Name, ElementName=itemList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged,
+                                ValidatesOnExceptions=True, ValidatesOnDataErrors=True}" 
                          Margin="5" Grid.Column="1" Grid.Row="0" VerticalContentAlignment="Center"/>
                 <Label Content="Subgroup:" Grid.Column="0" Grid.Row="1" Margin="5"/>
                 <ComboBox ItemsSource="{Binding Path=PossibleSubgroups}"
@@ -73,7 +74,8 @@
                           SelectedValue="{Binding Path=SelectedItem.SubGroup, ElementName=itemList}"
                           VerticalContentAlignment="Center" Margin="5" Grid.Column="1" Grid.Row="1"/>
                 <Label Content="Order:" Grid.Column="0" Grid.Row="2" Margin="5"/>
-                <TextBox Text="{Binding Path=SelectedItem.Order, ElementName=itemList}" 
+                <TextBox Text="{Binding Path=SelectedItem.Order, ElementName=itemList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, 
+                                ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" 
                          Margin="5" Grid.Column="1" Grid.Row="2" VerticalContentAlignment="Center"/>
                 <Label Content="Icon Path:" Grid.Column="0" Grid.Row="3" Margin="5"/>
                 <Grid Grid.Column="1" Grid.Row="3">
@@ -87,7 +89,8 @@
                             Command="{Binding Path=SelectedItem.FindImageCmd, ElementName=itemList}"/>
                 </Grid>
                 <Label Content="Stack Size:" Grid.Column="0" Grid.Row="4" Margin="5"/>
-                <TextBox Text="{bind:NumberBinding Path=SelectedItem.StackSize, ElementName=itemList}" 
+                <TextBox Text="{Binding Path=SelectedItem.StackSize, ElementName=itemList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged,
+                                ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" 
                          Grid.Column="1" Grid.Row="4" Margin="6" VerticalContentAlignment="Center"/>
             </Grid>
         </Grid>
