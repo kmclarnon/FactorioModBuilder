@@ -30,7 +30,7 @@ namespace FactorioModBuilder.Build.Extensions
             if (dep.Optional)
                 result += "? ";
             result += dep.Name + " " + dep.Version;
-            return result;
+            return "\"" + result + "\"";
         }
     }
 }
