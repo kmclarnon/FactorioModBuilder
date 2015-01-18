@@ -57,6 +57,7 @@ namespace FactorioModBuilder.Build
             this.GroupNames = new HashSet<string>();
             this.SubGroupNames = new HashSet<string>();
             this.ItemNames = new HashSet<string>();
+            this.EntityNames = new HashSet<string>();
         }
 
         public bool Build(List<DataUnit> data)
