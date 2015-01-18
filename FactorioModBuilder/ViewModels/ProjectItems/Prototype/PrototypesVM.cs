@@ -20,37 +20,49 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
             get
             {
                 GroupsVM gres;
-                if (!this.TryFindElementDown<GroupsVM>(out gres))
+                if (!this.TryFindElementDown(out gres))
                     throw new Exception("Could not find group child element");
                 SubGroupsVM sgres;
-                if (!this.TryFindElementDown<SubGroupsVM>(out sgres))
+                if (!this.TryFindElementDown(out sgres))
                     throw new Exception("Could not find subgroup child element");
                 ItemsVM ires;
-                if (!this.TryFindElementDown<ItemsVM>(out ires))
+                if (!this.TryFindElementDown(out ires))
                     throw new Exception("Could not find items child element");
                 return gres.CompilerData.ConcatMany(sgres.CompilerData, ires.CompilerData);
             }
         }
 
-        public ObservableCollection<SubGroupVM> PossibleSubgroups
+        public ObservableCollection<SubGroupVM> ItemSubgroups
         {
             get
             {
                 SubGroupsVM res;
-                if (!this.TryFindElementDown<SubGroupsVM>(out res))
+                if (!this.TryFindElementDown(out res))
                     throw new Exception("Could not find subgroups child element");
                 return res.ItemList;
             }
         }
 
-        public ObservableCollection<GroupVM> PossibleGroups
+        public ObservableCollection<GroupVM> ItemGroups
         {
             get
             {
                 GroupsVM res;
-                if (!this.TryFindElementDown<GroupsVM>(out res))
+                if (!this.TryFindElementDown(out res))
                     throw new Exception("Could not find groups child element");
                 return res.ItemList;
+            }
+        }
+
+        public ObservableCollection<ItemVM> Items
+        {
+            get
+            {
+                ItemsVM res;
+                if (!this.TryFindElementDown(out res))
+                    throw new Exception("Could not find items child element");
+                return res.ItemList;
+
             }
         }
 

@@ -33,7 +33,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
                 PrototypesVM res;
                 if (!this.TryFindElementUp<PrototypesVM>(out res))
                     throw new Exception("Failed to find parent to supply PossibleGroups");
-                return res.PossibleGroups;
+                return res.ItemGroups;
             }
         }
 
