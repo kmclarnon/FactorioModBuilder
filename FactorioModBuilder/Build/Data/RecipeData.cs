@@ -14,9 +14,11 @@ namespace FactorioModBuilder.Build.Data
         public List<Tuple<string, int>> Ingredients { get; private set; }
         public int EnergyReq { get; private set; }
         public string Result { get; private set; }
+        public int ResultCount { get; private set; }
 
         public RecipeData(string name, bool enabled, 
-            IEnumerable<Tuple<string, int>> ingredients, int energyReq, string result) 
+            IEnumerable<Tuple<string, int>> ingredients, int energyReq, string result,
+            int resultCount) 
             : base(ExtensionType.PrototypeRecipes)
         {
             this.Name = name;
@@ -24,6 +26,7 @@ namespace FactorioModBuilder.Build.Data
             this.Ingredients = ingredients.ToList();
             this.EnergyReq = energyReq;
             this.Result = result;
+            this.ResultCount = resultCount;
         }
     }
 }
