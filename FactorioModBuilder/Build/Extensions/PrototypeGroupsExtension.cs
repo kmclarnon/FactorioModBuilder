@@ -47,7 +47,7 @@ namespace FactorioModBuilder.Build.Extensions
                 sb.AppendLine("    name = \"" + g.Name + "\",");
                 sb.AppendLine("    icon = \"" + g.Icon + "\",");
                 sb.AppendLine("    inventory_order = \"" + g.InvOrder + "\",");
-                sb.AppendLine("    order = \"" + g.Order + "\",");
+                sb.AppendLine("    order = \"" + g.Order + "\"");
                 sb.AppendLine("  },");
 
                 foreach(var sg in sgd.Where(o => o.Group == g.Name))
