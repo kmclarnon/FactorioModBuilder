@@ -22,6 +22,10 @@ namespace FactorioModBuilder.Build.Extensions
             if (!this.PrepareProject(pd))
                 return false;
 
+            this.ProjectName = pd.ProjectName;
+            this.OutputDirectory = pd.BaseOutDirectory;
+            this.TemporaryDirectory = pd.BaseTempDirectory;
+
             return true;
         }
 
