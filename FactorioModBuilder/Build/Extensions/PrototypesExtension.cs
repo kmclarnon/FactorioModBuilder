@@ -18,6 +18,18 @@ namespace FactorioModBuilder.Build.Extensions
         protected override bool BuildUnit(IEnumerable<PrototypeData> units, StreamWriter sw)
         {
             this.PrototypeDirectory = Path.Combine(this.TemporaryDirectory, "prototypes");
+            var dinfo = new DirectoryInfo(this.PrototypeDirectory);
+            
+            if (!dinfo.Exists)
+                dinfo.Create();
+            else
+            {
+                foreach (var file in dinfo.GetFiles())
+                    file.Delete();
+                foreach (var folder in dinfo.GetDirectories())
+                    folder.Delete(true);
+            }
+
             return true;
         }
     }
