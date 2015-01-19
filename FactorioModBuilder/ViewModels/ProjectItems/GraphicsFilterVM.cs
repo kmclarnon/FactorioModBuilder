@@ -43,7 +43,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
                     GraphicsVM res;
                     if (!this.TryFindElementUp(out res))
                         throw new Exception("Could not find parent graphics view model");
-                    return res.BasePath + "/" + this.Name;
+                    return this.Name;
                 }
 
                 return filterRes.ParentPath + "/" + this.Name;
