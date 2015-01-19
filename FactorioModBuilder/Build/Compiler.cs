@@ -62,7 +62,8 @@ namespace FactorioModBuilder.Build
 
         public bool Build(List<DataUnit> data)
         {
-            
+            // clear out any previous messages
+            this.BuildMessages.Clear();
             IEnumerable<ICompilerExtension> exts;
             if(!this.TryGetRequiredExtensions(data, out exts))
             {
