@@ -22,7 +22,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         public ItemVM ResultItem
         {
             get { return this.GetProperty<ItemVM>(); }
-            set { this.SetProperty(value, (() => this.Result = value.Name)); }
+            set { this.SetProperty(value, (() => this.Result = (value == null) ? String.Empty : value.Name)); }
         }
 
         public string Result

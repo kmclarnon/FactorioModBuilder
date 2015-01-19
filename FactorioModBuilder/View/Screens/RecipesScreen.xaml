@@ -61,8 +61,8 @@
                          Text="{Binding Path=SelectedItem.Name, ElementName=itemList}"/>
                 <Label Content="Result:" Grid.Column="0" Grid.Row="1" VerticalContentAlignment="Center" Margin="5"/>
                 <ComboBox Grid.Column="1" Grid.Row="1" VerticalContentAlignment="Center"
-                          ItemsSource="{Binding Path=PossibleResults}" Margin="5"
-                          SelectedItem="{Binding Path=SelectedItem.Result, ElementName=itemList}"/>
+                          ItemsSource="{Binding Path=PossibleResults}" Margin="5" DisplayMemberPath="Name"
+                          SelectedItem="{Binding Path=SelectedItem.ResultItem, ElementName=itemList}"/>
                 <Label Content="Enabled:" Grid.Column="0" Grid.Row="2" VerticalContentAlignment="Center" Margin="5"/>
                 <CheckBox Grid.Column="1" Grid.Row="2" VerticalContentAlignment="Center" Margin="5"
                           IsChecked="{Binding Path=SelectedItem.Enabled, ElementName=itemList}"/>
@@ -81,7 +81,8 @@
                           ItemsSource="{Binding Path=SelectedItem.Ingredients, ElementName=itemList}"
                           AutoGenerateColumns="False">
                     <DataGrid.Columns>
-                        <DataGridComboBoxColumn Header="Ingredient" Width="2*" ItemsSource="{Binding Path=PossibleIngredients}"
+                        <DataGridComboBoxColumn Header="Ingredient" Width="2*" 
+                                                ItemsSource="{Binding Path=DataContext.PossibleIngredients, RelativeSource={RelativeSource AncestorType=DataGrid}}"
                                                 SelectedItemBinding="{Binding Path=Ingredient}"/>
                         <DataGridTextColumn Header="Amount" Width="*"/>
                     </DataGrid.Columns>

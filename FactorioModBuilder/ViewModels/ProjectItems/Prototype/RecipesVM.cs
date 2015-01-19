@@ -24,6 +24,17 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
             }
         }
 
+        public ObservableCollection<ItemVM> PossibleIngredients
+        {
+            get
+            {
+                PrototypesVM res;
+                if (!this.TryFindElementUp(out res))
+                    throw new Exception("Could not find prototypes parent");
+                return res.Items;
+            }
+        }
+
         public ICommand AddRecipeCmd { get { return this.GetCommand(this.AddRecipe, this.CanAddRecipe); } }
         public ICommand RemoveRecipeCmd { get { return this.GetCommand(this.RemoveRecipe, this.CanRemoveRecipe); } }
 
