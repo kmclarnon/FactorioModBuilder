@@ -12,12 +12,18 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <DataGrid x:Name="itemList" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" ItemsSource="{Binding ItemList}" Margin="5">
+            <DataGrid x:Name="itemList" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" ItemsSource="{Binding ItemList}" Margin="5"
+                      AutoGenerateColumns="False">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Recipe" Binding="{Binding Path=Name}" Width="*"/>
-                    <DataGridCheckBoxColumn Header="Active At Start" Binding="{Binding Path=Active}" Width="100"/>
-                    <DataGridComboBoxColumn Header="Result" Width="*" ItemsSource="{Binding Path=PossibleResults}" 
-                                            SelectedItemBinding="{Binding Path=Result}"/>
+                    <DataGridTemplateColumn Header="Result" Width="*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <ComboBox ItemsSource="{Binding Path=DataContext.PossibleResults, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                          SelectedItem="{Binding Path=ResultItem}" DisplayMemberPath="Name"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                     <DataGridTextColumn Header="Result Count" Width="80" Binding="{Binding Path=ResultCount}"/>
                     <DataGridCheckBoxColumn Header="Enabled" Binding="{Binding Path=Enabled}" Width="60"/>
                 </DataGrid.Columns>
@@ -49,22 +55,17 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Label Content="Name:" Grid.Column="0" Grid.Row="0" VerticalContentAlignment="Center" Margin="5"/>
                 <TextBox Grid.Column="1" Grid.Row="0" VerticalContentAlignment="Center" Margin="5"
-                         Text="{Binding Path=SelectedItem.Name, Converter={conv:ObjectNotNull}, ElementName=itemList}"/>
+                         Text="{Binding Path=SelectedItem.Name, ElementName=itemList}"/>
                 <Label Content="Result:" Grid.Column="0" Grid.Row="1" VerticalContentAlignment="Center" Margin="5"/>
                 <ComboBox Grid.Column="1" Grid.Row="1" VerticalContentAlignment="Center"
                           ItemsSource="{Binding Path=PossibleResults}" Margin="5"
                           SelectedItem="{Binding Path=SelectedItem.Result, ElementName=itemList}"/>
-                <Label Content="Active:" Grid.Column="0" Grid.Row="2" VerticalContentAlignment="Center" Margin="5"/>
+                <Label Content="Enabled:" Grid.Column="0" Grid.Row="2" VerticalContentAlignment="Center" Margin="5"/>
                 <CheckBox Grid.Column="1" Grid.Row="2" VerticalContentAlignment="Center" Margin="5"
-                          IsChecked="{Binding Path=Active, ElementName=itemList}"/>
-                <Label Content="Enabled:" Grid.Column="0" Grid.Row="3" VerticalContentAlignment="Center" Margin="5"/>
-                <CheckBox Grid.Column="1" Grid.Row="3" VerticalContentAlignment="Center" Margin="5"
-                          IsChecked="{Binding Path=Enabled, ElementName=itemList}"/>
+                          IsChecked="{Binding Path=SelectedItem.Enabled, ElementName=itemList}"/>
             </Grid>
             <Grid Grid.Column="1" Grid.Row="2" IsEnabled="{Binding Path=SelectedItem,
                 Converter={conv:ObjectNotNull}, ElementName=itemList}">
@@ -76,20 +77,19 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <DataGrid Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Margin="5" 
-                          ItemsSource="{Binding Path=SelectedItem.Ingredients, ElementName=itemList}">
+                <DataGrid x:Name="ingredientList" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Margin="5" 
+                          ItemsSource="{Binding Path=SelectedItem.Ingredients, ElementName=itemList}"
+                          AutoGenerateColumns="False">
                     <DataGrid.Columns>
-                        <DataGridComboBoxColumn Header="Type" Width="*" ItemsSource="{Binding Path=PossibleIngredientTypes}"
-                                                SelectedItemBinding="{Binding Path=IngredientType}"/>
                         <DataGridComboBoxColumn Header="Ingredient" Width="2*" ItemsSource="{Binding Path=PossibleIngredients}"
                                                 SelectedItemBinding="{Binding Path=Ingredient}"/>
                         <DataGridTextColumn Header="Amount" Width="*"/>
                     </DataGrid.Columns>
                 </DataGrid>
                 <Button Content="Add Ingredient" Margin="5" Grid.Column="0" Grid.Row="1"
-                        Command="{Binding Path=AddIngredientCmd}"/>
+                        Command="{Binding Path=SelectedItem.AddIngredientCmd, ElementName=ingredientList}"/>
                 <Button Content="Remove Ingredient" Margin="5" Grid.Column="1" Grid.Row="1"
-                        Command="{Binding Path=RemoveIngredientCmd}"/>
+                        Command="{Binding Path=SelectedItem.RemoveIngredientCmd, ElementName=ingredientList}"/>
             </Grid>
         </Grid>
     </DataTemplate>
