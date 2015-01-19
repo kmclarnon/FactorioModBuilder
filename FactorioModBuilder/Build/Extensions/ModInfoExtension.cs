@@ -29,7 +29,8 @@ namespace FactorioModBuilder.Build.Extensions
             sb.AppendLine("{");
             sb.AppendLine("  \"name\" : \"" + info.Name + "\",");
             sb.AppendLine("  \"version\" : \"" + info.Version + "\",");
-            sb.AppendLine("  \"title\" : \"" + info.Author + "\",");
+            sb.AppendLine("  \"title\" : \"" + info.Title + "\",");
+            sb.AppendLine("  \"author\" : \"" + info.Author + "\",");
             sb.AppendLine("  \"contact\" : \"" + info.Contact + "\",");
             sb.AppendLine("  \"homepage\" : \"" + info.Homepage + "\",");
             sb.AppendLine("  \"description\" : \"" + info.Description + "\",");
