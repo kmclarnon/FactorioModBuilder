@@ -14,11 +14,6 @@
             </Grid.RowDefinitions>
             <DataGrid x:Name="itemList" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="100" Margin="5"
                       ItemsSource="{Binding Path=ItemList}" AutoGenerateColumns="False" SelectionUnit="FullRow">
-                <DataGrid.RowStyle>
-                    <Style TargetType="{x:Type DataGridRow}">
-                        <Setter Property="IsSelected" Value="{Binding Path=IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                    </Style>                           
-                </DataGrid.RowStyle>
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Group" Binding="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="3*"/>
                     <DataGridTextColumn Header="Inventory Order" Binding="{Binding Path=InvOrder, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*"/>

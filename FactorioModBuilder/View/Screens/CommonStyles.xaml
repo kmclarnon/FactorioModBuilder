@@ -13,4 +13,9 @@
             <Setter Property="VerticalContentAlignment" Value="Center"/>
         </Style.Setters>
     </Style>
+    <Style TargetType="{x:Type DataGridRow}">
+        <Style.Setters>
+            <Setter Property="IsSelected" Value="{Binding Path=IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        </Style.Setters>
+    </Style>
 </ResourceDictionary>

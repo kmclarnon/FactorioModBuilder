@@ -76,7 +76,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 
         private void RemoveRecipe()
         {
-            var res = this.ItemList.Where(o => o.IsSelected);
+            var res = this.ItemList.Where(o => o.IsSelected).ToList();
             foreach (var r in res)
                 this.ItemList.Remove(r);
         }
