@@ -38,6 +38,12 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
             set { this.SetProperty(_internal, value); }
         }
 
+        public int EnergyRequired
+        {
+            get { return _internal.EnergyRequired; }
+            set { this.SetProperty(_internal, value); }
+        }
+
         public ICommand AddIngredientCmd { get { return this.GetCommand(this.AddIngredient, this.CanAddIngredient); } }
         public ICommand RemoveIngredientCmd { get { return this.GetCommand(this.RemoveIngredient, this.CanRemoveIngredient); } }
 
