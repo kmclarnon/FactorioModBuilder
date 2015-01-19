@@ -43,6 +43,7 @@ namespace FactorioModBuilder
                         new ProjectExtension(),
                         new ModDataExtension(),
                         new ModControlExtension(),
+                        new GraphicsExtension(),
                         new PrototypesExtension(),
                         new PrototypeGroupsExtension(),
                         new PrototypeItemsExtension(),

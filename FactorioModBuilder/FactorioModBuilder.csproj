@@ -80,6 +80,7 @@
     <Compile Include="Build\Compiler.cs" />
     <Compile Include="Build\Data\DataUnit.cs" />
     <Compile Include="Build\Data\EntityData.cs" />
+    <Compile Include="Build\Data\GraphicsData.cs" />
     <Compile Include="Build\Data\GroupBaseData.cs" />
     <Compile Include="Build\Data\GroupData.cs" />
     <Compile Include="Build\Data\ItemData.cs" />
@@ -92,6 +93,7 @@
     <Compile Include="Build\Data\RecipeData.cs" />
     <Compile Include="Build\Data\SubGroupData.cs" />
     <Compile Include="Build\Extensions\ExtensionBase.cs" />
+    <Compile Include="Build\Extensions\GraphicsExtension.cs" />
     <Compile Include="Build\Extensions\ModDependenciesExtension.cs" />
     <Compile Include="Build\Extensions\PrototypeEntitiesExtension.cs" />
     <Compile Include="Build\Extensions\PrototypeItemsExtension.cs" />
@@ -120,6 +122,7 @@
     <Compile Include="ViewModels\Dialogs\NewProjectVM.cs" />
     <Compile Include="ViewModels\Main\BuildMenuVM.cs" />
     <Compile Include="ViewModels\Main\FileMenuVM.cs" />
+    <Compile Include="ViewModels\ProjectItems\GraphicsVM.cs" />
     <Compile Include="ViewModels\ProjectItems\ModInfoDependencyVM.cs" />
     <Compile Include="ViewModels\ProjectItems\ProjectItem.cs" />
     <Compile Include="ViewModels\ProjectItems\Prototype\RecipeIngredientVM.cs" />

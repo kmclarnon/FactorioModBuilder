@@ -20,6 +20,7 @@ namespace FactorioModBuilder.Build.Extensions
         FactorioControl,
         FactorioData,
         FactorioLocale,
+        FactorioGraphics,
         Prototypes,
         PrototypeEntities,
         PrototypeEquipment,

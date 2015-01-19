@@ -84,6 +84,7 @@ namespace FactorioModBuilder.ViewModels
                             new ModInfoVM(new ModInfo(projectName)),
                             new ModDataVM(new ModData()),
                             new ModControlVM(new ModControl()),
+                            new GraphicsVM(new Graphics()),
                             new PrototypesVM(new Prototypes(),
                                 new List<TreeItemVMBase>()
                                 {
