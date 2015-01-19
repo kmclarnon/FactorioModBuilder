@@ -10,28 +10,28 @@ using System.Threading.Tasks;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems
 {
-    public abstract class ProjectItem<T, U> : TreeItemVM<T, U>, ICompilerSource 
-        where T : TreeItem<T>
-        where U : TreeItemVM<T, U>
+    public abstract class ProjectItem<TItem, TViewModel> : TreeItemVM<TItem, TViewModel>, ICompilerSource 
+        where TItem : TreeItem<TItem>
+        where TViewModel : TreeItemVM<TItem, TViewModel>
     {
         public abstract IEnumerable<DataUnit> CompilerData { get; }
 
-        public ProjectItem(T item) 
+        public ProjectItem(TItem item) 
             : base(item)
         {
         }
 
-        public ProjectItem(TreeItemVMBase parent, T item)
+        public ProjectItem(TreeItemVMBase parent, TItem item)
             : base(parent, item)
         {
         }
 
-        public ProjectItem(T item, IEnumerable<TreeItemVMBase> children)
+        public ProjectItem(TItem item, IEnumerable<TreeItemVMBase> children)
             : base(item, children)
         {
         }
 
-        public ProjectItem(TreeItemVMBase parent, T item, IEnumerable<TreeItemVMBase> childre)
+        public ProjectItem(TreeItemVMBase parent, TItem item, IEnumerable<TreeItemVMBase> childre)
             : base(parent, item, childre)
         {
         }
