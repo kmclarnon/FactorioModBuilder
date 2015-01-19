@@ -35,7 +35,8 @@
                 FluidsTemplate="{StaticResource Fluids_Template}"
                 RecipesTemplate="{StaticResource Recipes_Template}"
                 TechnologyTemplate="{StaticResource Technology_Template}"
-                TilesTemplate="{StaticResource Tiles_Template}"/>
+                TilesTemplate="{StaticResource Tiles_Template}"
+                GraphicsTemplate="{StaticResource Graphics_Template}"/>
         </ResourceDictionary>
     </Window.Resources>
     <Grid>
