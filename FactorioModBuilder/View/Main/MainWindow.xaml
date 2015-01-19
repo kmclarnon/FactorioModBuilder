@@ -117,8 +117,18 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Label Content="Output" Grid.Row="0" FontSize="12"/>
-                <DataGrid Grid.Row="1" AutoGenerateColumns="True" ItemsSource="{Binding Path=Data.Compiler.BuildMessages, Source={StaticResource proxy}}"
-                          Margin="5 0 10 10">
+                <DataGrid Grid.Row="1" AutoGenerateColumns="False" Margin="5 0 10 10"
+                          ItemsSource="{Binding Path=Data.Compiler.BuildMessages, Source={StaticResource proxy}}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Type" Width="Auto" Binding="{Binding Path=Type}" IsReadOnly="True"/>
+                        <DataGridTemplateColumn Header="Message" Width="*" IsReadOnly="True">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Path=Message}" TextWrapping="Wrap"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
                 </DataGrid>
             </Grid>
         </Grid>
