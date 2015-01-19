@@ -153,16 +153,16 @@ namespace FactorioModBuilder.ViewModels.Base
         public bool TryFindElementUp<T>(out T element) where T : TreeItemVMBase
         {
             element = default(T);
-            T res = (T)_parent;
+            var res = (TreeItemVMBase)_parent;
             while (res != null)
             {
                 if (res.GetType() == typeof(T))
                 {
-                    element = res;
+                    element = (T)res;
                     return true;
                 }
                 else
-                    res = (T)res._parent;
+                    res = (TreeItemVMBase)res._parent;
             }
 
             return false;
