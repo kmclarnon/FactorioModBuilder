@@ -44,7 +44,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
         public string Version
         {
             get { return _internal.Version; }
-            set { this.SetProperty(_internal, value, false, this.UpdateProjectName); }
+            set { this.SetProperty(_internal, value, false, this.UpdateProjectVersion); }
 
         }
 
@@ -125,15 +125,21 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
             _depCount++;
         }
 
+        private void UpdateProjectVersion()
+        {
+            ProjectVM res;
+            if (this.TryFindElementUp<ProjectVM>(out res))
+            {
+                res.Version = this.Version;
+            }
+        }
+
         private void UpdateProjectName()
         {
             ProjectVM res;
             if (this.TryFindElementUp<ProjectVM>(out res))
             {
-                if (this.Version == null || this.Version == String.Empty)
-                    res.Name = this.ModName;
-                else
-                    res.Name = this.ModName + "_" + this.Version;
+                res.Name = this.ModName;
             }
         }
     }

@@ -45,6 +45,18 @@ namespace FactorioModBuilder.Build.Extensions
             set { _compiler.ProjectName = value; }
         }
 
+        protected string ProjectVersion
+        {
+            get { return _compiler.ProjectVersion; }
+            set { _compiler.ProjectVersion = value; }
+        }
+
+        protected string ProjectDirectoryName
+        {
+            get { return _compiler.ProjectDirectory; }
+            set { _compiler.ProjectDirectory = value; }
+        }
+
         protected string TemporaryDirectory
         {
             get { return _compiler.TemporaryDirectory; }

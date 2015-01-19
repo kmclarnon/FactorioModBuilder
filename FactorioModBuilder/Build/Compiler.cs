@@ -22,6 +22,8 @@ namespace FactorioModBuilder.Build
             new Dictionary<ExtensionType, ICompilerExtension>();
 
         public string ProjectName { get; set; }
+        public string ProjectVersion { get; set; }
+        public string ProjectDirectory { get; set; }
         public string TemporaryDirectory { get; set; }
         public string OutputDirectory { get; set; }
         public string PrototypeDirectory { get; set; }
@@ -30,6 +32,7 @@ namespace FactorioModBuilder.Build
         public HashSet<string> SubGroupNames { get; private set; }
         public HashSet<string> ItemNames { get; private set; }
         public HashSet<string> EntityNames { get; private set; }
+        public Dictionary<string, string> GraphicsPathLookup { get; private set; }
 
         public Compiler()
             : this(0)
@@ -58,6 +61,7 @@ namespace FactorioModBuilder.Build
             this.SubGroupNames = new HashSet<string>();
             this.ItemNames = new HashSet<string>();
             this.EntityNames = new HashSet<string>();
+            this.GraphicsPathLookup = new Dictionary<string, string>();
         }
 
         public bool Build(List<DataUnit> data)
