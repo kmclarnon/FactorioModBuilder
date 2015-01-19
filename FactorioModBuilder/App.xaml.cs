@@ -36,7 +36,7 @@ namespace FactorioModBuilder
                     if (arg.StartsWith("-"))
                     {
                         // new command, dispatch previous one
-                        if (_commands.TryGetValue(_cmdSelector, out cmdFunc))
+                        if (_cmdSelector != null && _commands.TryGetValue(_cmdSelector, out cmdFunc))
                             cmdFunc(wnd.ViewModel, parameters);
                         // clear our parameter buffer for next command
                         parameters.Clear();
