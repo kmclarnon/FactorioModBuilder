@@ -19,7 +19,7 @@
                       ItemsSource="{Binding Path=ItemList}" AutoGenerateColumns="False">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Item" Width="5*" Binding="{Binding Path=Name}" />
-                    <DataGridTemplateColumn Header="Subgroup" Width="Auto">
+                    <DataGridTemplateColumn Header="Subgroup" Width="2*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <ComboBox VerticalContentAlignment="Center" DisplayMemberPath="Name"
@@ -28,7 +28,9 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridCheckBoxColumn Header="Enabled" Width="3*" Binding="{Binding Path=Enabled}"/>
+                    <DataGridTextColumn Header="Order" Width="*" Binding="{Binding Path=Order, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <DataGridTextColumn Header="Stack Size" Width="*" Binding="{Binding Path=StackSize, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <DataGridCheckBoxColumn Header="Enabled" Width="*" Binding="{Binding Path=Enabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 </DataGrid.Columns>
             </DataGrid>
             <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="1" 
