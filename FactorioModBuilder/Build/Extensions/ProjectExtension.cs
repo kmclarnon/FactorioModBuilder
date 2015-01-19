@@ -52,7 +52,7 @@ namespace FactorioModBuilder.Build.Extensions
                 }
 
                 // get and validate our output directory
-                var outDirInfo = new DirectoryInfo(pd.BaseOutDirectory);
+                var outDirInfo = new DirectoryInfo(outDir);
                 if (!outDirInfo.Exists)
                     outDirInfo.Create();
             }
