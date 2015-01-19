@@ -189,7 +189,7 @@ namespace FactorioModBuilder.ViewModels.Base
         public bool TryFindElementPeer<T>(out T element) where T : TreeItemVMBase
         {
             element = default(T);
-            T res = (T)_parent;
+            TreeItemVMBase res = (TreeItemVMBase)_parent;
             if (res == null)
                 return false;
             else
