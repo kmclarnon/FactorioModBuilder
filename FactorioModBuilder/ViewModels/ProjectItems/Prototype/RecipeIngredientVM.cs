@@ -16,6 +16,12 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
             get { throw new NotImplementedException(); }
         }
 
+        public TreeItemVMBase Ingredient
+        {
+            get { return this.GetProperty<TreeItemVMBase>(); }
+            set { this.SetProperty(value, (() => this.Name = (value == null) ? String.Empty : value.Name)); }
+        }
+
         public int Quantity
         {
             get { return _internal.Quantity; }

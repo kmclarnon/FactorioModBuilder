@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
@@ -37,6 +38,11 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
             set { this.SetProperty(_internal, value); }
         }
 
+        public ICommand AddIngredientCmd { get { return this.GetCommand(this.AddIngredient, this.CanAddIngredient); } }
+        public ICommand RemoveIngredientCmd { get { return this.GetCommand(this.RemoveIngredient, this.CanRemoveIngredient); } }
+
+        private int _newCount = 1;
+
         public RecipeVM(Recipe rec)
             : this(null, rec)
         {
@@ -46,6 +52,30 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
             : base(parent, rec)
         {
             this.Ingredients = new ObservableCollection<RecipeIngredientVM>();
+        }
+
+        private bool CanAddIngredient()
+        {
+            return true;
+        }
+
+        private void AddIngredient()
+        {
+            this.Ingredients.Add(new RecipeIngredientVM(
+                new RecipeIngredient("New Ingredient " + _newCount, 1)));
+            _newCount++;
+        }
+
+        private bool CanRemoveIngredient()
+        {
+            return this.Ingredients.Where(o => o.IsSelected).Any();
+        }
+
+        private void RemoveIngredient()
+        {
+            var res = this.Ingredients.Where(o => o.IsSelected).ToList();
+            foreach (var r in res)
+                this.Ingredients.Remove(r);
         }
     }
 }
