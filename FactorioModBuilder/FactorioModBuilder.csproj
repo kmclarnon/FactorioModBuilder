@@ -127,6 +127,7 @@
     <Compile Include="ViewModels\ProjectItems\GraphicsFilterItemVM.cs" />
     <Compile Include="ViewModels\ProjectItems\GraphicsFilterVM.cs" />
     <Compile Include="ViewModels\ProjectItems\GraphicsVM.cs" />
+    <Compile Include="ViewModels\ProjectItems\IGraphicsSource.cs" />
     <Compile Include="ViewModels\ProjectItems\ModInfoDependencyVM.cs" />
     <Compile Include="ViewModels\ProjectItems\ProjectItem.cs" />
     <Compile Include="ViewModels\ProjectItems\Prototype\RecipeIngredientVM.cs" />

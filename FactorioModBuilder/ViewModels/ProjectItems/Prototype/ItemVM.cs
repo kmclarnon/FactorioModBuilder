@@ -15,7 +15,7 @@ using System.Text.RegularExpressions;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
-    public class ItemVM : ProjectItem<Item, ItemVM>
+    public class ItemVM : ProjectItem<Item, ItemVM>, IGraphicsSource
     {
         public override IEnumerable<DataUnit> CompilerData
         {
@@ -25,6 +25,12 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
                 this.SubGroupName, this.Order, 
                 this.PlaceResult, this.StackSize).ListWrap(); 
             }
+        }
+
+        public string GraphicPath
+        {
+            get { return this.GetProperty<string>(); }
+            set { this.SetProperty(value); }
         }
 
         public SubGroupVM SubGroup
@@ -48,7 +54,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         public string IconPath
         {
             get { return _internal.IconPath; }
-            set { this.SetProperty(_internal, value); }
+            set { this.SetProperty(_internal, value, false, (() => this.GraphicPath = (value == null) ? String.Empty : value)); }
         }
 
         public int StackSize

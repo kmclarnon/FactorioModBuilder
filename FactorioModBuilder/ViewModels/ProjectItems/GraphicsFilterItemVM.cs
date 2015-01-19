@@ -1,4 +1,5 @@
-﻿using FactorioModBuilder.Models.ProjectItems;
+﻿using FactorioModBuilder.Build.Data;
+using FactorioModBuilder.Models.ProjectItems;
 using FactorioModBuilder.ViewModels.Base;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
 {
     public class GraphicsFilterItemVM : ProjectItem<GraphicsFilterItem, GraphicsFilterItemVM>
     {
-        public override IEnumerable<Build.Data.DataUnit> CompilerData
+        public override IEnumerable<DataUnit> CompilerData
         {
             get { throw new NotImplementedException(); }
         }
@@ -27,6 +28,12 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
             set { this.SetProperty(_internal, value); }
         }
 
+        public TreeItemVMBase Source
+        {
+            get { return this.GetProperty<TreeItemVMBase>(); }
+            set { this.SetProperty(value, this.SourceUpdated); }
+        }
+
         public GraphicsFilterItemVM(GraphicsFilterItem item)
             : this(null, item)
         {
@@ -35,6 +42,11 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
         public GraphicsFilterItemVM(TreeItemVMBase parent, GraphicsFilterItem item)
             : base(parent, item)
         {
+        }
+
+        private void SourceUpdated()
+        {
+
         }
     }
 }

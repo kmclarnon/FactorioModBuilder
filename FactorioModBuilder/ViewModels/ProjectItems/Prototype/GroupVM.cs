@@ -14,7 +14,7 @@ using WpfUtils;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
-    public class GroupVM : ProjectItem<Group, GroupVM>
+    public class GroupVM : ProjectItem<Group, GroupVM>, IGraphicsSource
     {
         public override IEnumerable<DataUnit> CompilerData
         {
@@ -23,6 +23,12 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
                 return new GroupData(this.Name, 
                     this.IconPath, this.InvOrder, this.Order).ListWrap();
             }
+        }
+
+        public string GraphicPath
+        {
+            get { return this.GetProperty<string>(); }
+            set { this.SetProperty(value); }
         }
 
         public string Type
@@ -34,7 +40,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         public string IconPath
         {
             get { return _internal.IconPath; }
-            set { this.SetProperty(_internal, value); }
+            set { this.SetProperty(_internal, value, false, (() => this.GraphicPath = (value == null) ? String.Empty : value)); }
         }
 
         public string InvOrder

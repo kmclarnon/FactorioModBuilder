@@ -10,6 +10,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections.Specialized;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
@@ -65,18 +66,44 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
                 if (!this.TryFindElementDown(out res))
                     throw new Exception("Could not find items child element");
                 return res.ItemList;
-
             }
         }
+
+        public ObservableCollection<IGraphicsSource> GraphicsSources { get; private set; }
 
         public PrototypesVM(Prototypes types, IEnumerable<TreeItemVMBase> children)
             : base(types, children)
         {
+            this.GraphicsSources = new ObservableCollection<IGraphicsSource>();
         }
 
         public PrototypesVM(TreeItemVMBase parent, Prototypes types, IEnumerable<TreeItemVMBase> children)
             : base(parent, types, children)
         {
+            this.GraphicsSources = new ObservableCollection<IGraphicsSource>();
+        }
+
+        protected override void Initialize()
+        {
+            this.Items.CollectionChanged += GraphicsSourceCollectionChanged;
+            this.ItemGroups.CollectionChanged += GraphicsSourceCollectionChanged;
+        }
+
+        void GraphicsSourceCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            switch (e.Action)
+            {
+                case NotifyCollectionChangedAction.Add:
+                    foreach (var i in e.NewItems)
+                        this.GraphicsSources.Add((IGraphicsSource)i);
+                    break;
+                case NotifyCollectionChangedAction.Remove:
+                    foreach (var i in e.OldItems)
+                        this.GraphicsSources.Remove((IGraphicsSource)i);
+                    break;
+                default:
+                    throw new Exception("Unhandled graphics source change");
+            }
         }
     }
 }

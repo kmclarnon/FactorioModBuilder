@@ -1,6 +1,7 @@
 ﻿using FactorioModBuilder.Build.Data;
 using FactorioModBuilder.Models.ProjectItems;
 using FactorioModBuilder.ViewModels.Base;
+using FactorioModBuilder.ViewModels.ProjectItems.Prototype;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -19,6 +20,17 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
 
         public ObservableCollection<GraphicsFilterVM> Filters { get; private set; }
 
+        public ObservableCollection<IGraphicsSource> GraphicsSources
+        {
+            get
+            {
+                PrototypesVM res;
+                if (!this.TryFindElementPeer(out res))
+                    throw new Exception("Could not find prototypes view model");
+                return res.GraphicsSources;
+            }
+        }
+
         public GraphicsVM(Graphics item)
             : this(null, item)
         {
@@ -29,7 +41,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
         {
             this.Filters = new ObservableCollection<GraphicsFilterVM>();
             this.Filters.Add(
-                new GraphicsFilterVM(
+                new GraphicsFilterVM(this,
                     new GraphicsFilter("graphics"),
                     new List<GraphicsFilterVM>()
                     {
