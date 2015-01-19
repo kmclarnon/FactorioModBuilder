@@ -25,6 +25,8 @@ namespace FactorioModBuilder
     /// </summary>
     public partial class MainWindow : Window
     {
+        public MainVM ViewModel { get { return (MainVM)this.DataContext; } }
+
         public MainWindow()
         {
             InitializeComponent();
