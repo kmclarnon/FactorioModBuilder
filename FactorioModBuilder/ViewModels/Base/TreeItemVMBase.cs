@@ -186,50 +186,25 @@ namespace FactorioModBuilder.ViewModels.Base
             return false;
         }
 
-        public bool TryFindElementWithPropertyUp(Type propType,
-            string propName, out TreeItemVMBase element)
+        public bool TryFindElementPeer<T>(out T element) where T : TreeItemVMBase
         {
-            element = null;
-            TreeItemVMBase res = _parent;
-            while (res != null)
+            element = default(T);
+            T res = (T)_parent;
+            if (res == null)
+                return false;
+            else
             {
-                var type = res.GetType();
-                foreach (var p in type.GetProperties())
+                foreach(var c in res.Children)
                 {
-                    if (p.PropertyType == propType && p.Name == propName)
+                    if(c.GetType() == typeof(T))
                     {
-                        element = res;
+                        element = (T)c;
                         return true;
                     }
                 }
-
-                res = res._parent;
             }
 
-            return false;
-        }
-
-        public bool TryFindElementWithPropertyDown(Type propType,
-            string propName, out TreeItemVMBase element)
-        {
-            element = null;
-            foreach (var c in this.Children)
-            {
-                var type = c.GetType();
-                foreach (var p in type.GetProperties())
-                {
-                    if (p.PropertyType == propType && p.Name == propName)
-                    {
-                        element = c;
-                        return true;
-                    }
-                }
-
-                if (c.TryFindElementWithPropertyDown(propType, propName, out element))
-                    return true;
-            }
-
-            return false;
+            return true;
         }
     }
 }
