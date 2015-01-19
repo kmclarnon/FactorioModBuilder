@@ -50,6 +50,7 @@ namespace FactorioModBuilder.ViewModels.Base
                 {
                     _isSelected = value;
                     this.NotifyPropertyChanged();
+                    this.OnIsSelected();
                 }
             }
         }
@@ -63,6 +64,7 @@ namespace FactorioModBuilder.ViewModels.Base
                 {
                     _item.Name = value;
                     this.NotifyPropertyChanged();
+                    this.OnSetName();
                 }
             }
         }
@@ -132,6 +134,14 @@ namespace FactorioModBuilder.ViewModels.Base
         protected virtual string OnGetName(string name)
         {
             return name;
+        }
+
+        protected virtual void OnSetName()
+        {
+        }
+
+        protected virtual void OnIsSelected()
+        {
         }
 
         public void ExpandDown()
