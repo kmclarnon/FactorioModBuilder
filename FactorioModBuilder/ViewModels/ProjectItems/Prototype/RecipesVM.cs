@@ -10,9 +10,15 @@ using System.Windows.Input;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
-    public class RecipesVM : TreeItemVM<Recipes, RecipesVM>
+    public class RecipesVM : ProjectItem<Recipes, RecipesVM>
     {
+        public override IEnumerable<Build.Data.DataUnit> CompilerData
+        {
+            get { throw new NotImplementedException(); }
+        }
+
         public ObservableCollection<RecipeVM> ItemList { get; private set; }
+
         public ObservableCollection<ItemVM> PossibleResults
         {
             get

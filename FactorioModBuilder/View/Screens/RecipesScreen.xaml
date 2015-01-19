@@ -20,7 +20,7 @@
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <ComboBox ItemsSource="{Binding Path=DataContext.PossibleResults, RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                                          SelectedItem="{Binding Path=ResultItem}" DisplayMemberPath="Name"/>
+                                          SelectedItem="{Binding Path=ResultItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
@@ -62,7 +62,8 @@
                 <Label Content="Result:" Grid.Column="0" Grid.Row="1" VerticalContentAlignment="Center" Margin="5"/>
                 <ComboBox Grid.Column="1" Grid.Row="1" VerticalContentAlignment="Center"
                           ItemsSource="{Binding Path=PossibleResults}" Margin="5" DisplayMemberPath="Name"
-                          SelectedItem="{Binding Path=SelectedItem.ResultItem, ElementName=itemList}"/>
+                          SelectedItem="{Binding Path=SelectedItem.ResultItem, ElementName=itemList, 
+                                         Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 <Label Content="Enabled:" Grid.Column="0" Grid.Row="2" VerticalContentAlignment="Center" Margin="5"/>
                 <CheckBox Grid.Column="1" Grid.Row="2" VerticalContentAlignment="Center" Margin="5"
                           IsChecked="{Binding Path=SelectedItem.Enabled, ElementName=itemList}"/>
@@ -81,9 +82,14 @@
                           ItemsSource="{Binding Path=SelectedItem.Ingredients, ElementName=itemList}"
                           AutoGenerateColumns="False">
                     <DataGrid.Columns>
-                        <DataGridComboBoxColumn Header="Ingredient" Width="2*" 
-                                                ItemsSource="{Binding Path=DataContext.PossibleIngredients, RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                                                SelectedItemBinding="{Binding Path=Ingredient}"/>
+                        <DataGridTemplateColumn Header="Ingredient" Width="2*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <ComboBox ItemsSource="{Binding Path=DataContext.PossibleIngredients, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                              SelectedItem="{Binding Path=Ingredient, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
                         <DataGridTextColumn Header="Amount" Width="*"/>
                     </DataGrid.Columns>
                 </DataGrid>
