@@ -1,6 +1,7 @@
 ﻿using FactorioModBuilder.Build.Data;
 using FactorioModBuilder.Models.ProjectItems;
 using FactorioModBuilder.ViewModels.Base;
+using FactorioModBuilder.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -15,7 +16,13 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
     {
         public override IEnumerable<Build.Data.DataUnit> CompilerData
         {
-            get { return this.ItemList.Select(o => new GraphicsData(o.Source.Name, o.ImportPath, o.ExportPath)); }
+            get 
+            {
+                return this.ItemList.Select(o =>
+                    new GraphicsData(o.Source.Name, o.ImportPath, o.ExportPath))
+                    .Concat(this.Children.Where(o => o.GetType() == typeof(GraphicsFilterVM))
+                        .Cast<GraphicsFilterVM>().SelectMany(e => e.CompilerData));
+            }
         }
 
         public ObservableCollection<GraphicsFilterItemVM> ItemList { get; private set; }

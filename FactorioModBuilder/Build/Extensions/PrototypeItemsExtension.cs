@@ -31,11 +31,15 @@ namespace FactorioModBuilder.Build.Extensions
                 if (!this.ItemNames.Add(i.Name))
                     return false;
 
+                string iconPath;
+                if (!this.GraphicsPathLookup.TryGetValue(i.Icon, out iconPath))
+                    return false;
+
                 // write out the item
                 sb.AppendLine("  {");
                 sb.AppendLine("    type = \"item\",");
                 sb.AppendLine("    name = \"" + i.Name +"\",");
-                sb.AppendLine("    icon = \"" + i.Icon + "\",");
+                sb.AppendLine("    icon = \"" + iconPath + "\",");
                 sb.AppendLine("    flags = {}");
                 sb.AppendLine("    subgroup = \"" + i.SubGroup + "\",");
                 sb.AppendLine("    order = \"" + i.Order + "\",");

@@ -42,10 +42,14 @@ namespace FactorioModBuilder.Build.Extensions
                     continue;
                 }
 
+                string iconPath;
+                if(!this.GraphicsPathLookup.TryGetValue(g.Icon, out iconPath))
+                    return false;
+
                 sb.AppendLine("  {");
                 sb.AppendLine("    type = \"item-group\"");
                 sb.AppendLine("    name = \"" + g.Name + "\",");
-                sb.AppendLine("    icon = \"" + g.Icon + "\",");
+                sb.AppendLine("    icon = \"" + iconPath + "\",");
                 sb.AppendLine("    inventory_order = \"" + g.InvOrder + "\",");
                 sb.AppendLine("    order = \"" + g.Order + "\"");
                 sb.AppendLine("  },");

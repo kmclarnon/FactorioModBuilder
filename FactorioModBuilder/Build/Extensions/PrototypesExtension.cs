@@ -11,7 +11,7 @@ namespace FactorioModBuilder.Build.Extensions
     public class PrototypesExtension : ExtensionBase<PrototypeData>
     {
         public PrototypesExtension()
-            : base(ExtensionType.Prototypes)
+            : base(ExtensionType.Prototypes, ExtensionType.FactorioGraphics)
         {
         }
 

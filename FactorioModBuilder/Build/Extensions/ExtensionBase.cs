@@ -89,6 +89,7 @@ namespace FactorioModBuilder.Build.Extensions
 
         protected HashSet<string> EntityNames { get { return _compiler.EntityNames; } }
 
+        protected Dictionary<string, string> GraphicsPathLookup { get { return _compiler.GraphicsPathLookup; } }
 
         public ExtensionBase(ExtensionType extension,
             params ExtensionType[] dependencies)
