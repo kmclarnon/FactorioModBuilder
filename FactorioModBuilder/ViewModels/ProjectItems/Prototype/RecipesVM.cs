@@ -1,4 +1,5 @@
-﻿using FactorioModBuilder.Models.ProjectItems.Prototype;
+﻿using FactorioModBuilder.Build.Data;
+using FactorioModBuilder.Models.ProjectItems.Prototype;
 using FactorioModBuilder.ViewModels.Base;
 using System;
 using System.Collections.Generic;
@@ -12,9 +13,17 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
     public class RecipesVM : ProjectItem<Recipes, RecipesVM>
     {
-        public override IEnumerable<Build.Data.DataUnit> CompilerData
+        public override IEnumerable<DataUnit> CompilerData
         {
-            get { throw new NotImplementedException(); }
+            get
+            {
+                return this.ItemList.Select(o => 
+                    new RecipeData(o.Name, o.Enabled, 
+                        o.Ingredients.Select(e => new Tuple<string, int>(e.Name, e.Quantity)),
+                        o.EnergyRequired,
+                        o.Result,
+                        o.ResultCount));
+            }
         }
 
         public ObservableCollection<RecipeVM> ItemList { get; private set; }

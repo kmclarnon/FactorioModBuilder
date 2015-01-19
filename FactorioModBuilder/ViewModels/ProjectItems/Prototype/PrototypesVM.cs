@@ -28,7 +28,10 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
                 ItemsVM ires;
                 if (!this.TryFindElementDown(out ires))
                     throw new Exception("Could not find items child element");
-                return gres.CompilerData.ConcatMany(sgres.CompilerData, ires.CompilerData);
+                RecipesVM rres;
+                if (!this.TryFindElementDown(out rres))
+                    throw new Exception("Could not find recipes child element");
+                return gres.CompilerData.ConcatMany(sgres.CompilerData, ires.CompilerData, rres.CompilerData);
             }
         }
 
