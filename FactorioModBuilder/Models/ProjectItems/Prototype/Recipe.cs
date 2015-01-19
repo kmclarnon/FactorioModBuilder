@@ -16,7 +16,7 @@ namespace FactorioModBuilder.Models.ProjectItems.Prototype
 
         public Recipe(string name) : base(name)
         {
-
+            this.ResultCount = 1;
         }
     }
 }
