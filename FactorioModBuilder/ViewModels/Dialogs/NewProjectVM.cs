@@ -148,16 +148,10 @@ namespace FactorioModBuilder.ViewModels.Dialogs
 
         private void BrowseLocation()
         {
-            var dlg = new Gat.Controls.OpenDialogView();
-            var vm = (Gat.Controls.OpenDialogViewModel)dlg.DataContext;
-
-            vm.IsDirectoryChooser = true;
-            vm.SelectFolder = true;
-            vm.FileNameText = "Selected Folder:";
-
-            if (vm.Show() == true)
+            var dlg = new Ookii.Dialogs.Wpf.VistaFolderBrowserDialog();
+            if(dlg.ShowDialog() == true)
             {
-                this.ResultLocation = vm.SelectedFolder.Path;
+                this.ResultLocation = dlg.SelectedPath;
             }
         }
     }
