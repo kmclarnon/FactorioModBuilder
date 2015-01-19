@@ -16,5 +16,6 @@
         <ResourceDictionary Source="RecipesScreen.xaml"/>
         <ResourceDictionary Source="TechnologyScreen.xaml"/>
         <ResourceDictionary Source="TilesScreen.xaml"/>
+        <ResourceDictionary Source="GraphicsScreen.xaml"/>
     </ResourceDictionary.MergedDictionaries>    
 </ResourceDictionary>
