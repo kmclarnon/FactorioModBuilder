@@ -7,9 +7,9 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
             <!-- Manual control -->
             <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="5">
@@ -26,13 +26,31 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TreeView x:Name="graphicsView" Grid.Row="0" Grid.Column="0" 
-                          Grid.ColumnSpan="2" Margin="5">
-
+                <TreeView x:Name="graphicsView" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="5"
+                          ItemsSource="{Binding Path=Filters}">
+                    <TreeView.ItemContainerStyle>
+                        <Style TargetType="{x:Type TreeViewItem}">
+                            <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}"/>
+                            <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}"/>
+                            <Setter Property="FontWeight" Value="Normal"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="FontWeight" Value="Bold"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TreeView.ItemContainerStyle>
+                    <TreeView.ItemTemplate>
+                        <HierarchicalDataTemplate ItemsSource="{Binding Children}">
+                            <TextBlock Text="{Binding Name}"/>
+                        </HierarchicalDataTemplate>
+                    </TreeView.ItemTemplate>
                 </TreeView>
                 <Button Content="Add Filter" Grid.Row="1" Grid.Column="0" Margin="5"/>
                 <Button Content="Remove Filter" Grid.Row="1" Grid.Column="1" Margin="5"/>
             </Grid>
+            <!-- Column splitter -->
+            <GridSplitter Grid.Row="1" Grid.Column="1" Width="5" VerticalAlignment="Stretch" HorizontalAlignment="Center"/>
             <!-- Graphics selected filter properties -->
         </Grid>
     </DataTemplate>
