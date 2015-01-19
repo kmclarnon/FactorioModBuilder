@@ -56,7 +56,6 @@ namespace FactorioModBuilder.Build
             foreach (var ext in exts)
                 this.AddExtension(ext);
 
-
             this.GroupNames = new HashSet<string>();
             this.SubGroupNames = new HashSet<string>();
             this.ItemNames = new HashSet<string>();
@@ -68,6 +67,7 @@ namespace FactorioModBuilder.Build
         {
             // clear out any previous messages
             this.BuildMessages.Clear();
+            this.ResetProjectStorage();
             IEnumerable<ICompilerExtension> exts;
             if(!this.TryGetRequiredExtensions(data, out exts))
             {
@@ -166,11 +166,17 @@ namespace FactorioModBuilder.Build
         private void ResetProjectStorage()
         {
             this.ProjectName = String.Empty;
+            this.ProjectVersion = String.Empty;
+            this.ProjectDirectory = String.Empty;
+            this.PrototypeDirectory = String.Empty;
             this.OutputDirectory = String.Empty;
             this.TemporaryDirectory = String.Empty;
-            this.GroupNames = new HashSet<string>();
-            this.SubGroupNames = new HashSet<string>();
-            this.ItemNames = new HashSet<string>();
+
+            this.GroupNames.Clear();
+            this.SubGroupNames.Clear();
+            this.ItemNames.Clear();
+            this.EntityNames.Clear();
+            this.GraphicsPathLookup.Clear();
         }
     }
 }
