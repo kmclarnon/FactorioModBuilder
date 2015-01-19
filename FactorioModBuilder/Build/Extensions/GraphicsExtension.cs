@@ -37,7 +37,7 @@ namespace FactorioModBuilder.Build.Extensions
                         if (!dinfo.Exists)
                             Directory.CreateDirectory(dirPath);
 
-                        info.CopyTo(Path.Combine(dirPath, Path.GetFileName(g.ExportPath)));
+                        info.CopyTo(Path.Combine(dirPath, Path.GetFileName(g.ExportPath)), true);
                     }
                     else
                         return false;
