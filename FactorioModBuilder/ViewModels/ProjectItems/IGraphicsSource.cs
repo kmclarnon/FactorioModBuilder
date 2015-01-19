@@ -9,5 +9,6 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
     public interface IGraphicsSource
     {
         string GraphicPath { get; }
+        string Name { get; }
     }
 }

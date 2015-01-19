@@ -33,6 +33,23 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
         public ICommand AddGraphicCmd { get { return this.GetCommand(this.AddGraphic, this.CanAddGraphic); } }
         public ICommand RemoveGraphicCmd { get { return this.GetCommand(this.RemoveGraphic, this.CanRemoveGraphic); } }
 
+        public string ParentPath
+        {
+            get
+            {
+                GraphicsFilterVM filterRes;
+                if(!this.TryFindElementUp(out filterRes))
+                {
+                    GraphicsVM res;
+                    if (!this.TryFindElementUp(out res))
+                        throw new Exception("Could not find parent graphics view model");
+                    return res.BasePath + "/" + this.Name;
+                }
+
+                return filterRes.ParentPath + "/" + this.Name;
+            }
+        }
+
         private int _newCount = 1;
 
         public GraphicsFilterVM(GraphicsFilter item)
@@ -66,7 +83,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
 
         private void AddGraphic()
         {
-            this.ItemList.Add(new GraphicsFilterItemVM(
+            this.ItemList.Add(new GraphicsFilterItemVM(this,
                 new GraphicsFilterItem("New Graphic " + _newCount)));
             _newCount++;
         }
@@ -81,6 +98,19 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
             var res = this.ItemList.Where(o => o.IsSelected).ToList();
             foreach (var r in res)
                 this.ItemList.Remove(r);
+        }
+
+        public void UpdateExportPath()
+        {
+            foreach(var c in this.Children)
+            {
+                var filter = c as GraphicsFilterVM;
+                if (filter != null)
+                    filter.UpdateExportPath();
+            }
+
+            foreach (var i in this.ItemList)
+                i.UpdateExportPath();
         }
     }
 }

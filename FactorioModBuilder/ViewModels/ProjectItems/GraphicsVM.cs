@@ -31,6 +31,24 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
             }
         }
 
+        public string BasePath
+        {
+            get { return this.GetProperty<string>(); }
+            set { this.SetProperty(value, this.UpdateChildPaths); }
+        }
+
+        public string ProjectName
+        {
+            get { return this.GetProperty<string>(); }
+            set { this.SetProperty(value, this.UpdateBasePath); }
+        }
+
+        public bool ManualMode
+        {
+            get { return this.GetProperty<bool>(); }
+            set { this.SetProperty(value); }
+        }
+
         public GraphicsVM(Graphics item)
             : this(null, item)
         {
@@ -51,6 +69,17 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
                         new GraphicsFilterVM(new GraphicsFilter("technology")),
                         new GraphicsFilterVM(new GraphicsFilter("terrain"))
                     }));
+        }
+
+        private void UpdateBasePath()
+        {
+            this.BasePath = "__" + this.ProjectName.Replace(" ", "_") + "__";
+        }
+
+        private void UpdateChildPaths()
+        {
+            foreach (var f in this.Filters)
+                f.UpdateExportPath();
         }
     }
 }
