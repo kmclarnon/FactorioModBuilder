@@ -50,39 +50,15 @@ namespace FactorioModBuilder.ViewModels.Main
                 {
                     case SolutionType.CreateNew:
                         _parent.Solutions.Clear();
-                        var vm = new SolutionVM(
-                            new Solution(result.ResultSolutionName, result.ResultLocation),
-                            new List<ProjectVM>() 
-                            { 
-                                new ProjectVM(new Project(result.ResultProjectName,
-                                    "C:\\Users\\Kevin\\Desktop\\FactorioModBuilder\\temp",
-                                    "C:\\Users\\Kevin\\Desktop\\Factorio_0.11.8.12921\\mods"), 
-                                    new List<TreeItemVMBase>()
-                                    {
-                                        new ModInfoVM(new ModInfo(result.ResultProjectName)),
-                                        new ModDataVM(new ModData()),
-                                        new ModControlVM(new ModControl()),
-                                        new PrototypesVM(new Prototypes(),
-                                            new List<TreeItemVMBase>()
-                                            {
-                                                new GroupsVM(new Groups()),
-                                                new SubGroupsVM(new SubGroups()),
-                                                new EquipsVM(new Equips()),
-                                                new FluidsVM(new Fluids()),
-                                                new ItemsVM(new Items()),
-                                                new RecipesVM(new Recipes()),
-                                                new TechnologiesVM(new Technologies()),
-                                                new TilesVM(new Tiles())
-                                            }),
-                                        new LocaleVM(new Locale())
-                                    }),
-                            });
+                        var vm = _parent.CreateNewSolution(result.ResultSolutionName, 
+                            result.ResultProjectName, result.ResultLocation);
                         vm.ExpandDown();
                         _parent.Solutions.Add(vm);
                         break;
                     case SolutionType.AddExisting:
                         break;
                     case SolutionType.CreateInNewInstance:
+                        _parent.CreateInNewInstance(result.ResultSolutionName, result.ResultProjectName, result.ResultLocation);
                         break;
                     default:
                         throw new ArgumentException("Unknown Solution Type");
