@@ -1,4 +1,5 @@
-﻿using FactorioModBuilder.Models.ProjectItems;
+﻿using FactorioModBuilder.Build.Data;
+using FactorioModBuilder.Models.ProjectItems;
 using FactorioModBuilder.ViewModels.Base;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
     {
         public override IEnumerable<Build.Data.DataUnit> CompilerData
         {
-            get { throw new NotImplementedException(); }
+            get { return this.ItemList.Select(o => new GraphicsData(o.Source.Name, o.ImportPath, o.ExportPath)); }
         }
 
         public ObservableCollection<GraphicsFilterItemVM> ItemList { get; private set; }

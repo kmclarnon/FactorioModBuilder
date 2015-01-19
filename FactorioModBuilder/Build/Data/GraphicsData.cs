@@ -8,9 +8,16 @@ namespace FactorioModBuilder.Build.Data
 {
     public class GraphicsData : DataUnit
     {
-        public GraphicsData()
+        public string SourceName { get; private set; }
+        public string ImportPath { get; private set; }
+        public string ExportPath { get; private set; }
+
+        public GraphicsData(string sourceName, string importPath, string exportPath)
             : base(Extensions.ExtensionType.FactorioGraphics)
         {
+            this.SourceName = sourceName;
+            this.ImportPath = importPath;
+            this.ExportPath = exportPath;
         }
     }
 }

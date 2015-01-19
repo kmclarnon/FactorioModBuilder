@@ -2,6 +2,7 @@
 using FactorioModBuilder.Models.ProjectItems;
 using FactorioModBuilder.ViewModels.Base;
 using FactorioModBuilder.ViewModels.ProjectItems.Prototype;
+using FactorioModBuilder.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -15,7 +16,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
     {
         public override IEnumerable<DataUnit> CompilerData
         {
-            get { throw new NotImplementedException(); }
+            get { return this.Filters.SelectMany(o => o.CompilerData); }
         }
 
         public ObservableCollection<GraphicsFilterVM> Filters { get; private set; }
