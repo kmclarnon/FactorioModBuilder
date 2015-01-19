@@ -16,7 +16,7 @@ namespace FactorioModBuilder.Build.Data
         {
             this.Name = name;
             this.Icon = iconPath;
-            this.InvOrder = InvOrder;
+            this.InvOrder = invOrder;
             this.Order = order;
         }
     }
