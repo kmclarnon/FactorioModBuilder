@@ -45,6 +45,7 @@ namespace FactorioModBuilder
                         new PrototypeGroupsExtension(),
                         new PrototypeItemsExtension(),
                         new PrototypeEntitiesExtension(),
+                        new PrototypeRecipeExtension(),
                         new LocaleExtension())));
         }
     }
