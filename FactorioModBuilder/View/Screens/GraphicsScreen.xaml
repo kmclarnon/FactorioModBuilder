@@ -52,6 +52,26 @@
             <!-- Column splitter -->
             <GridSplitter Grid.Row="1" Grid.Column="1" Width="5" VerticalAlignment="Stretch" HorizontalAlignment="Center"/>
             <!-- Graphics selected filter properties -->
+            <Grid Grid.Column="2" Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="2*"/>
+                </Grid.RowDefinitions>
+                <DataGrid Grid.Row="0" Grid.Column="0" Margin="5" AutoGenerateColumns="False"
+                          ItemsSource="{Binding Path=SelectedItem.ItemList, ElementName=graphicsView}">
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Header="Source" Width="Auto">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <ComboBox />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn Header="Import Path" Binding="{Binding Path=ImportPath}" Width="*" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Export Path" Binding="{Binding Path=ExportPath}" Width="*" IsReadOnly="True"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
         </Grid>
     </DataTemplate>
 </ResourceDictionary>

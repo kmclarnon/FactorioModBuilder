@@ -2,6 +2,7 @@
 using FactorioModBuilder.ViewModels.Base;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,14 +16,18 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
             get { throw new NotImplementedException(); }
         }
 
+        public ObservableCollection<GraphicsFilterItemVM> ItemList { get; private set; }
+
         public GraphicsFilterVM(GraphicsFilter item)
-            : base(item)
+            : this(item, new List<GraphicsFilterVM>())
         {
         }
 
         public GraphicsFilterVM(GraphicsFilter item, IEnumerable<GraphicsFilterVM> children)
             : base(item, children)
         {
+            this.ItemList = new ObservableCollection<GraphicsFilterItemVM>();
+            this.ItemList.Add(new GraphicsFilterItemVM(new GraphicsFilterItem("test item")));
         }
     }
 }

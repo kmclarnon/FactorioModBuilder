@@ -117,12 +117,14 @@
     <Compile Include="Extensions\CollectionMethods.cs" />
     <Compile Include="Models\Dialogs\NewProject.cs" />
     <Compile Include="Models\ProjectItems\GraphicsFilter.cs" />
+    <Compile Include="Models\ProjectItems\GraphicsFilterItem.cs" />
     <Compile Include="Models\ProjectItems\ModInfoDependency.cs" />
     <Compile Include="Models\ProjectItems\Prototype\RecipeIngredient.cs" />
     <Compile Include="Models\SolutionItems\Solution.cs" />
     <Compile Include="ViewModels\Dialogs\NewProjectVM.cs" />
     <Compile Include="ViewModels\Main\BuildMenuVM.cs" />
     <Compile Include="ViewModels\Main\FileMenuVM.cs" />
+    <Compile Include="ViewModels\ProjectItems\GraphicsFilterItemVM.cs" />
     <Compile Include="ViewModels\ProjectItems\GraphicsFilterVM.cs" />
     <Compile Include="ViewModels\ProjectItems\GraphicsVM.cs" />
     <Compile Include="ViewModels\ProjectItems\ModInfoDependencyVM.cs" />
