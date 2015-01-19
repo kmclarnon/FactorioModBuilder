@@ -45,12 +45,6 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
             set { this.SetProperty(_internal, value); }
         }
 
-        public bool Enabled
-        {
-            get { return _internal.Enabled; }
-            set { this.SetProperty(_internal, value); }
-        }
-
         public string IconPath
         {
             get { return _internal.IconPath; }

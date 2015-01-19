@@ -30,7 +30,6 @@
                     </DataGridTemplateColumn>
                     <DataGridTextColumn Header="Order" Width="*" Binding="{Binding Path=Order, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     <DataGridTextColumn Header="Stack Size" Width="*" Binding="{Binding Path=StackSize, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                    <DataGridCheckBoxColumn Header="Enabled" Width="*" Binding="{Binding Path=Enabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 </DataGrid.Columns>
             </DataGrid>
             <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="1" 

@@ -46,12 +46,6 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
             set { this.SetProperty(_internal, value); }
         }
 
-        public bool Enabled
-        {
-            get { return this.GetProperty<bool>(); }
-            set { this.SetProperty(value); }
-        }
-
         public SubGroupVM(SubGroup item)
             : this(null, item)
         {
@@ -60,7 +54,6 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         public SubGroupVM(TreeItemVMBase parent, SubGroup item)
             : base(parent, item)
         {
-            this.Enabled = true;
         }
 
         public void ForceRemoveGroup()

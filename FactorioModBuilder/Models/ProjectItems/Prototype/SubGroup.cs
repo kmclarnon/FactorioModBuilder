@@ -12,7 +12,6 @@ namespace FactorioModBuilder.Models.ProjectItems.Prototype
         public string Type { get; set; }
         public string Group { get; set; }
         public string Order { get; set; }
-        public bool Enabled { get; set; }
 
         public SubGroup(string name) : base(name)
         {

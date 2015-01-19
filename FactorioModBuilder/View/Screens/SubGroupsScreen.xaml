@@ -27,7 +27,6 @@
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                     <DataGridTextColumn Header="Order" Binding="{Binding Path=Order, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*"/>
-                    <DataGridCheckBoxColumn Header="Enabled" Binding="{Binding Path=Enabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*"/>
                 </DataGrid.Columns>
             </DataGrid>
             <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="1" 
@@ -49,6 +48,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -68,10 +68,6 @@
                        VerticalContentAlignment="Center"/>
                 <TextBox Grid.Column="1" Grid.Row="2" Margin="2.5 2.5 5 2.5" VerticalContentAlignment="Center"
                          Text="{Binding Path=SelectedItem.Order, ElementName=itemList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                <Label Content="Enabled:" Grid.Row="3" Margin="5 2.5 2.5 5"
-                       VerticalContentAlignment="Center"/>
-                <CheckBox Grid.Column="1" Grid.Row="3" Margin="2.5 2.5 5 5" VerticalAlignment="Center"
-                          IsChecked="{Binding Path=SelectedItem.Enabled, ElementName=itemList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             </Grid>
         </Grid>
     </DataTemplate>
