@@ -21,48 +21,48 @@ namespace FactorioModBuilder.Build.Extensions
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("data:extend(");
             sb.AppendLine("{");
-            if (units.Any())
+            foreach (var r in units)
             {
-                foreach (var r in units)
-                {
-                    if (r.Ingredients.Count < 1)
+                if (r.Ingredients.Count < 1)
+                    return false;
+                if (!this.ItemNames.Contains(r.Result))
+                    return false;
+                if (r.EnergyReq < 0)
+                    return false;
+                foreach (var i in r.Ingredients)
+                    if (!this.ItemNames.Contains(i.Item1))
                         return false;
-                    if (!this.ItemNames.Contains(r.Result))
-                        return false;
-                    if (r.EnergyReq < 0)
-                        return false;
-                    foreach (var i in r.Ingredients)
-                        if (!this.ItemNames.Contains(i.Item1))
-                            return false;
 
-                    sb.AppendLine("  {");
-                    sb.AppendLine("    type = \"recipe\",");
-                    sb.AppendLine("    name = \"" + r.Name + "\",");
-                    sb.AppendLine("    enabled = \"" + r.Enabled + "\",");
-                    if(r.EnergyReq != 0)
-                        sb.AppendLine("    energy_required = \"" + r.EnergyReq + "\",");
-                    sb.AppendLine("    ingredients = ");
-                    sb.AppendLine("    {");
-                    foreach (var i in r.Ingredients)
-                        sb.AppendLine("      {\"" + i.Item1 + "\"," + i.Item2 + "},");
-                    sb.Length -= (Environment.NewLine.Length + 1);
-                    sb.AppendLine();
-                    sb.AppendLine("    },");
-                    if (r.ResultCount != 1)
-                    {
-                        sb.AppendLine("    result = \"" + r.Result + "\",");
-                        sb.AppendLine("    result_count = " + r.ResultCount);
-                    }
-                    else
-                    {
-                        sb.AppendLine("    result = \"" + r.Result + "\",");
-                    }
-                    sb.AppendLine("  },");
-                }
+                sb.AppendLine("  {");
+                sb.AppendLine("    type = \"recipe\",");
+                sb.AppendLine("    name = \"" + r.Name + "\",");
+                sb.AppendLine("    enabled = \"" + r.Enabled + "\",");
+                if(r.EnergyReq != 0)
+                    sb.AppendLine("    energy_required = \"" + r.EnergyReq + "\",");
+                sb.AppendLine("    ingredients = ");
+                sb.AppendLine("    {");
+                foreach (var i in r.Ingredients)
+                    sb.AppendLine("      {\"" + i.Item1 + "\"," + i.Item2 + "},");
                 sb.Length -= (Environment.NewLine.Length + 1);
                 sb.AppendLine();
+                sb.AppendLine("    },");
+                if (r.ResultCount != 1)
+                {
+                    sb.AppendLine("    result = \"" + r.Result + "\",");
+                    sb.AppendLine("    result_count = " + r.ResultCount);
+                }
+                else
+                {
+                    sb.AppendLine("    result = \"" + r.Result + "\",");
+                }
+                sb.AppendLine("  },");
             }
+            if(sb.Length > 2)
+                sb.Length = sb.Length - (Environment.NewLine.Length + 1);
+            sb.AppendLine("");
             sb.AppendLine("})");
+            var res = sb.ToString();
+            sr.Write(res);
 
             return true;
         }
