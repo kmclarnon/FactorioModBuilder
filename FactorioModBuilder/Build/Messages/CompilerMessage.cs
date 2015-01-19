@@ -26,6 +26,7 @@ namespace FactorioModBuilder.Build.Messages
     {
         public string Message { get; private set; }
         public MessageType Type { get; private set; }
+        public bool IsSelected { get; set; }
 
         public CompilerMessage(MessageType type, string msg)
         {
