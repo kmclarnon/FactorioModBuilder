@@ -26,7 +26,7 @@ namespace FactorioModBuilder.Build.Extensions
                 // verify the item contents
                 if (!this.SubGroupNames.Contains(i.SubGroup))
                     return false;
-                if (!this.EntityNames.Contains(i.PlaceResult))
+                if (i.PlaceResult != null && !this.EntityNames.Contains(i.PlaceResult))
                     return false;
                 if (!this.ItemNames.Add(i.Name))
                     return false;
@@ -39,7 +39,8 @@ namespace FactorioModBuilder.Build.Extensions
                 sb.AppendLine("    flags = {}");
                 sb.AppendLine("    subgroup = \"" + i.SubGroup + "\",");
                 sb.AppendLine("    order = \"" + i.Order + "\",");
-                sb.AppendLine("    place_result = \"" + i.PlaceResult + "\",");
+                if(i.PlaceResult != null)
+                    sb.AppendLine("    place_result = \"" + i.PlaceResult + "\",");
                 sb.AppendLine("    stack_size = \"" + i.StackSize + "\"");
                 sb.AppendLine("  },");
             }

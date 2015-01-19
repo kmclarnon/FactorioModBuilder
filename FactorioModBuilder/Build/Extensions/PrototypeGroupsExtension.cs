@@ -70,7 +70,6 @@ namespace FactorioModBuilder.Build.Extensions
                 sb.Length = sb.Length - (Environment.NewLine.Length + 1);
             sb.AppendLine("");
             sb.AppendLine("})");
-
             string res = sb.ToString();
             sw.Write(res);
 
