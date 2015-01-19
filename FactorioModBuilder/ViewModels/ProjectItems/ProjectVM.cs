@@ -39,7 +39,8 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
                 GraphicsVM gres;
                 if (!this.TryFindElementDown(out gres))
                     throw new Exception("Failed to find graphics child");
-                return new ProjectData(this.Name, this.TempDir, this.OutDir).ListWrap()
+                var test = gres.CompilerData;
+                return new ProjectData(this.Name, this.TempDir, this.OutDir, this.Version).ListWrap()
                     .ConcatMany(miRes.CompilerData, mcRes.CompilerData, mdRes.CompilerData, 
                         prot.CompilerData, loc.CompilerData, gres.CompilerData);
             }
@@ -54,6 +55,12 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
         public string OutDir
         {
             get { return _internal.OutDir; }
+            set { this.SetProperty(_internal, value); }
+        }
+
+        public string Version
+        {
+            get { return _internal.Version; }
             set { this.SetProperty(_internal, value); }
         }
 

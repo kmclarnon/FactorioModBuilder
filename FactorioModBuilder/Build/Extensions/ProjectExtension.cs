@@ -19,22 +19,25 @@ namespace FactorioModBuilder.Build.Extensions
 
             this.Info("Build Started: Project: {0}", pd.ProjectName);
 
-            if (!this.PrepareProject(pd))
-                return false;
-
             this.ProjectName = pd.ProjectName;
-            this.OutputDirectory = pd.BaseOutDirectory;
-            this.TemporaryDirectory = pd.BaseTempDirectory;
+            this.ProjectVersion = pd.Version;
+            this.ProjectDirectoryName = (pd.Version == null || pd.Version == String.Empty) ?
+                pd.ProjectName : pd.ProjectName + "_" + pd.Version;
+            this.OutputDirectory = Path.Combine(pd.OutDir, this.ProjectDirectoryName);
+            this.TemporaryDirectory = Path.Combine(pd.TempDir, this.ProjectDirectoryName);
+
+            if (!this.PrepareProject(this.OutputDirectory, this.TemporaryDirectory))
+                return false;
 
             return true;
         }
 
-        protected bool PrepareProject(ProjectData pd)
+        protected bool PrepareProject(string tmpDir, string outDir)
         {
             try
             {
                 // get and validate our temporary directory
-                var tmpDirInfo = new DirectoryInfo(pd.BaseTempDirectory);
+                var tmpDirInfo = new DirectoryInfo(tmpDir);
                 if (!tmpDirInfo.Exists)
                 {
                     tmpDirInfo.Create();

@@ -11,6 +11,7 @@ namespace FactorioModBuilder.Models.ProjectItems
     {
         public string TempDir { get; set; }
         public string OutDir { get; set; }
+        public string Version { get; set; }
 
         public Project(string name, string tmpdir, 
             string outdir) : base(name)
