@@ -40,6 +40,18 @@ namespace FactorioModBuilder.ViewModels
             set { this.SetProperty(_main, value); }
         }
 
+        public int AppTop
+        {
+            get { return _main.AppTop; }
+            set { this.SetProperty(_main, value); }
+        }
+
+        public int AppLeft
+        {
+            get { return _main.AppLeft; }
+            set { this.SetProperty(_main, value); }
+        }
+
         public ObservableCollection<SolutionVM> Solutions { get; private set; }
 
         public FileMenuVM FileMenu { get; private set; }

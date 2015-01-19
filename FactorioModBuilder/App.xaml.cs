@@ -18,7 +18,10 @@ namespace FactorioModBuilder
             new Dictionary<string, Action<MainVM, IEnumerable<string>>>()
         {
             { "width", App.SetWidth },
-            { "height", App.SetHeight }
+            { "height", App.SetHeight },
+            { "top", App.SetTop },
+            { "left", App.SetLeft },
+            
         };
 
         private string _cmdSelector;
@@ -76,6 +79,28 @@ namespace FactorioModBuilder
             int res;
             if (Int32.TryParse(largs[0], out res))
                 vm.AppHeight = res;
+        }
+
+        private static void SetTop(MainVM vm, IEnumerable<string> args)
+        {
+            var largs = args.ToList();
+            if (largs.Count != 1)
+                return;
+
+            int res;
+            if (Int32.TryParse(largs[0], out res))
+                vm.AppTop = res;
+        }
+
+        private static void SetLeft(MainVM vm, IEnumerable<string> args)
+        {
+            var largs = args.ToList();
+            if (largs.Count != 1)
+                return;
+
+            int res;
+            if (Int32.TryParse(largs[0], out res))
+                vm.AppLeft = res;
         }
     }
 }

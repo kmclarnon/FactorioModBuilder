@@ -7,8 +7,10 @@
         xmlns:vmp="clr-namespace:FactorioModBuilder.ViewModels.ProjectItems"
         xmlns:local="clr-namespace:FactorioModBuilder"
         Title="{Binding Path=AppTitle, Mode=OneWay}" 
-        Height="{Binding Path=AppHeight, Mode=TwoWay}" 
-        Width="{Binding Path=AppWidth, Mode=TwoWay}">
+        Height="{Binding Path=AppHeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        Width="{Binding Path=AppWidth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        Top="{Binding Path=AppTop, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        Left="{Binding Path=AppLeft, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

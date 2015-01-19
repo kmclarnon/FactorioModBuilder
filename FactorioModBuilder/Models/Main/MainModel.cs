@@ -15,6 +15,8 @@ namespace FactorioModBuilder.Models.Main
         public string AppVersion { get; private set; }
         public int AppHeight { get; set; }
         public int AppWidth { get; set; }
+        public int AppTop { get; set; }
+        public int AppLeft { get; set; }
 
         public Compiler Compiler { get; private set; }
 
