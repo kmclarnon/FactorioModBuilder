@@ -2,6 +2,7 @@
 using FactorioModBuilder.Models.ProjectItems.Prototype;
 using FactorioModBuilder.ViewModels.Base;
 using FactorioModBuilder.Extensions;
+using FactorioModBuilder.ViewModels.ProjectItems.Prototype;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -23,7 +24,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
             { 
                 return new ItemData(this.Name, this.IconPath, 
                 this.SubGroupName, this.Order, 
-                this.PlaceResult, this.StackSize).ListWrap(); 
+                this.PlaceResult, this.StackSize, this.Flags.Item1).ListWrap(); 
             }
         }
 
@@ -67,6 +68,12 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         {
             get { return _internal.PlaceResult; }
             set { this.SetProperty(_internal, value); }
+        }
+
+        public Tuple<Item.ItemFlag, string> Flags
+        {
+            get { return this.GetProperty<Tuple<Item.ItemFlag, string>>(); }
+            set { this.SetProperty(value, (() => _internal.Flag = value.Item1)); }
         }
 
         public ICommand FindImageCmd { get { return this.GetCommand(this.FindImage, this.CanFindImage); } }

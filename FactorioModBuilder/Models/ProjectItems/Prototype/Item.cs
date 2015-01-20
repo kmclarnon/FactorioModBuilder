@@ -15,6 +15,16 @@ namespace FactorioModBuilder.Models.ProjectItems.Prototype
         public int StackSize { get; set; }
         public string PlaceResult { get; set; }
 
+        [Flags]
+        public enum ItemFlag
+        {
+            GoesToQuickbar      = 1 << 0,
+            GoesToMainInventory = 1 << 1,
+            Hidden              = 1 << 2
+        };
+
+        public ItemFlag Flag { get; set; }
+
         public Item(string name) : base(name)
         {
         }

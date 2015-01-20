@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FactorioModBuilder.Models.ProjectItems.Prototype;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,9 +15,10 @@ namespace FactorioModBuilder.Build.Data
         public string Order { get; private set; }
         public string PlaceResult { get; private set; }
         public int StackSize { get; private set; }
+        public Item.ItemFlag Flag { get; private set; }
 
         public ItemData(string name, string icon, string subgroup,
-            string order, string placeResult, int stackSize)
+            string order, string placeResult, int stackSize, Item.ItemFlag flag)
             : base(Extensions.ExtensionType.PrototypeItems)
         {
             this.Name = name;
@@ -25,6 +27,7 @@ namespace FactorioModBuilder.Build.Data
             this.Order = order;
             this.PlaceResult = placeResult;
             this.StackSize = StackSize;
+            this.Flag = flag;
         }
     }
 }

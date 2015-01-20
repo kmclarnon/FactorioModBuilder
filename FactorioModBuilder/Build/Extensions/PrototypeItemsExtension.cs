@@ -33,7 +33,7 @@ namespace FactorioModBuilder.Build.Extensions
                 sb.AppendLine("    type = \"item\",");
                 sb.AppendLine("    name = \"" + i.Name +"\",");
                 sb.AppendLine("    icon = \"" + iconPath + "\",");
-                sb.AppendLine("    flags = {},");
+                sb.AppendLine("    flags = {" + this.GetFlagString(i.Flag) + "},");
                 sb.AppendLine("    subgroup = \"" + i.SubGroup + "\",");
                 sb.AppendLine("    order = \"" + i.Order + "\",");
                 if(i.PlaceResult != null)
@@ -70,6 +70,25 @@ namespace FactorioModBuilder.Build.Extensions
         {
             path = Path.Combine(this.PrototypeDirectory, "items.lua");
             return true;
+        }
+
+        private string GetFlagString(Item.ItemFlag flag)
+        {
+            switch (flag)
+            {
+                case Item.ItemFlag.GoesToQuickbar:
+                    return "\"goes-to-quickbar\"";
+                case Item.ItemFlag.GoesToMainInventory:
+                    return "\"goes-to-main-inventory\""; 
+                case Item.ItemFlag.Hidden:
+                    return "\"hidden\"";
+                case Item.ItemFlag.GoesToQuickbar | Item.ItemFlag.Hidden:
+                    return "\"goes-to-quickbar\", \"hidden\"";
+                case Item.ItemFlag.GoesToMainInventory | Item.ItemFlag.Hidden:
+                    return "\"goes-to-main-inventory\", \"hidden\"";
+                default:
+                    throw new Exception("Unknown Item flag: " + flag.ToString());
+            }
         }
     }
 }

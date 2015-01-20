@@ -59,6 +59,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Label Content="Name:" Grid.Column="0" Grid.Row="0" Margin="5"/>
                 <TextBox Text="{Binding Path=SelectedItem.Name, ElementName=itemList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged,
@@ -88,6 +89,9 @@
                 <TextBox Text="{Binding Path=SelectedItem.StackSize, ElementName=itemList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged,
                                 ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" 
                          Grid.Column="1" Grid.Row="4" Margin="6" VerticalContentAlignment="Center"/>
+                <Label Content="Flags:" Grid.Column="0" Grid.Row="5" Margin="5"/>
+                <ComboBox Grid.Column="1" Grid.Row="5" ItemsSource="{Binding Path=PossibleFlags}" Margin="5"
+                          SelectedItem="{Binding Path=SelectedItem.Flags, ElementName=itemList}" DisplayMemberPath="Item2"/>
             </Grid>
         </Grid>
     </DataTemplate>   
