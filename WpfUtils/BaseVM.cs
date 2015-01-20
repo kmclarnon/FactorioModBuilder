@@ -177,7 +177,7 @@ namespace WpfUtils
             // check for type consistency.  We use reflection here because the
             // initial value of the property can be null
             var pInfo = this.GetType().GetProperty(propertyName);
-            if (value != null || !pInfo.PropertyType.IsAssignableFrom(typeof(T)))
+            if (!pInfo.PropertyType.IsAssignableFrom(typeof(T)))
                 throw new ArgumentException("Supplied type does not match property type");
 
             bool changed = false;
@@ -270,8 +270,8 @@ namespace WpfUtils
         /// <returns>The value of the specified property on the source object</returns>
         protected T GetProperty<T>(object source, Action precedingAction, [CallerMemberName] string propertyName = "")
         {
-            var pInfo = typeof(T).GetProperty(propertyName);
-            if (pInfo != null || pInfo.PropertyType.IsAssignableFrom(typeof(T)))
+            var pInfo = source.GetType().GetProperty(propertyName);
+            if (pInfo == null || !pInfo.PropertyType.IsAssignableFrom(typeof(T)))
                 throw new ArgumentException("Property does not match expected type");
 
             // execute our action if we have one
@@ -293,8 +293,8 @@ namespace WpfUtils
         {
             if (source == null)
                 throw new ArgumentException("source");
-            var pInfo = typeof(T).GetProperty(propertyName);
-            if (pInfo != null || pInfo.PropertyType.IsAssignableFrom(typeof(T)))
+            var pInfo = source.GetType().GetProperty(propertyName);
+            if (pInfo == null || !pInfo.PropertyType.IsAssignableFrom(typeof(T)))
                 throw new ArgumentException("Property does not match expected type");
 
             // execute our modifier if we have one
