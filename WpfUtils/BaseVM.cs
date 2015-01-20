@@ -258,7 +258,7 @@ namespace WpfUtils
         protected ICommand GetCommand(Action execute, Func<bool> canExecute = null,
             [CallerMemberName] string propertyName = "default")
         {
-            return this.GetCommand((x => execute()), (x => canExecute()), propertyName);
+            return this.GetCommand((x => execute()), (x => (canExecute == null) ? true : canExecute()), propertyName);
         }
 
         /// <summary>
