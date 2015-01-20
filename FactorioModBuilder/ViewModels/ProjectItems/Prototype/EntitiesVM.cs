@@ -11,13 +11,25 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
     public class EntitiesVM : TreeItemVM<Entities, EntitiesVM>
     {
+        /// <summary>
+        /// The Entities contained in this view model
+        /// </summary>
         public ObservableCollection<EntityVM> ItemList { get; private set; }
 
+        /// <summary>
+        /// The basic constructor to wrap an Entities model
+        /// </summary>
+        /// <param name="en">The entities model to wrap</param>
         public EntitiesVM(Entities en)
             : this(null, en)
         {
         }
 
+        /// <summary>
+        /// THe basic constructo to wrap an Entities model and associate it with the parent TreeView view model
+        /// </summary>
+        /// <param name="parent">The parent of this view model</param>
+        /// <param name="en">The entities model to wrap</param>
         public EntitiesVM(TreeItemVMBase parent, Entities en)
             : base(parent, en)
         {

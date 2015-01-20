@@ -11,6 +11,9 @@ using System.IO;
 
 namespace FactorioModBuilder.ViewModels.Dialogs
 {
+    /// <summary>
+    /// The view model for the New Project Dialog
+    /// </summary>
     public class NewProjectVM : BaseVM
     {
         public ICommand OkCmd { get { return this.GetCommand(this.OK); } }

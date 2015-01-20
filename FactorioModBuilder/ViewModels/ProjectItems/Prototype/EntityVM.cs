@@ -10,11 +10,20 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
     public class EntityVM : TreeItemVM<Entity, EntityVM>
     {
+        /// <summary>
+        /// The basic constructor to wrap an Entity model
+        /// </summary>
+        /// <param name="entity">The Entity model to wrap</param>
         public EntityVM(Entity entity)
             : base(entity)
         {
         }
 
+        /// <summary>
+        /// THe basic constructor to wrap an Entity model and associte it with the provided parent
+        /// </summary>
+        /// <param name="parent">The parent of this view model</param>
+        /// <param name="entity">The Entity model to wrap</param>
         public EntityVM(TreeItemVMBase parent, Entity entity)
             : base(parent, entity)
         {
