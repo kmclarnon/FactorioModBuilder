@@ -7,105 +7,38 @@ using System.Windows.Input;
 using WpfUtils;
 using FactorioModBuilder.Models;
 using FactorioModBuilder.Models.Dialogs;
+using System.IO;
 
 namespace FactorioModBuilder.ViewModels.Dialogs
 {
     public class NewProjectVM : BaseVM
     {
-        private ICommand _okCmd;
-        public ICommand OkCmd
-        {
-            get
-            {
-                if (_okCmd == null)
-                    _okCmd = new RelayCommand(
-                        (x => this.OK()));
-                return _okCmd;
-            }
-        }
-
-        private ICommand _cancelCmd;
-        public ICommand CancelCmd
-        {
-            get
-            {
-                if (_cancelCmd == null)
-                    _cancelCmd = new RelayCommand(
-                        (x => this.Cancel()));
-                return _cancelCmd;
-            }
-        }
-
-        private ICommand _browseLocation;
-        public ICommand BrowseLocationCmd
-        {
-            get
-            {
-                if (_browseLocation == null)
-                    _browseLocation = new RelayCommand(
-                        (x => this.BrowseLocation()));
-                return _browseLocation;
-            }
-        }
+        public ICommand OkCmd { get { return this.GetCommand(this.OK); } }
+        public ICommand CancelCmd { get { return this.GetCommand(this.Cancel); } }
+        public ICommand BrowseLocationCmd { get { return this.GetCommand(this.BrowseLocation); } }
 
         public string ResultProjectName
         {
             get { return this.Project.ResultProjectName; }
-            set
-            {
-                if(this.Project.ResultProjectName != value)
-                {
-                    this.Project.ResultProjectName = value;
-                    this.NotifyPropertyChanged();
-                    if(!this._solutionModified)
-                    {
-                        this.Project.ResultSolutionName = value;
-                        this.NotifyPropertyChanged("ResultSolutionName");
-                    }
-                }
-            }
+            set { this.SetProperty(this.Project, value, false, this.OnUpdateName); }
         }
 
         public string ResultLocation
         {
             get { return this.Project.ResultLocation; }
-            set
-            {
-                if(this.Project.ResultLocation != value)
-                {
-                    this.Project.ResultLocation = value;
-                    this.NotifyPropertyChanged();
-                }
-            }
+            set { this.SetProperty(this.Project, value); }
         }
 
         public SolutionType ResultSolutionType
         {
             get { return this.Project.ResultSolutionType; }
-            set
-            {
-                if(this.Project.ResultSolutionType != value)
-                {
-                    this.Project.ResultSolutionType = value;
-                    this.NotifyPropertyChanged();
-                }
-            }
+            set { this.SetProperty(this.Project, value); }
         }
 
         public string ResultSolutionName
         {
             get { return this.Project.ResultSolutionName; }
-            set
-            {
-                if(this.Project.ResultSolutionName != value)
-                {
-                    _solutionModified = true;
-                    this.Project.ResultSolutionName = value;
-                    if (value == String.Empty)
-                        _solutionModified = false;
-                    this.NotifyPropertyChanged();
-                }
-            }
+            set { this.SetProperty(this.Project, value, false, this.OnUpdateSolution); }
         }
 
         public IEnumerable<Tuple<SolutionType, String>> PossibleSolutions
@@ -124,6 +57,12 @@ namespace FactorioModBuilder.ViewModels.Dialogs
             }
         }
 
+        public string Message
+        {
+            get { return this.GetProperty<string>(); }
+            set { this.SetProperty(value); }
+        }
+
         private Action<bool> _setResult;
         private bool _solutionModified = false;
 
@@ -136,9 +75,40 @@ namespace FactorioModBuilder.ViewModels.Dialogs
             this.Project = new NewProject();
         }
 
+        private bool CanOK()
+        {
+            try
+            {
+                if (this.ResultProjectName == String.Empty || this.ResultProjectName == null)
+                {
+                    this.Message = "A valid project name is required";
+                    return false;
+                }
+                if (this.ResultSolutionName == String.Empty || this.ResultSolutionName == null)
+                {
+                    this.Message = "A valid solution name is required";
+                    return false;
+                }
+                if (this.ResultLocation == null || this.ResultLocation == String.Empty)
+                {
+                    this.Message = "A valid location path is required";
+                    return false;
+                }
+                var p = Path.GetFullPath(this.ResultLocation);
+                this.Message = String.Empty;
+                return true;
+            }
+            catch(Exception)
+            {
+                this.Message = "A valid location path is required";
+                return false;
+            }
+        }
+
         private void OK()
         {
-            _setResult(true);
+            if(this.CanOK())
+                _setResult(true);
         }
 
         private void Cancel()
@@ -153,6 +123,22 @@ namespace FactorioModBuilder.ViewModels.Dialogs
             {
                 this.ResultLocation = dlg.SelectedPath;
             }
+        }
+
+        private void OnUpdateName()
+        {
+            if (!_solutionModified)
+            {
+                this.Project.ResultSolutionName = this.ResultProjectName;
+                this.NotifyPropertyChanged("ResultSolutionName");
+            }
+        }
+
+        private void OnUpdateSolution()
+        {
+            _solutionModified = true;
+            if (this.ResultSolutionName == String.Empty)
+                _solutionModified = false;
         }
     }
 }
