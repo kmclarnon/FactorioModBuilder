@@ -60,6 +60,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Label Content="Name:" Grid.Column="0" Grid.Row="0" Margin="5"/>
                 <TextBox Text="{Binding Path=SelectedItem.Name, ElementName=itemList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged,
@@ -91,7 +92,12 @@
                          Grid.Column="1" Grid.Row="4" Margin="6" VerticalContentAlignment="Center"/>
                 <Label Content="Flags:" Grid.Column="0" Grid.Row="5" Margin="5"/>
                 <ComboBox Grid.Column="1" Grid.Row="5" ItemsSource="{Binding Path=PossibleFlags}" Margin="5"
-                          SelectedItem="{Binding Path=SelectedItem.Flags, ElementName=itemList}" DisplayMemberPath="Item2"/>
+                          SelectedItem="{Binding Path=SelectedItem.Flags, ElementName=itemList, Mode=TwoWay, 
+                                        UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Item2"/>
+                <Label Content="Place Result:" Grid.Column="0" Grid.Row="6" Margin="5"/>
+                <ComboBox Grid.Column="1" Grid.Row="6" ItemsSource="{Binding Path=PossiblePlaceResults}" Margin="5"
+                          SelectedItem="{Binding Path=SelectedItem.PlaceResultEntity, ElementName=itemList, 
+                                        Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name"/>
             </Grid>
         </Grid>
     </DataTemplate>   

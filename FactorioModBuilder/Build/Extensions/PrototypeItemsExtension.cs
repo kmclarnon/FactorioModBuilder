@@ -36,7 +36,7 @@ namespace FactorioModBuilder.Build.Extensions
                 sb.AppendLine("    flags = {" + this.GetFlagString(i.Flag) + "},");
                 sb.AppendLine("    subgroup = \"" + i.SubGroup + "\",");
                 sb.AppendLine("    order = \"" + i.Order + "\",");
-                if(i.PlaceResult != null)
+                if(i.PlaceResult != null && i.PlaceResult != String.Empty)
                     sb.AppendLine("    place_result = \"" + i.PlaceResult + "\",");
                 sb.AppendLine("    stack_size = \"" + i.StackSize + "\"");
                 sb.AppendLine("  },");

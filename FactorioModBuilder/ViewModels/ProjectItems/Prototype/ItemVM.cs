@@ -64,6 +64,12 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
             set { this.SetProperty(_internal, value); }
         }
 
+        public EntityVM PlaceResultEntity
+        {
+            get { return this.GetProperty<EntityVM>(); }
+            set { this.SetProperty(value, (() => this.PlaceResult = (value == null) ? String.Empty : value.Name)); }
+        }
+
         public string PlaceResult
         {
             get { return _internal.PlaceResult; }

@@ -90,6 +90,7 @@ namespace FactorioModBuilder.ViewModels
                                 {
                                     new GroupsVM(new Groups()),
                                     new SubGroupsVM(new SubGroups()),
+                                    new EntitiesVM(new Entities()),
                                     new EquipsVM(new Equips()),
                                     new FluidsVM(new Fluids()),
                                     new ItemsVM(new Items()),

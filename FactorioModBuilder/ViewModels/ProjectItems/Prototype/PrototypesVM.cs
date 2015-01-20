@@ -69,6 +69,17 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
             }
         }
 
+        public ObservableCollection<EntityVM> Entities
+        {
+            get
+            {
+                EntitiesVM res;
+                if (!this.TryFindElementDown(out res))
+                    throw new Exception("Could not find entity child element");
+                return res.ItemList;
+            }
+        }
+
         public ObservableCollection<IGraphicsSource> GraphicsSources { get; private set; }
 
         public PrototypesVM(Prototypes types, IEnumerable<TreeItemVMBase> children)
