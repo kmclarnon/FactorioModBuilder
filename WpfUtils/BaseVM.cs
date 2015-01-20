@@ -177,7 +177,7 @@ namespace WpfUtils
             // check for type consistency.  We use reflection here because the
             // initial value of the property can be null
             var pInfo = this.GetType().GetProperty(propertyName);
-            if (value != null && pInfo.PropertyType != typeof(T))
+            if (value != null || !pInfo.PropertyType.IsAssignableFrom(typeof(T)))
                 throw new ArgumentException("Supplied type does not match property type");
 
             bool changed = false;
@@ -228,7 +228,7 @@ namespace WpfUtils
         }
 
         /// <summary>
-        /// Gets the property indiciated by the propertyName argument to the given value.  
+        /// Gets the property indiciated by the propertyName argument.
         /// Creates a new property entry and returns the default value if the property does not exist yet
         /// </summary>
         /// <param name="propertyName">The name of the property to retrieve the value for.  Defaults to CallerMemberName and only needs to be set when invoked outside of the property get</param>
@@ -246,6 +246,62 @@ namespace WpfUtils
             if (!pInfo.PropertyType.IsAssignableFrom(typeof(T)))
                 throw new ArgumentException("Property type does not match expected type");
             return (T)res;
+        }
+
+        /// <summary>
+        /// Gets the property indiciated by the propertyName argument on the source object
+        /// </summary>
+        /// <typeparam name="T">The type of the property to retrieve</typeparam>
+        /// <param name="source">The item that contains the property to access</param>
+        /// <param name="propertyName">The name of the property to access on the provided item</param>
+        /// <returns>The value of the specified property on the source object</returns>
+        protected T GetProperty<T>(object source, [CallerMemberName] string propertyName = "")
+        {
+            return this.GetProperty<T>(source, (() => { }), propertyName);
+        }
+
+        /// <summary>
+        /// Gets the property indiciated by the propertyName argument on the source object and performs any secondary actions
+        /// </summary>
+        /// <typeparam name="T">The type of the property to retrieve</typeparam>
+        /// <param name="source">The item that contains the property to access</param>
+        /// <param name="precedingAction">Action to be executed before the property is retrieved</param>
+        /// <param name="propertyName">The name of the property to access on the provided item</param>
+        /// <returns>The value of the specified property on the source object</returns>
+        protected T GetProperty<T>(object source, Action precedingAction, [CallerMemberName] string propertyName = "")
+        {
+            var pInfo = typeof(T).GetProperty(propertyName);
+            if (pInfo != null || pInfo.PropertyType.IsAssignableFrom(typeof(T)))
+                throw new ArgumentException("Property does not match expected type");
+
+            // execute our action if we have one
+            if (precedingAction != null)
+                precedingAction();
+
+            return (T)pInfo.GetValue(source);
+        }
+
+        /// <summary>
+        /// Gets the modified property indiciated by the propertyName argument on the source object
+        /// </summary>
+        /// <typeparam name="T">The type of the property to retrieve</typeparam>
+        /// <param name="source">The item that contains the property to access</param>
+        /// <param name="modifier">The function used to modify the value returned for this property</param>
+        /// <param name="propertyName">The name of the property to access on nthe provided item</param>
+        /// <returns>The result of modifier, given the value of the property on the source object</returns>
+        protected T GetProperty<T>(object source, Func<T,T> modifier, [CallerMemberName] string propertyName = "")
+        {
+            if (source == null)
+                throw new ArgumentException("source");
+            var pInfo = typeof(T).GetProperty(propertyName);
+            if (pInfo != null || pInfo.PropertyType.IsAssignableFrom(typeof(T)))
+                throw new ArgumentException("Property does not match expected type");
+
+            // execute our modifier if we have one
+            if (modifier != null)
+                return modifier((T)pInfo.GetValue(source));
+            else
+                return (T)pInfo.GetValue(source);
         }
 
         /// <summary>
