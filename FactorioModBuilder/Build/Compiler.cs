@@ -65,28 +65,37 @@ namespace FactorioModBuilder.Build
 
         public bool Build(List<DataUnit> data)
         {
-            // clear out any previous messages
-            this.BuildMessages.Clear();
-            this.ResetProjectStorage();
-            IEnumerable<ICompilerExtension> exts;
-            if(!this.TryGetRequiredExtensions(data, out exts))
+            try
             {
+                // clear out any previous messages
+                this.BuildMessages.Clear();
+                this.ResetProjectStorage();
+                IEnumerable<ICompilerExtension> exts;
+                if (!this.TryGetRequiredExtensions(data, out exts))
+                {
+                    return false;
+                }
+
+                // process each of our compilation units
+                foreach (var ext in this.GetProcessOrder(exts))
+                {
+                    if (!this.CanContinue())
+                        return false;
+
+                    if (!ext.BuildUnit(data.Where(o => o.Type == ext.Extension)))
+                    {
+                        continue;
+                    }
+                }
+
+                return true;
+            }
+            catch(Exception e)
+            {
+                this.BuildMessages.Add(new FatalMessage(
+                    "The compiler encountered a fatal exception during the build: " + e.Message));
                 return false;
             }
-
-            // process each of our compilation units
-            foreach(var ext in this.GetProcessOrder(exts))
-            {
-                if (!this.CanContinue())
-                    return false;
-
-                if(!ext.BuildUnit(data.Where(o => o.Type == ext.Extension)))
-                {
-                    continue;
-                }
-            }
-
-            return true;
         }
 
         public bool AddExtension(ICompilerExtension ext)
@@ -142,15 +151,36 @@ namespace FactorioModBuilder.Build
                 if (!this.TryGetExtension(d.Type, out ext))
                     return false;
                 res.Add(ext);
-                foreach (var e in ext.Dependencies)
-                {
-                    if (!this.TryGetExtension(e, out ext))
-                        return false;
-                    res.Add(ext);
-                }
+                IEnumerable<ICompilerExtension> deps;
+                if (!this.TryGetDependencies(ext, out deps))
+                    return false;
+                res.AddRange(deps);
             }
 
             result = res.DistinctBy(o => o.Extension);
+            return true;
+        }
+
+        private bool TryGetDependencies(ICompilerExtension ext, out IEnumerable<ICompilerExtension> result)
+        {
+            result = null;
+            if (ext == null)
+                return false;
+
+            List<ICompilerExtension> res = new List<ICompilerExtension>();
+            foreach(var d in ext.Dependencies)
+            {
+                ICompilerExtension tmpExt;
+                if(!this.TryGetExtension(d, out tmpExt))
+                    return false;
+                res.Add(tmpExt);
+
+                IEnumerable<ICompilerExtension> deps;
+                if (!this.TryGetDependencies(tmpExt, out deps))
+                    return false;
+                res.AddRange(deps);
+            }
+            result = res;
             return true;
         }
 
