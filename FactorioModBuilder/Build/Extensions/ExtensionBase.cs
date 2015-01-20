@@ -113,19 +113,35 @@ namespace FactorioModBuilder.Build.Extensions
 
             try
             {
-                if (_compiler.EnableBuildValidation &&
-                    !this.ValidateData(units.Cast<T>()))
+                if (_compiler.EnableBuildValidation && !this.ValidateData(units.Cast<T>()))
+                {
+                    this.Error("{0} data failed validation check", units.First().Type);
                     return false;
+                }
 
                 string path;
-                if(!this.GetOutputPath(out path))
-                    return this.BuildUnit(units.Cast<T>(), null);
+                if (!this.GetOutputPath(out path))
+                {
+                    if (!this.BuildUnit(units.Cast<T>(), null))
+                    {
+                        this.Error("Extension failed to execute non-build tasks");
+                        return false;
+                    }
+                    
+                    return true;
+                }
                 else
                 {
-                    using(var fs = File.Open(path, FileMode.Create))
-                    using(var sw = new StreamWriter(fs))
+                    using (var fs = File.Open(path, FileMode.Create))
+                    using (var sw = new StreamWriter(fs))
                     {
-                        return this.BuildUnit(units.Cast<T>(), sw);
+                        if(!this.BuildUnit(units.Cast<T>(), sw))
+                        {
+                            this.Error("Extension failed to execut build task to generate: {0}", path);
+                            return false;
+                        }
+
+                        return true;
                     }
                 }
             }
@@ -179,14 +195,6 @@ namespace FactorioModBuilder.Build.Extensions
             if (_compiler != null)
                 _compiler.BuildMessages.Add(
                     new FatalMessage(format, args));
-        }
-
-        protected ICompilerExtension GetCompilerExtension(ExtensionType type)
-        {
-            ICompilerExtension ext;
-            if (!_compiler.TryGetExtension(type, out ext))
-                throw new Exception("Could not resolve compiler extension for type: " + ext.GetType().Name);
-            return ext;
         }
     }
 }

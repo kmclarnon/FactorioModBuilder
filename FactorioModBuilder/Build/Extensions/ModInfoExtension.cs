@@ -40,12 +40,21 @@ namespace FactorioModBuilder.Build.Extensions
         protected override bool ValidateData(IEnumerable<ModInfoData> units)
         {
             if (units.Count() != 1)
+            {
+                this.Error("Expected a single mod info data item, encountered multiple");
                 return false;
+            }
             var unit = units.Single();
             if (!Regex.IsMatch(unit.Version, @"^\d{1,4}\.\d{1,4}\.\d{1,4}$"))
+            {
+                this.Error("The mod version must be in the format Major.Middle.Minor and contain only numbers");
                 return false;
+            }
             if (!(unit.Name == this.ProjectName || unit.Name + "_" + unit.Version == this.ProjectName))
+            {
+                this.Error("The project name is not valid");
                 return false;
+            }
             return true;
         }
 

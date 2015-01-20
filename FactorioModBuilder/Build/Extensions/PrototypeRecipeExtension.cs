@@ -62,14 +62,31 @@ namespace FactorioModBuilder.Build.Extensions
             foreach(var r in units)
             {
                 if (r.Ingredients == null || r.Ingredients.Count < 1)
+                {
+                    this.Error("Recipe {0} does not have any ingredients", r.Name);
                     return false;
+                }
+
                 if (!this.ItemNames.Contains(r.Result))
+                {
+                    this.Error("Duplicate recipe {0} in recipe definitions", r.Name);
                     return false;
+                }
+
                 if (r.EnergyReq < 0)
+                {
+                    this.Error("The energy requirement for the recipe {0} cannot be negative", r.Name);
                     return false;
+                }
+
                 foreach (var i in r.Ingredients)
+                {
                     if (!this.ItemNames.Contains(i.Item1))
+                    {
+                        this.Error("The item {0} listed as an ingredient in the recipe {0} does not exist", i.Item1, r.Name);
                         return false;
+                    }
+                }
             }
 
             return true;

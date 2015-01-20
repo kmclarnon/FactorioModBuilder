@@ -24,15 +24,11 @@ namespace FactorioModBuilder.Build.Extensions
             sb.AppendLine("{");
             foreach(var i in units)
             {
-                string iconPath;
-                if (!this.GraphicsPathLookup.TryGetValue(i.Icon, out iconPath))
-                    return false;
-
                 // write out the item
                 sb.AppendLine("  {");
                 sb.AppendLine("    type = \"item\",");
                 sb.AppendLine("    name = \"" + i.Name +"\",");
-                sb.AppendLine("    icon = \"" + iconPath + "\",");
+                sb.AppendLine("    icon = \"" + this.GraphicsPathLookup[i.Icon] + "\",");
                 sb.AppendLine("    flags = {" + this.GetFlagString(i.Flag) + "},");
                 sb.AppendLine("    subgroup = \"" + i.SubGroup + "\",");
                 sb.AppendLine("    order = \"" + i.Order + "\",");
@@ -54,13 +50,29 @@ namespace FactorioModBuilder.Build.Extensions
         {
             foreach (var i in units)
             {
-                // verify the item contents
+                if (!this.GraphicsPathLookup.ContainsKey(i.Icon))
+                {
+                    this.Error("Unknown image {0} specified in definition of the {1} item", i.Icon, i.Name);
+                    return false;
+                }
+
                 if (!this.SubGroupNames.Contains(i.SubGroup))
+                {
+                    this.Error("Unknown subgroup {0} specified in the definition of the {1} item", i.SubGroup, i.Name);
                     return false;
+                }
+
                 if (i.PlaceResult != null && !this.EntityNames.Contains(i.PlaceResult))
+                {
+                    this.Error("Unknown place result {0} specified in the definition of the {1} item", i.PlaceResult, i.Name);
                     return false;
+                }
+
                 if (!this.ItemNames.Add(i.Name))
+                {
+                    this.Error("Detected duplicate item name {0}", i.Name);
                     return false;
+                }
             }
 
             return true;

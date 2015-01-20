@@ -83,7 +83,10 @@ namespace FactorioModBuilder.Build.Extensions
             foreach (var g in gd)
             {
                 if (!this.GraphicsPathLookup.ContainsKey(g.Icon))
+                {
+                    this.Error("Unknown image required by the {0} group", g.Name);
                     return false;
+                }
             }
 
             return true;

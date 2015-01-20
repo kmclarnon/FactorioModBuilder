@@ -37,8 +37,9 @@ namespace FactorioModBuilder.Build.Extensions
 
                 return true;
             }
-            catch(Exception)
+            catch(Exception e)
             {
+                this.Error("Encountered exception processing graphics data: {0}", e.Message);
                 return false;
             }
         }
@@ -48,10 +49,16 @@ namespace FactorioModBuilder.Build.Extensions
             foreach(var g in units)
             {
                 if (this.GraphicsPathLookup.ContainsKey(g.ImportPath))
+                {
+                    this.Error("Duplicate import path detected in the graphics data");
                     return false;
+                }
                 FileInfo info = new FileInfo(g.ImportPath);
                 if (!info.Exists)
+                {
+                    this.Error("Graphics data contains an invalid import path: {0}", g.ImportPath);
                     return false;
+                }
             }
 
             return true;

@@ -84,21 +84,34 @@ namespace FactorioModBuilder.Build
                 IEnumerable<ICompilerExtension> exts;
                 if (!this.TryGetRequiredExtensions(data, out exts))
                 {
+                    this.BuildMessages.Add(new FatalMessage(
+                        "The compiler could not find all required extensions for the project data"));
                     return false;
                 }
+
+                this.BuildMessages.Add(new InfoMessage(
+                    "Resolved " + exts.Count() + " dependencies for the project data"));
 
                 // process each of our compilation units
                 foreach (var ext in this.GetProcessOrder(exts))
                 {
                     if (!this.CanContinue())
+                    {
+                        this.BuildMessages.Add(new ErrorMessage(
+                            "The compiler cannot continue due to previous errors encountered, build halted"));
                         return false;
+                    }
 
                     if (!ext.BuildUnit(data.Where(o => o.Type == ext.Extension)))
                     {
+                        this.BuildMessages.Add(new ErrorMessage(
+                            "Extension " + ext.GetType().FullName + " failed to compile " + ext.Extension + " data"));
                         continue;
                     }
                 }
 
+                this.BuildMessages.Add(new InfoMessage(
+                    "Project " + this.ProjectName + " compiled successfully"));
                 return true;
             }
             catch(Exception e)
