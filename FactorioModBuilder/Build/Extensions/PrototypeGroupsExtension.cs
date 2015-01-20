@@ -47,7 +47,7 @@ namespace FactorioModBuilder.Build.Extensions
                     return false;
 
                 sb.AppendLine("  {");
-                sb.AppendLine("    type = \"item-group\"");
+                sb.AppendLine("    type = \"item-group\",");
                 sb.AppendLine("    name = \"" + g.Name + "\",");
                 sb.AppendLine("    icon = \"" + iconPath + "\",");
                 sb.AppendLine("    inventory_order = \"" + g.InvOrder + "\",");
