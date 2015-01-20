@@ -32,6 +32,11 @@ namespace FactorioModBuilder.Build.Extensions
             return true;
         }
 
+        protected override bool ValidateData(IEnumerable<ProjectData> units)
+        {
+            return true;
+        }
+
         protected bool PrepareProject(string tmpDir, string outDir)
         {
             try

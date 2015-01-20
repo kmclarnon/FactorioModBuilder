@@ -19,13 +19,8 @@ namespace FactorioModBuilder.Build.Extensions
         protected override bool BuildUnit(IEnumerable<ModInfoData> units, StreamWriter sw)
         {
             var info = units.Single();
-
-            if (!Regex.IsMatch(info.Version, @"^\d{1,4}\.\d{1,4}\.\d{1,4}$"))
-                return false;
-            if (!(info.Name == this.ProjectName || info.Name + "_" + info.Version == this.ProjectName))
-                return false;
-
             StringBuilder sb = new StringBuilder();
+
             sb.AppendLine("{");
             sb.AppendLine("  \"name\" : \"" + info.Name + "\",");
             sb.AppendLine("  \"version\" : \"" + info.Version + "\",");
@@ -39,6 +34,18 @@ namespace FactorioModBuilder.Build.Extensions
 
             string res = sb.ToString();
             sw.Write(res);
+            return true;
+        }
+
+        protected override bool ValidateData(IEnumerable<ModInfoData> units)
+        {
+            if (units.Count() != 1)
+                return false;
+            var unit = units.Single();
+            if (!Regex.IsMatch(unit.Version, @"^\d{1,4}\.\d{1,4}\.\d{1,4}$"))
+                return false;
+            if (!(unit.Name == this.ProjectName || unit.Name + "_" + unit.Version == this.ProjectName))
+                return false;
             return true;
         }
 

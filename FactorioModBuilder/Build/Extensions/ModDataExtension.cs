@@ -21,6 +21,11 @@ namespace FactorioModBuilder.Build.Extensions
             return true;
         }
 
+        protected override bool ValidateData(IEnumerable<ModDataData> units)
+        {
+            return true;
+        }
+
         protected override bool GetOutputPath(out string path)
         {
             path = Path.Combine(this.TemporaryDirectory, "data.lua");

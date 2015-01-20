@@ -25,6 +25,11 @@ namespace FactorioModBuilder.Build.Extensions
             return true;
         }
 
+        protected override bool ValidateData(IEnumerable<ModInfoDependencyData> units)
+        {
+            return true;
+        }
+
         private string GetDepString(ModInfoDependencyData dep)
         {
             string result = String.Empty;

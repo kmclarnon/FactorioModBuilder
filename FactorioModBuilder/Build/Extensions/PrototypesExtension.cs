@@ -32,5 +32,10 @@ namespace FactorioModBuilder.Build.Extensions
 
             return true;
         }
+
+        protected override bool ValidateData(IEnumerable<PrototypeData> units)
+        {
+            return true;
+        }
     }
 }

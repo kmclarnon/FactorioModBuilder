@@ -23,24 +23,16 @@ namespace FactorioModBuilder.Build.Extensions
                 string baseDir = "__" + this.ProjectName + "__";
                 foreach (var g in units)
                 {
-                    if (!this.GraphicsPathLookup.ContainsKey(g.ImportPath))
-                    {
-                        FileInfo info = new FileInfo(g.ImportPath);
-                        if (!info.Exists)
-                            return false;
+                    // modify the path and copy the image into the appropriate location
+                    this.GraphicsPathLookup.Add(g.ImportPath, baseDir + "/" + g.ExportPath);
 
-                        // modify the path and copy the image into the appropriate location
-                        this.GraphicsPathLookup.Add(g.ImportPath, baseDir + "/" + g.ExportPath);
+                    string dirPath = Path.Combine(this.TemporaryDirectory, Path.GetDirectoryName(g.ExportPath));
+                    DirectoryInfo dinfo = new DirectoryInfo(dirPath);
+                    if (!dinfo.Exists)
+                        Directory.CreateDirectory(dirPath);
 
-                        string dirPath = Path.Combine(this.TemporaryDirectory, Path.GetDirectoryName(g.ExportPath));
-                        DirectoryInfo dinfo = new DirectoryInfo(dirPath);
-                        if (!dinfo.Exists)
-                            Directory.CreateDirectory(dirPath);
-
-                        info.CopyTo(Path.Combine(dirPath, Path.GetFileName(g.ExportPath)), true);
-                    }
-                    else
-                        return false;
+                    FileInfo info = new FileInfo(g.ImportPath);
+                    info.CopyTo(Path.Combine(dirPath, Path.GetFileName(g.ExportPath)), true);
                 }
 
                 return true;
@@ -49,6 +41,20 @@ namespace FactorioModBuilder.Build.Extensions
             {
                 return false;
             }
+        }
+
+        protected override bool ValidateData(IEnumerable<GraphicsData> units)
+        {
+            foreach(var g in units)
+            {
+                if (this.GraphicsPathLookup.ContainsKey(g.ImportPath))
+                    return false;
+                FileInfo info = new FileInfo(g.ImportPath);
+                if (!info.Exists)
+                    return false;
+            }
+
+            return true;
         }
     }
 }

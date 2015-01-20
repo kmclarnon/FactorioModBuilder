@@ -23,16 +23,6 @@ namespace FactorioModBuilder.Build.Extensions
             sb.AppendLine("{");
             foreach (var r in units)
             {
-                if (r.Ingredients.Count < 1)
-                    return false;
-                if (!this.ItemNames.Contains(r.Result))
-                    return false;
-                if (r.EnergyReq < 0)
-                    return false;
-                foreach (var i in r.Ingredients)
-                    if (!this.ItemNames.Contains(i.Item1))
-                        return false;
-
                 sb.AppendLine("  {");
                 sb.AppendLine("    type = \"recipe\",");
                 sb.AppendLine("    name = \"" + r.Name + "\",");
@@ -63,6 +53,24 @@ namespace FactorioModBuilder.Build.Extensions
             sb.AppendLine("})");
             var res = sb.ToString();
             sr.Write(res);
+
+            return true;
+        }
+
+        protected override bool ValidateData(IEnumerable<RecipeData> units)
+        {
+            foreach(var r in units)
+            {
+                if (r.Ingredients == null || r.Ingredients.Count < 1)
+                    return false;
+                if (!this.ItemNames.Contains(r.Result))
+                    return false;
+                if (r.EnergyReq < 0)
+                    return false;
+                foreach (var i in r.Ingredients)
+                    if (!this.ItemNames.Contains(i.Item1))
+                        return false;
+            }
 
             return true;
         }

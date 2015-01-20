@@ -17,6 +17,7 @@ namespace FactorioModBuilder.Build
         public ObservableCollection<CompilerMessage> BuildMessages { get; private set; }
 
         public int MaxErrors { get; set; }
+        public bool EnableBuildValidation { get; set; }
 
         private Dictionary<ExtensionType, ICompilerExtension> _activeExtensions = 
             new Dictionary<ExtensionType, ICompilerExtension>();
@@ -33,7 +34,7 @@ namespace FactorioModBuilder.Build
         public HashSet<string> ItemNames { get; private set; }
         public HashSet<string> EntityNames { get; private set; }
         public Dictionary<string, string> GraphicsPathLookup { get; private set; }
-
+        
         public Compiler()
             : this(0)
         {
@@ -44,12 +45,22 @@ namespace FactorioModBuilder.Build
         {
         }
 
+        public Compiler(int maxErrors, bool enableChecks)
+            : this(maxErrors, enableChecks, new List<ICompilerExtension>())
+        {
+        }
+
         public Compiler(int maxErrors, params ICompilerExtension[] exts)
             : this(maxErrors, exts.ToList())
         {
         }
 
         public Compiler(int maxErrors, IEnumerable<ICompilerExtension> exts)
+            : this(maxErrors, true, exts)
+        {
+        }
+
+        public Compiler(int maxErrors, bool enableChecks, IEnumerable<ICompilerExtension> exts)
         {
             this.MaxErrors = maxErrors;
             this.BuildMessages = new ObservableCollection<CompilerMessage>();
@@ -201,6 +212,7 @@ namespace FactorioModBuilder.Build
             this.PrototypeDirectory = String.Empty;
             this.OutputDirectory = String.Empty;
             this.TemporaryDirectory = String.Empty;
+            this.DependencyString = String.Empty;
 
             this.GroupNames.Clear();
             this.SubGroupNames.Clear();

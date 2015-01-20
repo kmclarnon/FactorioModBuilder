@@ -19,5 +19,10 @@ namespace FactorioModBuilder.Build.Extensions
         {
             return true;
         }
+
+        protected override bool ValidateData(IEnumerable<LocaleData> units)
+        {
+            return true;            
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using FactorioModBuilder.Build.Data;
+using FactorioModBuilder.Models.ProjectItems.Prototype;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -23,14 +24,6 @@ namespace FactorioModBuilder.Build.Extensions
             sb.AppendLine("{");
             foreach(var i in units)
             {
-                // verify the item contents
-                if (!this.SubGroupNames.Contains(i.SubGroup))
-                    return false;
-                if (i.PlaceResult != null && !this.EntityNames.Contains(i.PlaceResult))
-                    return false;
-                if (!this.ItemNames.Add(i.Name))
-                    return false;
-
                 string iconPath;
                 if (!this.GraphicsPathLookup.TryGetValue(i.Icon, out iconPath))
                     return false;
@@ -54,6 +47,22 @@ namespace FactorioModBuilder.Build.Extensions
 
             string res = sb.ToString();
             sw.Write(res);
+            return true;
+        }
+
+        protected override bool ValidateData(IEnumerable<ItemData> units)
+        {
+            foreach (var i in units)
+            {
+                // verify the item contents
+                if (!this.SubGroupNames.Contains(i.SubGroup))
+                    return false;
+                if (i.PlaceResult != null && !this.EntityNames.Contains(i.PlaceResult))
+                    return false;
+                if (!this.ItemNames.Add(i.Name))
+                    return false;
+            }
+
             return true;
         }
 

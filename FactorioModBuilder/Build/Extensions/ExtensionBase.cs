@@ -113,6 +113,10 @@ namespace FactorioModBuilder.Build.Extensions
 
             try
             {
+                if (_compiler.EnableBuildValidation &&
+                    !this.ValidateData(units.Cast<T>()))
+                    return false;
+
                 string path;
                 if(!this.GetOutputPath(out path))
                     return this.BuildUnit(units.Cast<T>(), null);
@@ -140,6 +144,8 @@ namespace FactorioModBuilder.Build.Extensions
         }
 
         protected abstract bool BuildUnit(IEnumerable<T> units, StreamWriter sr);
+
+        protected abstract bool ValidateData(IEnumerable<T> units);
 
         protected virtual bool GetOutputPath(out string path)
         {

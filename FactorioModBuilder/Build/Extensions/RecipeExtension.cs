@@ -18,7 +18,12 @@ namespace FactorioModBuilder.Build.Extensions
 
         protected override bool BuildUnit(IEnumerable<RecipeData> units, StreamWriter sw)
         {
-            throw new NotImplementedException();
+            return true;
+        }
+
+        protected override bool ValidateData(IEnumerable<RecipeData> units)
+        {
+            return true;
         }
     }
 }
