@@ -206,7 +206,7 @@ namespace FactorioModBuilder.ViewModels.Base
             {
                 foreach(var c in res.Children)
                 {
-                    if(c.GetType() == typeof(T))
+                    if(c.GetType() == typeof(T) && !ReferenceEquals(c, this))
                     {
                         element = (T)c;
                         return true;
