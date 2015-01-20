@@ -14,6 +14,10 @@ using System.ComponentModel;
 
 namespace FactorioModBuilder.ViewModels.Base
 {
+    /// <summary>
+    /// The base view model that wraps a TreeItem and exposes the appropriate methods to handle
+    /// selection, expand/collapse operations and display of children
+    /// </summary>
     public abstract class TreeItemVMBase : BaseVM, IDataErrorInfo
     {
         /// <summary>
