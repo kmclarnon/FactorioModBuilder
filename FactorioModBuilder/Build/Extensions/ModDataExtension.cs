@@ -22,20 +22,27 @@ namespace FactorioModBuilder.Build.Extensions
         protected override bool BuildUnit(IEnumerable<ModDataData> units, StreamWriter sw)
         {
             StringBuilder sb = new StringBuilder();
-            foreach (var f in this.GeneratedFiles)
-                sb.AppendLine("require(\"" + this.GetRequirePath(f) + "\")");
+            foreach (var f in this.GeneratedFiles.Where(o => o.StartsWith(this.TemporaryDirectory)))
+            {
+                var np = f.Substring(this.TemporaryDirectory.Length + 1).Replace('\\','.');
+                if (np == "control.lua" || np == "data.lua" || np == "info.json")
+                    continue;
+
+                if (!np.Contains('.'))
+                    continue;
+                var ext = Path.GetExtension(f);
+                np = np.Substring(0, np.Length - ext.Length);
+
+                sb.AppendLine("require(\"" + np + "\")");
+            }
+
+            sw.Write(sb.ToString());
             return true;
         }
 
         protected override bool ValidateData(IEnumerable<ModDataData> units)
         {
             return true;
-        }
-
-        private string GetRequirePath(string filePath)
-        {
-            var np = filePath.Substring(this.TemporaryDirectory.Length);
-            return np;
         }
 
         protected override bool GetOutputPath(out string path)
