@@ -34,6 +34,7 @@ namespace FactorioModBuilder.Build
         public HashSet<string> ItemNames { get; private set; }
         public HashSet<string> EntityNames { get; private set; }
         public Dictionary<string, string> GraphicsPathLookup { get; private set; }
+        public HashSet<string> GeneratedFiles { get; private set; }
         
         public Compiler()
             : this(0)
@@ -72,6 +73,7 @@ namespace FactorioModBuilder.Build
             this.ItemNames = new HashSet<string>();
             this.EntityNames = new HashSet<string>();
             this.GraphicsPathLookup = new Dictionary<string, string>();
+            this.GeneratedFiles = new HashSet<string>();
         }
 
         public bool Build(List<DataUnit> data)
@@ -232,6 +234,7 @@ namespace FactorioModBuilder.Build
             this.ItemNames.Clear();
             this.EntityNames.Clear();
             this.GraphicsPathLookup.Clear();
+            this.GeneratedFiles.Clear();
         }
     }
 }

@@ -2,6 +2,7 @@
 using FactorioModBuilder.Build.Messages;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Json;
@@ -91,6 +92,8 @@ namespace FactorioModBuilder.Build.Extensions
 
         protected Dictionary<string, string> GraphicsPathLookup { get { return _compiler.GraphicsPathLookup; } }
 
+        protected IEnumerable<string> GeneratedFiles { get { return _compiler.GeneratedFiles; } }
+
         public ExtensionBase(ExtensionType extension,
             params ExtensionType[] dependencies)
         {
@@ -141,6 +144,8 @@ namespace FactorioModBuilder.Build.Extensions
                             return false;
                         }
 
+                        if (!_compiler.GeneratedFiles.Add(fs.Name))
+                            this.Warning(WarningLevel.W1, "Compiler generation of {0} has happened more than once", path);
                         return true;
                     }
                 }
