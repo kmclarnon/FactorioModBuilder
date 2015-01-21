@@ -63,21 +63,18 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
             switch (e.Action)
             {
                 case NotifyCollectionChangedAction.Add:
-                    foreach (var i in e.NewItems)
-                        filter.AddGraphicsSource(this.Categorize((IGraphicsSource)i), (IGraphicsSource)i);
+                    if (!this.ManualMode)
+                    {
+                        foreach (var i in e.NewItems)
+                            filter.AddGraphicsSource(this.Categorize((IGraphicsSource)i), (IGraphicsSource)i);
+                    }
                     break;
-                case NotifyCollectionChangedAction.Move:
+                case NotifyCollectionChangedAction.Remove:
                     foreach (var i in e.OldItems)
                         filter.RemoveGraphicsSource((IGraphicsSource)i);
                     break;
-                case NotifyCollectionChangedAction.Remove:
-                    break;
-                case NotifyCollectionChangedAction.Replace:
-                    break;
-                case NotifyCollectionChangedAction.Reset:
-                    break;
                 default:
-                    break;
+                    throw new Exception("Unhandled collection changed event");
             }
         }
 

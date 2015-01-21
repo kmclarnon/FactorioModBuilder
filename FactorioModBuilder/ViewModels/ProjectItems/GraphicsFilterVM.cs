@@ -119,20 +119,20 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
             }
 
             foreach (var i in this.ItemList)
-                i.UpdateExportPath();
+                i.Update();
         }
 
         public void AddGraphicsSource(string fPath, IGraphicsSource source)
         {
             if(fPath == this.FilterPath)
             {
-                var res = new GraphicsFilterItemVM(this, new GraphicsFilterItem(source.Name + " graphics"));
+                var res = new GraphicsFilterItemVM(this, new GraphicsFilterItem(source.Name));
                 res.Source = source;
                 this.ItemList.Add(res);
             }
             else if(fPath.StartsWith(this.FilterPath))
             {
-                var cs = this.Children.Cast<GraphicsFilterVM>().Where(o => o.FilterPath.StartsWith(fPath));
+                var cs = this.Children.Cast<GraphicsFilterVM>().Where(o => fPath.StartsWith(o.FilterPath));
                 if (!cs.Any())
                 {
                     // determine what the filter's name should be
@@ -154,7 +154,11 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
 
         public void RemoveGraphicsSource(IGraphicsSource source)
         {
-
+            var res = this.ItemList.Where(o => o.Source.Equals(source)).ToList();
+            foreach (var r in res)
+                this.ItemList.Remove(r);
+            foreach (var c in this.Children.Cast<GraphicsFilterVM>())
+                c.RemoveGraphicsSource(source);
         }
     }
 }

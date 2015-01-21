@@ -44,7 +44,13 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
         public IGraphicsSource Source
         {
             get { return this.GetProperty<IGraphicsSource>(); }
-            set { this.SetProperty(value, this.SourceUpdated); }
+            set 
+            {
+                var s = this.GetProperty<IGraphicsSource>();
+                if (s != null)
+                    s.PropertyChanged -= this.OnSourcePropertyChanged;
+                this.SetProperty(value, this.SourceUpdated); 
+            }
         }
 
         public GraphicsFilterItemVM(GraphicsFilterItem item)
@@ -60,21 +66,23 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
         private void SourceUpdated()
         {
             this.Source.PropertyChanged += OnSourcePropertyChanged;
-            this.ImportPath = this.Source.GraphicPath;
-            this.UpdateExportPath();
+            this.Update();
         }
 
-        void OnSourcePropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void OnSourcePropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            this.ImportPath = this.Source.GraphicPath;
-            this.UpdateExportPath();
+            this.Update();
         }
 
-        public void UpdateExportPath()
+        public void Update()
         {
-            if(this.Source != null)
-                this.ExportPath = this.ParentPath + "/" +
-                    Path.GetFileName(this.Source.GraphicPath);
+            this.ImportPath = this.Source.GraphicPath;
+            this.Name = this.Source.Name;
+            if (this.Source != null && this.Source.GraphicPath != null)
+            {
+                this.ExportPath = this.ParentPath + "/" + this.Name.ToLowerInvariant().Replace(' ', '-')
+                    + "-image" + Path.GetExtension(this.Source.GraphicPath);
+            }
         }
     }
 }
