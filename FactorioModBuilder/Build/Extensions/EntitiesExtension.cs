@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace FactorioModBuilder.Build.Extensions
 {
-    public class PrototypeEntitiesExtension : ExtensionBase<EntityData>
+    public class EntitiesExtension : ExtensionBase<EntityData>
     {
-        public PrototypeEntitiesExtension()
+        public EntitiesExtension()
             : base(ExtensionType.PrototypeEntities, ExtensionType.Prototypes)
         {
         }

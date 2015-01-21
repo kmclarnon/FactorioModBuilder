@@ -38,18 +38,22 @@ namespace FactorioModBuilder
                         .GetName().Version.ToString(),
                     new Build.Compiler(
                         100,
-                        new ModInfoExtension(),
-                        new ModDependenciesExtension(),
-                        new ProjectExtension(),
-                        new ModDataExtension(),
-                        new ModControlExtension(),
+                        new EntitiesExtension(),
+                        new EquipmentExtension(),
+                        new FluidsExtension(),
                         new GraphicsExtension(),
+                        new GroupsExtension(),
+                        new ItemsExtension(),
+                        new LocaleExtension(),
+                        new ModControlExtension(),
+                        new ModDataExtension(),
+                        new ModDependenciesExtension(),
+                        new ModInfoExtension(),
+                        new ProjectExtension(),
                         new PrototypesExtension(),
-                        new PrototypeGroupsExtension(),
-                        new PrototypeItemsExtension(),
-                        new PrototypeEntitiesExtension(),
-                        new PrototypeRecipeExtension(),
-                        new LocaleExtension())));
+                        new RecipeExtension(),
+                        new TechnologyExtension(),
+                        new TilesExtension())));
         }
     }
 }

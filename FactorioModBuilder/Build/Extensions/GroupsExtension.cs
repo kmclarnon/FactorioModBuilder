@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace FactorioModBuilder.Build.Extensions
 {
-    public class PrototypeGroupsExtension : ExtensionBase<GroupBaseData>
+    public class GroupsExtension : ExtensionBase<GroupBaseData>
     {
-        public PrototypeGroupsExtension()
+        public GroupsExtension()
             : base(ExtensionType.PrototypeGroups, ExtensionType.Prototypes)
         {
         }
