@@ -39,7 +39,8 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
                 var test = gres.CompilerData;
                 return new ProjectData(this.Name, this.TempDir, this.OutDir, this.Version).ListWrap()
                     .ConcatMany(miRes.CompilerData, mcRes.CompilerData, 
-                        prot.CompilerData, loc.CompilerData, gres.CompilerData);
+                        prot.CompilerData, loc.CompilerData, gres.CompilerData)
+                    .Concat(new ModDataData().ListWrap());
             }
         }
 
