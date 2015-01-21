@@ -3,6 +3,7 @@ using FactorioModBuilder.Models.ProjectItems;
 using FactorioModBuilder.ViewModels.Base;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -36,7 +37,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
                 GraphicsFilterVM res;
                 if (!this.TryFindElementUp(out res))
                     throw new Exception("Could not find parent graphics filter view model");
-                return res.ParentPath;
+                return res.FilterPath;
             }
         }
 
@@ -57,6 +58,13 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
         }
 
         private void SourceUpdated()
+        {
+            this.Source.PropertyChanged += OnSourcePropertyChanged;
+            this.ImportPath = this.Source.GraphicPath;
+            this.UpdateExportPath();
+        }
+
+        void OnSourcePropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             this.ImportPath = this.Source.GraphicPath;
             this.UpdateExportPath();

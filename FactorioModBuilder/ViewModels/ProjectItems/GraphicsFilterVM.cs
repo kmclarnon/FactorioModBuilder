@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using FactorioModBuilder.ViewModels.ProjectItems.Prototype;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems
 {
@@ -41,7 +42,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
         public ICommand AddGraphicCmd { get { return this.GetCommand(this.AddGraphic, this.CanAddGraphic); } }
         public ICommand RemoveGraphicCmd { get { return this.GetCommand(this.RemoveGraphic, this.CanRemoveGraphic); } }
 
-        public string ParentPath
+        public string FilterPath
         {
             get
             {
@@ -54,7 +55,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
                     return this.Name;
                 }
 
-                return filterRes.ParentPath + "/" + this.Name;
+                return filterRes.FilterPath + "/" + this.Name;
             }
         }
 
@@ -119,6 +120,41 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
 
             foreach (var i in this.ItemList)
                 i.UpdateExportPath();
+        }
+
+        public void AddGraphicsSource(string fPath, IGraphicsSource source)
+        {
+            if(fPath == this.FilterPath)
+            {
+                var res = new GraphicsFilterItemVM(this, new GraphicsFilterItem(source.Name + " graphics"));
+                res.Source = source;
+                this.ItemList.Add(res);
+            }
+            else if(fPath.StartsWith(this.FilterPath))
+            {
+                var cs = this.Children.Cast<GraphicsFilterVM>().Where(o => o.FilterPath.StartsWith(fPath));
+                if (!cs.Any())
+                {
+                    // determine what the filter's name should be
+                    var rem = fPath.Substring(this.FilterPath.Length + 1);
+                    string name;
+                    if (rem.Contains('/'))
+                        name = rem.Substring(0, rem.IndexOf('/'));
+                    else
+                        name = rem;
+
+                    var newFilter = new GraphicsFilterVM(this, new GraphicsFilter(name));
+                    this.Children.Add(newFilter);
+                    newFilter.AddGraphicsSource(fPath, source);
+                }
+                else
+                    cs.Single().AddGraphicsSource(fPath, source);
+            }
+        }
+
+        public void RemoveGraphicsSource(IGraphicsSource source)
+        {
+
         }
     }
 }

@@ -9,6 +9,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections.Specialized;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems
 {
@@ -47,23 +48,56 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
             : base(parent, item)
         {
             this.Filters = new ObservableCollection<GraphicsFilterVM>();
-            this.Filters.Add(
-                new GraphicsFilterVM(this,
-                    new GraphicsFilter("graphics"),
-                    new List<GraphicsFilterVM>()
-                    {
-                        new GraphicsFilterVM(new GraphicsFilter("entity")),
-                        new GraphicsFilterVM(new GraphicsFilter("equipment")),
-                        new GraphicsFilterVM(new GraphicsFilter("icons")),
-                        new GraphicsFilterVM(new GraphicsFilter("technology")),
-                        new GraphicsFilterVM(new GraphicsFilter("terrain"))
-                    }));
+            this.Filters.Add(new GraphicsFilterVM(this,
+                    new GraphicsFilter("graphics")));
+        }
+
+        protected override void Initialize()
+        {
+            this.GraphicsSources.CollectionChanged += GraphicsSources_CollectionChanged;
+        }
+
+        void GraphicsSources_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            var filter = this.Filters.Single();
+            switch (e.Action)
+            {
+                case NotifyCollectionChangedAction.Add:
+                    foreach (var i in e.NewItems)
+                        filter.AddGraphicsSource(this.Categorize((IGraphicsSource)i), (IGraphicsSource)i);
+                    break;
+                case NotifyCollectionChangedAction.Move:
+                    foreach (var i in e.OldItems)
+                        filter.RemoveGraphicsSource((IGraphicsSource)i);
+                    break;
+                case NotifyCollectionChangedAction.Remove:
+                    break;
+                case NotifyCollectionChangedAction.Replace:
+                    break;
+                case NotifyCollectionChangedAction.Reset:
+                    break;
+                default:
+                    break;
+            }
         }
 
         private void UpdateChildPaths()
         {
             foreach (var f in this.Filters)
                 f.UpdateExportPath();
+        }
+
+        private static Dictionary<Type, string> _categoryDict = new Dictionary<Type, string>()
+        {
+            { typeof(GroupVM), "graphics/groups" },
+            { typeof(ItemVM), "graphics/items" },
+            { typeof(TechnologyVM), "graphics/technology" },
+            { typeof(TileVM), "graphics/tiles" }
+        };
+
+        private string Categorize(object source)
+        {
+            return _categoryDict[source.GetType()];
         }
     }
 }
