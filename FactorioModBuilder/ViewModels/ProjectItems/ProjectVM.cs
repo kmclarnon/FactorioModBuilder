@@ -27,9 +27,6 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
                 ModControlVM mcRes;
                 if (!this.TryFindElementDown(out mcRes))
                     throw new Exception("Failed to find mod control child");
-                ModDataVM mdRes;
-                if (!this.TryFindElementDown(out mdRes))
-                    throw new Exception("Failed to find mod data child");
                 PrototypesVM prot;
                 if (!this.TryFindElementDown(out prot))
                     throw new Exception("Failed to find prototypes child");
@@ -41,7 +38,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
                     throw new Exception("Failed to find graphics child");
                 var test = gres.CompilerData;
                 return new ProjectData(this.Name, this.TempDir, this.OutDir, this.Version).ListWrap()
-                    .ConcatMany(miRes.CompilerData, mcRes.CompilerData, mdRes.CompilerData, 
+                    .ConcatMany(miRes.CompilerData, mcRes.CompilerData, 
                         prot.CompilerData, loc.CompilerData, gres.CompilerData);
             }
         }

@@ -162,8 +162,6 @@
     <Compile Include="Models\ProjectItems\Prototype\SubGroup.cs" />
     <Compile Include="Models\ProjectItems\Prototype\SubGroups.cs" />
     <Compile Include="Models\ProjectItems\ModControl.cs" />
-    <Compile Include="Models\ProjectItems\ModData.cs" />
-    <Compile Include="Models\ProjectItems\ModDataItem.cs" />
     <Compile Include="Models\ProjectItems\Project.cs" />
     <Compile Include="Models\ProjectItems\Prototype\Prototypes.cs" />
     <Compile Include="Models\ProjectItems\Prototype\Technologies.cs" />
@@ -187,7 +185,6 @@
     <Compile Include="ViewModels\ProjectItems\Prototype\RecipeVM.cs" />
     <Compile Include="ViewModels\ProjectItems\Prototype\SubGroupsVM.cs" />
     <Compile Include="ViewModels\ProjectItems\Prototype\ItemsVM.cs" />
-    <Compile Include="ViewModels\ProjectItems\ModDataItemVM.cs" />
     <Compile Include="ViewModels\ProjectItems\ProjectVM.cs" />
     <Compile Include="ViewModels\ProjectItems\Prototype\PrototypesVM.cs" />
     <Compile Include="ViewModels\ProjectItems\Prototype\SubGroupVM.cs" />
@@ -240,10 +237,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Screens\ModDataScreen.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\Screens\ModInfoScreen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -277,7 +270,6 @@
     <Compile Include="Models\Base\TreeItem.cs" />
     <Compile Include="Models\ProjectItems\ModInfo.cs" />
     <Compile Include="ViewModels\ProjectItems\ModControlVM.cs" />
-    <Compile Include="ViewModels\ProjectItems\ModDataVM.cs" />
     <Compile Include="ViewModels\ProjectItems\ModInfoVM.cs" />
     <Compile Include="ViewModels\Base\TreeItemVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">

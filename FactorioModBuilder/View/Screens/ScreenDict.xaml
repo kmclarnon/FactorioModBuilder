@@ -3,7 +3,6 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="CommonStyles.xaml"/>
         <ResourceDictionary Source="ModInfoScreen.xaml"/>
-        <ResourceDictionary Source="ModDataScreen.xaml"/>
         <ResourceDictionary Source="ModControlScreen.xaml"/>
         <ResourceDictionary Source="ProjectHeaderScreen.xaml"/>
         <ResourceDictionary Source="GroupsScreen.xaml"/>

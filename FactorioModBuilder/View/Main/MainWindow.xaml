@@ -22,8 +22,7 @@
             <!-- Content Presenter Template Selector -->
             <local:ViewTemplateSelector 
                 x:Key="selector" 
-                ModControlTemplate="{StaticResource ModControlScreen_Template}" 
-                ModDataTemplate="{StaticResource ModDataScreen_Template}"     
+                ModControlTemplate="{StaticResource ModControlScreen_Template}"     
                 ModInfoTemplate="{StaticResource ModInfoScreen_Template}" 
                 ProjectHeaderTemplate="{StaticResource ProjectHeaderScreen_Template}"
                 ItemGroupsTemplate="{StaticResource ItemGroups_Template}"

@@ -13,7 +13,6 @@ namespace FactorioModBuilder
     public class ViewTemplateSelector : DataTemplateSelector
     {
         public DataTemplate ModControlTemplate { get; set; }
-        public DataTemplate ModDataTemplate { get; set; }
         public DataTemplate ModInfoTemplate { get; set; }
         public DataTemplate ProjectHeaderTemplate { get; set; }
         public DataTemplate ItemGroupsTemplate { get; set; }
@@ -32,7 +31,6 @@ namespace FactorioModBuilder
             new Dictionary<Type, Func<ViewTemplateSelector, DataTemplate>>()
         {
             { typeof(ModControlVM),     (x => x.ModControlTemplate) },
-            { typeof(ModDataVM),        (x => x.ModDataTemplate) },
             { typeof(ModInfoVM),        (x => x.ModInfoTemplate) },
             { typeof(ProjectVM),        (x => x.ProjectHeaderTemplate) },
             { typeof(GroupsVM),         (x => x.ItemGroupsTemplate) },
