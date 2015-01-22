@@ -50,7 +50,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         private void AddGroup()
         {
             this.ItemList.Add(new GroupVM(this, 
-                new Group("New Group " + _newCount)));
+                new Group("new-group-" + _newCount)));
             _newCount++;
         }
 

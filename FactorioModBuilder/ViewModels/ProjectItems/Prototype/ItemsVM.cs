@@ -77,7 +77,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         private void AddItem()
         {
             this.ItemList.Add(new ItemVM(this, 
-                new Item("New Item " + _newCount)));
+                new Item("new-item-" + _newCount)));
             _newCount++;
         }
 

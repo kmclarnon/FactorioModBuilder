@@ -74,7 +74,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         private void AddRecipe()
         {
             this.ItemList.Add(new RecipeVM(
-                new Recipe("New Recipe " + _newCount)));
+                new Recipe("new-recipe-" + _newCount)));
             _newCount++;
         }
 

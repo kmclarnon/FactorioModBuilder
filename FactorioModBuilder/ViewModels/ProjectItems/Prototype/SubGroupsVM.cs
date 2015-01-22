@@ -92,7 +92,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         private void AddSubgroup()
         {
             this.ItemList.Add(new SubGroupVM(this, 
-                new SubGroup("New Subgroup " + _newCount)));
+                new SubGroup("new-subgroup-" + _newCount)));
             _newCount++;
         }
 
