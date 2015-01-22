@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -39,6 +40,21 @@ namespace WpfUtils
         {
             if (this.PropertyChanged != null)
                 this.PropertyChanged(this, new PropertyChangedEventArgs(property));
+        }
+
+        /// <summary>
+        /// Provides a convenient way to send notifications outside of a property by taking an
+        /// member expression which then supports refactoring
+        /// </summary>
+        /// <param name="selector">The member expression that selects the property</param>
+        protected void NotifyPropertyChanged<T>(Expression<Func<T>> selector)
+        {
+            if (selector == null)
+                throw new ArgumentNullException("selector");
+            MemberExpression b = selector.Body as MemberExpression;
+            if (b == null)
+                throw new ArgumentException("The body must be a member expression");
+            this.NotifyPropertyChanged(b.Member.Name);
         }
     
         /// <summary>
