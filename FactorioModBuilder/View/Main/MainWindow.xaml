@@ -116,8 +116,14 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Label Content="Output" Grid.Row="0" FontSize="12"/>
-                <DataGrid Grid.Row="1" AutoGenerateColumns="False" Margin="5 0 10 10"
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="3*"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="Output" Grid.Row="0" Grid.Column="0" FontSize="12" VerticalContentAlignment="Center"/>
+                <ComboBox Grid.Column="1" Margin="5"/>
+                <DataGrid Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" AutoGenerateColumns="False" Margin="5 0 10 10"
                           ItemsSource="{Binding Path=Data.Compiler.BuildMessages, Source={StaticResource proxy}}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Type" Width="Auto" Binding="{Binding Path=Type}" IsReadOnly="True"/>
