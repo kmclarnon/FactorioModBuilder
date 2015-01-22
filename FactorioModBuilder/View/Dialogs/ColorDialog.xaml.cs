@@ -21,17 +21,13 @@ namespace FactorioModBuilder.View.Dialogs
     public partial class ColorDialog : Window
     {
         public Color OldColor 
-        { 
-            set { ((ColorDialogVM)this.DataContext).OldColor = new SolidColorBrush(value); }
+        {
+            set { ((ColorDialogVM)this.DataContext).OldColor = value; ; }
         }
 
-        public Color NewColor
+        public Color SelectedColor
         {
-            get 
-            {
-                var brush = ((ColorDialogVM)this.DataContext).NewColor;
-                return ((SolidColorBrush)brush).Color;
-            }
+            get { return ((ColorDialogVM)this.DataContext).NewColor; }
         }
 
         public ColorDialog()

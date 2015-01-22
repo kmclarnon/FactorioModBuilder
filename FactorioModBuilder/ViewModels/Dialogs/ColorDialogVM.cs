@@ -17,43 +17,35 @@ namespace FactorioModBuilder.ViewModels.Dialogs
         /// <summary>
         /// The old color set in the constructor
         /// </summary>
-        public Brush OldColor
+        public Color OldColor
         {
-            get { return this.GetProperty<Brush>(); }
-            set { this.SetProperty(value, (() => this.NewColor = value)); }
+            get { return this.GetProperty<Color>(); }
+            set { this.SetProperty(value, this.OnOldColorUpdate); }
         }
 
         /// <summary>
         /// The new color that the user is selecting
         /// </summary>
-        public Brush NewColor
+        private Color _newColor;
+        public Color NewColor
         {
-            get { return this.GetProperty<Brush>(); }
-            set { this.SetProperty(value); }
+            get { return _newColor; }
+            set { this.SetProperty(ref _newColor, value); }
         }
 
-        /// <summary>
-        /// The current red value of the new color
-        /// </summary>
-        public byte RedValue
+        public byte Red
         {
             get { return this.GetProperty<byte>(); }
             set { this.SetProperty(value, this.OnSliderUpdate); }
         }
 
-        /// <summary>
-        /// The current green value of the new color
-        /// </summary>
-        public byte GreenValue
+        public byte Green
         {
             get { return this.GetProperty<byte>(); }
             set { this.SetProperty(value, this.OnSliderUpdate); }
         }
 
-        /// <summary>
-        /// The current blue value of the new color
-        /// </summary>
-        public byte BlueValue
+        public byte Blue
         {
             get { return this.GetProperty<byte>(); }
             set { this.SetProperty(value, this.OnSliderUpdate); }
@@ -73,6 +65,8 @@ namespace FactorioModBuilder.ViewModels.Dialogs
 
         public ColorDialogVM(Action<bool> setResult)
         {
+            this.OldColor = Colors.White;
+            this.NewColor = Colors.White;
             if (setResult == null)
                 throw new ArgumentNullException("setResult");
             _setResult = setResult;
@@ -103,19 +97,20 @@ namespace FactorioModBuilder.ViewModels.Dialogs
             _setResult(false);
         }
 
-        /// <summary>
-        /// Updates the color when the red, blue and green values change
-        /// </summary>
         private void OnSliderUpdate()
         {
-            if (this.NewColor == null)
-                return;
+            _newColor.R = this.Red;
+            _newColor.G = this.Green;
+            _newColor.B = this.Blue;
+            this.NotifyPropertyChanged(() => this.NewColor);
+        }
 
-            Color c = new Color();
-            c.R = this.RedValue;
-            c.G = this.GreenValue;
-            c.B = this.BlueValue;
-            this.NewColor = new SolidColorBrush(c);
+        private void OnOldColorUpdate()
+        {
+            this.NewColor = this.OldColor;
+            this.Red = this.NewColor.R;
+            this.Blue = this.NewColor.B;
+            this.Green = this.NewColor.G;
         }
     }
 }

@@ -22,23 +22,31 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Rectangle Grid.Column="0" Margin="5" Stroke="Black" Fill="{Binding Path=OldColor, Mode=TwoWay}"/>
-            <Rectangle Grid.Column="1" Margin="5" Stroke="Black" Fill="{Binding Path=NewColor, Mode=TwoWay}"/>
+            <Grid Grid.Column="0" Margin="5">
+                <Grid.Background>
+                    <SolidColorBrush Color="{Binding Path=OldColor}"/>
+                </Grid.Background>
+            </Grid>
+            <Grid Grid.Column="1" Margin="5">
+                <Grid.Background>
+                    <SolidColorBrush Color="{Binding Path=NewColor}"/>
+                </Grid.Background>
+            </Grid>
         </Grid>
         <!-- Red color slider -->
         <Label Content="R" Grid.Column="0" Grid.Row="1"/>
         <Slider x:Name="redSlider" Grid.Column="1" Grid.Row="1" Maximum="255" Minimum="0" 
-                Value="{Binding Path=RedValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                Value="{Binding Path=Red, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         <Label Content="{Binding Path=Value, ElementName=redSlider}" Grid.Column="4" Grid.Row="1"/>
         <!-- Green color slider -->
         <Label Content="G" Grid.Column="0" Grid.Row="2"/>
         <Slider x:Name="greenSlider" Grid.Column="1" Grid.Row="2" Maximum="255" Minimum="0" 
-                Value="{Binding Path=GreenValue, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                Value="{Binding Path=Green, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
         <Label Content="{Binding Path=Value, ElementName=greenSlider}" Grid.Column="4" Grid.Row="2"/>
         <!-- Blue color slider -->
         <Label Content="B" Grid.Column="0" Grid.Row="3"/>
         <Slider x:Name="blueSlider" Grid.Column="1" Grid.Row="3" Maximum="255" Minimum="0" 
-                Value="{Binding Path=BlueValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                Value="{Binding Path=Blue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         <Label Content="{Binding Path=Value, ElementName=blueSlider}" Grid.Column="4" Grid.Row="3"/>
         <!-- Ok/Cancel buttons -->
         <Grid Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2">

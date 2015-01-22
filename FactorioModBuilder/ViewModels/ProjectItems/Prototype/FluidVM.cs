@@ -47,19 +47,19 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         /// <summary>
         /// The color of the fluid when it is not moving
         /// </summary>
-        public SolidColorBrush BaseColor
+        public Color BaseColor
         {
-            get { return this.GetProperty<SolidColorBrush>(); }
+            get { return this.GetProperty<Color>(); }
             set { this.SetProperty(value, (() => this.UpdateBaseColor(value))); }
         }
 
         /// <summary>
         /// The color of the fluid when it is moving through pipes
         /// </summary>
-        public SolidColorBrush FlowColor
+        public Color FlowColor
         {
-            get { return this.GetProperty<SolidColorBrush>(); }
-            set { this.SetProperty(_internal, value, false, (() => this.UpdateFlowColor(value))); }
+            get { return this.GetProperty<Color>(); }
+            set { this.SetProperty(value, (() => this.UpdateFlowColor(value))); }
         }
 
         /// <summary>
@@ -123,50 +123,62 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         public ICommand SelectIconCmd { get { return this.GetCommand(this.SelectIcon); } }
 
         public FluidVM(Fluid fluid)
-            : base(fluid)
+            : this(null, fluid)
         {
         }
 
         public FluidVM(TreeItemVMBase parent, Fluid fluid)
             : base(parent, fluid)
         {
+            this.BaseColor = Colors.White;
+            this.FlowColor = Colors.White;
         }
 
-        private void UpdateBaseColor(SolidColorBrush b)
+        private void UpdateBaseColor(Color c)
         {
-            _internal.BaseColorR = b.Color.R;
-            _internal.BaseColorG = b.Color.G;
-            _internal.BaseColorB = b.Color.B;
+            _internal.BaseColorR = c.R;
+            _internal.BaseColorG = c.G;
+            _internal.BaseColorB = c.B;
         }
 
-        private void UpdateFlowColor(SolidColorBrush b)
+        private void UpdateFlowColor(Color c)
         {
-            _internal.FlowColorR = b.Color.R;
-            _internal.FlowColorG = b.Color.G;
-            _internal.FlowColorB = b.Color.B;
+            _internal.FlowColorR = c.R;
+            _internal.FlowColorG = c.G;
+            _internal.FlowColorB = c.B;
         }
 
         private void SelectBaseColor()
         {
             var dlg = new ColorDialog();
-            dlg.OldColor = Colors.Red;
+            dlg.OldColor = this.BaseColor;
             dlg.Owner = Application.Current.MainWindow;
            
-
             if(dlg.ShowDialog() == true)
-            {
-                this.BaseColor = new SolidColorBrush(dlg.NewColor);
-            }
+                this.BaseColor = dlg.SelectedColor;
         }
 
         private void SelectFlowColor()
         {
+            var dlg = new ColorDialog();
+            dlg.OldColor = this.FlowColor;
+            dlg.Owner = Application.Current.MainWindow;
 
+            if (dlg.ShowDialog() == true)
+                this.FlowColor = dlg.SelectedColor;
         }
 
         private void SelectIcon()
         {
+            var ofd = new OpenFileDialog();
+            ofd.CheckFileExists = true;
+            ofd.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
+            ofd.Multiselect = false;
 
+            if (ofd.ShowDialog() == true)
+            {
+                this.IconPath = ofd.FileName;
+            }
         }
     }
 }

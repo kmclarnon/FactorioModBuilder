@@ -27,27 +27,27 @@
                     </Style>
                 </DataGrid.ColumnHeaderStyle>
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Name" Width="2*" Binding="{Binding Path=Name}"/>
-                    <DataGridTextColumn Header="Default Temp" Width="Auto" Binding="{Binding Path=DefaultTemp}"/>
-                    <DataGridTextColumn Header="Heat Capacity" Width="Auto" Binding="{Binding Path=HeatCapacity}"/>
+                    <DataGridTextColumn Header="Name" Width="2*" Binding="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <DataGridTextColumn Header="Default Temp" Width="Auto" Binding="{Binding Path=DefaultTemp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <DataGridTextColumn Header="Heat Capacity" Width="Auto" Binding="{Binding Path=HeatCapacity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     <DataGridTemplateColumn Header="Base Color" Width="*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Rectangle Margin="5" Fill="{Binding Path=BaseColor}"/>
+                                <Rectangle Margin="1" Fill="{Binding Path=BaseColor, Converter={conv:ColorToSolidColorBrush}}"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                     <DataGridTemplateColumn Header="Flow Color" Width="*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Rectangle Margin="5" Fill="{Binding Path=FlowColor}"/>
+                                <Rectangle Margin="1" Fill="{Binding Path=FlowColor, Converter={conv:ColorToSolidColorBrush}}"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTextColumn Header="Max Temp" Width="Auto" Binding="{Binding Path=MaxTemp}"/>
-                    <DataGridTextColumn Header="Pressure to Speed Ratio" Width="*" Binding="{Binding Path=PressureToSpeed}"/>
-                    <DataGridTextColumn Header="Flow to Energy Ratio" Width="*" Binding="{Binding Path=FlowToEnergy}"/>
-                    <DataGridTextColumn Header="Order" Width="Auto" Binding="{Binding Path=Order}"/>
+                    <DataGridTextColumn Header="Max Temp" Width="Auto" Binding="{Binding Path=MaxTemp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <DataGridTextColumn Header="Pressure to Speed Ratio" Width="*" Binding="{Binding Path=PressureToSpeed, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <DataGridTextColumn Header="Flow to Energy Ratio" Width="*" Binding="{Binding Path=FlowToEnergy, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <DataGridTextColumn Header="Order" Width="Auto" Binding="{Binding Path=Order, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 </DataGrid.Columns>
             </DataGrid>
             <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="1" 
@@ -85,16 +85,16 @@
                 </Grid.RowDefinitions>
                 <Label Grid.Column="0" Grid.Row="0" Content="Name:" VerticalContentAlignment="Center" Margin="5"/>
                 <TextBox Grid.Column="1" Grid.ColumnSpan="2" VerticalContentAlignment="Center" Margin="5" Grid.Row="0"
-                         Text="{Binding Path=SelectedItem.Name, ElementName=itemList}"/>
+                         Text="{Binding Path=SelectedItem.Name, ElementName=itemList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 <Label Grid.Column="0" Grid.Row="1" Content="Def. Temp:" VerticalContentAlignment="Center" Margin="5"/>
                 <TextBox Grid.Column="1" Grid.ColumnSpan="2" VerticalContentAlignment="Center" Margin="5" Grid.Row="1"
-                         Text="{Binding Path=SelectedItem.DefaultTemp, ElementName=itemList}"/>
+                         Text="{Binding Path=SelectedItem.DefaultTemp, ElementName=itemList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 <Label Grid.Column="0" Grid.Row="2" Content="Heat Cap:" VerticalContentAlignment="Center" Margin="5"/>
                 <TextBox Grid.Column="1" Grid.ColumnSpan="2" VerticalContentAlignment="Center" Margin="5" Grid.Row="2"
-                         Text="{Binding Path=SelectedItem.HeatCapacity, ElementName=itemList}"/>
+                         Text="{Binding Path=SelectedItem.HeatCapacity, ElementName=itemList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 <Label Grid.Column="0" Grid.Row="3" Content="Base Color:" VerticalContentAlignment="Center" Margin="5"/>
                 <Rectangle Grid.Column="1" Margin="5" Grid.Row="3" StrokeThickness="1"
-                           Fill="{Binding Path=SelectedItem.BaseColor, ElementName=itemList}">
+                           Fill="{Binding Path=SelectedItem.BaseColor, Converter={conv:ColorToSolidColorBrush}, ElementName=itemList}">
                     <Rectangle.Style>
                         <Style TargetType="{x:Type Rectangle}">
                             <Style.Triggers>
@@ -112,7 +112,7 @@
                         Command="{Binding Path=SelectedItem.SelectBaseColorCmd, ElementName=itemList}"/>
                 <Label Grid.Column="0" Grid.Row="4" Content="Flow Color:" VerticalContentAlignment="Center" Margin="5"/>
                 <Rectangle Grid.Column="1" Margin="5" Grid.Row="4" StrokeThickness="1"
-                           Fill="{Binding Path=SelectedItem.FlowColor, ElementName=itemList}">
+                           Fill="{Binding Path=SelectedItem.FlowColor, Converter={conv:ColorToSolidColorBrush}, ElementName=itemList}">
                     <Rectangle.Style>
                         <Style TargetType="{x:Type Rectangle}">
                             <Style.Triggers>
@@ -130,10 +130,10 @@
                         Command="{Binding Path=SelectedItem.SelectFlowColorCmd, ElementName=itemList}"/>
                 <Label Grid.Column="0" Content="Max Temp:" Margin="5" Grid.Row="5" VerticalContentAlignment="Center"/>
                 <TextBox Grid.Column="1" Grid.ColumnSpan="2" Margin="5" Grid.Row="5" VerticalContentAlignment="Center"
-                         Text="{Binding Path=SelectedItem.MaxTemp, ElementName=itemList}"/>
+                         Text="{Binding Path=SelectedItem.MaxTemp, ElementName=itemList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 <Label Grid.Column="0" Content="Icon:" Margin="5" Grid.Row="6" VerticalContentAlignment="Center"/>
                 <TextBox Grid.Column="1" Margin="5" Grid.Row="6" VerticalContentAlignment="Center"
-                         Text="{Binding Path=SelectedItem.IconPath, ElementName=itemList}"/>
+                         Text="{Binding Path=SelectedItem.IconPath, ElementName=itemList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 <Button Content="..." Grid.Column="2" Margin="5" Grid.Row="6" 
                         VerticalContentAlignment="Center"
                         Command="{Binding Path=SelectedItem.SelectIconCmd, ElementName=itemList}"/>
@@ -152,13 +152,13 @@
                 </Grid.RowDefinitions>
                 <Label Grid.Column="0" Grid.Row="0" Content="Pres : Speed:" Margin="5" VerticalContentAlignment="Center"/>
                 <TextBox Grid.Column="1" Grid.Row="0" Margin="5" VerticalContentAlignment="Center"
-                         Text="{Binding Path=SelectedItem.PressureToSpeed, ElementName=itemList}"/>
+                         Text="{Binding Path=SelectedItem.PressureToSpeed, ElementName=itemList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 <Label Grid.Column="0" Grid.Row="1" Content="Flow : Energy:" Margin="5" VerticalContentAlignment="Center"/>
                 <TextBox Grid.Column="1" Grid.Row="1" Margin="5" VerticalContentAlignment="Center"
-                         Text="{Binding Path=SelectedItem.FlowToEnergy, ElementName=itemList}"/>
+                         Text="{Binding Path=SelectedItem.FlowToEnergy, ElementName=itemList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 <Label Grid.Column="0" Grid.Row="2" Content="Order:" Margin="5" VerticalContentAlignment="Center"/>
                 <TextBox Grid.Column="1" Grid.Row="2" Margin="5" VerticalContentAlignment="Center"
-                         Text="{Binding Path=SelectedItem.Order, ElementName=itemList}"/>
+                         Text="{Binding Path=SelectedItem.Order, ElementName=itemList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             </Grid>
         </Grid>
     </DataTemplate>
