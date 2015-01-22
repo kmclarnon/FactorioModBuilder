@@ -34,5 +34,5 @@ building the tool requires:
 | Support custom prototype extension | Planned |
 | Support multi-project mods | Planned |
 | Support automatic conditional dependency code execution | Planned |
-
+| Saving and loading of solutions/projects | Planned |
 
