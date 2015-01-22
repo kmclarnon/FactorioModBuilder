@@ -128,6 +128,7 @@
     <Compile Include="Models\ProjectItems\ModInfoDependency.cs" />
     <Compile Include="Models\ProjectItems\Prototype\RecipeIngredient.cs" />
     <Compile Include="Models\SolutionItems\Solution.cs" />
+    <Compile Include="ViewModels\Dialogs\ColorDialogVM.cs" />
     <Compile Include="ViewModels\Dialogs\NewProjectVM.cs" />
     <Compile Include="ViewModels\Main\BuildMenuVM.cs" />
     <Compile Include="ViewModels\Main\FileMenuVM.cs" />
@@ -139,9 +140,16 @@
     <Compile Include="ViewModels\ProjectItems\ProjectItem.cs" />
     <Compile Include="ViewModels\ProjectItems\Prototype\RecipeIngredientVM.cs" />
     <Compile Include="ViewModels\SolutionItems\SolutionVM.cs" />
+    <Compile Include="View\Dialogs\ColorDialog.xaml.cs">
+      <DependentUpon>ColorDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Dialogs\NewProjectDialog.xaml.cs">
       <DependentUpon>NewProjectDialog.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\Dialogs\ColorDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Main\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
