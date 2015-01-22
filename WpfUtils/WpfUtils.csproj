@@ -52,6 +52,7 @@
     <Compile Include="ValueConverters\BaseConverter.cs" />
     <Compile Include="ValueConverters\BooleanNot.cs" />
     <Compile Include="ValueConverters\BoolToVisibility.cs" />
+    <Compile Include="ValueConverters\ColorToSolidColorBrush.cs" />
     <Compile Include="ValueConverters\DualConverter.cs" />
     <Compile Include="ValueConverters\NullImage.cs" />
     <Compile Include="ValueConverters\ObjectIsType.cs" />
