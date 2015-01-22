@@ -17,7 +17,7 @@
                 <Label Content="Manage Manually"/>
             </StackPanel>
             <!-- Graphics filter view -->
-            <Grid Grid.Column="0" Grid.Row="1" IsEnabled="{Binding Path=IsChecked, ElementName=graphicsEnabled}">
+            <Grid Grid.Column="0" Grid.Row="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
@@ -46,8 +46,8 @@
                         </HierarchicalDataTemplate>
                     </TreeView.ItemTemplate>
                 </TreeView>
-                <Button Content="Add Filter" Grid.Row="1" Grid.Column="0" Margin="5"/>
-                <Button Content="Remove Filter" Grid.Row="1" Grid.Column="1" Margin="5"/>
+                <Button Content="Add Filter" Grid.Row="1" Grid.Column="0" Margin="5" IsEnabled="{Binding Path=IsChecked, ElementName=graphicsEnabled}"/>
+                <Button Content="Remove Filter" Grid.Row="1" Grid.Column="1" Margin="5" IsEnabled="{Binding Path=IsChecked, ElementName=graphicsEnabled}"/>
             </Grid>
             <!-- Column splitter -->
             <GridSplitter Grid.Row="1" Grid.Column="1" Width="5" VerticalAlignment="Stretch" HorizontalAlignment="Center"/>
@@ -77,9 +77,11 @@
                     </DataGrid.Columns>
                 </DataGrid>
                 <Button Content="Add Graphic" Grid.Column="0" Grid.Row="1" Margin="5"
-                        Command="{Binding Path=SelectedItem.AddGraphicCmd, ElementName=graphicsView}"/>
+                        Command="{Binding Path=SelectedItem.AddGraphicCmd, ElementName=graphicsView}"
+                        IsEnabled="{Binding Path=IsChecked, ElementName=graphicsEnabled}"/>
                 <Button Content="Remove Graphic" Grid.Column="1" Grid.Row="1" Margin="5"
-                        Command="{Binding Path=SelectedItem.RemoveGraphicCmd, ElementName=graphicsView}"/>
+                        Command="{Binding Path=SelectedItem.RemoveGraphicCmd, ElementName=graphicsView}"
+                        IsEnabled="{Binding Path=IsChecked, ElementName=graphicsEnabled}"/>
             </Grid>
         </Grid>
     </DataTemplate>
