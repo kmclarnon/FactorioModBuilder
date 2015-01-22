@@ -91,9 +91,6 @@ namespace FactorioModBuilder.Build
                     return false;
                 }
 
-                this.BuildMessages.Add(new InfoMessage(
-                    "Resolved " + exts.Count() + " dependencies for the project data"));
-
                 // process each of our compilation units
                 foreach (var ext in this.GetProcessOrder(exts))
                 {
