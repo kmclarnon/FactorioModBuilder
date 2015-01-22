@@ -59,7 +59,7 @@
                 </Grid.RowDefinitions>
                 <Label Content="Name:" Grid.Column="0" Grid.Row="0" VerticalContentAlignment="Center" Margin="5"/>
                 <TextBox Grid.Column="1" Grid.Row="0" VerticalContentAlignment="Center" Margin="5"
-                         Text="{Binding Path=SelectedItem.Name, ElementName=itemList}"/>
+                         Text="{Binding Path=SelectedItem.Name, ElementName=itemList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 <Label Content="Result:" Grid.Column="0" Grid.Row="1" VerticalContentAlignment="Center" Margin="5"/>
                 <ComboBox Grid.Column="1" Grid.Row="1" VerticalContentAlignment="Center"
                           ItemsSource="{Binding Path=PossibleResults}" Margin="5" DisplayMemberPath="Name"
@@ -70,7 +70,8 @@
                          Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ElementName=itemList}"/>
                 <Label Content="Enabled:" Grid.Column="0" Grid.Row="3" VerticalContentAlignment="Center" Margin="5"/>
                 <CheckBox Grid.Column="1" Grid.Row="3" VerticalContentAlignment="Center" Margin="5"
-                          IsChecked="{Binding Path=SelectedItem.Enabled, ElementName=itemList}"/>
+                          IsChecked="{Binding Path=SelectedItem.Enabled, ElementName=itemList, 
+                                      Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             </Grid>
             <Grid Grid.Column="1" Grid.Row="2" IsEnabled="{Binding Path=SelectedItem,
                 Converter={conv:ObjectNotNull}, ElementName=itemList}">
