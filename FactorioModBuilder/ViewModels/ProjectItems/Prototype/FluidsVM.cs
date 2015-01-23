@@ -59,7 +59,8 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
                 foreach(SubGroupVM sg in e.OldItems)
                 {
                     foreach (var f in this.ItemList)
-                        f.ForceRemoveSubGroup();
+                        if(f.SubGroupItem == sg)
+                            f.ForceRemoveSubGroup();
                 }
             }
         }
