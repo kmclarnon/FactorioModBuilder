@@ -19,7 +19,11 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         public TreeItemVMBase Ingredient
         {
             get { return this.GetProperty<TreeItemVMBase>(); }
-            set { this.SetProperty(value, null, (() => this.Name = (value == null) ? String.Empty : value.Name)); }
+            set 
+            { 
+                this.SetProperty(value, 
+                    this.UpdateSubGroupBinding, 
+                    (() => this.Name = (value == null) ? String.Empty : value.Name)); }
         }
 
         public int Quantity
@@ -36,6 +40,28 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         public RecipeIngredientVM(TreeItemVMBase parent, RecipeIngredient item)
             : base(parent, item)
         {
+        }
+
+        /// <summary>
+        /// Handles hooking and unhooking the ingredient's property changed notification to catch renaming
+        /// </summary>
+        private void UpdateSubGroupBinding(TreeItemVMBase val)
+        {
+            if (this.Ingredient != null)
+                this.Ingredient.PropertyChanged -= SubGroupPropertyChanged;
+            if (val != null)
+                val.PropertyChanged += SubGroupPropertyChanged;
+        }
+
+        /// <summary>
+        /// Re-reads the name property from the ingredient whenever there is a property change
+        /// </summary>
+        void SubGroupPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (this.Ingredient == null)
+                this.Name = String.Empty;
+            else
+                this.Name = this.Ingredient.Name;
         }
     }
 }

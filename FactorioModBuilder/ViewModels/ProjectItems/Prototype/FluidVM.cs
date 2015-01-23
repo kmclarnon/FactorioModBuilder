@@ -112,7 +112,12 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         public SubGroupVM SubGroupItem
         {
             get { return this.GetProperty<SubGroupVM>(); }
-            set { this.SetProperty(value, null, (() => this.SubGroup = (value == null) ? String.Empty : value.Name)); }
+            set 
+            { 
+                this.SetProperty(value, 
+                    this.UpdateSubGroupBinding, 
+                    (() => this.SubGroup = (value == null) ? String.Empty : value.Name)); 
+            }
         }
 
         /// <summary>
@@ -218,6 +223,29 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
             {
                 this.IconPath = ofd.FileName;
             }
+        }
+
+        /// <summary>
+        /// Handles hooking and unhooking the SubGroupVM's property changed notification to catch renaming
+        /// </summary>
+        /// <param name="val"></param>
+        private void UpdateSubGroupBinding(SubGroupVM val)
+        {
+            if(this.SubGroupItem != null)
+                this.SubGroupItem.PropertyChanged -= SubGroupPropertyChanged;
+            if (val != null)
+                val.PropertyChanged += SubGroupPropertyChanged;
+        }
+
+        /// <summary>
+        /// Re-reads the name property from the subgroup whenever there is a property change
+        /// </summary>
+        void SubGroupPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (this.SubGroupItem == null)
+                this.SubGroup = String.Empty;
+            else
+                this.SubGroup = this.SubGroupItem.Name;
         }
     }
 }

@@ -23,7 +23,12 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         public ItemVM ResultItem
         {
             get { return this.GetProperty<ItemVM>(); }
-            set { this.SetProperty(value, null, (() => this.Result = (value == null) ? String.Empty : value.Name)); }
+            set 
+            { 
+                this.SetProperty(value, 
+                    this.UpdateItemBinding, 
+                    (() => this.Result = (value == null) ? String.Empty : value.Name)); 
+            }
         }
 
         public string Result
@@ -82,6 +87,28 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
             var res = this.Ingredients.Where(o => o.IsSelected).ToList();
             foreach (var r in res)
                 this.Ingredients.Remove(r);
+        }
+
+        /// <summary>
+        /// Handles hooking and unhooking the ItemVM's property changed notification to catch renaming
+        /// </summary>
+        private void UpdateItemBinding(ItemVM val)
+        {
+            if (this.ResultItem != null)
+                this.ResultItem.PropertyChanged -= ItemPropertyChanged;
+            if (val != null)
+                val.PropertyChanged += ItemPropertyChanged;
+        }
+
+        /// <summary>
+        /// Re-reads the name property from the item whenever there is a property change
+        /// </summary>
+        void ItemPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (this.ResultItem == null)
+                this.Result = String.Empty;
+            else
+                this.Result = this.ResultItem.Name;
         }
     }
 }
