@@ -53,7 +53,7 @@ namespace FactorioModBuilder.Build.Data
             this.MaxTemp = maxTemp;
             this.PressureToSpeedRatio = pToSRatio;
             this.FlowToEnergyRatio = ftoERatio;
-            this.Order = Order;
+            this.Order = order;
             this.IconPath = iconPath;
         }
     }

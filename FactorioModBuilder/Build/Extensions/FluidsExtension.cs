@@ -23,7 +23,7 @@ namespace FactorioModBuilder.Build.Extensions
             sb.AppendLine("data:extend(");
             sb.AppendLine("{");
             sb.AppendLine(units.Select(o => this.GetOutput(o)).Aggregate((a, b) => a + "," + Environment.NewLine + b));
-            sb.AppendLine("}");
+            sb.AppendLine("})");
 
             string res = sb.ToString();
             sw.Write(res);
@@ -71,7 +71,7 @@ namespace FactorioModBuilder.Build.Extensions
             sb.AppendLine("    pressure_to_speed_ratio = " + d.PressureToSpeedRatio + ",");
             sb.AppendLine("    flow_to_energy_ratio = " + d.FlowToEnergyRatio + ",");
             sb.AppendLine("    order = \"" + d.Order + "\"");
-            sb.AppendLine("  }");
+            sb.Append("  }");
 
             return sb.ToString();
         }
