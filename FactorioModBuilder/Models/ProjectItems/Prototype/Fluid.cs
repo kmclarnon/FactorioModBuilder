@@ -36,7 +36,7 @@ namespace FactorioModBuilder.Models.ProjectItems.Prototype
         public float FlowToEnergy { get; set; }
         
         public string Order { get; set; }
-        public string Subgroup { get; set; }
+        public string SubGroup { get; set; }
 
         public Fluid(string name) : base(name)
         {

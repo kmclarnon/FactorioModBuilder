@@ -22,6 +22,17 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         public ICommand AddFluidCmd { get { return this.GetCommand(this.AddFluid, this.CanAddFluid); } }
         public ICommand RemoveFluidCmd { get { return this.GetCommand(this.RemoveFluid, this.CanRemoveFluid); } }
 
+        public ObservableCollection<SubGroupVM> PossibleSubGroups
+        {
+            get
+            {
+                PrototypesVM res;
+                if (!this.TryFindElementUp(out res))
+                    throw new Exception("Could not find subgroups view model");
+                return res.ItemSubgroups;
+            }
+        }
+
         private int _newCount = 1;
 
         public FluidsVM(Fluids fl) 

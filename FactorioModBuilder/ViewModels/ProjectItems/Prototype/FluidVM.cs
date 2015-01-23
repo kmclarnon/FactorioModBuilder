@@ -120,7 +120,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         /// </summary>
         public string SubGroup
         {
-            get { return _internal.Subgroup; }
+            get { return _internal.SubGroup; }
             set { this.SetProperty(_internal, value); }
         }
 

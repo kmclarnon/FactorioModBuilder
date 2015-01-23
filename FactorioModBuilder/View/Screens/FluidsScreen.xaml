@@ -37,7 +37,15 @@
                     </Style>
                 </DataGrid.ColumnHeaderStyle>
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Name" Width="2*" Binding="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <DataGridTextColumn Header="Name" Width="*" Binding="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <DataGridTemplateColumn Header="SubGroup" Width="*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <ComboBox ItemsSource="{Binding Path=DataContext.PossibleSubGroups, RelativeSource={RelativeSource AncestorType=DataGrid}}" 
+                                          SelectedItem="{Binding Path=SubGroupItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                     <DataGridTemplateColumn Header="Default Temp" Width="Auto">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
