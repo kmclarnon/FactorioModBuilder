@@ -54,6 +54,7 @@
     <Compile Include="ValueConverters\BoolToVisibility.cs" />
     <Compile Include="ValueConverters\ColorToSolidColorBrush.cs" />
     <Compile Include="ValueConverters\DualConverter.cs" />
+    <Compile Include="ValueConverters\EnumToDescriptionString.cs" />
     <Compile Include="ValueConverters\NullImage.cs" />
     <Compile Include="ValueConverters\ObjectIsType.cs" />
     <Compile Include="ValueConverters\ObjectNotNull.cs" />
