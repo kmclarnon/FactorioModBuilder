@@ -58,7 +58,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 
         public void ForceRemoveGroup()
         {
-            this.SetProperty<Group>(null, null, null, false, "Group");
+            this.SetProperty<GroupVM>(null, null, null, true, "Group");
             this.GroupName = String.Empty;
         }
     }
