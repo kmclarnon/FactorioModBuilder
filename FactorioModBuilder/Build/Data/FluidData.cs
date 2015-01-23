@@ -30,10 +30,11 @@ namespace FactorioModBuilder.Build.Data
         public float FlowToEnergyRatio { get; set; }
 
         public string Order { get; set; }
+        public string IconPath { get; set; }
 
         public FluidData(string name, int heatCap, EnergyUnit heatCapUnit, Color baseColor, 
             Color flowColor, int defTemp, int maxTemp, float pToSRatio,
-            float ftoERatio, string order)
+            float ftoERatio, string order, string iconPath)
             : base(Extensions.ExtensionType.PrototypeFluids)
         {
             this.Name = name;
@@ -53,6 +54,7 @@ namespace FactorioModBuilder.Build.Data
             this.PressureToSpeedRatio = pToSRatio;
             this.FlowToEnergyRatio = ftoERatio;
             this.Order = Order;
+            this.IconPath = iconPath;
         }
     }
 }

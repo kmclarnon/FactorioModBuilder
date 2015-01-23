@@ -29,7 +29,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
             {
                 return new FluidData(this.Name, this.HeatCapacity, this.HeatCapacityUnit,
                     this.BaseColor, this.FlowColor, this.DefaultTemp, this.MaxTemp,
-                    this.PressureToSpeed, this.FlowToEnergy, this.Order).ListWrap();
+                    this.PressureToSpeed, this.FlowToEnergy, this.Order, this.IconPath).ListWrap();
             }
         }
 
