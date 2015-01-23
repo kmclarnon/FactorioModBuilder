@@ -19,6 +19,9 @@ namespace FactorioModBuilder.Build.Extensions
 
         protected override bool BuildUnit(IEnumerable<FluidData> units, StringBuilder sb)
         {
+            if (!units.Any())
+                return true;
+
             sb.AppendLine("data:extend(");
             sb.AppendLine("{");
             sb.AppendLine(units.Select(o => this.GetOutput(o)).Aggregate((a, b) => a + "," + Environment.NewLine + b));

@@ -134,7 +134,7 @@ namespace FactorioModBuilder.Build.Extensions
                 {
                     if (sb.Length == 0)
                     {
-                        this.Info("Extension generated no information for requested file {0}, skipping", path);
+                        this.Info("Extension generated no information for requested file {0}, skipping...", path);
                         return true;
                     }
 
@@ -148,8 +148,11 @@ namespace FactorioModBuilder.Build.Extensions
 
                     if (!_compiler.GeneratedFiles.Add(fullPath))
                         this.Warning(WarningLevel.W1, "Compiler generation of {0} has happened more than once", path);
+                    
                     return true;
                 }
+
+                return true;
             }
             catch(InvalidCastException)
             {
