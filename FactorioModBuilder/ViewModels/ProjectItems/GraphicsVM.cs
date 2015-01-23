@@ -86,6 +86,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
 
         private static Dictionary<Type, string> _categoryDict = new Dictionary<Type, string>()
         {
+            { typeof(FluidVM), "graphics/fluids" },
             { typeof(GroupVM), "graphics/groups" },
             { typeof(ItemVM), "graphics/items" },
             { typeof(TechnologyVM), "graphics/technology" },

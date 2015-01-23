@@ -18,7 +18,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
     /// <summary>
     /// View model to wrap a fluid prototype used in the Fluids Screen
     /// </summary>
-    public class FluidVM : ProjectItem<Fluid, FluidVM>
+    public class FluidVM : ProjectItem<Fluid, FluidVM>, IGraphicsSource
     {
         /// <summary>
         /// The data necessary for the compiler
@@ -31,6 +31,15 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
                     this.BaseColor, this.FlowColor, this.DefaultTemp, this.MaxTemp,
                     this.PressureToSpeed, this.FlowToEnergy, this.Order).ListWrap();
             }
+        }
+
+        /// <summary>
+        /// Exposes the path to the file associated with this fluid's icon
+        /// </summary>
+        public string GraphicPath
+        {
+            get { return this.GetProperty<string>(); }
+            set { this.SetProperty(value); }
         }
 
         /// <summary>
@@ -93,7 +102,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         public string IconPath
         {
             get { return _internal.IconPath; }
-            set { this.SetProperty(_internal, value); }
+            set { this.SetProperty(_internal, value, false, (() => this.GraphicPath = (value == null) ? String.Empty : value)); }
         }
 
         /// <summary>

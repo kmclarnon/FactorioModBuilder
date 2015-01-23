@@ -84,6 +84,17 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
             }
         }
 
+        public ObservableCollection<FluidVM> Fluids
+        {
+            get
+            {
+                FluidsVM res;
+                if (!this.TryFindElementDown(out res))
+                    throw new Exception("Could not find fluids child element");
+                return res.ItemList;
+            }
+        }
+
         public ObservableCollection<IGraphicsSource> GraphicsSources { get; private set; }
 
         public PrototypesVM(Prototypes types, IEnumerable<TreeItemVMBase> children)
@@ -102,6 +113,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         {
             this.Items.CollectionChanged += GraphicsSourceCollectionChanged;
             this.ItemGroups.CollectionChanged += GraphicsSourceCollectionChanged;
+            this.Fluids.CollectionChanged += GraphicsSourceCollectionChanged;
         }
 
         void GraphicsSourceCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
