@@ -1,7 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:bind="clr-namespace:WpfUtils.Bindings;assembly=WpfUtils"
-                    xmlns:conv="clr-namespace:WpfUtils.ValueConverters;assembly=WpfUtils">
+                    xmlns:conv="clr-namespace:WpfUtils.ValueConverters;assembly=WpfUtils"
+                    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit">
     <!-- Primary screen template to export -->
     <DataTemplate x:Key="Items_Template">
         <Grid>
@@ -29,7 +30,13 @@
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                     <DataGridTextColumn Header="Order" Width="*" Binding="{Binding Path=Order, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                    <DataGridTextColumn Header="Stack Size" Width="*" Binding="{Binding Path=StackSize, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <DataGridTemplateColumn Header="Stack Size" Width="*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <xctk:IntegerUpDown Value="{Binding Path=StackSize, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Increment="1" FormatString="N0"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
             <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="1" 
@@ -87,9 +94,8 @@
                             Command="{Binding Path=SelectedItem.FindImageCmd, ElementName=itemList}"/>
                 </Grid>
                 <Label Content="Stack Size:" Grid.Column="0" Grid.Row="4" Margin="5"/>
-                <TextBox Text="{Binding Path=SelectedItem.StackSize, ElementName=itemList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged,
-                                ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" 
-                         Grid.Column="1" Grid.Row="4" Margin="6" VerticalContentAlignment="Center"/>
+                <xctk:IntegerUpDown Grid.Column="1" Grid.Row="4" Margin="5" Increment="1" FormatString="N0"
+                                    Value="{Binding Path=SelectedItem.StackSize, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ElementName=itemList}"/>
                 <Label Content="Flags:" Grid.Column="0" Grid.Row="5" Margin="5"/>
                 <ComboBox Grid.Column="1" Grid.Row="5" ItemsSource="{Binding Path=PossibleFlags}" Margin="5"
                           SelectedItem="{Binding Path=SelectedItem.Flags, ElementName=itemList, Mode=TwoWay, 
