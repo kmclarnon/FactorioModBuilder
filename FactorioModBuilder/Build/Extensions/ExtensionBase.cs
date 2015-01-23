@@ -164,7 +164,7 @@ namespace FactorioModBuilder.Build.Extensions
             }
         }
 
-        protected abstract bool BuildUnit(IEnumerable<T> units, StreamWriter sr);
+        protected abstract bool BuildUnit(IEnumerable<T> units, StreamWriter sw);
 
         protected abstract bool ValidateData(IEnumerable<T> units);
 
