@@ -144,6 +144,9 @@
     <Compile Include="Models\ProjectItems\GraphicsFilter.cs" />
     <Compile Include="Models\ProjectItems\GraphicsFilterItem.cs" />
     <Compile Include="Models\ProjectItems\ModInfoDependency.cs" />
+    <Compile Include="Models\ProjectItems\Prototype\EquipmentEnergySource.cs" />
+    <Compile Include="Models\ProjectItems\Prototype\EquipmentShape.cs" />
+    <Compile Include="Models\ProjectItems\Prototype\EquipmentSprite.cs" />
     <Compile Include="Models\ProjectItems\Prototype\RecipeIngredient.cs" />
     <Compile Include="Models\SolutionItems\Solution.cs" />
     <Compile Include="ViewModels\Dialogs\ColorDialogVM.cs" />

@@ -79,7 +79,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         /// <summary>
         /// The priority of the Equipment model sprite
         /// </summary>
-        public string SpritePriority
+        public SpritePriority SpritePriority
         {
             get { return _internal.SpritePriority; }
             set { this.SetProperty(_internal, value); }
@@ -88,7 +88,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         /// <summary>
         /// The shape type of the Equipment model
         /// </summary>
-        public string ShapeType
+        public ShapeType ShapeType
         {
             get { return _internal.ShapeType; }
             set { this.SetProperty(_internal, value); }
