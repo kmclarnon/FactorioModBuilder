@@ -112,7 +112,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         public SubGroupVM SubGroupItem
         {
             get { return this.GetProperty<SubGroupVM>(); }
-            set { this.SetProperty(value, (() => this.SubGroup = (value == null) ? String.Empty : value.Name)); }
+            set { this.SetProperty(value, null, (() => this.SubGroup = (value == null) ? String.Empty : value.Name)); }
         }
 
         /// <summary>

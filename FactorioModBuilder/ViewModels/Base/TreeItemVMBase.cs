@@ -48,7 +48,7 @@ namespace FactorioModBuilder.ViewModels.Base
         public bool IsExpanded
         {
             get { return this.GetProperty<bool>(); }
-            set { this.SetProperty(value, (() => this.OnIsExpandedChanged())); }
+            set { this.SetProperty(value, null, (() => this.OnIsExpandedChanged())); }
         }
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace FactorioModBuilder.ViewModels.Base
         public bool IsSelected
         {
             get { return this.GetProperty<bool>(); }
-            set { this.SetProperty(value, (() => this.OnIsSelectedChanged())); }
+            set { this.SetProperty(value, null, (() => this.OnIsSelectedChanged())); }
         }
 
         /// <summary>

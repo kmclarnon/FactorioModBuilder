@@ -49,7 +49,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
                 var s = this.GetProperty<IGraphicsSource>();
                 if (s != null)
                     s.PropertyChanged -= this.OnSourcePropertyChanged;
-                this.SetProperty(value, this.SourceUpdated); 
+                this.SetProperty(value, null, this.SourceUpdated); 
             }
         }
 

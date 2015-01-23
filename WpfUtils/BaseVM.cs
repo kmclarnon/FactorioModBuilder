@@ -181,6 +181,7 @@ namespace WpfUtils
         /// <param name="allowNull">Whether the property can be set to null or not</param>
         /// <param name="propertyName">The name of the property.  Defaults to CallerMemberName and only needs to be set when invoked outside a property setter</param>
         protected void SetProperty<T>(T value,
+            Action<T> precedingAction = null,
             Action secondaryAction = null,
             bool allowNull = false,
             [CallerMemberName] string propertyName = "")
@@ -195,6 +196,10 @@ namespace WpfUtils
             var pInfo = this.GetType().GetProperty(propertyName);
             if (!pInfo.PropertyType.IsAssignableFrom(typeof(T)))
                 throw new ArgumentException("Supplied type does not match property type");
+
+            // execute our preceeding action if we have one
+            if (precedingAction != null)
+                precedingAction(value);
 
             bool changed = false;
             // ensure type consistency

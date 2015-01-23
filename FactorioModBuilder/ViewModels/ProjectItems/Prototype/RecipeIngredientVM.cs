@@ -19,7 +19,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         public TreeItemVMBase Ingredient
         {
             get { return this.GetProperty<TreeItemVMBase>(); }
-            set { this.SetProperty(value, (() => this.Name = (value == null) ? String.Empty : value.Name)); }
+            set { this.SetProperty(value, null, (() => this.Name = (value == null) ? String.Empty : value.Name)); }
         }
 
         public int Quantity

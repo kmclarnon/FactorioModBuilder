@@ -37,7 +37,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         public SubGroupVM SubGroup
         {
             get { return this.GetProperty<SubGroupVM>(); }
-            set { this.SetProperty(value, (() => this.SubGroupName = (value == null) ? String.Empty : value.Name)); }
+            set { this.SetProperty(value, null, (() => this.SubGroupName = (value == null) ? String.Empty : value.Name)); }
         }
 
         public string SubGroupName
@@ -67,7 +67,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         public EntityVM PlaceResultEntity
         {
             get { return this.GetProperty<EntityVM>(); }
-            set { this.SetProperty(value, (() => this.PlaceResult = (value == null) ? String.Empty : value.Name)); }
+            set { this.SetProperty(value, null, (() => this.PlaceResult = (value == null) ? String.Empty : value.Name)); }
         }
 
         public string PlaceResult

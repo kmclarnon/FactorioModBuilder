@@ -20,7 +20,7 @@ namespace FactorioModBuilder.ViewModels.Dialogs
         public Color OldColor
         {
             get { return this.GetProperty<Color>(); }
-            set { this.SetProperty(value, this.OnOldColorUpdate); }
+            set { this.SetProperty(value, null, this.OnOldColorUpdate); }
         }
 
         /// <summary>
@@ -36,19 +36,19 @@ namespace FactorioModBuilder.ViewModels.Dialogs
         public byte Red
         {
             get { return this.GetProperty<byte>(); }
-            set { this.SetProperty(value, this.OnSliderUpdate); }
+            set { this.SetProperty(value, null, this.OnSliderUpdate); }
         }
 
         public byte Green
         {
             get { return this.GetProperty<byte>(); }
-            set { this.SetProperty(value, this.OnSliderUpdate); }
+            set { this.SetProperty(value, null, this.OnSliderUpdate); }
         }
 
         public byte Blue
         {
             get { return this.GetProperty<byte>(); }
-            set { this.SetProperty(value, this.OnSliderUpdate); }
+            set { this.SetProperty(value, null, this.OnSliderUpdate); }
         }
 
         /// <summary>
