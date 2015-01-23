@@ -3,6 +3,7 @@ using FactorioModBuilder.ViewModels.Base;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -44,6 +45,23 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
             : base(parent, fl)
         {
             this.ItemList = new ObservableCollection<FluidVM>();
+        }
+
+        protected override void Initialize()
+        {
+            this.PossibleSubGroups.CollectionChanged += HandlePossibleSubGroupsChanged;
+        }
+
+        private void HandlePossibleSubGroupsChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if(e.Action == NotifyCollectionChangedAction.Remove)
+            {
+                foreach(SubGroupVM sg in e.OldItems)
+                {
+                    foreach (var f in this.ItemList)
+                        f.ForceRemoveSubGroup();
+                }
+            }
         }
 
         private bool CanAddFluid()

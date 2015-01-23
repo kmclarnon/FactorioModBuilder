@@ -247,5 +247,15 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
             else
                 this.SubGroup = this.SubGroupItem.Name;
         }
+
+        /// <summary>
+        /// Used to force the Subgroup value to null when the specified subgroup
+        /// was deleted by the user
+        /// </summary>
+        public void ForceRemoveSubGroup()
+        {
+            this.SetProperty<SubGroupVM>(null, null, null, true, "SubGroupItem");
+            this.SubGroup = String.Empty;
+        }
     }
 }
