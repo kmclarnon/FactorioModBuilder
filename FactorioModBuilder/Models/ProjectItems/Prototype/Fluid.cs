@@ -1,21 +1,25 @@
 ﻿using FactorioModBuilder.Models.Base;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace FactorioModBuilder.Models.ProjectItems.Prototype
 {
+    public enum EnergyUnit
+    {
+        [DescriptionAttribute("J")] 
+        Joule,
+        [DescriptionAttribute("kJ")]
+        KiloJoule,
+        [DescriptionAttribute("MJ")]
+        MegaJoule
+    }
+
     public class Fluid : TreeItem<Fluid>
     {
-        public enum EnergyUnit
-        {
-            Joule,
-            KiloJoule,
-            MegaJoule
-        }
-
         public int DefaultTemp { get; set; }
         
         public int HeatCapacity { get; set; }
