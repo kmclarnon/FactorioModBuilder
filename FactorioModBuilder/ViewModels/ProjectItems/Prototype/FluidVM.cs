@@ -39,7 +39,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         /// <summary>
         /// The unit metric joules prefix associated with heat capacity
         /// </summary>
-        public Fluid.EnergyUnit HeatCapacityUnit
+        public EnergyUnit HeatCapacityUnit
         {
             get { return _internal.HeatCapacityUnit; }
             set { this.SetProperty(_internal, value); }
