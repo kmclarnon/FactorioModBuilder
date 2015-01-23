@@ -17,16 +17,15 @@ namespace FactorioModBuilder.Build.Extensions
         {
         }
 
-        protected override bool BuildUnit(IEnumerable<FluidData> units, System.IO.StreamWriter sw)
+        protected override bool BuildUnit(IEnumerable<FluidData> units, StringBuilder sb)
         {
-            StringBuilder sb = new StringBuilder();
             sb.AppendLine("data:extend(");
             sb.AppendLine("{");
             sb.AppendLine(units.Select(o => this.GetOutput(o)).Aggregate((a, b) => a + "," + Environment.NewLine + b));
             sb.AppendLine("})");
 
             string res = sb.ToString();
-            sw.Write(res);
+
             return true;
         }
 

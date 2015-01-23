@@ -37,7 +37,7 @@ namespace FactorioModBuilder
                     System.Reflection.Assembly.GetExecutingAssembly()
                         .GetName().Version.ToString(),
                     new Build.Compiler(
-                        100,
+                        100, true,
                         new EntitiesExtension(),
                         new EquipmentExtension(),
                         new FluidsExtension(),

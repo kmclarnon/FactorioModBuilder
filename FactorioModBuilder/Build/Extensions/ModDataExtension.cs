@@ -19,9 +19,8 @@ namespace FactorioModBuilder.Build.Extensions
         {
         }
 
-        protected override bool BuildUnit(IEnumerable<ModDataData> units, StreamWriter sw)
+        protected override bool BuildUnit(IEnumerable<ModDataData> units, StringBuilder sb)
         {
-            StringBuilder sb = new StringBuilder();
             foreach (var f in this.GeneratedFiles.Where(o => o.StartsWith(this.TemporaryDirectory)))
             {
                 var np = f.Substring(this.TemporaryDirectory.Length + 1).Replace('\\','.');
@@ -36,7 +35,6 @@ namespace FactorioModBuilder.Build.Extensions
                 sb.AppendLine("require(\"" + np + "\")");
             }
 
-            sw.Write(sb.ToString());
             return true;
         }
 

@@ -15,7 +15,7 @@ namespace FactorioModBuilder.Build.Extensions
         {
         }
 
-        protected override bool BuildUnit(IEnumerable<LocaleData> units, StreamWriter sw)
+        protected override bool BuildUnit(IEnumerable<LocaleData> units, StringBuilder sb)
         {
             return true;
         }

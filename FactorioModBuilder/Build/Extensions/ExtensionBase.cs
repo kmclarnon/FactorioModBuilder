@@ -122,32 +122,33 @@ namespace FactorioModBuilder.Build.Extensions
                     return false;
                 }
 
-                string path;
-                if (!this.GetOutputPath(out path))
+                StringBuilder sb = new StringBuilder();
+                if (!this.BuildUnit(units.Cast<T>(), sb))
                 {
-                    if (!this.BuildUnit(units.Cast<T>(), null))
-                    {
-                        this.Error("Extension failed to execute non-build tasks");
-                        return false;
-                    }
-                    
-                    return true;
+                    this.Error("Extension failed to execute build task: {0}", this.Extension);
+                    return false;
                 }
-                else
+
+                string path;
+                if (this.GetOutputPath(out path))
                 {
+                    if (sb.Length == 0)
+                    {
+                        this.Info("Extension generated no information for requested file {0}, skipping", path);
+                        return true;
+                    }
+
+                    string fullPath;
                     using (var fs = File.Open(path, FileMode.Create))
                     using (var sw = new StreamWriter(fs))
                     {
-                        if(!this.BuildUnit(units.Cast<T>(), sw))
-                        {
-                            this.Error("Extension failed to execut build task to generate: {0}", path);
-                            return false;
-                        }
-
-                        if (!_compiler.GeneratedFiles.Add(fs.Name))
-                            this.Warning(WarningLevel.W1, "Compiler generation of {0} has happened more than once", path);
-                        return true;
+                        fullPath = fs.Name;
+                        sw.Write(sb.ToString());
                     }
+
+                    if (!_compiler.GeneratedFiles.Add(fullPath))
+                        this.Warning(WarningLevel.W1, "Compiler generation of {0} has happened more than once", path);
+                    return true;
                 }
             }
             catch(InvalidCastException)
@@ -164,7 +165,7 @@ namespace FactorioModBuilder.Build.Extensions
             }
         }
 
-        protected abstract bool BuildUnit(IEnumerable<T> units, StreamWriter sw);
+        protected abstract bool BuildUnit(IEnumerable<T> units, StringBuilder sb);
 
         protected abstract bool ValidateData(IEnumerable<T> units);
 

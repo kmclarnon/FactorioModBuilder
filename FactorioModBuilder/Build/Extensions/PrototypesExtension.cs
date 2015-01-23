@@ -15,7 +15,7 @@ namespace FactorioModBuilder.Build.Extensions
         {
         }
 
-        protected override bool BuildUnit(IEnumerable<PrototypeData> units, StreamWriter sw)
+        protected override bool BuildUnit(IEnumerable<PrototypeData> units, StringBuilder sb)
         {
             this.PrototypeDirectory = Path.Combine(this.TemporaryDirectory, "prototypes");
             var dinfo = new DirectoryInfo(this.PrototypeDirectory);

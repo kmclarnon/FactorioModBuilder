@@ -16,9 +16,8 @@ namespace FactorioModBuilder.Build.Extensions
         {
         }
 
-        protected override bool BuildUnit(IEnumerable<RecipeData> units, System.IO.StreamWriter sr)
+        protected override bool BuildUnit(IEnumerable<RecipeData> units, StringBuilder sb)
         {
-            StringBuilder sb = new StringBuilder();
             sb.AppendLine("data:extend(");
             sb.AppendLine("{");
             foreach (var r in units)
@@ -52,7 +51,6 @@ namespace FactorioModBuilder.Build.Extensions
             sb.AppendLine("");
             sb.AppendLine("})");
             var res = sb.ToString();
-            sr.Write(res);
 
             return true;
         }

@@ -16,11 +16,9 @@ namespace FactorioModBuilder.Build.Extensions
             : base(ExtensionType.FactorioInfo, ExtensionType.FactorioDependencies) 
         { }
 
-        protected override bool BuildUnit(IEnumerable<ModInfoData> units, StreamWriter sw)
+        protected override bool BuildUnit(IEnumerable<ModInfoData> units, StringBuilder sb)
         {
             var info = units.Single();
-            StringBuilder sb = new StringBuilder();
-
             sb.AppendLine("{");
             sb.AppendLine("  \"name\" : \"" + info.Name + "\",");
             sb.AppendLine("  \"version\" : \"" + info.Version + "\",");
@@ -33,7 +31,6 @@ namespace FactorioModBuilder.Build.Extensions
             sb.AppendLine("}");
 
             string res = sb.ToString();
-            sw.Write(res);
             return true;
         }
 

@@ -14,14 +14,14 @@ namespace FactorioModBuilder.Build.Extensions
         {
         }
 
-        protected override bool BuildUnit(IEnumerable<ModInfoDependencyData> units, System.IO.StreamWriter sr)
+        protected override bool BuildUnit(IEnumerable<ModInfoDependencyData> units, StringBuilder sb)
         {
-            StringBuilder sb = new StringBuilder();
             sb.Append("[");
             if(units != null && units.Any())
                 sb.Append(units.Select(o => this.GetDepString(o)).Aggregate((a, b) => a + ", " + b));
             sb.Append("]");
             this.DependencyString = sb.ToString();
+
             return true;
         }
 

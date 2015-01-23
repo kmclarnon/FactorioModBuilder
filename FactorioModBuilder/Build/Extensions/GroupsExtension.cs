@@ -16,9 +16,8 @@ namespace FactorioModBuilder.Build.Extensions
         {
         }
 
-        protected override bool BuildUnit(IEnumerable<GroupBaseData> units, StreamWriter sw)
+        protected override bool BuildUnit(IEnumerable<GroupBaseData> units, StringBuilder sb)
         {
-            StringBuilder sb = new StringBuilder();
             sb.AppendLine("data:extend(");
             sb.AppendLine("{");
             var sgd = units.Where(o => o.GetType() == typeof(SubGroupData)).Cast<SubGroupData>();
@@ -61,7 +60,6 @@ namespace FactorioModBuilder.Build.Extensions
             sb.AppendLine("");
             sb.AppendLine("})");
             string res = sb.ToString();
-            sw.Write(res);
 
             return true;
         }

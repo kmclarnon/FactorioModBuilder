@@ -16,9 +16,8 @@ namespace FactorioModBuilder.Build.Extensions
         {
         }
 
-        protected override bool BuildUnit(IEnumerable<TechnologyData> units, System.IO.StreamWriter sw)
+        protected override bool BuildUnit(IEnumerable<TechnologyData> units, StringBuilder sb)
         {
-            sw.Write(" ");
             return true;
         }
 

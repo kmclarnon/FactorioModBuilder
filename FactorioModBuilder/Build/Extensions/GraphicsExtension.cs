@@ -16,7 +16,7 @@ namespace FactorioModBuilder.Build.Extensions
         {
         }
 
-        protected override bool BuildUnit(IEnumerable<GraphicsData> units, StreamWriter sr)
+        protected override bool BuildUnit(IEnumerable<GraphicsData> units, StringBuilder sb)
         {
             try
             {
