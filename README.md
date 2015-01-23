@@ -23,7 +23,7 @@ building the tool requires:
 | Automatic generation of data.lua | Working |
 | Automatic renaming of referenced prototypes | Done |
 | Generation of Entities | Planned |
-| Generation of Fluids | In Progress |
+| Generation of Fluids | Working |
 | Generation of Equipment | Planned |
 | Generation of Technology | In Progress |
 | Generation of Tiles | Planned |
