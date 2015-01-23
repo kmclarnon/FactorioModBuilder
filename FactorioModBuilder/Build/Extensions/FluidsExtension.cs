@@ -48,6 +48,11 @@ namespace FactorioModBuilder.Build.Extensions
                     this.Error("Fluid {0} contains an unknown icon path: {1}", d.Name, d.IconPath);
                     return false;
                 }
+                if(!this.SubGroupNames.Contains(d.SubGroup))
+                {
+                    this.Error("Fluid {0} contains an invalid subgroup: {1}", d.Name, d.SubGroup);
+                    return false;
+                }
             }
             return true;
         }
@@ -73,6 +78,7 @@ namespace FactorioModBuilder.Build.Extensions
             sb.AppendLine("    pressure_to_speed_ratio = " + d.PressureToSpeedRatio + ",");
             sb.AppendLine("    flow_to_energy_ratio = " + d.FlowToEnergyRatio + ",");
             sb.AppendLine("    order = \"" + d.Order + "\"");
+            sb.AppendLine("    subgroup = \"" + d.SubGroup + "\",");
             sb.Append("  }");
 
             return sb.ToString();

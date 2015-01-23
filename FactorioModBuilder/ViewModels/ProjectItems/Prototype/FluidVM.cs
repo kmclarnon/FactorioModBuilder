@@ -29,7 +29,8 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
             {
                 return new FluidData(this.Name, this.HeatCapacity, this.HeatCapacityUnit,
                     this.BaseColor, this.FlowColor, this.DefaultTemp, this.MaxTemp,
-                    this.PressureToSpeed, this.FlowToEnergy, this.Order, this.IconPath).ListWrap();
+                    this.PressureToSpeed, this.FlowToEnergy, this.Order, 
+                    this.IconPath, this.SubGroup).ListWrap();
             }
         }
 
@@ -103,6 +104,24 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         {
             get { return _internal.IconPath; }
             set { this.SetProperty(_internal, value, false, (() => this.GraphicPath = (value == null) ? String.Empty : value)); }
+        }
+
+        /// <summary>
+        /// The subgroup view model binding to facility renaming
+        /// </summary>
+        public SubGroupVM SubGroupItem
+        {
+            get { return this.GetProperty<SubGroupVM>(); }
+            set { this.SetProperty(value, (() => this.SubGroup = (value == null) ? String.Empty : value.Name)); }
+        }
+
+        /// <summary>
+        /// The subgroup property of the fluid
+        /// </summary>
+        public string SubGroup
+        {
+            get { return _internal.Subgroup; }
+            set { this.SetProperty(_internal, value); }
         }
 
         /// <summary>
