@@ -15,10 +15,10 @@ namespace FactorioModBuilder.Build.Data
         public string Order { get; private set; }
         public string PlaceResult { get; private set; }
         public int StackSize { get; private set; }
-        public Item.ItemFlag Flag { get; private set; }
+        public ItemFlag Flag { get; private set; }
 
         public ItemData(string name, string icon, string subgroup,
-            string order, string placeResult, int stackSize, Item.ItemFlag flag)
+            string order, string placeResult, int stackSize, ItemFlag flag)
             : base(Extensions.ExtensionType.PrototypeItems)
         {
             this.Name = name;

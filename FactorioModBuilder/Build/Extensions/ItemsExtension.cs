@@ -84,19 +84,17 @@ namespace FactorioModBuilder.Build.Extensions
             return true;
         }
 
-        private string GetFlagString(Item.ItemFlag flag)
+        private string GetFlagString(ItemFlag flag)
         {
             switch (flag)
             {
-                case Item.ItemFlag.GoesToQuickbar:
+                case ItemFlag.GoesToQuickbar:
                     return "\"goes-to-quickbar\"";
-                case Item.ItemFlag.GoesToMainInventory:
+                case ItemFlag.GoesToMainInventory:
                     return "\"goes-to-main-inventory\""; 
-                case Item.ItemFlag.Hidden:
-                    return "\"hidden\"";
-                case Item.ItemFlag.GoesToQuickbar | Item.ItemFlag.Hidden:
+                case ItemFlag.GoesToQuickBarHidden:
                     return "\"goes-to-quickbar\", \"hidden\"";
-                case Item.ItemFlag.GoesToMainInventory | Item.ItemFlag.Hidden:
+                case ItemFlag.GoesToMainInventoryHidden:
                     return "\"goes-to-main-inventory\", \"hidden\"";
                 default:
                     throw new Exception("Unknown Item flag: " + flag.ToString());

@@ -2,10 +2,19 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:bind="clr-namespace:WpfUtils.Bindings;assembly=WpfUtils"
                     xmlns:conv="clr-namespace:WpfUtils.ValueConverters;assembly=WpfUtils"
-                    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit">
+                    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                    xmlns:enum="clr-namespace:FactorioModBuilder.Models.ProjectItems.Prototype">
     <!-- Primary screen template to export -->
     <DataTemplate x:Key="Items_Template">
         <Grid>
+            <Grid.Resources>
+                <ObjectDataProvider x:Key="itemFlags" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
+                    <ObjectDataProvider.MethodParameters>
+                        <x:Type TypeName="enum:ItemFlag"/>
+                    </ObjectDataProvider.MethodParameters>
+                </ObjectDataProvider>
+            </Grid.Resources>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
@@ -97,9 +106,14 @@
                 <xctk:IntegerUpDown Grid.Column="1" Grid.Row="4" Margin="5" Increment="1" FormatString="N0"
                                     Value="{Binding Path=SelectedItem.StackSize, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ElementName=itemList}"/>
                 <Label Content="Flags:" Grid.Column="0" Grid.Row="5" Margin="5"/>
-                <ComboBox Grid.Column="1" Grid.Row="5" ItemsSource="{Binding Path=PossibleFlags}" Margin="5"
-                          SelectedItem="{Binding Path=SelectedItem.Flags, ElementName=itemList, Mode=TwoWay, 
-                                        UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Item2"/>
+                <ComboBox Grid.Column="1" Grid.Row="5" ItemsSource="{Binding Source={StaticResource itemFlags}}" Margin="5"
+                          SelectedItem="{Binding Path=SelectedItem.Flag, ElementName=itemList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Converter={conv:EnumToDescriptionString}}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
                 <Label Content="Place Result:" Grid.Column="0" Grid.Row="6" Margin="5"/>
                 <ComboBox Grid.Column="1" Grid.Row="6" ItemsSource="{Binding Path=PossiblePlaceResults}" Margin="5"
                           SelectedItem="{Binding Path=SelectedItem.PlaceResultEntity, ElementName=itemList, 

@@ -46,8 +46,6 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         public ICommand AddItemCmd { get { return this.GetCommand(this.AddItem, this.CanAddItem); } }
         public ICommand RemoveItemCmd { get { return this.GetCommand(this.RemoveItem, this.CanRemoveItem); } }
 
-        public ObservableCollection<Tuple<Item.ItemFlag, string>> PossibleFlags { get; private set; }
-
         private int _newCount = 1;
 
         public ItemsVM(Items items)
@@ -59,14 +57,6 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
             : base(parent, items)
         {
             this.ItemList = new ObservableCollection<ItemVM>();
-            this.PossibleFlags = new ObservableCollection<Tuple<Item.ItemFlag, string>>()
-            {
-                new Tuple<Item.ItemFlag, string>(Item.ItemFlag.GoesToQuickbar, "Goes to quickbar"),
-                new Tuple<Item.ItemFlag, string>(Item.ItemFlag.GoesToMainInventory, "Goes to main inventory"),
-                new Tuple<Item.ItemFlag, string>(Item.ItemFlag.Hidden, "Hidden"),
-                new Tuple<Item.ItemFlag, string>(Item.ItemFlag.GoesToQuickbar | Item.ItemFlag.Hidden, "Goes to quickbar, Hidden"),
-                new Tuple<Item.ItemFlag, string>(Item.ItemFlag.GoesToMainInventory | Item.ItemFlag.Hidden, "Goes to main inventory, Hidden")
-            };
         }
 
         private bool CanAddItem()
