@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace FactorioModBuilder.Models.ProjectItems.Prototype
 {
@@ -25,13 +26,8 @@ namespace FactorioModBuilder.Models.ProjectItems.Prototype
         public int HeatCapacity { get; set; }
         public EnergyUnit HeatCapacityUnit { get; set; }
 
-        public float BaseColorR { get; set; }
-        public float BaseColorG { get; set; }
-        public float BaseColorB { get; set; }
-        
-        public float FlowColorR { get; set; }
-        public float FlowColorG { get; set; }
-        public float FlowColorB { get; set; }
+        public Color BaseColor { get; set; }
+        public Color FlowColor { get; set; }
         
         public int MaxTemp { get; set; }
         public string IconPath { get; set; }

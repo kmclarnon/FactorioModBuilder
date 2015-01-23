@@ -1,6 +1,8 @@
-﻿using FactorioModBuilder.Models.ProjectItems.Prototype;
+﻿using FactorioModBuilder.Build.Data;
+using FactorioModBuilder.Models.ProjectItems.Prototype;
 using FactorioModBuilder.View.Dialogs;
 using FactorioModBuilder.ViewModels.Base;
+using FactorioModBuilder.Extensions;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -16,8 +18,21 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
     /// <summary>
     /// View model to wrap a fluid prototype used in the Fluids Screen
     /// </summary>
-    public class FluidVM : TreeItemVM<Fluid, FluidVM>
+    public class FluidVM : ProjectItem<Fluid, FluidVM>
     {
+        /// <summary>
+        /// The data necessary for the compiler
+        /// </summary>
+        public override IEnumerable<DataUnit> CompilerData
+        {
+            get
+            {
+                return new FluidData(this.Name, this.HeatCapacity, this.HeatCapacityUnit,
+                    this.BaseColor, this.FlowColor, this.DefaultTemp, this.MaxTemp,
+                    this.PressureToSpeed, this.FlowToEnergy, this.Order).ListWrap();
+            }
+        }
+
         /// <summary>
         /// The default temperature of the fluid
         /// </summary>
@@ -50,8 +65,8 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         /// </summary>
         public Color BaseColor
         {
-            get { return this.GetProperty<Color>(); }
-            set { this.SetProperty(value, (() => this.UpdateBaseColor(value))); }
+            get { return _internal.BaseColor; }
+            set { this.SetProperty(_internal, value); }
         }
 
         /// <summary>
@@ -59,8 +74,8 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         /// </summary>
         public Color FlowColor
         {
-            get { return this.GetProperty<Color>(); }
-            set { this.SetProperty(value, (() => this.UpdateFlowColor(value))); }
+            get { return _internal.FlowColor; }
+            set { this.SetProperty(_internal, value); }
         }
 
         /// <summary>
@@ -133,28 +148,6 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         {
             this.BaseColor = Colors.White;
             this.FlowColor = Colors.White;
-        }
-
-        /// <summary>
-        /// Sets the interal 
-        /// </summary>
-        /// <param name="c">The color to set the internal base color too</param>
-        private void UpdateBaseColor(Color c)
-        {
-            _internal.BaseColorR = (float)c.R / 255.0f;
-            _internal.BaseColorG = (float)c.G / 255.0f;
-            _internal.BaseColorB = (float)c.B / 255.0f;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="c">The color to set the internal flow color too</param>
-        private void UpdateFlowColor(Color c)
-        {
-            _internal.FlowColorR = (float)c.R / 255.0f;
-            _internal.FlowColorG = (float)c.G / 255.0f;
-            _internal.FlowColorB = (float)c.B / 255.0f;
         }
 
         /// <summary>

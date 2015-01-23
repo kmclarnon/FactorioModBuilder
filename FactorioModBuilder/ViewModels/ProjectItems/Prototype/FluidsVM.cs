@@ -10,8 +10,13 @@ using System.Windows.Input;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
-    public class FluidsVM : TreeItemVM<Fluids, FluidsVM>
+    public class FluidsVM : ProjectItem<Fluids, FluidsVM>
     {
+        public override IEnumerable<Build.Data.DataUnit> CompilerData
+        {
+            get { return this.ItemList.SelectMany(o => o.CompilerData); }
+        }
+
         public ObservableCollection<FluidVM> ItemList { get; set; }
 
         public ICommand AddFluidCmd { get { return this.GetCommand(this.AddFluid, this.CanAddFluid); } }
