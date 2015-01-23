@@ -135,20 +135,31 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
             this.FlowColor = Colors.White;
         }
 
+        /// <summary>
+        /// Sets the interal 
+        /// </summary>
+        /// <param name="c">The color to set the internal base color too</param>
         private void UpdateBaseColor(Color c)
         {
-            _internal.BaseColorR = c.R;
-            _internal.BaseColorG = c.G;
-            _internal.BaseColorB = c.B;
+            _internal.BaseColorR = (float)c.R / 255.0f;
+            _internal.BaseColorG = (float)c.G / 255.0f;
+            _internal.BaseColorB = (float)c.B / 255.0f;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="c">The color to set the internal flow color too</param>
         private void UpdateFlowColor(Color c)
         {
-            _internal.FlowColorR = c.R;
-            _internal.FlowColorG = c.G;
-            _internal.FlowColorB = c.B;
+            _internal.FlowColorR = (float)c.R / 255.0f;
+            _internal.FlowColorG = (float)c.G / 255.0f;
+            _internal.FlowColorB = (float)c.B / 255.0f;
         }
 
+        /// <summary>
+        /// Provides a dialog allowing the user to pick the fluid base color
+        /// </summary>
         private void SelectBaseColor()
         {
             var dlg = new ColorDialog();
@@ -159,6 +170,9 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
                 this.BaseColor = dlg.SelectedColor;
         }
 
+        /// <summary>
+        /// Provides a dialog allowing the user to pick the fluid flow color
+        /// </summary>
         private void SelectFlowColor()
         {
             var dlg = new ColorDialog();
@@ -169,6 +183,9 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
                 this.FlowColor = dlg.SelectedColor;
         }
 
+        /// <summary>
+        /// Provides a dialog for the user to select an appropriate image file
+        /// </summary>
         private void SelectIcon()
         {
             var ofd = new OpenFileDialog();
