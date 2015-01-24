@@ -24,14 +24,15 @@ building the tool requires:
 | Automatic renaming of referenced prototypes | Done |
 | Generation of Entities | Planned |
 | Generation of Fluids | Working |
-| Generation of Equipment | Planned |
+| Generation of Equipment | In Progress |
 | Generation of Technology | In Progress |
 | Generation of Tiles | Planned |
 | Dependency Import | Planned |
 | Support Localization management | Planned |
 | Support Lua code analysis/verification | Planned |
+| Support Lua unit testing | Planned |
 | Support unreachable prototype detection | Planned |
-| Support custom prototype extension | Planned |
+| Support custom prototype extensions | Planned |
 | Support multi-project mods | Planned |
 | Support automatic conditional dependency code execution | Planned |
 | Saving and loading of solutions/projects | Planned |
