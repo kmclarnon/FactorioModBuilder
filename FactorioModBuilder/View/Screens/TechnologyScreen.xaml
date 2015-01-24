@@ -102,7 +102,7 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <ComboBox ItemsSource="{Binding Path=DataContext.ItemList, RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                                              SelectedIndex="{Binding Path=Technology, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name"/>
+                                              SelectedItem="{Binding Path=Technology, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
