@@ -1,6 +1,7 @@
 ﻿using FactorioModBuilder.Build;
 using FactorioModBuilder.Models.ProjectItems.Prototype;
 using FactorioModBuilder.ViewModels.Base;
+using FactorioModBuilder.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -26,7 +27,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
             }
         }
 
-        public ICommand AddGroupCmd { get { return this.GetCommand(this.AddGroup, this.CanAddGroup);} }
+        public ICommand AddGroupCmd { get { return this.GetCommand(this.AddGroup);} }
         public ICommand RemoveGroupCmd { get { return this.GetCommand(this.RemoveGroup, this.CanRemoveGroup); } }
 
         private int _newCount = 1;
@@ -42,11 +43,9 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
             this.ItemList = new ObservableCollection<GroupVM>();
         }
 
-        private bool CanAddGroup()
-        {
-            return true;
-        }
-
+        /// <summary>
+        /// Adds a new group to the ItemList collection
+        /// </summary>
         private void AddGroup()
         {
             this.ItemList.Add(new GroupVM(this, 
@@ -54,16 +53,21 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
             _newCount++;
         }
 
+        /// <summary>
+        /// Determines if any groups can be removed from the ItemList collection
+        /// </summary>
+        /// <returns>True if any groups are selected, otherwise false</returns>
         private bool CanRemoveGroup()
         {
-            return this.ItemList.Where(o => o.IsSelected).Any();
+            return this.ItemList.Any(o => o.IsSelected);
         }
 
+        /// <summary>
+        /// Removes all selected groups from the ItemList collection
+        /// </summary>
         private void RemoveGroup()
         {
-            var list = this.ItemList.Where(o => o.IsSelected).ToList();
-            foreach (var g in list)
-                this.ItemList.Remove(g);
+            this.ItemList.RemoveWhere(o => o.IsSelected);
         }
     }
 }

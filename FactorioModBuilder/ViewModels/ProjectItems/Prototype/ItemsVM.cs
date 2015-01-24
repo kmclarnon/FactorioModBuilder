@@ -1,6 +1,7 @@
 ﻿using FactorioModBuilder.Build.Data;
 using FactorioModBuilder.Models.ProjectItems.Prototype;
 using FactorioModBuilder.ViewModels.Base;
+using FactorioModBuilder.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -43,7 +44,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
             }
         }
 
-        public ICommand AddItemCmd { get { return this.GetCommand(this.AddItem, this.CanAddItem); } }
+        public ICommand AddItemCmd { get { return this.GetCommand(this.AddItem); } }
         public ICommand RemoveItemCmd { get { return this.GetCommand(this.RemoveItem, this.CanRemoveItem); } }
 
         private int _newCount = 1;
@@ -59,11 +60,9 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
             this.ItemList = new ObservableCollection<ItemVM>();
         }
 
-        private bool CanAddItem()
-        {
-            return true;
-        }
-
+        /// <summary>
+        /// Adds a new item to the ItemList collection
+        /// </summary>
         private void AddItem()
         {
             this.ItemList.Add(new ItemVM(this, 
@@ -71,16 +70,21 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
             _newCount++;
         }
 
+        /// <summary>
+        /// Determines if any items can be removed from the ItemList collection
+        /// </summary>
+        /// <returns>True if any items are selected, otherwise false</returns>
         private bool CanRemoveItem()
         {
-            return this.ItemList.Where(o => o.IsSelected).Any();
+            return this.ItemList.Any(o => o.IsSelected);
         }
 
+        /// <summary>
+        /// Removes all selected items from the ItemList collection
+        /// </summary>
         private void RemoveItem()
         {
-            var list = this.ItemList.Where(o => o.IsSelected).ToList();
-            foreach (var i in list)
-                this.ItemList.Remove(i);
+            this.ItemList.RemoveWhere(o => o.IsSelected);
         }
     }
 }

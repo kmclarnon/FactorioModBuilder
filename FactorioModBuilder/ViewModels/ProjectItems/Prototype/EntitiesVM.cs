@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
+    /// <summary>
+    /// View model for the entities screen
+    /// </summary>
     public class EntitiesVM : TreeItemVM<Entities, EntitiesVM>
     {
         /// <summary>

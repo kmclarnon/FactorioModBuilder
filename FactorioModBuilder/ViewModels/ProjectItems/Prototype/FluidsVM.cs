@@ -1,5 +1,6 @@
 ﻿using FactorioModBuilder.Models.ProjectItems.Prototype;
 using FactorioModBuilder.ViewModels.Base;
+using FactorioModBuilder.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -20,7 +21,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 
         public ObservableCollection<FluidVM> ItemList { get; set; }
 
-        public ICommand AddFluidCmd { get { return this.GetCommand(this.AddFluid, this.CanAddFluid); } }
+        public ICommand AddFluidCmd { get { return this.GetCommand(this.AddFluid); } }
         public ICommand RemoveFluidCmd { get { return this.GetCommand(this.RemoveFluid, this.CanRemoveFluid); } }
 
         public ObservableCollection<SubGroupVM> PossibleSubGroups
@@ -65,11 +66,9 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
             }
         }
 
-        private bool CanAddFluid()
-        {
-            return true;
-        }
-
+        /// <summary>
+        /// Adds a new fluid to the ItemList collection
+        /// </summary>
         private void AddFluid()
         {
             this.ItemList.Add(new FluidVM(
@@ -77,16 +76,21 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
             _newCount++;
         }
 
+        /// <summary>
+        /// Determines if any fluids can be removed from the ItemList collection
+        /// </summary>
+        /// <returns>True if any fluids are selected, otherwise false</returns>
         private bool CanRemoveFluid()
         {
             return this.ItemList.Where(o => o.IsSelected).Any();
         }
 
+        /// <summary>
+        /// Removes all selected fluids from the ItemList collection
+        /// </summary>
         private void RemoveFluid()
         {
-            var res = this.ItemList.Where(o => o.IsSelected).ToList();
-            foreach (var r in res)
-                this.ItemList.Remove(r);
+            this.ItemList.RemoveWhere(o => o.IsSelected);
         }
     }
 }

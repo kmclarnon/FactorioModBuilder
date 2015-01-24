@@ -3,6 +3,7 @@ using FactorioModBuilder.Build.Data;
 using FactorioModBuilder.Build.Extensions;
 using FactorioModBuilder.Models.ProjectItems.Prototype;
 using FactorioModBuilder.ViewModels.Base;
+using FactorioModBuilder.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -37,7 +38,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
             }
         }
 
-        public ICommand AddSubgroupCmd { get { return this.GetCommand(this.AddSubgroup, this.CanAddSubgroup); } }
+        public ICommand AddSubgroupCmd { get { return this.GetCommand(this.AddSubgroup); } }
         public ICommand RemoveSubgroupCmd { get { return this.GetCommand(this.RemoveSubgroup, this.CanRemoveSubgroup); } }
 
         private int _newCount = 1;
@@ -84,11 +85,9 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
             this.ItemList = new ObservableCollection<SubGroupVM>();
         }
 
-        private bool CanAddSubgroup()
-        {
-            return true;
-        }
-
+        /// <summary>
+        /// Adds a new subgroup to the ItemList collection
+        /// </summary>
         private void AddSubgroup()
         {
             this.ItemList.Add(new SubGroupVM(this, 
@@ -96,16 +95,21 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
             _newCount++;
         }
 
+        /// <summary>
+        /// Determines if any subgroups can be removed from the ItemList collection
+        /// </summary>
+        /// <returns>True if any subgroups are selected, otherwise false</returns>
         private bool CanRemoveSubgroup()
         {
-            return this.ItemList.Where(o => o.IsSelected).Any();
+            return this.ItemList.Any(o => o.IsSelected);
         }
 
+        /// <summary>
+        /// Removes all selected subgroups from the ItemList collection
+        /// </summary>
         private void RemoveSubgroup()
         {
-            var list = this.ItemList.Where(o => o.IsSelected).ToList();
-            foreach (var i in list)
-                this.ItemList.Remove(i);
+            this.ItemList.RemoveWhere(o => o.IsSelected);
         }
     }
 }

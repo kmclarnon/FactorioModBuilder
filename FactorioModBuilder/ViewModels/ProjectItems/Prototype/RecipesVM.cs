@@ -1,6 +1,7 @@
 ﻿using FactorioModBuilder.Build.Data;
 using FactorioModBuilder.Models.ProjectItems.Prototype;
 using FactorioModBuilder.ViewModels.Base;
+using FactorioModBuilder.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -51,7 +52,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
             }
         }
 
-        public ICommand AddRecipeCmd { get { return this.GetCommand(this.AddRecipe, this.CanAddRecipe); } }
+        public ICommand AddRecipeCmd { get { return this.GetCommand(this.AddRecipe); } }
         public ICommand RemoveRecipeCmd { get { return this.GetCommand(this.RemoveRecipe, this.CanRemoveRecipe); } }
 
         private int _newCount = 1;
@@ -98,11 +99,9 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
             }
         }
 
-        private bool CanAddRecipe()
-        {
-            return true;
-        }
-
+        /// <summary>
+        /// Adds a new recipe to the ItemList collection
+        /// </summary>
         private void AddRecipe()
         {
             this.ItemList.Add(new RecipeVM(
@@ -110,16 +109,21 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
             _newCount++;
         }
 
+        /// <summary>
+        /// Determines whether any recipes can be removed from the ItemsList collection
+        /// </summary>
+        /// <returns>True if any recipes are selected, otherwise false</returns>
         private bool CanRemoveRecipe()
         {
-            return this.ItemList.Where(o => o.IsSelected).Any();
+            return this.ItemList.Any(o => o.IsSelected);
         }
 
+        /// <summary>
+        /// Removes all selected recipes from the ItemList collection
+        /// </summary>
         private void RemoveRecipe()
         {
-            var res = this.ItemList.Where(o => o.IsSelected).ToList();
-            foreach (var r in res)
-                this.ItemList.Remove(r);
+            this.ItemList.RemoveWhere(o => o.IsSelected);
         }
     }
 }

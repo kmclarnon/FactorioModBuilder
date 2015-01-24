@@ -1,5 +1,6 @@
 ﻿using FactorioModBuilder.Models.ProjectItems.Prototype;
 using FactorioModBuilder.ViewModels.Base;
+using FactorioModBuilder.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -49,7 +50,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
             set { this.SetProperty(_internal, value); }
         }
 
-        public ICommand AddIngredientCmd { get { return this.GetCommand(this.AddIngredient, this.CanAddIngredient); } }
+        public ICommand AddIngredientCmd { get { return this.GetCommand(this.AddIngredient); } }
         public ICommand RemoveIngredientCmd { get { return this.GetCommand(this.RemoveIngredient, this.CanRemoveIngredient); } }
 
         private int _newCount = 1;
@@ -65,11 +66,9 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
             this.Ingredients = new ObservableCollection<RecipeIngredientVM>();
         }
 
-        private bool CanAddIngredient()
-        {
-            return true;
-        }
-
+        /// <summary>
+        /// Adds a new ingredient to the Ingredients collection
+        /// </summary>
         private void AddIngredient()
         {
             this.Ingredients.Add(new RecipeIngredientVM(
@@ -77,16 +76,21 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
             _newCount++;
         }
 
+        /// <summary>
+        /// Determines whether any ingredients can be removed
+        /// </summary>
+        /// <returns>True if any ingredients are selected, false otherwise</returns>
         private bool CanRemoveIngredient()
         {
-            return this.Ingredients.Where(o => o.IsSelected).Any();
+            return this.Ingredients.Any(o => o.IsSelected);
         }
 
+        /// <summary>
+        /// Removes all selected ingredients from the Ingredients collection
+        /// </summary>
         private void RemoveIngredient()
         {
-            var res = this.Ingredients.Where(o => o.IsSelected).ToList();
-            foreach (var r in res)
-                this.Ingredients.Remove(r);
+            this.Ingredients.RemoveWhere(o => o.IsSelected);
         }
 
         /// <summary>
