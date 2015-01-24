@@ -56,9 +56,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         /// </summary>
         public void RemoveEquipment()
         {
-            var lst = this.ItemList.Where(o => o.IsSelected).ToList();
-            foreach (var i in lst)
-                this.ItemList.Remove(i);
+            this.ItemList.RemoveWhere(o => o.IsSelected);
         }
     }
 }
