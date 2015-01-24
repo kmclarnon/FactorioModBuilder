@@ -28,7 +28,7 @@
             <DataGrid x:Name="itemList" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Margin="5"
                       ItemsSource="{Binding Path=ItemList}" AutoGenerateColumns="False">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Item" Width="5*" Binding="{Binding Path=Name}" />
+                    <DataGridTextColumn Header="Item" Width="5*" Binding="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     <DataGridTemplateColumn Header="Subgroup" Width="2*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
