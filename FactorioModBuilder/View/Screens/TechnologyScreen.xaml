@@ -17,8 +17,8 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Technology" Width="*" Binding="{Binding Path=Name}"/>
                     <DataGridTextColumn Header="Order" Width="*" Binding="{Binding Path=Order}"/>
-                    <DataGridTextColumn Header="Time" Width="*" Binding="{Binding Path=Time}"/>
-                    <DataGridTextColumn Header="Count" Width="*" Binding="{Binding Path=Count}"/>
+                    <DataGridTextColumn Header="Time" Width="*" Binding="{Binding Path=UnitTime}"/>
+                    <DataGridTextColumn Header="Count" Width="*" Binding="{Binding Path=UnitCount}"/>
                     <DataGridTemplateColumn Header="Ingredients" Width="*">
                         
                     </DataGridTemplateColumn>
@@ -87,21 +87,9 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <Grid Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Label Content="Select Tech:" Grid.Row="0" Grid.Column="0" Margin="5"/>
-                        <ComboBox Grid.Row="0" Grid.Column="1" Margin="5" ItemsSource="{Binding Path=SelectedItem.PossiblePrereqs}"/>
-                    </Grid>
-                    <Button Content="Add Selected" Grid.Row="1" Grid.Column="0" Margin="5" 
+                    <Button Content="Add Selected" Grid.Row="0" Grid.Column="0" Margin="5" 
                             Command="{Binding Path=SelectedItem.AddPrereqCmd, ElementName=itemList}"/>
-                    <Button Content="Remove" Grid.Row="1" Grid.Column="1" Margin="5"
+                    <Button Content="Remove" Grid.Row="0" Grid.Column="1" Margin="5"
                             Command="{Binding Path=SelectedItem.RemovePrereqCmd, ElementName=itemList}"/>
                 </Grid>
             </Grid>
@@ -133,10 +121,10 @@
                     </Grid.RowDefinitions>
                     <Label Content="Count:" Grid.Column="0" VerticalContentAlignment="Center" Margin="5"/>
                     <TextBox Grid.Column="1" Margin="5" VerticalContentAlignment="Center"
-                         Text="{Binding Path=SelectedItem.IngredientCount, ElementName=itemList}"/>
+                         Text="{Binding Path=SelectedItem.UnitCount, ElementName=itemList}"/>
                     <Label Content="Time:" Grid.Column="2" VerticalContentAlignment="Center" Margin="5"/>
                     <TextBox Grid.Column="3" Margin="5" VerticalContentAlignment="Center"
-                         Text="{Binding Path=SelectedItem.IngredientTime, ElementName=itemList}"/>
+                         Text="{Binding Path=SelectedItem.UnitTime, ElementName=itemList}"/>
                     <Label Content="SP 1:" Grid.Column="0" Grid.Row="1" VerticalContentAlignment="Center" Margin="5"/>
                     <TextBox Grid.Column="1" Grid.Row="1" Margin="5" VerticalContentAlignment="Center"
                              Text="{Binding Path=SelectedItem.SP1Count, ElementName=itemList}"/>

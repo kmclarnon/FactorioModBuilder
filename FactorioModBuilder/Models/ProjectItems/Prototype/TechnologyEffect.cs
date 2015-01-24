@@ -19,11 +19,9 @@ namespace FactorioModBuilder.Models.ProjectItems.Prototype
         public TechEffectType Type { get; set; }
         public string Recipe { get; set; }
 
-        public TechnologyEffect(TechEffectType type, string recipeName)
-            : base(recipeName)
+        public TechnologyEffect()
+            : base("Tech Effect")
         {
-            this.Type = type;
-            this.Recipe = recipeName;
         }
     }
 }

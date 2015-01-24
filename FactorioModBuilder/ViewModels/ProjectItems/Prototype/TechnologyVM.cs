@@ -1,11 +1,13 @@
 ﻿using FactorioModBuilder.Models.ProjectItems.Prototype;
 using FactorioModBuilder.ViewModels.Base;
+using FactorioModBuilder.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
@@ -69,6 +71,42 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         /// </summary>
         public ObservableCollection<TechnologyEffectVM> Effects { get; private set; }
 
+        /// <summary>
+        /// The technology prerequisites that must be researched in order for this technolgy
+        /// to be available to the player
+        /// </summary>
+        public ObservableCollection<TechnologyPrerequisiteVM> Prerequisites { get; private set; }
+
+        /// <summary>
+        /// Command binding to add a new ingredient to the UnitIngredients collection
+        /// </summary>
+        public ICommand AddIngredientCmd { get { return this.GetCommand(this.AddIngredient); } }
+
+        /// <summary>
+        /// Command binding to remove all selected ingredients from the UnitIngredients collection
+        /// </summary>
+        public ICommand RemoveIngredientCmd { get { return this.GetCommand(this.RemoveIngredient, this.CanRemoveIngredient); } }
+
+        /// <summary>
+        /// Command binding to add a new effect to the Effects collection
+        /// </summary>
+        public ICommand AddEffectCmd { get { return this.GetCommand(this.AddEffect); } }
+
+        /// <summary>
+        /// Command binding to remvoe all selected effects from the Effects collection
+        /// </summary>
+        public ICommand RemoveEffectCmd { get { return this.GetCommand(this.RemoveEffect, this.CanRemoveEffect); } }
+
+        /// <summary>
+        /// Command binding to add a new prerequisite to the Prerequisites collection
+        /// </summary>
+        public ICommand AddPrereqCmd { get { return this.GetCommand(this.AddPrereq); } }
+
+        /// <summary>
+        /// Command binding to remove all seleccted prerequisites from the Prerequisistes collection
+        /// </summary>
+        public ICommand RemovePrereqCmd { get { return this.GetCommand(this.RemovePrereq, this.CanRemovePrereq); } }
+
         public TechnologyVM(Technology tech)
             : this(null, tech)
         {
@@ -79,6 +117,87 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         {
             this.UnitIngredients = new ObservableCollection<TechnologyIngredientVM>();
             this.Effects = new ObservableCollection<TechnologyEffectVM>();
+        }
+
+        /// <summary>
+        /// Adds a new ingredient to the UnitIngredients collection
+        /// </summary>
+        private void AddIngredient()
+        {
+            this.UnitIngredients.Add(
+                new TechnologyIngredientVM(
+                    new TechnologyIngredient("", 1)));
+        }
+
+        /// <summary>
+        /// Adds an new effect to the Effects collection
+        /// </summary>
+        private void AddEffect()
+        {
+            this.Effects.Add(
+                new TechnologyEffectVM(
+                    new TechnologyEffect()));
+        }
+
+        /// <summary>
+        /// Adds a new prerequisite to the Prerequisites collection
+        /// </summary>
+        private void AddPrereq()
+        {
+            this.Prerequisites.Add(
+                new TechnologyPrerequisiteVM(
+                    new TechnologyPrerequisite()));
+        }
+
+        /// <summary>
+        /// Determines whether any ingredients can be removed
+        /// </summary>
+        /// <returns>True if any ingredients are selected, otherwise false</returns>
+        private bool CanRemoveIngredient()
+        {
+            return this.UnitIngredients.Any(o => o.IsSelected);
+        }
+
+        /// <summary>
+        /// Determines whether any effects can be removed
+        /// </summary>
+        /// <returns>True if any effects are selected, otherwise false</returns>
+        private bool CanRemoveEffect()
+        {
+            return this.Effects.Any(o => o.IsSelected);
+        }
+
+        /// <summary>
+        /// Determines whether any prerequisites can be removed
+        /// </summary>
+        /// <returns>True if any prerequisites are selected, otherwise false</returns>
+        private bool CanRemovePrereq()
+        {
+            return this.Prerequisites.Any(o => o.IsSelected);
+        }
+
+        /// <summary>
+        /// Removes selected ingredients from the UnitIngredients collection
+        /// </summary>
+        private void RemoveIngredient()
+        {
+            this.UnitIngredients.RemoveWhere(o => o.IsSelected);
+        }
+
+        /// <summary>
+        /// Removes selected effects from the Effects collection
+        /// </summary>
+        private void RemoveEffect()
+        {
+            this.Effects.RemoveWhere(o => o.IsSelected);
+        }
+
+        /// <summary>
+        /// Removes selected prerequisites from the Prerequisites collection
+        /// </summary>
+        private void RemovePrereq()
+        {
+            this.Prerequisites.RemoveWhere(o => o.IsSelected);
         }
     }
 }
