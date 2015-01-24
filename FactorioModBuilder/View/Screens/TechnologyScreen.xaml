@@ -98,7 +98,14 @@
                 <DataGrid Grid.Row="4" Grid.RowSpan="2" Grid.Column="1" Margin="5" AutoGenerateColumns="False"
                           ItemsSource="{Binding Path=SelectedItem.Prerequisites, ElementName=itemList}">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Name" Width="*" Binding="{Binding Path=Name}"/>
+                        <DataGridTemplateColumn Header="Technology" Width="*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <ComboBox ItemsSource="{Binding Path=DataContext.ItemList, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                              SelectedIndex="{Binding Path=Technology, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
                 <Grid Grid.Row="6" Grid.Column="1">
@@ -133,10 +140,10 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Label Content="Count:" Grid.Column="0" VerticalContentAlignment="Center" Margin="5"/>
+                    <Label Content="Unit Count:" Grid.Column="0" VerticalContentAlignment="Center" Margin="5"/>
                     <xctk:IntegerUpDown Grid.Column="1" Margin="5" Increment="1" Minimum="0"
                                         Value="{Binding Path=SelectedItem.UnitCount, ElementName=itemList, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
-                    <Label Content="Time (s):" Grid.Column="2" VerticalContentAlignment="Center" Margin="5"/>
+                    <Label Content="Unit Time (s):" Grid.Column="2" VerticalContentAlignment="Center" Margin="5"/>
                     <xctk:IntegerUpDown Grid.Column="3" Margin="5" Increment="1" Minimum="0"
                                         Value="{Binding Path=SelectedItem.UnitTime, ElementName=itemList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 </Grid>
