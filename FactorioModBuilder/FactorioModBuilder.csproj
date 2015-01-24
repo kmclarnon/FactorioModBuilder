@@ -148,6 +148,8 @@
     <Compile Include="Models\ProjectItems\Prototype\EquipmentShape.cs" />
     <Compile Include="Models\ProjectItems\Prototype\EquipmentSprite.cs" />
     <Compile Include="Models\ProjectItems\Prototype\RecipeIngredient.cs" />
+    <Compile Include="Models\ProjectItems\Prototype\TechnologyEffect.cs" />
+    <Compile Include="Models\ProjectItems\Prototype\TechnologyIngredient.cs" />
     <Compile Include="Models\SolutionItems\Solution.cs" />
     <Compile Include="ViewModels\Dialogs\ColorDialogVM.cs" />
     <Compile Include="ViewModels\Dialogs\NewProjectVM.cs" />
@@ -160,6 +162,8 @@
     <Compile Include="ViewModels\ProjectItems\ModInfoDependencyVM.cs" />
     <Compile Include="ViewModels\ProjectItems\ProjectItem.cs" />
     <Compile Include="ViewModels\ProjectItems\Prototype\RecipeIngredientVM.cs" />
+    <Compile Include="ViewModels\ProjectItems\Prototype\TechnologyEffectVM.cs" />
+    <Compile Include="ViewModels\ProjectItems\Prototype\TechnologyIngredientVM.cs" />
     <Compile Include="ViewModels\SolutionItems\SolutionVM.cs" />
     <Compile Include="View\Dialogs\ColorDialog.xaml.cs">
       <DependentUpon>ColorDialog.xaml</DependentUpon>
