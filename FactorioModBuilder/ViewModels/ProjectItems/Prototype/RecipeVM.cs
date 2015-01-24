@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using WpfUtils.Extensions;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
@@ -121,7 +122,8 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         /// </summary>
         public void ForceRemoveResultItem()
         {
-            this.SetProperty<ItemVM>(null, null, null, true, "ResultItem");
+            this.SetProperty<ItemVM>(null, null, null, true, 
+                PropertyMethods.GetName(() => this.ResultItem));
             this.Result = String.Empty;
         }
 

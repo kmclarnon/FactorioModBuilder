@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WpfUtils.Extensions;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
@@ -58,7 +59,8 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 
         public void ForceRemoveGroup()
         {
-            this.SetProperty<GroupVM>(null, null, null, true, "Group");
+            this.SetProperty<GroupVM>(null, null, null, true,
+                PropertyMethods.GetName(() => this.Group));
             this.GroupName = String.Empty;
         }
     }

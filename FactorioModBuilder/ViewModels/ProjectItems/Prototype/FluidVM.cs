@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
+using WpfUtils.Extensions;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
@@ -254,7 +255,8 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         /// </summary>
         public void ForceRemoveSubGroup()
         {
-            this.SetProperty<SubGroupVM>(null, null, null, true, "SubGroupItem");
+            this.SetProperty<SubGroupVM>(null, null, null, true,
+                PropertyMethods.GetName(() => this.SubGroup));
             this.SubGroup = String.Empty;
         }
     }
