@@ -92,21 +92,24 @@
                     <DataGridTemplateColumn Header="Max Temp" Width="Auto">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <xctk:IntegerUpDown Increment="1" FormatString="N0" Value="{Binding Path=MaxTemp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                <xctk:IntegerUpDown Increment="1" FormatString="N0" 
+                                                    Value="{Binding Path=MaxTemp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                     <DataGridTemplateColumn Header="Pressure to Speed Ratio" Width="*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <xctk:DecimalUpDown FormatString="F2" Increment="0.01" Value="{Binding Path=PressureToSpeed, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                <xctk:CalculatorUpDown FormatString="F2" Increment="0.01" Minimum="0"
+                                                    Value="{Binding Path=PressureToSpeed, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                     <DataGridTemplateColumn Header="Flow to Energy Ratio" Width="*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <xctk:DecimalUpDown FormatString="F2" Increment="0.01" Value="{Binding Path=FlowToEnergy, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                <xctk:CalculatorUpDown FormatString="F2" Increment="0.01" Minimum="0"
+                                                    Value="{Binding Path=FlowToEnergy, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
@@ -228,10 +231,10 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Label Grid.Column="0" Grid.Row="0" Content="Pres : Speed:" Margin="5" VerticalContentAlignment="Center"/>
-                <xctk:DecimalUpDown Grid.Column="1" Grid.Row="0" Margin="5" FormatString="F2" Increment="0.01"
+                <xctk:CalculatorUpDown Grid.Column="1" Grid.Row="0" Margin="5" FormatString="F2" Increment="0.01" Minimum="0"
                                     Value="{Binding Path=SelectedItem.PressureToSpeed, ElementName=itemList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 <Label Grid.Column="0" Grid.Row="1" Content="Flow : Energy:" Margin="5" VerticalContentAlignment="Center"/>
-                <xctk:DecimalUpDown Grid.Column="1" Grid.Row="1" Margin="5" FormatString="F2" Increment="0.01"
+                <xctk:CalculatorUpDown Grid.Column="1" Grid.Row="1" Margin="5" FormatString="F2" Increment="0.01" Minimum="0"
                                     Value="{Binding Path=SelectedItem.FlowToEnergy, ElementName=itemList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 <Label Grid.Column="0" Grid.Row="2" Content="Order:" Margin="5" VerticalContentAlignment="Center"/>
                 <TextBox Grid.Column="1" Grid.Row="2" Margin="5" VerticalContentAlignment="Center"
