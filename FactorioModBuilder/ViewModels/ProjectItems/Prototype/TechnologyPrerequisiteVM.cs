@@ -46,7 +46,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         }
 
         /// <summary>
-        /// Handles hooking and unhooking the TechnologyVM's property changed notificatio
+        /// Handles hooking and unhooking the TechnologyVM's property changed notifications
         /// in order to catch renaming
         /// </summary>
         /// <param name="tech">The potentially new Technology value</param>
@@ -68,17 +68,6 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
                 this.Name = String.Empty;
             else
                 this.Name = this.Technology.Name;
-        }
-
-        /// <summary>
-        /// Used to force the Technology value to null when the specified
-        /// TechnologyVM was deleted by the user
-        /// </summary>
-        public void ForceRemoveTech()
-        {
-            this.SetProperty<TechnologyVM>(null, null, null, true, 
-                PropertyMethods.GetName(() => this.Technology));
-            this.Name = String.Empty;
         }
     }
 }

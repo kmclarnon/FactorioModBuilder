@@ -222,5 +222,23 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
                 this.IconPath = ofd.FileName;
             }
         }
+
+        /// <summary>
+        /// Removes all effects that reference the given recipe
+        /// </summary>
+        /// <param name="rec">The recipe to remove</param>
+        public void ForceRemoveRecipe(RecipeVM rec)
+        {
+            this.Effects.RemoveWhere(o => o.RecipeItem == rec);
+        }
+
+        /// <summary>
+        /// Removes all prerequisites that reference the given technology
+        /// </summary>
+        /// <param name="tech"></param>
+        public void ForceRemoveTechnology(TechnologyVM tech)
+        {
+            this.Prerequisites.RemoveWhere(o => o.Technology == tech);
+        }
     }
 }

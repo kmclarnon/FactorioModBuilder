@@ -16,7 +16,7 @@
             <DataGrid x:Name="itemList" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" ItemsSource="{Binding ItemList}" Margin="5"
                       AutoGenerateColumns="False">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Recipe" Binding="{Binding Path=Name}" Width="*"/>
+                    <DataGridTextColumn Header="Recipe" Binding="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*"/>
                     <DataGridTemplateColumn Header="Result" Width="*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
@@ -32,7 +32,7 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridCheckBoxColumn Header="Enabled" Binding="{Binding Path=Enabled}" Width="60"/>
+                    <DataGridCheckBoxColumn Header="Enabled" Binding="{Binding Path=Enabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="60"/>
                 </DataGrid.Columns>
             </DataGrid>
             <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="1" 

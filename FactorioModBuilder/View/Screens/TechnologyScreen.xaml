@@ -154,7 +154,8 @@
                         <DataGridTemplateColumn Header="Effect Type" Width="*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <ComboBox ItemsSource="{Binding Source={StaticResource effects}}">
+                                    <ComboBox ItemsSource="{Binding Source={StaticResource effects}}"
+                                              SelectedValue="{Binding Path=Type, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                         <ComboBox.ItemTemplate>
                                             <DataTemplate>
                                                 <TextBlock Text="{Binding Converter={conv:EnumToDescriptionString}}"/>
@@ -164,7 +165,14 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridComboBoxColumn Header="Target" Width="*"/>
+                        <DataGridTemplateColumn Header="Target" Width="*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <ComboBox ItemsSource="{Binding Path=DataContext.AvailableRecipes, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                              SelectedItem="{Binding Path=RecipeItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
                 <Grid Grid.Column="1" Grid.Row="4">

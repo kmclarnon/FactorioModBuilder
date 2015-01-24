@@ -35,7 +35,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
             set 
             { 
                 this.SetProperty(value,
-                    null,
+                    this.HandleItemBinding,
                     (() => this.Name = (value == null) ? String.Empty : value.Name)); 
             }
         }
@@ -74,17 +74,6 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
                 this.Name = String.Empty;
             else
                 this.Name = this.Ingredient.Name;
-        }
-
-        /// <summary>
-        /// Used to force the Ingredient value to null when the specified
-        /// ItemVM was deleted by the user
-        /// </summary>
-        public void ForceRemoveIngredient()
-        {
-            this.SetProperty<TechnologyIngredientVM>(null, null, null, true,
-                PropertyMethods.GetName(() => this.Ingredient));
-            this.Name = String.Empty;
         }
     }
 }

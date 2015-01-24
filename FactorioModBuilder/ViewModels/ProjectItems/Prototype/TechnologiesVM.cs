@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Collections.Specialized;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
@@ -31,6 +32,20 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         /// </summary>
         public ICommand RemoveTechCmd { get { return this.GetCommand(this.RemoveTech, this.CanRemoveTech); } }
 
+        /// <summary>
+        /// Recipes available for selection as unlock targets
+        /// </summary>
+        public ObservableCollection<RecipeVM> AvailableRecipes
+        {
+            get
+            {
+                PrototypesVM res;
+                if (!this.TryFindElementUp(out res))
+                    throw new Exception("Could not find prototypes parent element");
+                return res.Recipes;
+            }
+        }
+
         private int _newCount = 1;
 
         public TechnologiesVM(Technologies tech)
@@ -42,6 +57,44 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
             : base(parent, tech)
         {
             this.ItemList = new ObservableCollection<TechnologyVM>();
+        }
+
+        protected override void Initialize()
+        {
+            this.AvailableRecipes.CollectionChanged += AvailableRecipesChanged;
+            this.ItemList.CollectionChanged += ItemListChanged;
+        }
+
+        /// <summary>
+        /// Handles the removal of technologies referenced as prerequisites in other technologies
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void ItemListChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if(e.Action == NotifyCollectionChangedAction.Remove)
+            {
+                foreach(TechnologyVM oldt in e.OldItems)
+                {
+                    foreach (var t in this.ItemList)
+                        t.ForceRemoveTechnology(t);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Handles removal of recipes that were referenced in effects of technologies
+        /// </summary>
+        void AvailableRecipesChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if(e.Action == NotifyCollectionChangedAction.Remove)
+            {
+                foreach(RecipeVM r in e.OldItems)
+                {
+                    foreach (var t in this.ItemList)
+                        t.ForceRemoveRecipe(r);
+                }
+            }
         }
 
         /// <summary>
