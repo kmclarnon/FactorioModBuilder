@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Microsoft.Win32;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
@@ -107,6 +108,11 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         /// </summary>
         public ICommand RemovePrereqCmd { get { return this.GetCommand(this.RemovePrereq, this.CanRemovePrereq); } }
 
+        /// <summary>
+        /// Command binding to display image selection dialog for the technology icon
+        /// </summary>
+        public ICommand FindImageCmd { get { return this.GetCommand(this.FindImage); } }
+
         public TechnologyVM(Technology tech)
             : this(null, tech)
         {
@@ -117,6 +123,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         {
             this.UnitIngredients = new ObservableCollection<TechnologyIngredientVM>();
             this.Effects = new ObservableCollection<TechnologyEffectVM>();
+            this.Prerequisites = new ObservableCollection<TechnologyPrerequisiteVM>();
         }
 
         /// <summary>
@@ -198,6 +205,22 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         private void RemovePrereq()
         {
             this.Prerequisites.RemoveWhere(o => o.IsSelected);
+        }
+
+        /// <summary>
+        /// Displays a dialog to select an appropriate image icon
+        /// </summary>
+        private void FindImage()
+        {
+            var ofd = new OpenFileDialog();
+            ofd.CheckFileExists = true;
+            ofd.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
+            ofd.Multiselect = false;
+
+            if (ofd.ShowDialog() == true)
+            {
+                this.IconPath = ofd.FileName;
+            }
         }
     }
 }
