@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using WpfUtils.Extensions;
 
 namespace WpfUtils
 {
@@ -49,12 +50,7 @@ namespace WpfUtils
         /// <param name="selector">The member expression that selects the property</param>
         protected void NotifyPropertyChanged<T>(Expression<Func<T>> selector)
         {
-            if (selector == null)
-                throw new ArgumentNullException("selector");
-            MemberExpression b = selector.Body as MemberExpression;
-            if (b == null)
-                throw new ArgumentException("The body must be a member expression");
-            this.NotifyPropertyChanged(b.Member.Name);
+            this.NotifyPropertyChanged(PropertyMethods.GetName(selector));
         }
     
         /// <summary>
