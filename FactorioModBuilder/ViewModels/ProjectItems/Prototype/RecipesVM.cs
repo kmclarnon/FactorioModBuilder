@@ -4,6 +4,7 @@ using FactorioModBuilder.ViewModels.Base;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -64,6 +65,37 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
             : base(parent, rec)
         {
             this.ItemList = new ObservableCollection<RecipeVM>();
+        }
+
+        protected override void Initialize()
+        {
+            this.PossibleResults.CollectionChanged += PossibleResultsCollectionChanged;
+            this.PossibleIngredients.CollectionChanged += PossibleIngredientsCollectionChanged;
+        }
+
+        void PossibleIngredientsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if(e.Action == NotifyCollectionChangedAction.Remove)
+            {
+                foreach(ItemVM item in e.OldItems)
+                {
+                    foreach(var r in this.ItemList)
+                        r.ForceRemoveIngredient(item);
+                }
+            }
+        }
+
+        void PossibleResultsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if(e.Action == NotifyCollectionChangedAction.Remove)
+            {
+                foreach(ItemVM i in e.OldItems)
+                {
+                    foreach (var r in this.ItemList)
+                        if (r.ResultItem == i)
+                            r.ForceRemoveResultItem();
+                }
+            }
         }
 
         private bool CanAddRecipe()

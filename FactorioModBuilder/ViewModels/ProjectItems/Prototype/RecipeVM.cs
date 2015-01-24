@@ -110,5 +110,30 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
             else
                 this.Result = this.ResultItem.Name;
         }
+
+        /// <summary>
+        /// Used to force the ResultItem value to null when the specified item
+        /// was deleted by the user
+        /// </summary>
+        public void ForceRemoveResultItem()
+        {
+            this.SetProperty<ItemVM>(null, null, null, true, "ResultItem");
+            this.Result = String.Empty;
+        }
+
+        /// <summary>
+        /// Used to remove ingredients appropriate when the item specified is
+        /// deleted by the user
+        /// </summary>
+        /// <param name="ingredient"></param>
+        public void ForceRemoveIngredient(TreeItemVMBase ingredient)
+        {
+            var tmpList = this.Ingredients.ToList();
+            foreach(var i in tmpList)
+            {
+                if (i.Ingredient == ingredient)
+                    this.Ingredients.Remove(i);
+            }
+        }
     }
 }
