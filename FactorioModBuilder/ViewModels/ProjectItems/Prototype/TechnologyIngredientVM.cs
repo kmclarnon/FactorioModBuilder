@@ -2,9 +2,11 @@
 using FactorioModBuilder.ViewModels.Base;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WpfUtils.Extensions;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
@@ -24,6 +26,20 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
             set { this.SetProperty(_internal, value); }
         }
 
+        /// <summary>
+        /// The item that is represented by this ingredient
+        /// </summary>
+        public ItemVM Ingredient
+        {
+            get { return this.GetProperty<ItemVM>(); }
+            set 
+            { 
+                this.SetProperty(value,
+                    null,
+                    (() => this.Name = (value == null) ? String.Empty : value.Name)); 
+            }
+        }
+
         public TechnologyIngredientVM(TechnologyIngredient item)
             : this(null, item)
         {
@@ -32,6 +48,43 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         public TechnologyIngredientVM(TreeItemVMBase parent, TechnologyIngredient item)
             : base(parent, item)
         {
+        }
+
+        /// <summary>
+        /// Handles hooking and unhooking the ItemVM's property changed notifications
+        /// in order to catch renaming
+        /// </summary>
+        /// <param name="val"></param>
+        private void HandleItemBinding(ItemVM val)
+        {
+            if (this.Ingredient != null)
+                this.Ingredient.PropertyChanged -= this.IngredientPropertyChanged;
+            if (val != null)
+                val.PropertyChanged += this.IngredientPropertyChanged;
+        }
+
+        /// <summary>
+        /// Rereads the name property of the ItemVM whenever there is a property change
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void IngredientPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (this.Ingredient == null)
+                this.Name = String.Empty;
+            else
+                this.Name = this.Ingredient.Name;
+        }
+
+        /// <summary>
+        /// Used to force the Ingredient value to null when the specified
+        /// ItemVM was deleted by the user
+        /// </summary>
+        public void ForceRemoveIngredient()
+        {
+            this.SetProperty<TechnologyIngredientVM>(null, null, null, true,
+                PropertyMethods.GetName(() => this.Ingredient));
+            this.Name = String.Empty;
         }
     }
 }

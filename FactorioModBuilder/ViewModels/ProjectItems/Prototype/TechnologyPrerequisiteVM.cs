@@ -5,15 +5,33 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WpfUtils.Extensions;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
+    /// <summary>
+    /// A view model for the technology prerequisite model
+    /// </summary>
     public class TechnologyPrerequisiteVM 
         : ProjectItem<TechnologyPrerequisite, TechnologyPrerequisiteVM>
     {
         public override IEnumerable<Build.Data.DataUnit> CompilerData
         {
             get { throw new NotImplementedException(); }
+        }
+
+        /// <summary>
+        /// The technology required by this prerequisite
+        /// </summary>
+        public TechnologyVM Technology
+        {
+            get { return this.GetProperty<TechnologyVM>(); }
+            set 
+            {
+                this.SetProperty(value,
+                    this.HandleTechnologyBinding,
+                    (() => this.Name = (value == null) ? String.Empty : value.Name));
+            }
         }
 
         public TechnologyPrerequisiteVM(TechnologyPrerequisite item)
@@ -25,6 +43,42 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
             TechnologyPrerequisite item)
             : base(parent, item)
         {
+        }
+
+        /// <summary>
+        /// Handles hooking and unhooking the TechnologyVM's property changed notificatio
+        /// in order to catch renaming
+        /// </summary>
+        /// <param name="tech">The potentially new Technology value</param>
+        private void HandleTechnologyBinding(TechnologyVM tech)
+        {
+            if(this.Technology != null)
+                this.Technology.PropertyChanged -= this.TechnologyPropertyChanged;
+            if (tech != null)
+                tech.PropertyChanged += this.TechnologyPropertyChanged;
+        }
+
+        /// <summary>
+        /// Rereads the name property from the TechnologyVM whenenver there is
+        /// a property change
+        /// </summary>
+        void TechnologyPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (this.Technology == null)
+                this.Name = String.Empty;
+            else
+                this.Name = this.Technology.Name;
+        }
+
+        /// <summary>
+        /// Used to force the Technology value to null when the specified
+        /// TechnologyVM was deleted by the user
+        /// </summary>
+        public void ForceRemoveTech()
+        {
+            this.SetProperty<TechnologyVM>(null, null, null, true, 
+                PropertyMethods.GetName(() => this.Technology));
+            this.Name = String.Empty;
         }
     }
 }

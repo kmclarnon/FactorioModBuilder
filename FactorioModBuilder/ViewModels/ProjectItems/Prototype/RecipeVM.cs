@@ -97,6 +97,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         /// <summary>
         /// Handles hooking and unhooking the ItemVM's property changed notification to catch renaming
         /// </summary>
+        /// <param name="val">The potentially new ItemVM value</param>
         private void UpdateItemBinding(ItemVM val)
         {
             if (this.ResultItem != null)
