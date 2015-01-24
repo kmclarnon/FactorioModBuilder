@@ -29,5 +29,12 @@ namespace FactorioModBuilder.Extensions
                     yield return elem;
             }
         }
+
+        public static void RemoveWhere<T>(this IList<T> list, Predicate<T> selector)
+        {
+            var res = list.Where(o => selector(o)).ToList();
+            foreach (var r in res)
+                list.Remove(r);
+        }
     }
 }
