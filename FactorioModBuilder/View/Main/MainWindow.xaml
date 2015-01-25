@@ -7,10 +7,22 @@
         Width="{Binding Path=AppWidth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
         Top="{Binding Path=AppTop, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
         Left="{Binding Path=AppLeft, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Menu/ContextMenuTemplate.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="24"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+        <Grid.ContextMenu>
+            <ContextMenu>
+                <MenuItem Header="Test"/>
+            </ContextMenu>
+        </Grid.ContextMenu>
     </Grid>
 </Window>
