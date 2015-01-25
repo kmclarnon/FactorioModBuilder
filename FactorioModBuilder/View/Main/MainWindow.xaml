@@ -10,137 +10,14 @@
         Height="{Binding Path=AppHeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
         Width="{Binding Path=AppWidth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
         Top="{Binding Path=AppTop, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-        Left="{Binding Path=AppLeft, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-    <Window.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <!-- Right Panel Screen Resources -->
-                <ResourceDictionary Source="../Screens/ScreenDict.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-            <!-- Data context reference for consistent syntax -->
-            <util:BindingProxy x:Key="proxy" Data="{Binding}"/>
-            <!-- Content Presenter Template Selector -->
-            <local:ViewTemplateSelector 
-                x:Key="selector" 
-                ModControlTemplate="{StaticResource ModControlScreen_Template}"     
-                ModInfoTemplate="{StaticResource ModInfoScreen_Template}" 
-                ProjectHeaderTemplate="{StaticResource ProjectHeaderScreen_Template}"
-                ItemGroupsTemplate="{StaticResource ItemGroups_Template}"
-                ItemSubGroupsTemplate="{StaticResource ItemSubGroups_Template}"
-                ItemsTemplate="{StaticResource Items_Template}"
-                PrototypeTemplate="{StaticResource Prototype_Template}"
-                EntitiesTemplate="{StaticResource Entities_Template}"
-                EquipsTemplate="{StaticResource Equipment_Template}"
-                FluidsTemplate="{StaticResource Fluids_Template}"
-                RecipesTemplate="{StaticResource Recipes_Template}"
-                TechnologyTemplate="{StaticResource Technology_Template}"
-                TilesTemplate="{StaticResource Tiles_Template}"
-                GraphicsTemplate="{StaticResource Graphics_Template}"/>
-        </ResourceDictionary>
-    </Window.Resources>
+        Left="{Binding Path=AppLeft, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        WindowStyle="None" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Window.Style>
+        <Style TargetType="{x:Type Window}">
+            
+        </Style>
+    </Window.Style>
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="3*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <!-- Main Menu -->
-        <Menu IsMainMenu="True" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="1000">
-            <MenuItem Header="_File">
-                <MenuItem Header="_New Project" Command="{Binding Path=Data.FileMenu.NewProjectCmd, Source={StaticResource proxy}}" />
-                <MenuItem Header="_Open Project" Command="{Binding Path=Data.FileMenu.OpenSolutionCmd, Source={StaticResource proxy}}" />
-                <Separator />
-                <MenuItem Header="_Save Solution" Command="{Binding Path=Data.FileMenu.SaveSolutionCmd, Source={StaticResource proxy}}" />
-                <MenuItem Header="Save Solution As..." Command="{Binding Path=Data.FileMenu.SaveSolutionAsCmd, Source={StaticResource proxy}}" />
-                <Separator />
-                <MenuItem Header="_Close Solution" Command="{Binding Path=Data.FileMenu.CloseSolutionCmd, Source={StaticResource proxy}}"/>
-                <MenuItem Header="_Exit" Command="{Binding Path=Data.FileMenu.ExitCmd, Source={StaticResource proxy}}" />
-            </MenuItem>
-            <MenuItem Header="_Edit"/>
-            <MenuItem Header="_View"/>
-            <MenuItem Header="_Build">
-                <MenuItem Header="Build Solution" Command="{Binding Path=Data.BuildMenu.BuildSolutionCmd, Source={StaticResource proxy}}"/>
-                <MenuItem Header="Rebuild Solution" Command="{Binding Path=Data.BuildMenu.RebuildSolutionCmd, Source={StaticResource proxy}}"/>
-                <MenuItem Header="Clean Solution" Command="{Binding Path=Data.BuildMenu.CleanSolutionCmd, Source={StaticResource proxy}}"/>
-            </MenuItem>
-            <MenuItem Header="_Window"/>
-            <MenuItem Header="_Help"/>
-        </Menu>
-        <!-- Project View -->
-        <Grid Grid.Column="0" Grid.Row="1" Grid.RowSpan="2">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <!-- Main project view -->
-            <TreeView x:Name="projectView" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="100" Margin="10 10 5 10"
-                      ItemsSource="{Binding Path=Data.Solutions, Source={StaticResource proxy}}">
-                <TreeView.ItemContainerStyle>
-                    <Style TargetType="{x:Type TreeViewItem}">
-                        <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}"/>
-                        <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}"/>
-                        <Setter Property="FontWeight" Value="Normal"/>
-                        <Style.Triggers>
-                            <Trigger Property="IsSelected" Value="True">
-                                <Setter Property="FontWeight" Value="Bold"/>
-                            </Trigger>                                
-                        </Style.Triggers>
-                    </Style>
-                </TreeView.ItemContainerStyle>
-                <TreeView.ItemTemplate>
-                    <HierarchicalDataTemplate ItemsSource="{Binding Children}">
-                        <TextBlock Text="{Binding Name}"/>
-                    </HierarchicalDataTemplate>
-                </TreeView.ItemTemplate>
-            </TreeView>
-        </Grid>
-        <!-- Separators -->
-        <GridSplitter Grid.Column="1" Grid.Row="1" Width="5" VerticalAlignment="Stretch" HorizontalAlignment="Center"/>
-        <Grid Grid.Column="2" Grid.Row="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="3*"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <!-- Main Project Item View -->
-            <ContentPresenter Grid.Row="0" Margin="5" 
-                          Content="{Binding Path=SelectedItem, ElementName=projectView}" 
-                          ContentTemplateSelector="{StaticResource selector}"/>
-            <GridSplitter Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" Height="5"/>
-            <Grid Grid.Row="2">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="3*"/>
-                </Grid.ColumnDefinitions>
-                <Label Content="Output" Grid.Row="0" Grid.Column="0" FontSize="12" VerticalContentAlignment="Center"/>
-                <ComboBox Grid.Column="1" Margin="5"/>
-                <DataGrid Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" AutoGenerateColumns="False" Margin="5 0 10 10"
-                          ItemsSource="{Binding Path=Data.Compiler.BuildMessages, Source={StaticResource proxy}}">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Type" Width="Auto" Binding="{Binding Path=Type}" IsReadOnly="True"/>
-                        <DataGridTemplateColumn Header="Message" Width="*" IsReadOnly="True">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding Path=Message}" TextWrapping="Wrap"/>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                    </DataGrid.Columns>
-                </DataGrid>
-            </Grid>
-        </Grid>
-        <!-- Status Bar -->
-        <StatusBar Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="1000">
 
-        </StatusBar>
     </Grid>
 </Window>
