@@ -54,9 +54,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FirstFloor.ModernUI">
-      <HintPath>..\packages\ModernUI.WPF.1.0.6\lib\net45\FirstFloor.ModernUI.dll</HintPath>
-    </Reference>
     <Reference Include="Ookii.Dialogs.Wpf">
       <HintPath>..\packages\Ookii.Dialogs.1.0\lib\net35\Ookii.Dialogs.Wpf.dll</HintPath>
     </Reference>
