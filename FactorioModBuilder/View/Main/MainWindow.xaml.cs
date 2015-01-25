@@ -17,13 +17,14 @@ using FactorioModBuilder.Models;
 using FactorioModBuilder.Models.Main;
 using FactorioModBuilder.Build;
 using FactorioModBuilder.Build.Extensions;
+using FirstFloor.ModernUI.Windows.Controls;
 
 namespace FactorioModBuilder
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : ModernWindow
     {
         public MainVM ViewModel { get { return (MainVM)this.DataContext; } }
 

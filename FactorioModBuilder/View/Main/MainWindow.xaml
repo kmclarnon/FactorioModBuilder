@@ -1,23 +1,14 @@
-﻿<Window x:Class="FactorioModBuilder.MainWindow"
+﻿<mui:ModernWindow x:Class="FactorioModBuilder.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:util="clr-namespace:WpfUtils;assembly=WpfUtils"
-        xmlns:conv="clr-namespace:WpfUtils.ValueConverters;assembly=WpfUtils"
-        xmlns:vm="clr-namespace:FactorioModBuilder.ViewModels"
-        xmlns:vmp="clr-namespace:FactorioModBuilder.ViewModels.ProjectItems"
-        xmlns:local="clr-namespace:FactorioModBuilder"
+        xmlns:mui="http://firstfloorsoftware.com/ModernUI"
         Title="{Binding Path=AppTitle, Mode=OneWay}" 
         Height="{Binding Path=AppHeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
         Width="{Binding Path=AppWidth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
         Top="{Binding Path=AppTop, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-        Left="{Binding Path=AppLeft, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-        WindowStyle="None" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
-    <Window.Style>
-        <Style TargetType="{x:Type Window}">
-            
-        </Style>
-    </Window.Style>
+        Left="{Binding Path=AppLeft, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
     <Grid>
 
     </Grid>
-</Window>
+</mui:ModernWindow>
