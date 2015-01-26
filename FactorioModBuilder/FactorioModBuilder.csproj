@@ -175,7 +175,8 @@
     <Compile Include="ViewModels\ProjectItems\Prototype\TechnologyEffectVM.cs" />
     <Compile Include="ViewModels\ProjectItems\Prototype\TechnologyIngredientVM.cs" />
     <Compile Include="ViewModels\ProjectItems\Prototype\TechnologyPrerequisiteVM.cs" />
-    <Compile Include="ViewModels\SolutionItems\SolutionVM.cs" />
+    <Compile Include="ViewModels\ProjectItems\SolutionVM.cs" />
+    <Compile Include="ViewModels\SolutionExplorerVM.cs" />
     <Compile Include="View\Dialogs\ColorDialog.xaml.cs">
       <DependentUpon>ColorDialog.xaml</DependentUpon>
     </Compile>
@@ -257,6 +258,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Menu\ContextMenuTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SolutionExplorer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

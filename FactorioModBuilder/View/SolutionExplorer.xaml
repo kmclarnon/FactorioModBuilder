@@ -1,0 +1,30 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sln="clr-namespace:FactorioModBuilder.ViewModels"
+                    xmlns:conv="clr-namespace:WpfUtils.ValueConverters;assembly=WpfUtils">
+    <DataTemplate DataType="{x:Type sln:SolutionExplorerVM}">
+        <DataTemplate.Resources>
+            <SolidColorBrush x:Key="WatermarkBackgroundBrush" Color="White"/>
+            <SolidColorBrush x:Key="WatermarkForegroundBrush" Color="LightSteelBlue"/>
+            <SolidColorBrush x:Key="WatermarkBorderBrush" Color="Indigo"/>
+        </DataTemplate.Resources>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <!-- Header -->
+            <Label Content="Solution Explorer" FontSize="10"/>
+            <!-- Search bar -->
+            <Grid Grid.Row="1" Background="{StaticResource WatermarkBackgroundBrush}">
+                <!-- Watermark -->
+                <TextBlock Text="Test text" Foreground="{StaticResource WatermarkForegroundBrush}"
+                           Visibility="{Binding Path=Text.IsEmpty, Converter={conv:BoolToVisibility}, ElementName=searchBox}"/>
+                <TextBox x:Name="searchBox" Background="Transparent" BorderBrush="{StaticResource WatermarkBorderBrush}"/>
+            </Grid>
+            <!-- Solution TreeView -->
+            <TreeView Grid.Row="2"/>
+        </Grid>
+    </DataTemplate>
+</ResourceDictionary>

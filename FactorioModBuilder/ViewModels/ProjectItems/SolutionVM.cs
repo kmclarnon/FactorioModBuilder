@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WpfUtils;
 
-namespace FactorioModBuilder.ViewModels
+namespace FactorioModBuilder.ViewModels.ProjectItems
 {
     /// <summary>
     /// The view model used to wrap the solution model

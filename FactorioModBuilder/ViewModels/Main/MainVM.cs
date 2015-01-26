@@ -21,6 +21,8 @@ using FactorioModBuilder.ViewModels.Main;
 using FactorioModBuilder.Build;
 using System.IO;
 using System.Diagnostics;
+using FactorioModBuilder.ViewModels.Menu.Base;
+using FactorioModBuilder.ViewModels.Menu;
 
 namespace FactorioModBuilder.ViewModels
 {
@@ -55,6 +57,8 @@ namespace FactorioModBuilder.ViewModels
         }
 
         public ObservableCollection<SolutionVM> Solutions { get; private set; }
+
+        public ObservableCollection<IMenuItemProvider> MenuItems { get; private set; }
 
         public FileMenuVM FileMenu { get; private set; }
         public BuildMenuVM BuildMenu { get; private set; }

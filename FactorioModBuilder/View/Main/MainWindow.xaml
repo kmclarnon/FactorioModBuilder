@@ -11,6 +11,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../Menu/ContextMenuTemplate.xaml"/>
+                <ResourceDictionary Source="../ToolTip/ToolTipTemplate.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
