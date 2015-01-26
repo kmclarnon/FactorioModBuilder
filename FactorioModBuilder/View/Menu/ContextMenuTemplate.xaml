@@ -10,8 +10,9 @@
                     <!-- Bindings for IMenuItemProvider -->
                     <Setter Property="Header" Value="{Binding Path=Header}"/>
                     <Setter Property="Command" Value="{Binding Path=Command}"/>
-                    <Setter Property="ItemsSource" Value="{Binding Path=SubMenus}"/>
+                    <Setter Property="ItemsSource" Value="{Binding Path=SubItems}"/>
                     <Setter Property="IsCheckable" Value="{Binding Path=IsCheckable}"/>
+                    <Setter Property="Icon" Value="{Binding Path=Icon}"/>
                     <Setter Property="IsChecked" Value="{Binding Path=IsChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     <Setter Property="Visibility" Value="{Binding Path=IsVisible, Converter={conv:BoolToVisibility}}"/>
                     <Setter Property="ToolTip" Value="{Binding Path=ToolTip}"/>

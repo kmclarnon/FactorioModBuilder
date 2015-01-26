@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FactorioModBuilder.ViewModels.Menu.Base;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;

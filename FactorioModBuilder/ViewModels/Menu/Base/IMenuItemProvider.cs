@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace FactorioModBuilder.ViewModels
+namespace FactorioModBuilder.ViewModels.Menu.Base
 {
     /// <summary>
     /// Provides the basic interface necessary to generate a dynamic context menu item
@@ -26,7 +26,7 @@ namespace FactorioModBuilder.ViewModels
         /// <summary>
         /// Collection containing all menu items that are children of this menu
         /// </summary>
-        IEnumerable<IMenuItemProvider> SubMenus { get; }
+        ObservableCollection<IMenuItemProvider> SubItems { get; }
 
         /// <summary>
         /// Whether or not this menu item can be checked

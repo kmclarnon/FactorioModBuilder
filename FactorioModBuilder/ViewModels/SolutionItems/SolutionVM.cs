@@ -16,7 +16,7 @@ namespace FactorioModBuilder.ViewModels
     /// <summary>
     /// The view model used to wrap the solution model
     /// </summary>
-    public class SolutionVM : TreeItemVM<Solution, SolutionVM>
+    public class SolutionVM : TreeItemVM<Solution, SolutionVM> 
     {   
         /// <summary>
         /// The constructor used to wrap the given Solution model in a view model and associate
