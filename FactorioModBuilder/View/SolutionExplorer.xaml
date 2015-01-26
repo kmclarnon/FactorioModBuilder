@@ -3,26 +3,22 @@
                     xmlns:sln="clr-namespace:FactorioModBuilder.ViewModels"
                     xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit">
     <DataTemplate DataType="{x:Type sln:SolutionExplorerVM}">
-        <DataTemplate.Resources>
-            <ResourceDictionary Source="Menu/ContextMenuTemplate.xaml"/>
-        </DataTemplate.Resources>
         <Border BorderBrush="LightGray" BorderThickness="1">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="25"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <!-- Header -->
                 <Label Content="Solution Explorer" FontSize="11"/>
                 <!-- Option buttons -->
-                <ToolBar Grid.Row="1">
-                    <Button Command="{Binding Back}"/>
-                    <Button Command="{Binding Forward}"/>
-                </ToolBar>
+                <ToolBarTray Grid.Row="1">
+                    
+                </ToolBarTray>
                 <!-- Search bar -->
-                <Grid Grid.Row="2">
+                <Grid Grid.Row="2" Margin="0 0 0 1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="15"/>
@@ -56,7 +52,7 @@
                 </Grid>
             
                 <!-- Solution TreeView -->
-                <TreeView Grid.Row="3"/>
+                <TreeView Grid.Row="3" BorderThickness="0"/>
             </Grid>
         </Border>
     </DataTemplate>
