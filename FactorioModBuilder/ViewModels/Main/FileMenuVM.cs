@@ -49,11 +49,11 @@ namespace FactorioModBuilder.ViewModels.Main
                 switch (result.ResultSolutionType)
                 {
                     case SolutionType.CreateNew:
-                        _parent.Solutions.Clear();
+                        //_parent.Solutions.Clear();
                         var vm = _parent.CreateNewSolution(result.ResultSolutionName, 
                             result.ResultProjectName, result.ResultLocation);
                         vm.ExpandDown();
-                        _parent.Solutions.Add(vm);
+                        //_parent.Solutions.Add(vm);
                         break;
                     case SolutionType.AddExisting:
                         break;
@@ -77,7 +77,7 @@ namespace FactorioModBuilder.ViewModels.Main
 
         private bool CanSaveSolution()
         {
-            return _parent.Solutions.Count > 0;
+            return false;
         }
 
         private void SaveSolution()
@@ -86,7 +86,7 @@ namespace FactorioModBuilder.ViewModels.Main
 
         private bool CanSaveSolutionAs()
         {
-            return _parent.Solutions.Count > 0;
+            return false;
         }
 
         private void SaveSolutionAs()
@@ -96,7 +96,7 @@ namespace FactorioModBuilder.ViewModels.Main
 
         private bool CanCloseSolution()
         {
-            return _parent.Solutions.Count > 0;
+            return false;
         }
 
         private void CloseSolution()

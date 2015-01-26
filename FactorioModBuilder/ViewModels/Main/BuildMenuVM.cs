@@ -26,18 +26,12 @@ namespace FactorioModBuilder.ViewModels.Main
 
         private void BuildSolution()
         {
-            if (_parent.Solutions.Count < 1)
-                throw new InvalidOperationException("Cannot create solution data when no solution exists");
 
-            List<DataUnit> res = new List<DataUnit>();
-            var sln = _parent.Solutions[0];
-            foreach (ProjectVM p in sln.Children)
-                _parent.Compiler.Build(p.CompilerData.ToList());
         }
 
         private bool CanBuildSolution()
         {
-            return _parent.Solutions.Count > 0;
+            return false;
         }
 
         private void RebuildSolution()
@@ -47,7 +41,7 @@ namespace FactorioModBuilder.ViewModels.Main
 
         private bool CanRebuildSolution()
         {
-            return _parent.Solutions.Count > 0;
+            return false;
         }
 
         private void CleanSolution()
@@ -57,7 +51,7 @@ namespace FactorioModBuilder.ViewModels.Main
 
         private bool CanCleanSolution()
         {
-            return _parent.Solutions.Count > 0;
+            return false;
         }
     }
 }

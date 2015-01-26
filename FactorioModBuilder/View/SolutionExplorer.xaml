@@ -1,30 +1,63 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:sln="clr-namespace:FactorioModBuilder.ViewModels"
-                    xmlns:conv="clr-namespace:WpfUtils.ValueConverters;assembly=WpfUtils">
+                    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit">
     <DataTemplate DataType="{x:Type sln:SolutionExplorerVM}">
         <DataTemplate.Resources>
-            <SolidColorBrush x:Key="WatermarkBackgroundBrush" Color="White"/>
-            <SolidColorBrush x:Key="WatermarkForegroundBrush" Color="LightSteelBlue"/>
-            <SolidColorBrush x:Key="WatermarkBorderBrush" Color="Indigo"/>
+            <ResourceDictionary Source="Menu/ContextMenuTemplate.xaml"/>
         </DataTemplate.Resources>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <!-- Header -->
-            <Label Content="Solution Explorer" FontSize="10"/>
-            <!-- Search bar -->
-            <Grid Grid.Row="1" Background="{StaticResource WatermarkBackgroundBrush}">
-                <!-- Watermark -->
-                <TextBlock Text="Test text" Foreground="{StaticResource WatermarkForegroundBrush}"
-                           Visibility="{Binding Path=Text.IsEmpty, Converter={conv:BoolToVisibility}, ElementName=searchBox}"/>
-                <TextBox x:Name="searchBox" Background="Transparent" BorderBrush="{StaticResource WatermarkBorderBrush}"/>
+        <Border BorderBrush="LightGray" BorderThickness="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <!-- Header -->
+                <Label Content="Solution Explorer" FontSize="11"/>
+                <!-- Option buttons -->
+                <ToolBar Grid.Row="1">
+                    <Button Command="{Binding Back}"/>
+                    <Button Command="{Binding Forward}"/>
+                </ToolBar>
+                <!-- Search bar -->
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="15"/>
+                    </Grid.ColumnDefinitions>
+                    <xctk:WatermarkTextBox Grid.Column="0" Panel.ZIndex="1"
+                                           Watermark="{Binding Path=SearchWatermark}" Text="{Binding Path=SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <xctk:DropDownButton x:Name="searchDropdown" Grid.Column="0" Grid.ColumnSpan="2" Panel.ZIndex="0">
+                        <xctk:DropDownButton.DropDownContent>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Content="Search Options" FontSize="11" Grid.ColumnSpan="2"/>
+                                <CheckBox Grid.Row="1" Grid.Column="0" VerticalContentAlignment="Center" Margin="5 0 0 0"
+                                          IsChecked="{Binding Path=CaseSensitive, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                <Label Grid.Row="1" Grid.Column="1" VerticalContentAlignment="Center"
+                                       Content="Case sensitive"/>
+                                <CheckBox Grid.Row="2" Grid.Column="0" VerticalContentAlignment="Center" Margin="5 0 0 0"
+                                          IsChecked="{Binding Path=SearchExtern, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                <Label Grid.Row="2" Grid.Column="1" VerticalContentAlignment="Center"
+                                       Content="Search external dependencies"/>
+                            </Grid>
+                        </xctk:DropDownButton.DropDownContent>
+                    </xctk:DropDownButton>
+                </Grid>
+            
+                <!-- Solution TreeView -->
+                <TreeView Grid.Row="3"/>
             </Grid>
-            <!-- Solution TreeView -->
-            <TreeView Grid.Row="2"/>
-        </Grid>
+        </Border>
     </DataTemplate>
 </ResourceDictionary>

@@ -12,18 +12,16 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../Menu/ContextMenuTemplate.xaml"/>
                 <ResourceDictionary Source="../ToolTip/ToolTipTemplate.xaml"/>
+                <ResourceDictionary Source="../SolutionExplorer.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            <util:BindingProxy x:Key="proxy" Data="{Binding}"/>
         </ResourceDictionary>
     </Window.Resources>
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="24"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Grid.ContextMenu>
-            <ContextMenu>
-                <MenuItem Header="Test"/>
-            </ContextMenu>
-        </Grid.ContextMenu>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+        <ContentPresenter Margin="5" Content="{Binding Path=Data.SolutionExplorer, Source={StaticResource proxy}}"/>
     </Grid>
 </Window>

@@ -56,9 +56,7 @@ namespace FactorioModBuilder.ViewModels
             set { this.SetProperty(_main, value); }
         }
 
-        public ObservableCollection<SolutionVM> Solutions { get; private set; }
-
-        public ObservableCollection<IMenuItemProvider> MenuItems { get; private set; }
+        public SolutionExplorerVM SolutionExplorer { get; private set; }
 
         public FileMenuVM FileMenu { get; private set; }
         public BuildMenuVM BuildMenu { get; private set; }
@@ -69,7 +67,7 @@ namespace FactorioModBuilder.ViewModels
         public MainVM(MainModel m)
         {
             _main = m;
-            this.Solutions = new ObservableCollection<SolutionVM>();
+            this.SolutionExplorer = new SolutionExplorerVM();
             this.FileMenu = new FileMenuVM(this);
             this.BuildMenu = new BuildMenuVM(this);
         }
@@ -108,10 +106,10 @@ namespace FactorioModBuilder.ViewModels
 
         public void CreateAndLoadNewSolution(string solutionName, string projectName, string location)
         {
-            this.Solutions.Clear();
+            //this.Solutions.Clear();
             var vm = this.CreateNewSolution(this.Unwrap(solutionName), this.Unwrap(projectName), location);
             vm.ExpandDown();
-            this.Solutions.Add(vm);
+            //this.Solutions.Add(vm);
         }
 
         public void CreateInNewInstance(string solutionName, string projectName, string location)
