@@ -17,8 +17,8 @@ namespace FactorioModBuilder.ViewModels.Menu
         /// </summary>
         /// <param name="header">The text to be displayed on this menu item</param>
         /// <param name="subItems">The sub items to be shown as children of this menu item</param>
-        public CategoryItem(string header, IEnumerable<IMenuItemProvider> subItems)
-            : this(header, subItems, null)
+        public CategoryItem(string header, params IMenuItemProvider[] subItems)
+            : this(header, subItems.ToList())
         {
         }
 
@@ -27,8 +27,18 @@ namespace FactorioModBuilder.ViewModels.Menu
         /// </summary>
         /// <param name="header">The text to be displayed on this menu item</param>
         /// <param name="subItems">The sub items to be shown as children of this menu item</param>
+        public CategoryItem(string header, IEnumerable<IMenuItemProvider> subItems)
+            : this(header, null, subItems)
+        {
+        }
+
+        /// <summary>
+        /// Creates a menu item that contains a one or more sub items
+        /// </summary>
+        /// <param name="header">The text to be displayed on this menu item</param>
         /// <param name="icon">The icon to display next to this menu item</param>
-        public CategoryItem(string header, IEnumerable<IMenuItemProvider> subItems, object icon)
+        /// <param name="subItems">The sub items to be shown as children of this menu item</param>
+        public CategoryItem(string header, object icon, IEnumerable<IMenuItemProvider> subItems)
             : base(header)
         {
             foreach (var s in subItems)

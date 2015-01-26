@@ -133,8 +133,8 @@ namespace FactorioModBuilder.ViewModels.Menu.Base
         /// <summary>
         /// This callback is executed when the IsChecked 
         /// </summary>
-        /// <param name="newVal"></param>
-        /// <param name="old"></param>
+        /// <param name="oldVal">The old value of IsChecked</param>
+        /// <param name="newVal">The new value of IsChecked</param>
         protected virtual void OnIsCheckedChanged(bool oldVal, bool newVal)
         {
         }

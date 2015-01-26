@@ -15,17 +15,16 @@ namespace FactorioModBuilder.ViewModels.Menu
         /// <summary>
         /// The action to execute when this item is checked
         /// </summary>
-        private Action _onChecked;
+        private Action<bool> _checkChanged;
 
         /// <summary>
         /// Creates a basic checkable menu item that is unchecked
         /// </summary>
         /// <param name="header">The text to display</param>
-        public CheckableItem(string header, Action onChecked)
-            : this(header, onChecked, false)
+        /// <param name="checkChanged">The action to perform when the checked state changes</param>
+        public CheckableItem(string header, Action<bool> checkChanged)
+            : this(header, checkChanged, false)
         {
-            this.IsCheckable = true;
-            _onChecked = onChecked;
         }
 
         /// <summary>
@@ -33,13 +32,13 @@ namespace FactorioModBuilder.ViewModels.Menu
         /// </summary>
         /// <param name="header">The text to display</param>
         /// <param name="onChecked">The action to perform when this item is checked</param>
-        /// <param name="isChecked">Whether or not this item should start off checked</param>
+        /// <param name="checkChanged">The action to perform when the checked state changes</param>
         /// <remarks>
         /// Even if the isChecked parameter is set to true, the onChecked action will
         /// only be executed if the item is unchecked and then checked again
         /// </remarks>
-        public CheckableItem(string header, Action onChecked, bool isChecked)
-            : this(header, onChecked, isChecked, null)
+        public CheckableItem(string header, Action<bool> checkChanged, bool isChecked)
+            : this(header, checkChanged, isChecked, null)
         {
         }
 
@@ -47,31 +46,33 @@ namespace FactorioModBuilder.ViewModels.Menu
         /// Creates a basic checkable menu item that is optionally checked
         /// </summary>
         /// <param name="header">The text to display</param>
-        /// <param name="onChecked">The action to perform when this item is checked</param>
+        /// <param name="onIsCheckedChanged">The action to perform when the checked state changes</param>
         /// <param name="isChecked">Whether or not this item should start off checked</param>
         /// <param name="icon">The icon to display with this menu item</param>
         /// <remarks>
         /// Even if the isChecked parameter is set to true, the onChecked action will
         /// only be executed if the item is unchecked and then checked again
         /// </remarks>
-        public CheckableItem(string header, Action onChecked, bool isChecked, object icon)
+        public CheckableItem(string header, Action<bool> checkChanged, bool isChecked, object icon)
             : base(header)
         {
             this.IsCheckable = true;
             this.IsChecked = isChecked;
-            if (onChecked == null)
+            if (checkChanged == null)
                 throw new ArgumentNullException("onChecked");
-            _onChecked = onChecked;
+            _checkChanged = checkChanged;
             this.Icon = icon;
         }
 
         /// <summary>
-        /// Executes the action provided to the constructor when this menu item is checked
+        /// Executes the checkChanged action provided by the user
         /// </summary>
-        protected override void OnIsChecked()
+        /// <param name="oldVal">The old value of IsChecked</param>
+        /// <param name="newVal">The new value of IsChecked</param>
+        protected override void OnIsCheckedChanged(bool oldVal, bool newVal)
         {
-            if (_onChecked != null)
-                _onChecked();
+            if(_checkChanged != null)
+                _checkChanged(newVal);
         }
     }
 }
