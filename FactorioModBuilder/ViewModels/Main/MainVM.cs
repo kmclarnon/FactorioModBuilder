@@ -60,6 +60,8 @@ namespace FactorioModBuilder.ViewModels
 
         public MainMenuVM MainMenu { get; private set; }
 
+        public MainContentVM MainContent { get; private set; }
+
         public Compiler Compiler { get { return _main.Compiler; } }
 
         private MainModel _main;
@@ -69,6 +71,7 @@ namespace FactorioModBuilder.ViewModels
             _main = m;
             this.SolutionExplorer = new SolutionExplorerVM();
             this.MainMenu = new MainMenuVM();
+            this.MainContent = new MainContentVM();
         }
 
         public SolutionVM CreateNewSolution(string solutionName, string projectName, string location)

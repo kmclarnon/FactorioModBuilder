@@ -14,13 +14,21 @@
                 <ResourceDictionary Source="../ToolTip/ToolTipTemplate.xaml"/>
                 <ResourceDictionary Source="SolutionExplorer.xaml"/>
                 <ResourceDictionary Source="MainMenu.xaml"/>
+                <ResourceDictionary Source="MainContent.xaml"/>
+                <ResourceDictionary Source="../TabControlTemplate.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <util:BindingProxy x:Key="proxy" Data="{Binding}"/>
         </ResourceDictionary>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
+            <!-- Main Menu Row -->
             <RowDefinition Height="25"/>
+            <!-- Main Tool Strip Row -->
+            <RowDefinition Height="25"/>
+            <!-- Main Content Row -->
+            <RowDefinition Height="3*"/>
+            <!-- Output Console Row -->
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -31,8 +39,14 @@
         <ContentPresenter Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="100" 
                           Content="{Binding Path=Data.MainMenu, Source={StaticResource proxy}}" 
                           ContentTemplate="{StaticResource mainMenu}"/>
+        <!-- Main Tool Strip -->
+        <ContentPresenter Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="100"
+                          Content="{Binding Path=Data.MainToolStrip, Source={StaticResource proxy}}"/>
+        <!-- Main Content View -->
+        <ContentPresenter Grid.Row="2" Grid.Column="1" Margin="2.5 5 5 2.5"
+                          Content="{Binding Path=Data.MainContent, Source={StaticResource proxy}}"/>
         <!-- Solution Explorer -->
-        <ContentPresenter Grid.Row="1" Grid.Column="0" Margin="5" 
+        <ContentPresenter Grid.Row="2" Grid.RowSpan="2" Grid.Column="0" Margin="5 5 2.5 5" 
                           Content="{Binding Path=Data.SolutionExplorer, Source={StaticResource proxy}}"/>
     </Grid>
 </Window>
