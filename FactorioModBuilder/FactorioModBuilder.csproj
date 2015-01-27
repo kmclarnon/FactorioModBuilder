@@ -156,6 +156,7 @@
     <Compile Include="Models\SolutionItems\Solution.cs" />
     <Compile Include="ViewModels\Dialogs\ColorDialogVM.cs" />
     <Compile Include="ViewModels\Dialogs\NewProjectVM.cs" />
+    <Compile Include="ViewModels\Main\MainMenuVM.cs" />
     <Compile Include="ViewModels\Menu\CategoryItem.cs" />
     <Compile Include="ViewModels\Menu\CheckableItem.cs" />
     <Compile Include="ViewModels\Menu\ClickableItem.cs" />
@@ -261,7 +262,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\SolutionExplorer.xaml">
+    <Page Include="View\Main\MainMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Main\SolutionExplorer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

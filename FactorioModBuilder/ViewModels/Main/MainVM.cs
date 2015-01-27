@@ -58,8 +58,8 @@ namespace FactorioModBuilder.ViewModels
 
         public SolutionExplorerVM SolutionExplorer { get; private set; }
 
-        public FileMenuVM FileMenu { get; private set; }
-        public BuildMenuVM BuildMenu { get; private set; }
+        public MainMenuVM MainMenu { get; private set; }
+
         public Compiler Compiler { get { return _main.Compiler; } }
 
         private MainModel _main;
@@ -68,8 +68,7 @@ namespace FactorioModBuilder.ViewModels
         {
             _main = m;
             this.SolutionExplorer = new SolutionExplorerVM();
-            this.FileMenu = new FileMenuVM(this);
-            this.BuildMenu = new BuildMenuVM(this);
+            this.MainMenu = new MainMenuVM();
         }
 
         public SolutionVM CreateNewSolution(string solutionName, string projectName, string location)
@@ -106,10 +105,10 @@ namespace FactorioModBuilder.ViewModels
 
         public void CreateAndLoadNewSolution(string solutionName, string projectName, string location)
         {
-            //this.Solutions.Clear();
+            this.SolutionExplorer.Solutions.Clear();
             var vm = this.CreateNewSolution(this.Unwrap(solutionName), this.Unwrap(projectName), location);
             vm.ExpandDown();
-            //this.Solutions.Add(vm);
+            this.SolutionExplorer.Solutions.Add(vm);
         }
 
         public void CreateInNewInstance(string solutionName, string projectName, string location)

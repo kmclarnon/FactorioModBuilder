@@ -1,5 +1,6 @@
 ﻿using FactorioModBuilder.ViewModels.Menu;
 using FactorioModBuilder.ViewModels.Menu.Base;
+using FactorioModBuilder.ViewModels.ProjectItems;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -34,10 +35,12 @@ namespace FactorioModBuilder.ViewModels
 
         public ObservableCollection<IMenuItemProvider> MenuItems { get; private set; }
 
+        public ObservableCollection<SolutionVM> Solutions { get; private set; }
+
         public SolutionExplorerVM()
         {
             this.MenuItems = new ObservableCollection<IMenuItemProvider>();
-            this.MenuItems.Add(new ClickableItem("Collapse All", (() => { })));
+            this.Solutions = new ObservableCollection<SolutionVM>();
         }
     }
 }
