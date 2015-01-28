@@ -3,7 +3,7 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="../Colors.xaml"/>
     </ResourceDictionary.MergedDictionaries>
-    <Style x:Key="StandardButton" TargetType="Button">
+    <Style x:Key="StandardButton" TargetType="{x:Type Button}">
         <Setter Property="Visibility" Value="Visible"/>
         <Setter Property="Foreground" Value="{StaticResource Foreground}"/>
         <Setter Property="Background" Value="{StaticResource BackgroundNormal}"/>
@@ -36,7 +36,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <Style x:Key="LinkButton" TargetType="Button">
+    <Style x:Key="LinkButton" TargetType="{x:Type Button}">
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="Foreground" Value="{StaticResource LinkButtonForeground}" />
         <Setter Property="Template">
@@ -51,5 +51,30 @@
                 <Setter Property="Foreground" Value="{StaticResource LinkButtonForegroundHighlighted}" />
             </Trigger>
         </Style.Triggers>
+    </Style>
+    <Style x:Key="WindowButton" TargetType="{x:Type Button}">
+        <Setter Property="Background" Value="{StaticResource LightBackground}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Foreground" Value="{StaticResource Foreground}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid SnapsToDevicePixels="True" Background="{TemplateBinding Background}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{StaticResource BackgroundHighlighted}" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="{StaticResource BackgroundSelected}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value=".5"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 </ResourceDictionary>

@@ -18,19 +18,36 @@
             <util:BindingProxy x:Key="proxy" Data="{Binding}"/>
         </ResourceDictionary>
     </Window.Resources>
-    <Border>
-        <DockPanel x:Name="Root">
-            <DockPanel x:Name="TitleBar" DockPanel.Dock="Top" Background="{StaticResource LightBackground}" Height="40"
+    <!-- Window Active Border Highlight -->
+    <Border SnapsToDevicePixels="True" BorderThickness="1">
+        <Border.Style>
+            <Style TargetType="{x:Type Border}">
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding Path=Active}" Value="True">
+                        <Setter Property="BorderBrush" Value="#007ACC"/>
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding Path=Active}" Value="False">
+                        <Setter Property="BorderBrush" Value="{StaticResource LightBackground}"/>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </Border.Style>
+        <DockPanel x:Name="Root" Background="{StaticResource LightBackground}">
+            <!-- Window Title Bar -->
+            <DockPanel x:Name="TitleBar" DockPanel.Dock="Top" Background="{StaticResource LightBackground}" Height="35"
                    MouseDown="TitleBarMouseDown">
                 <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" VerticalAlignment="Top">
-                    <Button x:Name="MinButton" Content="m" Click="MinButton_Click"/>
-                    <Button x:Name="MaxButton" Content="^" Click="MaxButton_Click"/>
-                    <Button x:Name="CloseButton" Content="x" Click="CloseButton_Click"/>
+                    <Button x:Name="MinButton" Style="{StaticResource WindowButton}" ToolTip="Minimize"
+                            Content="m" Click="MinButton_Click" Width="34" Height="27"/>
+                    <Button x:Name="MaxButton" Style="{StaticResource WindowButton}" ToolTip="Maximize"
+                            Content="^" Click="MaxButton_Click" Width="34" Height="27"/>
+                    <Button x:Name="CloseButton" Style="{StaticResource WindowButton}" ToolTip="Close"
+                            Content="x" Click="CloseButton_Click" Width="34" Height="27"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" DockPanel.Dock="Left" VerticalAlignment="Center">
                     <Image Margin="10 10 5 10" Source="../../Resources/Icons/Gear-md.png"/>
-                    <TextBlock Margin="5 10 10 10" HorizontalAlignment="Left" Text="{Binding Path=AppTitle}" 
-                           FontSize="14" FontFamily="SegoeUI" Foreground="#6F6F70"/>
+                    <TextBlock Margin="5 10 10 5" HorizontalAlignment="Left" Text="{Binding Path=AppTitle}" 
+                           FontSize="16" FontFamily="SegoeUI" Foreground="#6F6F70"/>
                 </StackPanel>
             </DockPanel>
             <Grid>
