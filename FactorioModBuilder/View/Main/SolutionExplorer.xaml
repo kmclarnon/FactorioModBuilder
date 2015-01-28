@@ -3,7 +3,7 @@
                     xmlns:sln="clr-namespace:FactorioModBuilder.ViewModels"
                     xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit">
     <DataTemplate DataType="{x:Type sln:SolutionExplorerVM}">
-        <Border BorderBrush="LightGray" BorderThickness="1">
+        <Border BorderBrush="{StaticResource BorderBrushHighlighted}" BorderThickness="0.25">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
