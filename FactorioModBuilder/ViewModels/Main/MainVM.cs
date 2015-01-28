@@ -56,6 +56,12 @@ namespace FactorioModBuilder.ViewModels
             set { this.SetProperty(_main, value); }
         }
 
+        public bool Active
+        {
+            get { return this.GetProperty<bool>(); }
+            set { this.SetProperty(value); }
+        }
+
         public SolutionExplorerVM SolutionExplorer { get; private set; }
 
         public MainMenuVM MainMenu { get; private set; }

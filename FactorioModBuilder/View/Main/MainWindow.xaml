@@ -9,7 +9,9 @@
         Top="{Binding Path=AppTop, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
         Left="{Binding Path=AppLeft, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
         ResizeMode="NoResize" WindowStyle="None" TitleForeground="#6F6F70" 
-        WindowStartupLocation="CenterScreen" ShowMaxRestoreButton="True">
+        WindowStartupLocation="CenterScreen" ShowMaxRestoreButton="True"
+        BorderBrush="{StaticResource BackgroundSelected}" BorderThickness="0.5"
+        Activated="OnActivated" Deactivated="OnDeactivated">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

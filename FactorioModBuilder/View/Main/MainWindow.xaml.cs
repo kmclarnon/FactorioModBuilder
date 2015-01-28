@@ -56,5 +56,15 @@ namespace FactorioModBuilder
                         new TechnologyExtension(),
                         new TilesExtension())));
         }
+
+        private void OnActivated(object sender, EventArgs e)
+        {
+            this.ViewModel.Active = true;
+        }
+
+        private void OnDeactivated(object sender, EventArgs e)
+        {
+            this.ViewModel.Active = false;
+        }
     }
 }
