@@ -1,0 +1,30 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ResourceDictionary.MergedDictionaries>
+        <!-- Style Resources -->
+        <ResourceDictionary Source="Styles/ButtonStyle.xaml"/>
+        <ResourceDictionary Source="Styles/ComboBoxStyle.xaml"/>
+        <ResourceDictionary Source="Styles/DataGridStyle.xaml"/>
+        <ResourceDictionary Source="Styles/GroupBoxStyle.xaml"/>
+        <ResourceDictionary Source="Styles/ListBoxStyle.xaml"/>
+        <ResourceDictionary Source="Styles/MenuStyle.xaml"/>
+        <ResourceDictionary Source="Styles/ScrollBarStyle.xaml"/>
+        <ResourceDictionary Source="Styles/TabControlStyle.xaml"/>
+        <ResourceDictionary Source="Styles/TextBoxStyle.xaml"/>
+        <ResourceDictionary Source="Styles/WindowStyle.xaml"/>
+        <ResourceDictionary Source="Styles/MetroWindowStyle.xaml"/>
+        <!-- Color Resources -->
+        <ResourceDictionary Source="Colors.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+    <!-- Styles -->
+    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource StandardButton}"/>
+    <Style TargetType="{x:Type Window}" BasedOn="{StaticResource StandardWindow}"/>
+    <Style TargetType="{x:Type TabControl}" BasedOn="{StaticResource StandardTabControl}"/>
+    <Style TargetType="{x:Type Menu}" BasedOn="{StaticResource StandardMenu}"/>
+    <Style TargetType="{x:Type ListBox}" BasedOn="{StaticResource StandardListBox}"/>
+    <Style TargetType="{x:Type ScrollBar}" BasedOn="{StaticResource StandardScrollBar}"/>
+    <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource StandardTextBox}"/>
+    <Style TargetType="{x:Type DataGrid}" BasedOn="{StaticResource StandardDataGrid}"/>
+    <Style TargetType="{x:Type ComboBox}" BasedOn="{StaticResource StandardComboBox}"/>
+    <Style TargetType="{x:Type GroupBox}" BasedOn="{StaticResource StandardGroupBox}"/>
+</ResourceDictionary>

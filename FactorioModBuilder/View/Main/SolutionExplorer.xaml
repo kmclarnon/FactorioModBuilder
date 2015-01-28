@@ -23,7 +23,7 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="15"/>
                     </Grid.ColumnDefinitions>
-                    <xctk:WatermarkTextBox Grid.Column="0" Panel.ZIndex="1"
+                    <xctk:WatermarkTextBox Grid.Column="0" Panel.ZIndex="1" Style="{StaticResource StandardTextBox}"
                                            Watermark="{Binding Path=SearchWatermark}" Text="{Binding Path=SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     <xctk:DropDownButton x:Name="searchDropdown" Grid.Column="0" Grid.ColumnSpan="2" Panel.ZIndex="0">
                         <xctk:DropDownButton.DropDownContent>

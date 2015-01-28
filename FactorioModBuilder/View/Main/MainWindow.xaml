@@ -1,21 +1,21 @@
-﻿<Window x:Class="FactorioModBuilder.MainWindow"
+﻿<metro:MetroWindow x:Class="FactorioModBuilder.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:util="clr-namespace:WpfUtils;assembly=WpfUtils"
+        xmlns:metro="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         Title="{Binding Path=AppTitle, Mode=OneWay}" 
         Height="{Binding Path=AppHeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
         Width="{Binding Path=AppWidth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
         Top="{Binding Path=AppTop, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-        Left="{Binding Path=AppLeft, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+        Left="{Binding Path=AppLeft, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        ResizeMode="NoResize" WindowStyle="None" TitleForeground="#6F6F70" 
+        WindowStartupLocation="CenterScreen" ShowMaxRestoreButton="True">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../Menu/ContextMenuTemplate.xaml"/>
-                <ResourceDictionary Source="../ToolTip/ToolTipTemplate.xaml"/>
                 <ResourceDictionary Source="SolutionExplorer.xaml"/>
                 <ResourceDictionary Source="MainMenu.xaml"/>
                 <ResourceDictionary Source="MainContent.xaml"/>
-                <ResourceDictionary Source="../TabControlTemplate.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <util:BindingProxy x:Key="proxy" Data="{Binding}"/>
         </ResourceDictionary>
@@ -49,4 +49,4 @@
         <ContentPresenter Grid.Row="2" Grid.RowSpan="2" Grid.Column="0" Margin="5 5 2.5 5" 
                           Content="{Binding Path=Data.SolutionExplorer, Source={StaticResource proxy}}"/>
     </Grid>
-</Window>
+</metro:MetroWindow>
