@@ -49,11 +49,11 @@ namespace FactorioModBuilder.ViewModels.Main
                 switch (result.ResultSolutionType)
                 {
                     case SolutionType.CreateNew:
-                        //_parent.Solutions.Clear();
+                        _parent.SolutionExplorer.Solutions.Clear();
                         var vm = _parent.CreateNewSolution(result.ResultSolutionName, 
                             result.ResultProjectName, result.ResultLocation);
                         vm.ExpandDown();
-                        //_parent.Solutions.Add(vm);
+                        _parent.SolutionExplorer.Solutions.Add(vm);
                         break;
                     case SolutionType.AddExisting:
                         break;

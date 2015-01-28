@@ -70,7 +70,7 @@ namespace FactorioModBuilder.ViewModels
         {
             _main = m;
             this.SolutionExplorer = new SolutionExplorerVM();
-            this.MainMenu = new MainMenuVM();
+            this.MainMenu = new MainMenuVM(this, new FileMenuVM(this));
             this.MainContent = new MainContentVM();
         }
 

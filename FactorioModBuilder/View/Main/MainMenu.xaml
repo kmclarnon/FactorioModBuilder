@@ -3,7 +3,7 @@
     <DataTemplate x:Key="mainMenu">
         <Menu>
             <MenuItem Header="FILE">
-                <MenuItem Header="New"/>
+                <MenuItem Header="New" Command="{Binding Path=FileMenu.NewProjectCmd}"/>
                 <MenuItem Header="Open"/>
                 <Separator/>
                 <MenuItem Header="Save"/>
