@@ -31,6 +31,7 @@
     <Color x:Key="TextBoxText">#FF414141</Color>
     <Color x:Key="NormalForegroundColor">#FF000000</Color>
     <Color x:Key="HoverForegroundColor">#FFFFFFFF</Color>
+    
     <!--Note: For the best design BaseColor2 should be a contrast of BaseColor1-->
     <Color x:Key="BaseColor2">#FFFFFFFF</Color>
     <Color x:Key="BaseColor5">#FFBABABA</Color>

@@ -17,14 +17,13 @@ using FactorioModBuilder.Models;
 using FactorioModBuilder.Models.Main;
 using FactorioModBuilder.Build;
 using FactorioModBuilder.Build.Extensions;
-using MahApps.Metro.Controls;
 
 namespace FactorioModBuilder
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : MetroWindow
+    public partial class MainWindow : Window
     {
         public MainVM ViewModel { get { return (MainVM)this.DataContext; } }
 
@@ -65,6 +64,48 @@ namespace FactorioModBuilder
         private void OnDeactivated(object sender, EventArgs e)
         {
             this.ViewModel.Active = false;
+        }
+
+        /// <summary>
+        /// Handles the title bar mouse down event. Drag if single click, resize if double click
+        /// </summary>
+        private void TitleBarMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if(e.ChangedButton == MouseButton.Left)
+            {
+                if (e.ClickCount == 2)
+                    this.ToggleWindowState();
+                else
+                    Application.Current.MainWindow.DragMove();
+            }
+        }
+
+        private void MaxButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.ToggleWindowState();
+        }
+
+        private void MinButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = System.Windows.WindowState.Minimized;
+        }
+
+        private void ToggleWindowState()
+        {
+            if(this.WindowState == System.Windows.WindowState.Maximized)
+            {
+                this.WindowState = WindowState.Normal;
+                
+            }
+            else
+            {
+                this.WindowState = WindowState.Maximized;
+            }
+        }
+
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
         }
     }
 }
