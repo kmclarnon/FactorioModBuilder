@@ -22,6 +22,7 @@
     <Border SnapsToDevicePixels="True" BorderThickness="1">
         <Border.Style>
             <Style TargetType="{x:Type Border}">
+                <Setter Property="Cursor" Value="SizeNS"/>
                 <Style.Triggers>
                     <DataTrigger Binding="{Binding Path=Active}" Value="True">
                         <Setter Property="BorderBrush" Value="#007ACC"/>
@@ -32,24 +33,35 @@
                 </Style.Triggers>
             </Style>
         </Border.Style>
-        <DockPanel x:Name="Root" Background="{StaticResource LightBackground}">
+        <DockPanel x:Name="Root" Background="{StaticResource LightBackground}" Cursor="Arrow">
             <!-- Window Title Bar -->
             <DockPanel x:Name="TitleBar" DockPanel.Dock="Top" Background="{StaticResource LightBackground}" Height="35"
                    MouseDown="TitleBarMouseDown">
                 <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" VerticalAlignment="Top">
                     <Button x:Name="MinButton" Style="{StaticResource WindowButton}" ToolTip="Minimize"
-                            Content="m" Click="MinButton_Click" Width="34" Height="27"/>
+                             Click="MinButton_Click" Width="34" Height="27">
+                        <Image Source="../../Resources/Icons/Minimize.png"/>
+                    </Button>
                     <Button x:Name="MaxButton" Style="{StaticResource WindowButton}" ToolTip="Maximize"
-                            Content="^" Click="MaxButton_Click" Width="34" Height="27"/>
+                            Click="MaxButton_Click" Width="34" Height="27">
+                        <Image Source="../../Resources/Icons/Maximize.png"/>
+                    </Button>
                     <Button x:Name="CloseButton" Style="{StaticResource WindowButton}" ToolTip="Close"
-                            Content="x" Click="CloseButton_Click" Width="34" Height="27"/>
+                            Click="CloseButton_Click" Width="34" Height="27">
+                        <TextBlock Text="X" FontFamily="Syncopate" FontSize="13"/>
+                    </Button>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" DockPanel.Dock="Left" VerticalAlignment="Center">
-                    <Image Margin="10 10 5 10" Source="../../Resources/Icons/Gear-md.png"/>
+                    <Image Margin="10 10 5 10"/>
                     <TextBlock Margin="5 10 10 5" HorizontalAlignment="Left" Text="{Binding Path=AppTitle}" 
                            FontSize="16" FontFamily="SegoeUI" Foreground="#6F6F70"/>
                 </StackPanel>
             </DockPanel>
+            <StatusBar DockPanel.Dock="Bottom">
+                <StatusBarItem Background="#007ACC">
+                    <TextBlock Text="Ready" Foreground="{StaticResource Foreground}"/>
+                </StatusBarItem>
+            </StatusBar>
             <Grid>
                 <Grid.RowDefinitions>
                     <!-- Main Menu Row -->
