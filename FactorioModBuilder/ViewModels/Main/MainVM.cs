@@ -23,6 +23,7 @@ using System.IO;
 using System.Diagnostics;
 using FactorioModBuilder.ViewModels.Menu.Base;
 using FactorioModBuilder.ViewModels.Menu;
+using System.Windows;
 
 namespace FactorioModBuilder.ViewModels
 {
@@ -59,7 +60,19 @@ namespace FactorioModBuilder.ViewModels
         public bool Active
         {
             get { return this.GetProperty<bool>(); }
+            set { this.SetProperty(value, null, () => this.ShowBorder = this.Active && (this.WindowState == System.Windows.WindowState.Normal)); }
+        }
+
+        public bool ShowBorder
+        {
+            get { return this.GetProperty<bool>(); }
             set { this.SetProperty(value); }
+        }
+
+        public WindowState WindowState
+        {
+            get { return this.GetProperty<WindowState>(); }
+            set { this.SetProperty(value, null, () => this.ShowBorder = this.Active && (this.WindowState == System.Windows.WindowState.Normal)); }
         }
 
         public SolutionExplorerVM SolutionExplorer { get; private set; }
