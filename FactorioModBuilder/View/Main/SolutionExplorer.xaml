@@ -51,8 +51,7 @@
                     </xctk:DropDownButton>
                 </Grid>
                 <!-- Solution TreeView -->
-                <TreeView Grid.Row="3" BorderThickness="0" 
-                          ItemsSource="{Binding Path=Solutions}"/>
+                <TreeView Grid.Row="3" BorderThickness="0" ItemsSource="{Binding Path=Solutions}"/>
             </Grid>
         </Border>
     </DataTemplate>
