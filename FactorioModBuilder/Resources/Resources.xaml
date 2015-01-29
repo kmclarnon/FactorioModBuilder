@@ -8,11 +8,12 @@
         <ResourceDictionary Source="Styles/GroupBoxStyle.xaml"/>
         <ResourceDictionary Source="Styles/ListBoxStyle.xaml"/>
         <ResourceDictionary Source="Styles/MenuStyle.xaml"/>
+        <ResourceDictionary Source="Styles/MetroWindowStyle.xaml"/>
         <ResourceDictionary Source="Styles/ScrollBarStyle.xaml"/>
         <ResourceDictionary Source="Styles/TabControlStyle.xaml"/>
         <ResourceDictionary Source="Styles/TextBoxStyle.xaml"/>
+        <ResourceDictionary Source="Styles/TreeViewStyle.xaml"/>
         <ResourceDictionary Source="Styles/WindowStyle.xaml"/>
-        <ResourceDictionary Source="Styles/MetroWindowStyle.xaml"/>
         <!-- Color Resources -->
         <ResourceDictionary Source="Colors.xaml"/>
     </ResourceDictionary.MergedDictionaries>
@@ -27,4 +28,5 @@
     <Style TargetType="{x:Type DataGrid}" BasedOn="{StaticResource StandardDataGrid}"/>
     <Style TargetType="{x:Type ComboBox}" BasedOn="{StaticResource StandardComboBox}"/>
     <Style TargetType="{x:Type GroupBox}" BasedOn="{StaticResource StandardGroupBox}"/>
+    <Style TargetType="{x:Type TreeView}" BasedOn="{StaticResource StandardTreeView}"/>
 </ResourceDictionary>

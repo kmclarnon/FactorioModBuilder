@@ -8,7 +8,7 @@
         Top="{Binding Path=AppTop, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
         Left="{Binding Path=AppLeft, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
         WindowState="{Binding Path=WindowState, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-        GlowBrush="#007ACC" BorderThickness="0.5"
+        BorderBrush="#007ACC" BorderThickness="0.7"
         Title="{Binding Path=AppTitle}" TitleForeground="#6F6F70" TitleCaps="False" 
         Activated="OnActivated" Deactivated="OnDeactivated">
     <Window.Resources>
@@ -25,7 +25,7 @@
         <Style TargetType="{x:Type mah:MetroWindow}">
             <Style.Triggers>
                 <Trigger Property="WindowState" Value="Maximized">
-                    <Setter Property="GlowBrush" Value="Transparent"/>
+                    <Setter Property="BorderBrush" Value="Transparent"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
@@ -62,7 +62,7 @@
             <ContentPresenter Grid.Row="2" Grid.Column="1" Margin="2.5 5 5 2.5"
                               Content="{Binding Path=Data.MainContent, Source={StaticResource proxy}}"/>
             <!-- Solution Explorer -->
-            <ContentPresenter Grid.Row="2" Grid.RowSpan="2" Grid.Column="0" Margin="5 5 2.5 5" 
+            <ContentPresenter Grid.Row="2" Grid.RowSpan="2" Grid.Column="0" Margin="10 5 2.5 10" 
                               Content="{Binding Path=Data.SolutionExplorer, Source={StaticResource proxy}}"/>
         </Grid>
     </DockPanel>
