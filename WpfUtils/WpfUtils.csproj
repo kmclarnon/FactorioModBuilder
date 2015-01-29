@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="Actions\CloseTabItemAction.cs" />
     <Compile Include="BaseVM.cs" />
+    <Compile Include="Behaviors\MouseDoubleClick.cs" />
     <Compile Include="BindingProxy.cs" />
     <Compile Include="Bindings\BaseBinding.cs" />
     <Compile Include="Bindings\NumberBinding.cs" />
@@ -63,6 +64,7 @@
     <Compile Include="ValueConverters\ObjectNotNull.cs" />
     <Compile Include="ValueConverters\StringToLength.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

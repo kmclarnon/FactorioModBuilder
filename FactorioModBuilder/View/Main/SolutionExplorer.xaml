@@ -1,7 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:sln="clr-namespace:FactorioModBuilder.ViewModels"
-                    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit">
+                    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+                    xmlns:cmds="clr-namespace:WpfUtils.Behaviors;assembly=WpfUtils">
     <DataTemplate DataType="{x:Type sln:SolutionExplorerVM}">
         <Border BorderBrush="{StaticResource BorderBrushHighlighted}" BorderThickness="0.25">
             <Grid>
@@ -51,7 +52,8 @@
                     </xctk:DropDownButton>
                 </Grid>
                 <!-- Solution TreeView -->
-                <TreeView Grid.Row="3" BorderThickness="0" ItemsSource="{Binding Path=Solutions}"/>
+                <TreeView Grid.Row="3" BorderThickness="0" ItemsSource="{Binding Path=Solutions}"
+                          cmds:MouseDoubleClick.Command="{Binding OpenSelectedItemCmd}"/>
             </Grid>
         </Border>
     </DataTemplate>
