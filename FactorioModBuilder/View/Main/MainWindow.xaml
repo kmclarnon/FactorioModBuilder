@@ -19,11 +19,7 @@
             <util:BindingProxy x:Key="proxy" Data="{Binding}"/>
             <Style x:Key="exteriorRect" TargetType="{x:Type Rectangle}">
                 <Setter Property="SnapsToDevicePixels" Value="True"/>
-                <Setter Property="Effect">
-                    <Setter.Value>
-                        <DropShadowEffect Color="Black"/>
-                    </Setter.Value>
-                </Setter>
+                <Setter Property="Panel.ZIndex" Value="1000"/>
                 <Style.Triggers>
                     <DataTrigger Binding="{Binding Path=ShowBorder}" Value="True">
                         <Setter Property="Fill" Value="#007ACC"/>
@@ -99,7 +95,7 @@
         <Rectangle Grid.Row="4" Grid.Column="3" Style="{StaticResource exteriorRect}" Cursor="SizeNWSE" MouseDown="BottomRightMouseDown"/>
         <Rectangle Grid.Row="3" Grid.Column="3" Style="{StaticResource interiorRect}" Cursor="SizeNWSE" MouseDown="BottomRightMouseDown"/>
         <!-- Main Application Content -->
-        <DockPanel x:Name="Root" Grid.Row="1" Grid.RowSpan="3" Grid.Column="1" Grid.ColumnSpan="3" Background="{StaticResource LightBackground}" Cursor="Arrow">
+        <DockPanel x:Name="Root" Grid.Row="0" Grid.RowSpan="5" Grid.Column="0" Grid.ColumnSpan="5" Background="{StaticResource LightBackground}" Cursor="Arrow">
             <!-- Window Title Bar -->
             <DockPanel x:Name="TitleBar" DockPanel.Dock="Top" Background="{StaticResource LightBackground}" Height="35"
                        MouseDown="TitleBarMouseDown">
