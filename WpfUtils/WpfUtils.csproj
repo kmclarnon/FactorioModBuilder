@@ -51,6 +51,7 @@
     <Compile Include="Bindings\BaseBinding.cs" />
     <Compile Include="Bindings\NumberBinding.cs" />
     <Compile Include="Extensions\PropertyMethods.cs" />
+    <Compile Include="Extensions\TreeViewItemMethods.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RelayCommand.cs" />
     <Compile Include="ValueConverters\BaseConverter.cs" />
@@ -59,6 +60,7 @@
     <Compile Include="ValueConverters\ColorToSolidColorBrush.cs" />
     <Compile Include="ValueConverters\DualConverter.cs" />
     <Compile Include="ValueConverters\EnumToDescriptionString.cs" />
+    <Compile Include="ValueConverters\LeftMarginMultiplier.cs" />
     <Compile Include="ValueConverters\NullImage.cs" />
     <Compile Include="ValueConverters\ObjectIsType.cs" />
     <Compile Include="ValueConverters\ObjectNotNull.cs" />
