@@ -1,13 +1,15 @@
-﻿<Window x:Class="FactorioModBuilder.MainWindow"
+﻿<mah:MetroWindow x:Class="FactorioModBuilder.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:util="clr-namespace:WpfUtils;assembly=WpfUtils"
+        xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         Height="{Binding Path=AppHeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
         Width="{Binding Path=AppWidth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
         Top="{Binding Path=AppTop, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
         Left="{Binding Path=AppLeft, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
         WindowState="{Binding Path=WindowState, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-        ResizeMode="NoResize" WindowStyle="None" 
+        GlowBrush="#007ACC" BorderThickness="0.5"
+        Title="{Binding Path=AppTitle}" TitleForeground="#6F6F70" TitleCaps="False" 
         Activated="OnActivated" Deactivated="OnDeactivated">
     <Window.Resources>
         <ResourceDictionary>
@@ -17,142 +19,51 @@
                 <ResourceDictionary Source="MainContent.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <util:BindingProxy x:Key="proxy" Data="{Binding}"/>
-            <Style x:Key="exteriorRect" TargetType="{x:Type Rectangle}">
-                <Setter Property="SnapsToDevicePixels" Value="True"/>
-                <Setter Property="Panel.ZIndex" Value="1000"/>
-                <Style.Triggers>
-                    <DataTrigger Binding="{Binding Path=ShowBorder}" Value="True">
-                        <Setter Property="Fill" Value="#007ACC"/>
-                    </DataTrigger>
-                    <DataTrigger Binding="{Binding Path=ShowBorder}" Value="False">
-                        <Setter Property="Fill" Value="{StaticResource LightBackground}"/>
-                    </DataTrigger>
-                </Style.Triggers>
-            </Style>
-            <Style x:Key="interiorRect" TargetType="{x:Type Rectangle}">
-                <Setter Property="SnapsToDevicePixels" Value="True"/>
-                <Setter Property="Panel.ZIndex" Value="1000"/>
-                <Setter Property="Fill" Value="Transparent"/>
-            </Style>
         </ResourceDictionary>
     </Window.Resources>
-    <!-- Window Active Border Highlight -->
-    <Grid>
-        <Grid.RowDefinitions>
-            <!-- Top Exterior Border -->
-            <RowDefinition Height="1"/>
-            <!-- Top Interior Border -->
-            <RowDefinition Height="3"/>
-            <!-- Content -->
-            <RowDefinition Height="*"/>
-            <!-- Bottom Interior Border -->
-            <RowDefinition Height="3"/>
-            <!-- Bottom Exterior Border -->
-            <RowDefinition Height="1"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <!-- Left Exterior Border -->
-            <ColumnDefinition Width="1"/>
-            <!-- Left Interior Border -->
-            <ColumnDefinition Width="3"/>
-            <!-- Content -->
-            <ColumnDefinition Width="*"/>
-            <!-- Right Interior Border -->
-            <ColumnDefinition Width="3"/>
-            <!-- Right Exterior Border -->
-            <ColumnDefinition Width="1"/>
-        </Grid.ColumnDefinitions>
-        <!-- Top Left Corner -->
-        <Rectangle Grid.Row="0" Grid.Column="0" Style="{StaticResource exteriorRect}" Cursor="SizeNWSE" MouseDown="TopLeftMouseDown"/>
-        <Rectangle Grid.Row="1" Grid.Column="0" Style="{StaticResource exteriorRect}" Cursor="SizeNWSE" MouseDown="TopLeftMouseDown"/>
-        <Rectangle Grid.Row="0" Grid.Column="1" Style="{StaticResource exteriorRect}" Cursor="SizeNWSE" MouseDown="TopLeftMouseDown"/>
-        <Rectangle Grid.Row="1" Grid.Column="1" Style="{StaticResource interiorRect}" Cursor="SizeNWSE" MouseDown="TopLeftMouseDown"/>
-        <!-- Top Middle -->
-        <Rectangle Grid.Row="0" Grid.Column="2" Style="{StaticResource exteriorRect}" Cursor="SizeNS" MouseDown="TopMiddleMouseDown"/>
-        <Rectangle Grid.Row="1" Grid.Column="2" Style="{StaticResource interiorRect}" Cursor="SizeNS" MouseDown="TopMiddleMouseDown"/>
-        <!-- Top Right Corner -->
-        <Rectangle Grid.Row="0" Grid.Column="3" Style="{StaticResource exteriorRect}" Cursor="SizeNESW" MouseDown="TopRightMouseDown"/>
-        <Rectangle Grid.Row="0" Grid.Column="4" Style="{StaticResource exteriorRect}" Cursor="SizeNESW" MouseDown="TopRightMouseDown"/>
-        <Rectangle Grid.Row="1" Grid.Column="4" Style="{StaticResource exteriorRect}" Cursor="SizeNESW" MouseDown="TopRightMouseDown"/>
-        <Rectangle Grid.Row="1" Grid.Column="3" Style="{StaticResource interiorRect}" Cursor="SizeNESW" MouseDown="TopRightMouseDown"/>
-        <!-- Left Middle -->
-        <Rectangle Grid.Row="2" Grid.Column="0" Style="{StaticResource exteriorRect}" Cursor="SizeWE" MouseDown="LeftMiddleMouseDown"/>
-        <Rectangle Grid.Row="2" Grid.Column="1" Style="{StaticResource interiorRect}" Cursor="SizeWE" MouseDown="LeftMiddleMouseDown"/>
-        <!-- Right Middle -->
-        <Rectangle Grid.Row="2" Grid.Column="4" Style="{StaticResource exteriorRect}" Cursor="SizeWE" MouseDown="RightMiddleMouseDown"/>
-        <Rectangle Grid.Row="2" Grid.Column="3" Style="{StaticResource interiorRect}" Cursor="SizeWE" MouseDown="RightMiddleMouseDown"/>
-        <!-- Bottom Left Corner -->
-        <Rectangle Grid.Row="3" Grid.Column="0" Style="{StaticResource exteriorRect}" Cursor="SizeNESW" MouseDown="BottomLeftMouseDown"/>
-        <Rectangle Grid.Row="4" Grid.Column="0" Style="{StaticResource exteriorRect}" Cursor="SizeNESW" MouseDown="BottomLeftMouseDown"/>
-        <Rectangle Grid.Row="4" Grid.Column="1" Style="{StaticResource exteriorRect}" Cursor="SizeNESW" MouseDown="BottomLeftMouseDown"/>
-        <Rectangle Grid.Row="3" Grid.Column="1" Style="{StaticResource interiorRect}" Cursor="SizeNESW" MouseDown="BottomLeftMouseDown"/>
-        <!-- Bottom Middle -->
-        <Rectangle Grid.Row="4" Grid.Column="2" Style="{StaticResource exteriorRect}" Cursor="SizeNS" MouseDown="BottomMiddleMouseDown"/>
-        <Rectangle Grid.Row="3" Grid.Column="2" Style="{StaticResource interiorRect}" Cursor="SizeNS" MouseDown="BottomMiddleMouseDown"/>
-        <!-- Bottom Right Corner -->
-        <Rectangle Grid.Row="3" Grid.Column="4" Style="{StaticResource exteriorRect}" Cursor="SizeNWSE" MouseDown="BottomRightMouseDown"/>
-        <Rectangle Grid.Row="4" Grid.Column="4" Style="{StaticResource exteriorRect}" Cursor="SizeNWSE" MouseDown="BottomRightMouseDown"/>
-        <Rectangle Grid.Row="4" Grid.Column="3" Style="{StaticResource exteriorRect}" Cursor="SizeNWSE" MouseDown="BottomRightMouseDown"/>
-        <Rectangle Grid.Row="3" Grid.Column="3" Style="{StaticResource interiorRect}" Cursor="SizeNWSE" MouseDown="BottomRightMouseDown"/>
-        <!-- Main Application Content -->
-        <DockPanel x:Name="Root" Grid.Row="0" Grid.RowSpan="5" Grid.Column="0" Grid.ColumnSpan="5" Background="{StaticResource LightBackground}" Cursor="Arrow">
-            <!-- Window Title Bar -->
-            <DockPanel x:Name="TitleBar" DockPanel.Dock="Top" Background="{StaticResource LightBackground}" Height="35"
-                       MouseDown="TitleBarMouseDown">
-                <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" VerticalAlignment="Top">
-                    <Button x:Name="MinButton" Style="{StaticResource WindowButton}" ToolTip="Minimize"
-                            Click="MinButton_Click" Width="34" Height="27">
-                        <Image Source="../../Resources/Icons/Minimize.png"/>
-                    </Button>
-                    <Button x:Name="MaxButton" Style="{StaticResource WindowButton}" ToolTip="Maximize"
-                            Click="MaxButton_Click" Width="34" Height="27">
-                        <Image Source="../../Resources/Icons/Maximize.png"/>
-                    </Button>
-                    <Button x:Name="CloseButton" Style="{StaticResource WindowButton}" ToolTip="Close"
-                            Click="CloseButton_Click" Width="34" Height="27">
-                        <TextBlock Text="X" FontFamily="Syncopate" FontSize="13"/>
-                    </Button>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" DockPanel.Dock="Left" VerticalAlignment="Center">
-                    <Image Margin="10 10 5 10"/>
-                    <TextBlock Margin="5 10 10 5" HorizontalAlignment="Left" Text="{Binding Path=AppTitle}" 
-                               FontSize="16" FontFamily="SegoeUI" Foreground="#6F6F70"/>
-                </StackPanel>
-            </DockPanel>
-            <StatusBar DockPanel.Dock="Bottom">
-                <StatusBarItem Background="#007ACC">
-                    <TextBlock Text="Ready" Foreground="{StaticResource Foreground}"/>
-                </StatusBarItem>
-            </StatusBar>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <!-- Main Menu Row -->
-                    <RowDefinition Height="25"/>
-                    <!-- Main Tool Strip Row -->
-                    <RowDefinition Height="25"/>
-                    <!-- Main Content Row -->
-                    <RowDefinition Height="3*"/>
-                    <!-- Output Console Row -->
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="3*"/>
-                </Grid.ColumnDefinitions>
-                <!-- Main Menu -->
-                <ContentPresenter Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="100" 
+    <Window.Style>
+        <Style TargetType="{x:Type mah:MetroWindow}">
+            <Style.Triggers>
+                <Trigger Property="WindowState" Value="Maximized">
+                    <Setter Property="GlowBrush" Value="Transparent"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Style>
+    <DockPanel x:Name="Root">
+        <StatusBar DockPanel.Dock="Bottom">
+            <StatusBarItem Background="#007ACC">
+                <TextBlock Text="Ready" Foreground="{StaticResource Foreground}"/>
+            </StatusBarItem>
+        </StatusBar>
+        <Grid>
+            <Grid.RowDefinitions>
+                <!-- Main Menu Row -->
+                <RowDefinition Height="25"/>
+                <!-- Main Tool Strip Row -->
+                <RowDefinition Height="25"/>
+                <!-- Main Content Row -->
+                <RowDefinition Height="3*"/>
+                <!-- Output Console Row -->
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            <!-- Main Menu -->
+            <ContentPresenter Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="100" 
                               Content="{Binding Path=Data.MainMenu, Source={StaticResource proxy}}" 
                               ContentTemplate="{StaticResource mainMenu}"/>
-                <!-- Main Tool Strip -->
-                <ContentPresenter Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="100"
+            <!-- Main Tool Strip -->
+            <ContentPresenter Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="100"
                               Content="{Binding Path=Data.MainToolStrip, Source={StaticResource proxy}}"/>
-                <!-- Main Content View -->
-                <ContentPresenter Grid.Row="2" Grid.Column="1" Margin="2.5 5 5 2.5"
+            <!-- Main Content View -->
+            <ContentPresenter Grid.Row="2" Grid.Column="1" Margin="2.5 5 5 2.5"
                               Content="{Binding Path=Data.MainContent, Source={StaticResource proxy}}"/>
-                <!-- Solution Explorer -->
-                <ContentPresenter Grid.Row="2" Grid.RowSpan="2" Grid.Column="0" Margin="5 5 2.5 5" 
+            <!-- Solution Explorer -->
+            <ContentPresenter Grid.Row="2" Grid.RowSpan="2" Grid.Column="0" Margin="5 5 2.5 5" 
                               Content="{Binding Path=Data.SolutionExplorer, Source={StaticResource proxy}}"/>
-            </Grid>
-        </DockPanel>
-    </Grid>
-</Window>
+        </Grid>
+    </DockPanel>
+</mah:MetroWindow>
