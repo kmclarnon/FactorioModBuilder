@@ -24,6 +24,7 @@ using System.Diagnostics;
 using FactorioModBuilder.ViewModels.Menu.Base;
 using FactorioModBuilder.ViewModels.Menu;
 using System.Windows;
+using FactorioModBuilder.ViewModels.ProjectItems.Prototype.Filters;
 
 namespace FactorioModBuilder.ViewModels
 {
@@ -110,15 +111,7 @@ namespace FactorioModBuilder.ViewModels
                             new PrototypesVM(new Prototypes(),
                                 new List<TreeItemVMBase>()
                                 {
-                                    new GroupsVM(new Groups()),
-                                    new SubGroupsVM(new SubGroups()),
-                                    new EntitiesVM(new Entities()),
-                                    new EquipsVM(new Equips()),
-                                    new FluidsVM(new Fluids()),
-                                    new ItemsVM(new Items()),
-                                    new RecipesVM(new Recipes()),
-                                    new TechnologiesVM(new Technologies()),
-                                    new TilesVM(new Tiles())
+                                    new GroupsFilterVM("Groups"),
                                 }),
                             new LocaleVM(new Locale())
                         }),

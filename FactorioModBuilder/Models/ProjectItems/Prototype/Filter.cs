@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 
 namespace FactorioModBuilder.Models.ProjectItems.Prototype
 {
-    public class Tiles : TreeItem<Tiles>
+    public class Filter : TreeItem<Filter>
     {
-        public Tiles() : base("Tiles")
+        public Filter(string name)
+            : base(name)
         {
         }
     }

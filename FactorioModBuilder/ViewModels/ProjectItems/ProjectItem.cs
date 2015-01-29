@@ -23,7 +23,10 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
         /// <summary>
         /// Provides a list of DataUnits generated from the data contained in the associated view models
         /// </summary>
-        public abstract IEnumerable<DataUnit> CompilerData { get; }
+        public virtual IEnumerable<DataUnit> CompilerData
+        {
+            get { return this.Children.Where(o => o is ICompilerSource).Cast<ICompilerSource>().SelectMany(o => o.CompilerData); }
+        }
 
         /// <summary>
         /// The basic constructor to wrap the given model in its associated view model
