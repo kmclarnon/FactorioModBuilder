@@ -168,6 +168,7 @@
     <Compile Include="Models\SolutionItems\Solution.cs" />
     <Compile Include="ViewModels\Dialogs\ColorDialogVM.cs" />
     <Compile Include="ViewModels\Dialogs\NewProjectVM.cs" />
+    <Compile Include="ViewModels\Main\MainContentItemVM.cs" />
     <Compile Include="ViewModels\Main\MainContentVM.cs" />
     <Compile Include="ViewModels\Main\MainMenuVM.cs" />
     <Compile Include="ViewModels\Menu\CategoryItem.cs" />

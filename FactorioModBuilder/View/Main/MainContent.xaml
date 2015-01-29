@@ -1,8 +1,16 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:main="clr-namespace:FactorioModBuilder.ViewModels.Main"
-                    xmlns:conv="clr-namespace:WpfUtils.ValueConverters;assembly=WpfUtils">
+                    xmlns:conv="clr-namespace:WpfUtils.ValueConverters;assembly=WpfUtils"
+                    xmlns:local="clr-namespace:FactorioModBuilder">
+    <local:ViewTemplateSelector x:Key="selector"/>
     <DataTemplate DataType="{x:Type main:MainContentVM}">
-        <TabControl ItemsSource="{Binding Path=Content}"/>
+        <TabControl ItemsSource="{Binding Path=Content}">
+            <TabControl.ContentTemplate>
+                <DataTemplate>
+                    <ContentPresenter Content="{Binding Path=Content}" ContentTemplateSelector="{StaticResource selector}"/>
+                </DataTemplate>
+            </TabControl.ContentTemplate>
+        </TabControl>
     </DataTemplate>
 </ResourceDictionary>

@@ -40,15 +40,20 @@ namespace FactorioModBuilder.ViewModels
 
         public ObservableCollection<SolutionVM> Solutions { get; private set; }
 
-        public SolutionExplorerVM()
+        private MainVM _parent;
+
+        public SolutionExplorerVM(MainVM parent)
         {
+            if (parent == null)
+                throw new ArgumentNullException("parent");
+            _parent = parent;
             this.MenuItems = new ObservableCollection<IMenuItemProvider>();
             this.Solutions = new ObservableCollection<SolutionVM>();
         }
 
         private void OpenSelectedItem()
         {
-
+            _parent.OpenItems(this.Solutions.SelectMany(o => o.SelectedNodes));
         }
     }
 }

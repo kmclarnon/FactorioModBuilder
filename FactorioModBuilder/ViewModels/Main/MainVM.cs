@@ -88,7 +88,7 @@ namespace FactorioModBuilder.ViewModels
         public MainVM(MainModel m)
         {
             _main = m;
-            this.SolutionExplorer = new SolutionExplorerVM();
+            this.SolutionExplorer = new SolutionExplorerVM(this);
             this.MainMenu = new MainMenuVM(this, new FileMenuVM(this));
             this.MainContent = new MainContentVM();
         }
@@ -147,6 +147,11 @@ namespace FactorioModBuilder.ViewModels
             {
                 // log this error
             }
+        }
+
+        public void OpenItems(IEnumerable<TreeItemVMBase> items)
+        {
+            this.MainContent.OpenItems(items);
         }
 
         private string Wrap(string val)

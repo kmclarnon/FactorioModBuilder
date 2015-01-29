@@ -1,4 +1,5 @@
-﻿using FactorioModBuilder.ViewModels.ProjectItems;
+﻿using FactorioModBuilder.ViewModels.Main;
+using FactorioModBuilder.ViewModels.ProjectItems;
 using FactorioModBuilder.ViewModels.ProjectItems.Prototype;
 using System;
 using System.Collections.Generic;
@@ -48,9 +49,12 @@ namespace FactorioModBuilder
 
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
-            Func<ViewTemplateSelector, DataTemplate> func;
-            if (item != null && _typeDict.TryGetValue(item.GetType(), out func))
-                return func(this);
+            if(item != null)
+            {
+                Func<ViewTemplateSelector, DataTemplate> func;
+                if (item != null && _typeDict.TryGetValue(item.GetType(), out func))
+                    return func(this);
+            }
 
             // fall back on our base class
             return base.SelectTemplate(item, container);

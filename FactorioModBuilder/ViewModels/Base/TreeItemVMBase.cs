@@ -78,6 +78,19 @@ namespace FactorioModBuilder.ViewModels.Base
         }
 
         /// <summary>
+        /// The selected nodes in this tree
+        /// </summary>
+        public IEnumerable<TreeItemVMBase> SelectedNodes
+        {
+            get
+            {
+                List<TreeItemVMBase> res = new List<TreeItemVMBase>();
+                this.GetSelected(res);
+                return res;
+            }
+        }
+
+        /// <summary>
         /// Indexer used to access IDataErrorInfo messages
         /// </summary>
         /// <returns>The associated error created as a result of a property data error</returns>
@@ -307,6 +320,18 @@ namespace FactorioModBuilder.ViewModels.Base
             }
 
             return true;
+        }
+
+        /// <summary>
+        /// Populates the given list with all selected nodes in this tree
+        /// </summary>
+        /// <param name="result">The selected item collection</param>
+        private void GetSelected(List<TreeItemVMBase> result)
+        {
+            if (this.IsSelected)
+                result.Add(this);
+            foreach (var c in this.Children)
+                c.GetSelected(result);
         }
     }
 }
