@@ -91,13 +91,13 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
         private int _depCount = 1;
 
         public ModInfoVM(ModInfo info)
-            : base(info)
+            : base(info, DoubleClickBehavior.OpenContent)
         {
             this.Dependencies = new ObservableCollection<ModInfoDependencyVM>();
         }
 
         public ModInfoVM(TreeItemVMBase parent, ModInfo info)
-            : base(parent, info)
+            : base(parent, info, DoubleClickBehavior.OpenContent)
         {
         }
 

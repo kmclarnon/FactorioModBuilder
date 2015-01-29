@@ -8,15 +8,15 @@ using System.Threading.Tasks;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
-    public class TileVM : TreeItemVM<Tile, TileVM>
+    public class TileVM : ProjectItem<Tile, TileVM>
     {
         public TileVM(Tile tile)
-            : base(tile)
+            : base(tile, DoubleClickBehavior.OpenContent)
         {
         }
 
         public TileVM(TreeItemVMBase parent, Tile tile)
-            : base(parent, tile)
+            : base(parent, tile, DoubleClickBehavior.OpenContent)
         {
         }
     }

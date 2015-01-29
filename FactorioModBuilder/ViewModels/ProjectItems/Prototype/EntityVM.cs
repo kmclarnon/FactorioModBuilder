@@ -11,14 +11,14 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
     /// <summary>
     /// View model fro the Entity model
     /// </summary>
-    public class EntityVM : TreeItemVM<Entity, EntityVM>
+    public class EntityVM : ProjectItem<Entity, EntityVM>
     {
         /// <summary>
         /// The basic constructor to wrap an Entity model
         /// </summary>
         /// <param name="entity">The Entity model to wrap</param>
         public EntityVM(Entity entity)
-            : base(entity)
+            : base(entity, DoubleClickBehavior.OpenContent)
         {
         }
 
@@ -28,7 +28,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         /// <param name="parent">The parent of this view model</param>
         /// <param name="entity">The Entity model to wrap</param>
         public EntityVM(TreeItemVMBase parent, Entity entity)
-            : base(parent, entity)
+            : base(parent, entity, DoubleClickBehavior.OpenContent)
         {
         }
     }

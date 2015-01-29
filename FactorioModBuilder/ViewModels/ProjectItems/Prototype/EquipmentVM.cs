@@ -11,7 +11,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
     /// <summary>
     /// A view model to wrap the Equipment model
     /// </summary>
-    public class EquipmentVM : TreeItemVM<Equipment, EquipmentVM>
+    public class EquipmentVM : ProjectItem<Equipment, EquipmentVM>
     {
         /// <summary>
         /// The type parameter of the Equipment model
@@ -162,7 +162,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         /// </summary>
         /// <param name="equip"></param>
         public EquipmentVM(Equipment equip)
-            : base(equip)
+            : base(equip, DoubleClickBehavior.OpenContent)
         {
         }
 
@@ -173,7 +173,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         /// <param name="parent"></param>
         /// <param name="equip"></param>
         public EquipmentVM(TreeItemVMBase parent, Equipment equip)
-            : base(parent, equip)
+            : base(parent, equip, DoubleClickBehavior.OpenContent)
         {
         }
     }

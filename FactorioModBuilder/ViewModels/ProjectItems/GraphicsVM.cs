@@ -45,7 +45,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
         }
 
         public GraphicsVM(TreeItemVMBase parent, Graphics item)
-            : base(parent, item)
+            : base(parent, item, DoubleClickBehavior.OpenContent)
         {
             this.Filters = new ObservableCollection<GraphicsFilterVM>();
             this.Filters.Add(new GraphicsFilterVM(this,

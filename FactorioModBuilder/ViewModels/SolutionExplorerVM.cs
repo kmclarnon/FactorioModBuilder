@@ -1,4 +1,5 @@
-﻿using FactorioModBuilder.ViewModels.Menu;
+﻿using FactorioModBuilder.ViewModels.Base;
+using FactorioModBuilder.ViewModels.Menu;
 using FactorioModBuilder.ViewModels.Menu.Base;
 using FactorioModBuilder.ViewModels.ProjectItems;
 using System;
@@ -53,7 +54,10 @@ namespace FactorioModBuilder.ViewModels
 
         private void OpenSelectedItem()
         {
-            _parent.OpenItems(this.Solutions.SelectMany(o => o.SelectedNodes));
+            var res = this.Solutions.SelectMany(o => o.SelectedNodes)
+                .Where(o => o is IDoubleClickBehavior).Cast<IDoubleClickBehavior>()
+                .Where(o => o.DoubleClickBehavior == DoubleClickBehavior.OpenContent);
+            _parent.OpenItems(res.Cast<TreeItemVMBase>());
         }
     }
 }

@@ -27,13 +27,13 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         public ObservableCollection<IGraphicsSource> GraphicsSources { get; private set; }
 
         public PrototypesVM(Prototypes types, IEnumerable<TreeItemVMBase> children)
-            : base(types, children)
+            : base(types, children, DoubleClickBehavior.Ignore)
         {
             this.GraphicsSources = new ObservableCollection<IGraphicsSource>();
         }
 
         public PrototypesVM(TreeItemVMBase parent, Prototypes types, IEnumerable<TreeItemVMBase> children)
-            : base(parent, types, children)
+            : base(parent, types, children, DoubleClickBehavior.Ignore)
         {
             this.GraphicsSources = new ObservableCollection<IGraphicsSource>();
         }

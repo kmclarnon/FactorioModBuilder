@@ -49,7 +49,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         }
 
         public TechnologyEffectVM(TechnologyEffect item)
-            : base(null, item)
+            : base(item)
         {
         }
 

@@ -16,7 +16,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
     /// </summary>
     /// <typeparam name="TModel">The type of the model to wrap</typeparam>
     /// <typeparam name="TViewModel">The type of the this view model (CRTP)</typeparam>
-    public abstract class ProjectItem<TModel, TViewModel> : TreeItemVM<TModel, TViewModel>, ICompilerSource 
+    public abstract class ProjectItem<TModel, TViewModel> : TreeItemVM<TModel, TViewModel>, ICompilerSource, IDoubleClickBehavior 
         where TModel : TreeItem<TModel>
         where TViewModel : TreeItemVM<TModel, TViewModel>
     {
@@ -29,12 +29,19 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
         }
 
         /// <summary>
+        /// Whether this project item should be opened when the user double clicks on it
+        /// </summary>
+        public DoubleClickBehavior DoubleClickBehavior { get; private set; }
+
+        /// <summary>
         /// The basic constructor to wrap the given model in its associated view model
         /// </summary>
         /// <param name="item"></param>
-        public ProjectItem(TModel item) 
+        /// <param name="openOnDblClick">Whether or not this project item should be opened when the user double clicks on it</param>
+        public ProjectItem(TModel item, DoubleClickBehavior dblClickBehavior = DoubleClickBehavior.Ignore) 
             : base(item)
         {
+            this.DoubleClickBehavior = dblClickBehavior;
         }
 
         /// <summary>
@@ -43,9 +50,11 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
         /// </summary>
         /// <param name="parent">The parent view model</param>
         /// <param name="item">The model to wrap</param>
-        public ProjectItem(TreeItemVMBase parent, TModel item)
+        /// <param name="openOnDblClick">Whether or not this project item should be opened when the user double clicks on it</param>
+        public ProjectItem(TreeItemVMBase parent, TModel item, DoubleClickBehavior dblClickBehavior = DoubleClickBehavior.Ignore)
             : base(parent, item)
         {
+            this.DoubleClickBehavior = dblClickBehavior;
         }
 
         /// <summary>
@@ -54,9 +63,11 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
         /// </summary>
         /// <param name="item">The model to wrap</param>
         /// <param name="children">The view model children of this model</param>
-        public ProjectItem(TModel item, IEnumerable<TreeItemVMBase> children)
+        /// <param name="openOnDblClick">Whether or not this project item should be opened when the user double clicks on it</param>
+        public ProjectItem(TModel item, IEnumerable<TreeItemVMBase> children, DoubleClickBehavior dblClickBehavior = DoubleClickBehavior.Ignore)
             : base(item, children)
         {
+            this.DoubleClickBehavior = dblClickBehavior;
         }
 
         /// <summary>
@@ -66,9 +77,12 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
         /// <param name="parent">The parent view model</param>
         /// <param name="item">The model to wrap</param>
         /// <param name="childre">The view model children of this model</param>
-        public ProjectItem(TreeItemVMBase parent, TModel item, IEnumerable<TreeItemVMBase> childre)
-            : base(parent, item, childre)
+        /// <param name="openOnDblClick">Whether or not this project item should be opened when the user double clicks on it</param>
+        public ProjectItem(TreeItemVMBase parent, TModel item, IEnumerable<TreeItemVMBase> children, 
+            DoubleClickBehavior dblClickBehavior = DoubleClickBehavior.Ignore)
+            : base(parent, item, children)
         {
+            this.DoubleClickBehavior = dblClickBehavior;
         }
     }
 }

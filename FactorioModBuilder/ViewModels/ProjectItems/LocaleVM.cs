@@ -18,13 +18,13 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
             get { return new LocaleData().ListWrap(); }
         }
 
-        public LocaleVM(Locale loc) 
-            : base(loc)
+        public LocaleVM(Locale loc)
+            : base(loc, DoubleClickBehavior.OpenContent)
         {
         }
 
         public LocaleVM(TreeItemVMBase parent, Locale loc)
-            : base(parent, loc)
+            : base(parent, loc, DoubleClickBehavior.OpenContent)
         {
         }
     }

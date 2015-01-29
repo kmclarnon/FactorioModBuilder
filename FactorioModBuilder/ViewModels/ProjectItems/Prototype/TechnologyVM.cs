@@ -15,7 +15,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
     /// <summary>
     /// The view model to represent a technology
     /// </summary>
-    public class TechnologyVM : TreeItemVM<Technology, TechnologyVM>
+    public class TechnologyVM : ProjectItem<Technology, TechnologyVM>
     {
         /// <summary>
         /// The file path to this technology's icon image
@@ -119,7 +119,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         }
 
         public TechnologyVM(TreeItemVMBase parent, Technology tech)
-            : base(parent, tech)
+            : base(parent, tech, DoubleClickBehavior.OpenContent)
         {
             this.UnitIngredients = new ObservableCollection<TechnologyIngredientVM>();
             this.Effects = new ObservableCollection<TechnologyEffectVM>();

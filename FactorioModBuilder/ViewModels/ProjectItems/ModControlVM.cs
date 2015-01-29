@@ -22,12 +22,12 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
         }
 
         public ModControlVM(ModControl control)
-            : base(control)
+            : base(control, DoubleClickBehavior.OpenContent)
         {
         }
 
         public ModControlVM(TreeItemVMBase parent, ModControl control)
-            : base(parent, control)
+            : base(parent, control, DoubleClickBehavior.OpenContent)
         {
         }
     }

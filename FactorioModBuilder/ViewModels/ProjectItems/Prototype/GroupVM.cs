@@ -64,12 +64,12 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         public ICommand FindImageCmd { get { return this.GetCommand(this.FindImage, this.CanFindImage); } }
 
         public GroupVM(Group group)
-            : base(group)
+            : base(group, DoubleClickBehavior.OpenContent)
         {
         }
 
         public GroupVM(TreeItemVMBase parent, Group group)
-            : base(parent, group)
+            : base(parent, group, DoubleClickBehavior.OpenContent)
         {
         }
 

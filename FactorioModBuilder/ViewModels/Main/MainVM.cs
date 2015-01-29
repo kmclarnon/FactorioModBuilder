@@ -112,6 +112,11 @@ namespace FactorioModBuilder.ViewModels
                                 new List<TreeItemVMBase>()
                                 {
                                     new GroupsFilterVM("Groups"),
+                                    new SubGroupFilterVM("SubGroups"),
+                                    new EntityFilterVM("Entities"),
+                                    new ItemFilterVM("Items"),
+                                    new EquipmentFilterVM("Equipment"),
+                                    new FluidFilterVM("Fluids")
                                 }),
                             new LocaleVM(new Locale())
                         }),

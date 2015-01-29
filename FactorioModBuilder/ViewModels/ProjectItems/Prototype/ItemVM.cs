@@ -97,7 +97,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         }
 
         public ItemVM(Item item)
-            : base(item)
+            : base(item, DoubleClickBehavior.OpenContent)
         {
         }
 

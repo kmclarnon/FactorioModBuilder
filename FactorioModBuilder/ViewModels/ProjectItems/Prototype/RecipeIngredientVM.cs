@@ -33,12 +33,12 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         }
 
         public RecipeIngredientVM(RecipeIngredient item)
-            : base(item)
+            : base(item, DoubleClickBehavior.OpenContent)
         {
         }
 
         public RecipeIngredientVM(TreeItemVMBase parent, RecipeIngredient item)
-            : base(parent, item)
+            : base(parent, item, DoubleClickBehavior.OpenContent)
         {
         }
 

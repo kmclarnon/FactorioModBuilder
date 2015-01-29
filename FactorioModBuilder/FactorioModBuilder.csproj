@@ -169,6 +169,7 @@
     <Compile Include="Models\SolutionItems\Solution.cs" />
     <Compile Include="ViewModels\Dialogs\ColorDialogVM.cs" />
     <Compile Include="ViewModels\Dialogs\NewProjectVM.cs" />
+    <Compile Include="ViewModels\ProjectItems\IDoubleClickBehavior.cs" />
     <Compile Include="ViewModels\Main\MainContentItemVM.cs" />
     <Compile Include="ViewModels\Main\MainContentVM.cs" />
     <Compile Include="ViewModels\Main\MainMenuVM.cs" />
@@ -187,8 +188,13 @@
     <Compile Include="ViewModels\ProjectItems\IGraphicsSource.cs" />
     <Compile Include="ViewModels\ProjectItems\ModInfoDependencyVM.cs" />
     <Compile Include="ViewModels\ProjectItems\ProjectItem.cs" />
+    <Compile Include="ViewModels\ProjectItems\Prototype\Filters\EntityFilterVM.cs" />
+    <Compile Include="ViewModels\ProjectItems\Prototype\Filters\EquipmentFilterVM.cs" />
     <Compile Include="ViewModels\ProjectItems\Prototype\Filters\FilterBaseVM.cs" />
+    <Compile Include="ViewModels\ProjectItems\Prototype\Filters\FluidFilterVM.cs" />
     <Compile Include="ViewModels\ProjectItems\Prototype\Filters\GroupsFilterVM.cs" />
+    <Compile Include="ViewModels\ProjectItems\Prototype\Filters\ItemFilterVM.cs" />
+    <Compile Include="ViewModels\ProjectItems\Prototype\Filters\SubGroupFilterVM.cs" />
     <Compile Include="ViewModels\ProjectItems\Prototype\RecipeIngredientVM.cs" />
     <Compile Include="ViewModels\ProjectItems\Prototype\TechnologyEffectVM.cs" />
     <Compile Include="ViewModels\ProjectItems\Prototype\TechnologyIngredientVM.cs" />

@@ -178,7 +178,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         }
 
         public FluidVM(TreeItemVMBase parent, Fluid fluid)
-            : base(parent, fluid)
+            : base(parent, fluid, DoubleClickBehavior.OpenContent)
         {
             this.BaseColor = Colors.White;
             this.FlowColor = Colors.White;

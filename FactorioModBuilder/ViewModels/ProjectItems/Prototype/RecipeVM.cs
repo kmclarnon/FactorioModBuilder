@@ -12,7 +12,7 @@ using WpfUtils.Extensions;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
-    public class RecipeVM : TreeItemVM<Recipe, RecipeVM>
+    public class RecipeVM : ProjectItem<Recipe, RecipeVM>
     {
         public ObservableCollection<RecipeIngredientVM> Ingredients { get; private set; }
 
@@ -62,7 +62,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         }
 
         public RecipeVM(TreeItemVMBase parent, Recipe rec)
-            : base(parent, rec)
+            : base(parent, rec, DoubleClickBehavior.OpenContent)
         {
             this.Ingredients = new ObservableCollection<RecipeIngredientVM>();
         }
