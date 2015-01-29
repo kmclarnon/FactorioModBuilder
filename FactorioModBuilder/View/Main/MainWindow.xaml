@@ -9,7 +9,7 @@
         Left="{Binding Path=AppLeft, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
         WindowState="{Binding Path=WindowState, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
         BorderBrush="#007ACC" BorderThickness="0.7"
-        Title="{Binding Path=AppTitle}" TitleForeground="#6F6F70" TitleCaps="False" 
+        Title="{Binding Path=AppTitle}" TitleForeground="#6F6F70" TitleCaps="False"
         Activated="OnActivated" Deactivated="OnDeactivated">
     <Window.Resources>
         <ResourceDictionary>
@@ -52,11 +52,11 @@
                 <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
             <!-- Main Menu -->
-            <ContentPresenter Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="100" 
+            <ContentPresenter Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="100" Margin="10 0 10 0"
                               Content="{Binding Path=Data.MainMenu, Source={StaticResource proxy}}" 
                               ContentTemplate="{StaticResource mainMenu}"/>
             <!-- Main Tool Strip -->
-            <ContentPresenter Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="100"
+            <ContentPresenter Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="100" Margin="10 0 10 0"
                               Content="{Binding Path=Data.MainToolStrip, Source={StaticResource proxy}}"/>
             <!-- Main Content View -->
             <ContentPresenter Grid.Row="2" Grid.Column="1" Margin="2.5 5 5 2.5"

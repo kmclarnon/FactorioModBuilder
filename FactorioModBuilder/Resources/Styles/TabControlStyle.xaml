@@ -15,7 +15,7 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type TabItem}">
-                            <Grid Background="{TemplateBinding Background}" SnapsToDevicePixels="true" Height="23">
+                            <Grid Background="{TemplateBinding Background}" SnapsToDevicePixels="true" Height="18">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="25"/>
@@ -109,7 +109,7 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <Border Background="Transparent" BorderThickness="0,0,0,3" 
+                        <Border Background="Transparent" BorderThickness="0,0,0,2" 
                                 BorderBrush="{StaticResource BackgroundSelected}">
                             <TabPanel Name="HeaderPanel" Panel.ZIndex="1" Margin="0,0,4,-1" 
                                 IsItemsHost="True" KeyboardNavigation.TabIndex="1"/>
