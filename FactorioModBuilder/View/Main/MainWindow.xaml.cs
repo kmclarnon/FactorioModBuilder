@@ -107,5 +107,10 @@ namespace FactorioModBuilder
         {
             Application.Current.Shutdown();
         }
+
+        private void BorderMouseDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
     }
 }

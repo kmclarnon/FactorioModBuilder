@@ -16,30 +16,90 @@
                 <ResourceDictionary Source="MainContent.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <util:BindingProxy x:Key="proxy" Data="{Binding}"/>
-        </ResourceDictionary>
-    </Window.Resources>
-    <!-- Window Active Border Highlight -->
-    <Border SnapsToDevicePixels="True" BorderThickness="1">
-        <Border.Style>
-            <Style TargetType="{x:Type Border}">
-                <Setter Property="Cursor" Value="SizeNS"/>
+            <Style x:Key="exteriorRect" TargetType="{x:Type Rectangle}">
+                <Setter Property="SnapsToDevicePixels" Value="True"/>
                 <Style.Triggers>
                     <DataTrigger Binding="{Binding Path=Active}" Value="True">
-                        <Setter Property="BorderBrush" Value="#007ACC"/>
+                        <Setter Property="Fill" Value="#007ACC"/>
                     </DataTrigger>
                     <DataTrigger Binding="{Binding Path=Active}" Value="False">
-                        <Setter Property="BorderBrush" Value="{StaticResource LightBackground}"/>
+                        <Setter Property="Fill" Value="{StaticResource LightBackground}"/>
                     </DataTrigger>
                 </Style.Triggers>
             </Style>
-        </Border.Style>
-        <DockPanel x:Name="Root" Background="{StaticResource LightBackground}" Cursor="Arrow">
+            <Style x:Key="interiorRect" TargetType="{x:Type Rectangle}">
+                <Setter Property="SnapsToDevicePixels" Value="True"/>
+                <Setter Property="Panel.ZIndex" Value="1000"/>
+                <Setter Property="Fill" Value="Transparent"/>
+            </Style>
+        </ResourceDictionary>
+    </Window.Resources>
+    <!-- Window Active Border Highlight -->
+    <Grid>
+        <Grid.RowDefinitions>
+            <!-- Top Exterior Border -->
+            <RowDefinition Height="1"/>
+            <!-- Top Interior Border -->
+            <RowDefinition Height="3"/>
+            <!-- Content -->
+            <RowDefinition Height="*"/>
+            <!-- Bottom Interior Border -->
+            <RowDefinition Height="3"/>
+            <!-- Bottom Exterior Border -->
+            <RowDefinition Height="1"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <!-- Left Exterior Border -->
+            <ColumnDefinition Width="1"/>
+            <!-- Left Interior Border -->
+            <ColumnDefinition Width="3"/>
+            <!-- Content -->
+            <ColumnDefinition Width="*"/>
+            <!-- Right Interior Border -->
+            <ColumnDefinition Width="3"/>
+            <!-- Right Exterior Border -->
+            <ColumnDefinition Width="1"/>
+        </Grid.ColumnDefinitions>
+        <!-- Top Left Corner -->
+        <Rectangle Grid.Row="0" Grid.Column="0" Style="{StaticResource exteriorRect}" Cursor="SizeNWSE" MouseDown="BorderMouseDown"/>
+        <Rectangle Grid.Row="1" Grid.Column="0" Style="{StaticResource exteriorRect}" Cursor="SizeNWSE" MouseDown="BorderMouseDown"/>
+        <Rectangle Grid.Row="0" Grid.Column="1" Style="{StaticResource exteriorRect}" Cursor="SizeNWSE" MouseDown="BorderMouseDown"/>
+        <Rectangle Grid.Row="1" Grid.Column="1" Style="{StaticResource interiorRect}" Cursor="SizeNWSE" MouseDown="BorderMouseDown"/>
+        <!-- Top Middle -->
+        <Rectangle Grid.Row="0" Grid.Column="2" Style="{StaticResource exteriorRect}" Cursor="SizeNS" MouseDown="BorderMouseDown"/>
+        <Rectangle Grid.Row="1" Grid.Column="2" Style="{StaticResource interiorRect}" Cursor="SizeNS" MouseDown="BorderMouseDown"/>
+        <!-- Top Right Corner -->
+        <Rectangle Grid.Row="0" Grid.Column="3" Style="{StaticResource exteriorRect}" Cursor="SizeNESW" MouseDown="BorderMouseDown"/>
+        <Rectangle Grid.Row="0" Grid.Column="4" Style="{StaticResource exteriorRect}" Cursor="SizeNESW" MouseDown="BorderMouseDown"/>
+        <Rectangle Grid.Row="1" Grid.Column="4" Style="{StaticResource exteriorRect}" Cursor="SizeNESW" MouseDown="BorderMouseDown"/>
+        <Rectangle Grid.Row="1" Grid.Column="3" Style="{StaticResource interiorRect}" Cursor="SizeNESW" MouseDown="BorderMouseDown"/>
+        <!-- Left Middle -->
+        <Rectangle Grid.Row="2" Grid.Column="0" Style="{StaticResource exteriorRect}" Cursor="SizeWE" MouseDown="BorderMouseDown"/>
+        <Rectangle Grid.Row="2" Grid.Column="1" Style="{StaticResource interiorRect}" Cursor="SizeWE" MouseDown="BorderMouseDown"/>
+        <!-- Right Middle -->
+        <Rectangle Grid.Row="2" Grid.Column="4" Style="{StaticResource exteriorRect}" Cursor="SizeWE" MouseDown="BorderMouseDown"/>
+        <Rectangle Grid.Row="2" Grid.Column="3" Style="{StaticResource interiorRect}" Cursor="SizeWE" MouseDown="BorderMouseDown"/>
+        <!-- Bottom Left Corner -->
+        <Rectangle Grid.Row="3" Grid.Column="0" Style="{StaticResource exteriorRect}" Cursor="SizeNESW" MouseDown="BorderMouseDown"/>
+        <Rectangle Grid.Row="4" Grid.Column="0" Style="{StaticResource exteriorRect}" Cursor="SizeNESW" MouseDown="BorderMouseDown"/>
+        <Rectangle Grid.Row="4" Grid.Column="1" Style="{StaticResource exteriorRect}" Cursor="SizeNESW" MouseDown="BorderMouseDown"/>
+        <Rectangle Grid.Row="3" Grid.Column="1" Style="{StaticResource interiorRect}" Cursor="SizeNESW" MouseDown="BorderMouseDown"/>
+        <!-- Bottom Middle -->
+        <Rectangle Grid.Row="4" Grid.Column="2" Style="{StaticResource exteriorRect}" Cursor="SizeNS" MouseDown="BorderMouseDown"/>
+        <Rectangle Grid.Row="3" Grid.Column="2" Style="{StaticResource interiorRect}" Cursor="SizeNS" MouseDown="BorderMouseDown"/>
+        <!-- Bottom Right Corner -->
+        <Rectangle Grid.Row="3" Grid.Column="4" Style="{StaticResource exteriorRect}" Cursor="SizeNWSE" MouseDown="BorderMouseDown"/>
+        <Rectangle Grid.Row="4" Grid.Column="4" Style="{StaticResource exteriorRect}" Cursor="SizeNWSE" MouseDown="BorderMouseDown"/>
+        <Rectangle Grid.Row="4" Grid.Column="3" Style="{StaticResource exteriorRect}" Cursor="SizeNWSE" MouseDown="BorderMouseDown"/>
+        <Rectangle Grid.Row="3" Grid.Column="3" Style="{StaticResource interiorRect}" Cursor="SizeNWSE" MouseDown="BorderMouseDown"/>
+        <!-- Main Application Content -->
+        <DockPanel x:Name="Root" Grid.Row="1" Grid.RowSpan="3" Grid.Column="1" Grid.ColumnSpan="3" Background="{StaticResource LightBackground}" Cursor="Arrow">
             <!-- Window Title Bar -->
             <DockPanel x:Name="TitleBar" DockPanel.Dock="Top" Background="{StaticResource LightBackground}" Height="35"
-                   MouseDown="TitleBarMouseDown">
+                       MouseDown="TitleBarMouseDown">
                 <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" VerticalAlignment="Top">
                     <Button x:Name="MinButton" Style="{StaticResource WindowButton}" ToolTip="Minimize"
-                             Click="MinButton_Click" Width="34" Height="27">
+                            Click="MinButton_Click" Width="34" Height="27">
                         <Image Source="../../Resources/Icons/Minimize.png"/>
                     </Button>
                     <Button x:Name="MaxButton" Style="{StaticResource WindowButton}" ToolTip="Maximize"
@@ -54,7 +114,7 @@
                 <StackPanel Orientation="Horizontal" DockPanel.Dock="Left" VerticalAlignment="Center">
                     <Image Margin="10 10 5 10"/>
                     <TextBlock Margin="5 10 10 5" HorizontalAlignment="Left" Text="{Binding Path=AppTitle}" 
-                           FontSize="16" FontFamily="SegoeUI" Foreground="#6F6F70"/>
+                               FontSize="16" FontFamily="SegoeUI" Foreground="#6F6F70"/>
                 </StackPanel>
             </DockPanel>
             <StatusBar DockPanel.Dock="Bottom">
@@ -79,18 +139,18 @@
                 </Grid.ColumnDefinitions>
                 <!-- Main Menu -->
                 <ContentPresenter Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="100" 
-                          Content="{Binding Path=Data.MainMenu, Source={StaticResource proxy}}" 
-                          ContentTemplate="{StaticResource mainMenu}"/>
+                              Content="{Binding Path=Data.MainMenu, Source={StaticResource proxy}}" 
+                              ContentTemplate="{StaticResource mainMenu}"/>
                 <!-- Main Tool Strip -->
                 <ContentPresenter Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="100"
-                          Content="{Binding Path=Data.MainToolStrip, Source={StaticResource proxy}}"/>
+                              Content="{Binding Path=Data.MainToolStrip, Source={StaticResource proxy}}"/>
                 <!-- Main Content View -->
                 <ContentPresenter Grid.Row="2" Grid.Column="1" Margin="2.5 5 5 2.5"
-                          Content="{Binding Path=Data.MainContent, Source={StaticResource proxy}}"/>
+                              Content="{Binding Path=Data.MainContent, Source={StaticResource proxy}}"/>
                 <!-- Solution Explorer -->
                 <ContentPresenter Grid.Row="2" Grid.RowSpan="2" Grid.Column="0" Margin="5 5 2.5 5" 
-                          Content="{Binding Path=Data.SolutionExplorer, Source={StaticResource proxy}}"/>
+                              Content="{Binding Path=Data.SolutionExplorer, Source={StaticResource proxy}}"/>
             </Grid>
         </DockPanel>
-    </Border>
+    </Grid>
 </Window>
