@@ -2,7 +2,10 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:sln="clr-namespace:FactorioModBuilder.ViewModels"
                     xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-                    xmlns:cmds="clr-namespace:WpfUtils.Behaviors;assembly=WpfUtils">
+                    xmlns:cmds="clr-namespace:WpfUtils.Behaviors;assembly=WpfUtils"
+                    xmlns:proj="clr-namespace:FactorioModBuilder.ViewModels.ProjectItems"
+                    xmlns:prot="clr-namespace:FactorioModBuilder.ViewModels.ProjectItems.Prototype"
+                    xmlns:fil="clr-namespace:FactorioModBuilder.ViewModels.ProjectItems.Prototype.Filters">
     <DataTemplate DataType="{x:Type sln:SolutionExplorerVM}">
         <Border BorderBrush="{StaticResource BorderBrushHighlighted}" BorderThickness="0.25">
             <Grid>

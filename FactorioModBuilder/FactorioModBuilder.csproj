@@ -167,6 +167,8 @@
     <Compile Include="Models\ProjectItems\Prototype\TechnologyIngredient.cs" />
     <Compile Include="Models\ProjectItems\Prototype\TechnologyPrerequisite.cs" />
     <Compile Include="Models\SolutionItems\Solution.cs" />
+    <Compile Include="Resources\Icons\AppIcon.cs" />
+    <Compile Include="Resources\Icons\IconConverter.cs" />
     <Compile Include="ViewModels\Dialogs\ColorDialogVM.cs" />
     <Compile Include="ViewModels\Dialogs\NewProjectVM.cs" />
     <Compile Include="ViewModels\ProjectItems\IDoubleClickBehavior.cs" />
@@ -208,6 +210,10 @@
       <DependentUpon>NewProjectDialog.xaml</DependentUpon>
     </Compile>
     <Page Include="Resources\Colors.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Icons\Icons.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -391,6 +397,13 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\Icons\Actions\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\Objects\FilterOpen.png" />
+    <Resource Include="Resources\Icons\Objects\FilterClosed.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

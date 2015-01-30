@@ -1,0 +1,11 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:icon="clr-namespace:FactorioModBuilder.Resources.Icons">
+    <BitmapImage x:Key="FilterOpen" UriSource="Objects/FilterOpen.png"/>
+    <BitmapImage x:Key="FilterClosed" UriSource="Objects/FilterClosed.png"/>
+    
+    <icon:IconConverter x:Key="IconSelector"
+                        IconNoIcon="{x:Null}"
+                        IconFilterOpen="{StaticResource FilterOpen}"
+                        IconFilterClosed="{StaticResource FilterClosed}"/>
+</ResourceDictionary>

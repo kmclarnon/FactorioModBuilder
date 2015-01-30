@@ -52,7 +52,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype.Filters
             : base(new Filter(name))
         {
             this.ChildDisplayName = childName;
-            this.SetupCollections();
+            this.Setup();
         }
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype.Filters
             : base(parent, new Filter(name))
         {
             this.ChildDisplayName = childName;
-            this.SetupCollections();
+            this.Setup();
         }
 
         /// <summary>
@@ -113,17 +113,18 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype.Filters
 
         /// <summary>
         /// Creates and hooks up the necessary collections and event handlers
+        /// and initialized other required properties
         /// </summary>
-        private void SetupCollections()
+        private void Setup()
         {
             // collections
             this.TypedChildren = new ObservableCollection<TChildren>();
             this.SubFilters = new ObservableCollection<FilterBaseVM<TChildren>>();
             this.MenuItems = new ObservableCollection<IMenuItemProvider>();
             // event handlers
-            this.TypedChildren.CollectionChanged += ChildrenCollectionChanged;
+            this.TypedChildren.CollectionChanged += TypedChildrenCollectionChanged;
             this.Children.CollectionChanged += ChildrenCollectionChanged;
-            this.SubFilters.CollectionChanged += ChildrenCollectionChanged;
+            this.SubFilters.CollectionChanged += SubFilterCollectionChanged;
             // menu items
             this.MenuItems.Add(new CategoryItem("Add",
                 new ClickableItem("New " + this.ChildDisplayName, this.AddChild),
@@ -136,84 +137,102 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype.Filters
             this.MenuItems.Add(new ClickableItem("Rename", this.Rename));
             this.MenuItems.Add(new SeparatorItem());
             this.MenuItems.Add(new ClickableItem("Properties", this.ViewProperties));
+            // icon
+            this.Icon = Resources.Icons.AppIcon.FilterClosed;
         }
 
         /// <summary>
-        /// Handles syncrhonization between TypedChildren and Children
+        /// Sets the icon appropriate depending on whether the filter is expanded or not
+        /// </summary>
+        protected override void OnIsExpandedChanged()
+        {
+            if (this.IsExpanded)
+                this.Icon = Resources.Icons.AppIcon.FilterOpen;
+            else
+                this.Icon = Resources.Icons.AppIcon.FilterClosed;
+        }
+
+        /// <summary>
+        /// Handles synchronization of changes in Children
+        /// </summary>
+        private void TypedChildrenCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            switch (e.Action)
+            {
+                case NotifyCollectionChangedAction.Add:
+                    foreach (TChildren i in e.NewItems)
+                    {
+                        if (!this.Children.Contains(i))
+                            this.Children.Add(i);
+                    }
+                    break;
+                case NotifyCollectionChangedAction.Remove:
+                    foreach (TChildren i in e.OldItems)
+                        this.Children.Remove(i);
+                    break;
+                case NotifyCollectionChangedAction.Reset:
+                    this.Children.RemoveWhere(o => o is TChildren);
+                    break;
+                default:
+                    throw new Exception("Unhandled filter collection changed");
+            }
+        }
+
+        /// <summary>
+        /// Handles syncrhonizing changes occuring in Children
         /// </summary>
         private void ChildrenCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            if(sender == this.TypedChildren)
+            switch (e.Action)
             {
-                switch (e.Action)
-                {
-                    case NotifyCollectionChangedAction.Add:
-                        foreach(TChildren i in e.NewItems)
-                        {
-                            if (!this.Children.Contains(i))
-                                this.Children.Add(i);
-                        }
-                        break;
-                    case NotifyCollectionChangedAction.Remove:
-                        foreach(TChildren i in e.OldItems)
-                            this.Children.Remove(i);
-                        break;
-                    case NotifyCollectionChangedAction.Reset:
-                        this.Children.RemoveWhere(o => o is TChildren);
-                        break;
-                    default:
-                        throw new Exception("Unhandled filter collection changed");
-                }
+                case NotifyCollectionChangedAction.Add:
+                    foreach(TreeItemVMBase i in e.NewItems)
+                    {
+                        if ((i is TChildren) && !this.TypedChildren.Contains(i))
+                            this.TypedChildren.Add((TChildren)i);
+                        else if ((i is FilterBaseVM<TChildren>) && !this.SubFilters.Contains(i))
+                            this.SubFilters.Add((FilterBaseVM<TChildren>)i);
+                    }
+                    break;
+                case NotifyCollectionChangedAction.Remove:
+                    foreach(TreeItemVMBase i in e.OldItems)
+                    {
+                        if (i is TChildren)
+                            this.TypedChildren.Remove((TChildren)i);
+                        else if (i is FilterBaseVM<TChildren>)
+                            this.SubFilters.Remove((FilterBaseVM<TChildren>)i);
+                    }
+                    break;
+                case NotifyCollectionChangedAction.Reset:
+                    this.TypedChildren.Clear();
+                    this.SubFilters.Clear();
+                    break;
+                default:
+                    throw new Exception("Unhandled filter collection changed");
             }
-            else if(sender == this.Children)
+        }
+
+        /// <summary>
+        /// Handles synchronizing changes occuring in the SubFilters
+        /// </summary>
+        private void SubFilterCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            switch (e.Action)
             {
-                switch (e.Action)
-                {
-                    case NotifyCollectionChangedAction.Add:
-                        foreach(TreeItemVMBase i in e.NewItems)
-                        {
-                            if ((i is TChildren) && !this.TypedChildren.Contains(i))
-                                this.TypedChildren.Add((TChildren)i);
-                            else if ((i is FilterBaseVM<TChildren>) && !this.SubFilters.Contains(i))
-                                this.SubFilters.Add((FilterBaseVM<TChildren>)i);
-                        }
-                        break;
-                    case NotifyCollectionChangedAction.Remove:
-                        foreach(TreeItemVMBase i in e.OldItems)
-                        {
-                            if (i is TChildren)
-                                this.TypedChildren.Remove((TChildren)i);
-                            else if (i is FilterBaseVM<TChildren>)
-                                this.SubFilters.Remove((FilterBaseVM<TChildren>)i);
-                        }
-                        break;
-                    case NotifyCollectionChangedAction.Reset:
-                        this.TypedChildren.Clear();
-                        this.SubFilters.Clear();
-                        break;
-                    default:
-                        throw new Exception("Unhandled filter collection changed");
-                }
-            }
-            else if(sender == this.SubFilters)
-            {
-                switch(e.Action)
-                {
-                    case NotifyCollectionChangedAction.Add:
-                        foreach(FilterBaseVM<TChildren> f in e.NewItems)
-                        {
-                            if (!this.Children.Contains(f))
-                                this.Children.Add(f);
-                        }
-                        break;
-                    case NotifyCollectionChangedAction.Remove:
-                        foreach (FilterBaseVM<TChildren> f in e.OldItems)
-                            this.Children.Remove(f);
-                        break;
-                    case NotifyCollectionChangedAction.Reset:
-                        this.Children.RemoveWhere(o => o is FilterBaseVM<TChildren>);
-                        break;
-                }
+                case NotifyCollectionChangedAction.Add:
+                    foreach (FilterBaseVM<TChildren> f in e.NewItems)
+                    {
+                        if (!this.Children.Contains(f))
+                            this.Children.Add(f);
+                    }
+                    break;
+                case NotifyCollectionChangedAction.Remove:
+                    foreach (FilterBaseVM<TChildren> f in e.OldItems)
+                        this.Children.Remove(f);
+                    break;
+                case NotifyCollectionChangedAction.Reset:
+                    this.Children.RemoveWhere(o => o is FilterBaseVM<TChildren>);
+                    break;
             }
         }
 

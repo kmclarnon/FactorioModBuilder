@@ -17,6 +17,8 @@
         <ResourceDictionary Source="Styles/WindowStyle.xaml"/>
         <!-- Color Resources -->
         <ResourceDictionary Source="Colors.xaml"/>
+        <!-- Icons -->
+        <ResourceDictionary Source="Icons/Icons.xaml"/>
     </ResourceDictionary.MergedDictionaries>
     <!-- Styles -->
     <Style TargetType="{x:Type Button}" BasedOn="{StaticResource StandardButton}"/>

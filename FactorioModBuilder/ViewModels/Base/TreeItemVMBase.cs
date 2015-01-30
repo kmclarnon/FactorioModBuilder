@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WpfUtils;
 using System.ComponentModel;
+using FactorioModBuilder.Resources.Icons;
 
 namespace FactorioModBuilder.ViewModels.Base
 {
@@ -75,6 +76,15 @@ namespace FactorioModBuilder.ViewModels.Base
         public string Error
         {
             get { throw new NotImplementedException("Classes derived from TreeItemVMBase must implemented the Error property"); }
+        }
+
+        /// <summary>
+        /// The Icon that should be used to represent this TreeItem
+        /// </summary>
+        public AppIcon Icon
+        {
+            get { return this.GetProperty<AppIcon>(); }
+            set { this.SetProperty(value); }
         }
 
         /// <summary>

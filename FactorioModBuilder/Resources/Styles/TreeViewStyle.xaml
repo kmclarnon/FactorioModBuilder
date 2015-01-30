@@ -3,6 +3,7 @@
                     xmlns:conv="clr-namespace:WpfUtils.ValueConverters;assembly=WpfUtils">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="../Colors.xaml"/>
+        <ResourceDictionary Source="../Icons/Icons.xaml"/>
         <ResourceDictionary Source="ContextMenuStyle.xaml"/>
     </ResourceDictionary.MergedDictionaries>
     <SolidColorBrush x:Key="GlyphBrush" Color="#444"/>
@@ -10,11 +11,15 @@
         <Setter Property="ItemTemplate">
             <Setter.Value>
                 <HierarchicalDataTemplate ItemsSource="{Binding Children}">
-                    <TextBlock Text="{Binding Name}"/>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Height="16" Width="16" SnapsToDevicePixels="True" 
+                               Source="{Binding Icon, Converter={StaticResource IconSelector}}"/>
+                        <TextBlock Text="{Binding Name}" Margin="5,0"/>
+                    </StackPanel>
                 </HierarchicalDataTemplate>
             </Setter.Value>
         </Setter>
-        <Setter Property="Background" Value="{StaticResource LightBackground}"/>
+        <Setter Property="Background" Value="{StaticResource Background}"/>
         <Setter Property="Foreground" Value="{StaticResource Foreground}"/>
     </Style>
     <Style x:Key="ExpandCollapseToggleStyle" TargetType="{x:Type ToggleButton}">
@@ -92,7 +97,7 @@
                                                   IsChecked="{Binding Path=IsExpanded, RelativeSource={RelativeSource TemplatedParent}}"
                                                   ClickMode="Press"/>
                                 <ContentPresenter x:Name="PART_Header"
-                                                  Grid.Column="1"
+                                                  Grid.Column="2"
                                                   ContentSource="Header"
                                                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
                             </Grid>
