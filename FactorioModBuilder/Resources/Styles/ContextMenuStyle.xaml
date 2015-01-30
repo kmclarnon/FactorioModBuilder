@@ -3,6 +3,7 @@
                     xmlns:conv="clr-namespace:WpfUtils.ValueConverters;assembly=WpfUtils">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="../Colors.xaml"/>
+        <ResourceDictionary Source="ToolTipStyle.xaml"/>
     </ResourceDictionary.MergedDictionaries>
     <Style x:Key="StandardContextMenu" TargetType="{x:Type ContextMenu}">
         <!-- Binding for IMenuProvider -->
