@@ -8,58 +8,29 @@ using System.Threading.Tasks;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype.Filters
 {
+    /// <summary>
+    /// A Filter for SubGroup prototypes
+    /// </summary>
     public class SubGroupFilterVM : FilterBaseVM<SubGroupVM>
     {
+        /// <summary>
+        /// Counter used to keep track of new children
+        /// </summary>
         private int _newCount = 1;
 
         public SubGroupFilterVM(string name)
             : base(name)
         {
-            this.MenuItems.Add(new CategoryItem("Add",
-                new ClickableItem("New SubGroup", this.AddNewSubGroupVM),
-                new ClickableItem("New Filter", this.AddFilter)));
-            this.MenuItems.Add(new SeparatorItem());
-            this.MenuItems.Add(new ClickableItem("Cut", this.Cut));
-            this.MenuItems.Add(new ClickableItem("Copy", this.Copy));
-            this.MenuItems.Add(new ClickableItem("Paste", this.Paste, this.CanPaste));
-            this.MenuItems.Add(new ClickableItem("Delete", this.Delete));
-            this.MenuItems.Add(new ClickableItem("Rename", this.Rename));
         }
 
-        private void AddNewSubGroupVM()
+        protected override FilterBaseVM<SubGroupVM> GetNewFilter()
         {
-            this.AddChild(new SubGroupVM(new SubGroup("New SubGroup " + _newCount)));
-            _newCount++;
+            return new SubGroupFilterVM("New Filter");
         }
 
-        private void Cut()
+        protected override SubGroupVM GetNewChild()
         {
-
-        }
-
-        private void Copy()
-        {
-
-        }
-
-        private void Paste()
-        {
-
-        }
-
-        private bool CanPaste()
-        {
-            return false;
-        }
-
-        private void Delete()
-        {
-
-        }
-
-        private void Rename()
-        {
-
+            return new SubGroupVM(new SubGroup("New SubGroup " + _newCount++));
         }
     }
 }

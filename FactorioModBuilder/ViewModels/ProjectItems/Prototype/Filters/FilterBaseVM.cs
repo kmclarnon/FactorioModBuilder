@@ -20,7 +20,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype.Filters
     /// <typeparam name="TModel">The type of the model to wrap</typeparam>
     /// <typeparam name="TViewModel">The type of the the derived class (CRTP)</typeparam>
     /// <typeparam name="TChildren">The type of the strongly typed children collection</typeparam>
-    public class FilterBaseVM<TChildren> : ProjectItem<Filter, FilterBaseVM<TChildren>>, IMenuProvider
+    public abstract class FilterBaseVM<TChildren> : ProjectItem<Filter, FilterBaseVM<TChildren>>, IMenuProvider
         where TChildren : TreeItemVMBase
         
     {
@@ -40,17 +40,18 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype.Filters
         public ObservableCollection<IMenuItemProvider> MenuItems { get; private set; }
 
         /// <summary>
-        /// Counter to keep track of new filters added
+        /// The name of the child that will be used in the context menu Add New menu 
         /// </summary>
-        private int _newFilterCount = 1;
+        public string ChildDisplayName { get; private set; }
 
         /// <summary>
         /// Base constructor for the filter
         /// </summary>
         /// <param name="name">The display name of the filter</param>
-        public FilterBaseVM(string name)
+        public FilterBaseVM(string name, string childName = "Item")
             : base(new Filter(name))
         {
+            this.ChildDisplayName = childName;
             this.SetupCollections();
         }
 
@@ -59,19 +60,31 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype.Filters
         /// </summary>
         /// <param name="parent">The parent TreeItem node</param>
         /// <param name="name">The display name of the filter</param>
-        public FilterBaseVM(TreeItemVMBase parent, string name)
+        public FilterBaseVM(TreeItemVMBase parent, string name, string childName = "Item")
             : base(parent, new Filter(name))
         {
+            this.ChildDisplayName = childName;
             this.SetupCollections();
         }
+
+        /// <summary>
+        /// Method implemented by derived class that will be invoked by the Add New Filter context menu command
+        /// </summary>
+        /// <returns>A new derived FilterBaseVM</returns>
+        protected abstract FilterBaseVM<TChildren> GetNewFilter();
+
+        /// <summary>
+        /// Method implemented by derived class that will be invoked by the Add New Item context menu command
+        /// </summary>
+        /// <returns></returns>
+        protected abstract TChildren GetNewChild();
 
         /// <summary>
         /// Adds a new filter to the subfilter collection
         /// </summary>
         protected void AddFilter()
         {
-            this.SubFilters.Add(new FilterBaseVM<TChildren>("New " + this.Name + " Filter " + _newFilterCount));
-            _newFilterCount++;
+            this.SubFilters.Add(this.GetNewFilter());
         }
 
         /// <summary>
@@ -85,9 +98,9 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype.Filters
         /// <summary>
         /// Adds a new child to the TypedChildren collection
         /// </summary>
-        protected void AddChild(TChildren child)
+        protected void AddChild()
         {
-            this.TypedChildren.Add(child);
+            this.TypedChildren.Add(this.GetNewChild());
         }
 
         /// <summary>
@@ -111,6 +124,18 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype.Filters
             this.TypedChildren.CollectionChanged += ChildrenCollectionChanged;
             this.Children.CollectionChanged += ChildrenCollectionChanged;
             this.SubFilters.CollectionChanged += ChildrenCollectionChanged;
+            // menu items
+            this.MenuItems.Add(new CategoryItem("Add",
+                new ClickableItem("New " + this.ChildDisplayName, this.AddChild),
+                new ClickableItem("New Filter", this.AddFilter)));
+            this.MenuItems.Add(new SeparatorItem());
+            this.MenuItems.Add(new ClickableItem("Cut", this.Cut));
+            this.MenuItems.Add(new ClickableItem("Copy", this.Copy));
+            this.MenuItems.Add(new ClickableItem("Paste", this.Paste, this.CanPaste));
+            this.MenuItems.Add(new ClickableItem("Delete", this.Delete));
+            this.MenuItems.Add(new ClickableItem("Rename", this.Rename));
+            this.MenuItems.Add(new SeparatorItem());
+            this.MenuItems.Add(new ClickableItem("Properties", this.ViewProperties));
         }
 
         /// <summary>
@@ -134,7 +159,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype.Filters
                             this.Children.Remove(i);
                         break;
                     case NotifyCollectionChangedAction.Reset:
-                        
+                        this.Children.RemoveWhere(o => o is TChildren);
                         break;
                     default:
                         throw new Exception("Unhandled filter collection changed");
@@ -149,6 +174,8 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype.Filters
                         {
                             if ((i is TChildren) && !this.TypedChildren.Contains(i))
                                 this.TypedChildren.Add((TChildren)i);
+                            else if ((i is FilterBaseVM<TChildren>) && !this.SubFilters.Contains(i))
+                                this.SubFilters.Add((FilterBaseVM<TChildren>)i);
                         }
                         break;
                     case NotifyCollectionChangedAction.Remove:
@@ -156,10 +183,13 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype.Filters
                         {
                             if (i is TChildren)
                                 this.TypedChildren.Remove((TChildren)i);
+                            else if (i is FilterBaseVM<TChildren>)
+                                this.SubFilters.Remove((FilterBaseVM<TChildren>)i);
                         }
                         break;
                     case NotifyCollectionChangedAction.Reset:
                         this.TypedChildren.Clear();
+                        this.SubFilters.Clear();
                         break;
                     default:
                         throw new Exception("Unhandled filter collection changed");
@@ -181,9 +211,67 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype.Filters
                             this.Children.Remove(f);
                         break;
                     case NotifyCollectionChangedAction.Reset:
+                        this.Children.RemoveWhere(o => o is FilterBaseVM<TChildren>);
                         break;
                 }
             }
+        }
+
+        /// <summary>
+        /// Performs the Cut operation on this Filter
+        /// </summary>
+        protected virtual void Cut()
+        {
+
+        }
+
+        /// <summary>
+        /// Performs the Copy operation on this Filter
+        /// </summary>
+        protected virtual void Copy()
+        {
+
+        }
+
+        /// <summary>
+        /// Performs a Paste operation on this Filter
+        /// </summary>
+        protected virtual void Paste()
+        {
+
+        }
+
+        /// <summary>
+        /// Determines if the Paste operation can occur
+        /// </summary>
+        /// <returns></returns>
+        protected virtual bool CanPaste()
+        {
+            return false;
+        }
+
+        /// <summary>
+        /// Deletes this filter
+        /// </summary>
+        protected virtual void Delete()
+        {
+
+        }
+
+        /// <summary>
+        /// Renames this filter
+        /// </summary>
+        protected virtual void Rename()
+        {
+
+        }
+
+        /// <summary>
+        /// Displays the filter properties
+        /// </summary>
+        protected virtual void ViewProperties()
+        {
+
         }
     }
 }

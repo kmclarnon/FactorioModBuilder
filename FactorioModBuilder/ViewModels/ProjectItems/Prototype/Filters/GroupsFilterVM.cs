@@ -17,20 +17,21 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype.Filters
         /// <summary>
         /// Counter to keep track of new groups created
         /// </summary>
-        private int _newCount = 1;
+        private int _newChild = 1;
 
         public GroupsFilterVM(string name)
             : base(name)
         {
-            this.MenuItems.Add(new CategoryItem("Add",
-                new ClickableItem("New Group", this.AddNewGroupVM),
-                new ClickableItem("New Filter", this.AddFilter)));
         }
 
-        private void AddNewGroupVM()
+        protected override FilterBaseVM<GroupVM> GetNewFilter()
         {
-            this.AddChild(new GroupVM(new Group("New Group " + _newCount)));
-            _newCount++;
+            return new GroupsFilterVM("New Filter");
+        }
+
+        protected override GroupVM GetNewChild()
+        {
+            return new GroupVM(new Group("New Group " + _newChild++));
         }
     }
 }
