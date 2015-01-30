@@ -26,45 +26,43 @@ namespace FactorioModBuilder.ViewModels
 {
     public class MainVM : BaseVM
     {
-        public string AppTitle { get { return _main.AppTitle; } }
-        public string AppName { get { return _main.AppName; } }
-        public string AppVersion { get { return _main.AppVersion; } }
+        public string AppTitle { get { return this.GetProperty<string>(); } }
+        public string AppName { get { return this.GetProperty<string>(); } }
+        public string AppVersion { get { return this.GetProperty<string>(); } }
         
         public int AppHeight
         {
-            get { return _main.AppHeight; }
-            set { this.SetProperty(_main, value); }
+            get { return this.GetProperty<int>(); }
+            set { this.SetProperty(value); }
         }
 
         public int AppWidth
         {
-            get { return _main.AppWidth; }
-            set { this.SetProperty(_main, value); }
+            get { return this.GetProperty<int>(); ; }
+            set { this.SetProperty(value); }
         }
 
         public int AppTop
         {
-            get { return _main.AppTop; }
-            set { this.SetProperty(_main, value); }
+            get { return this.GetProperty<int>(); }
+            set { this.SetProperty(value); }
         }
 
         public int AppLeft
         {
-            get { return _main.AppLeft; }
-            set { this.SetProperty(_main, value); }
+            get { return this.GetProperty<int>(); }
+            set { this.SetProperty(value); }
         }
 
         public ObservableCollection<SolutionVM> Solutions { get; private set; }
 
         public FileMenuVM FileMenu { get; private set; }
         public BuildMenuVM BuildMenu { get; private set; }
-        public Compiler Compiler { get { return _main.Compiler; } }
-
-        private MainModel _main;
+        public Compiler Compiler { get { return this.GetProperty<Compiler>(); } }
 
         public MainVM(MainModel m)
+            : base(m)
         {
-            _main = m;
             this.Solutions = new ObservableCollection<SolutionVM>();
             this.FileMenu = new FileMenuVM(this);
             this.BuildMenu = new BuildMenuVM(this);

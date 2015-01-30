@@ -23,7 +23,7 @@ namespace FactorioModBuilder.ViewModels.Dialogs
         public string ResultProjectName
         {
             get { return this.Project.ResultProjectName; }
-            set { this.SetProperty(this.Project, value, false, this.OnUpdateName); }
+            set { this.SetProperty(value, false, null, (x => this.OnUpdateName())); }
         }
 
         public string ResultLocation
@@ -35,13 +35,13 @@ namespace FactorioModBuilder.ViewModels.Dialogs
         public SolutionType ResultSolutionType
         {
             get { return this.Project.ResultSolutionType; }
-            set { this.SetProperty(this.Project, value); }
+            set { this.SetProperty(value); }
         }
 
         public string ResultSolutionName
         {
             get { return this.Project.ResultSolutionName; }
-            set { this.SetProperty(this.Project, value, false, this.OnUpdateSolution); }
+            set { this.SetProperty(value, false, (x => this.OnUpdateSolution())); }
         }
 
         public IEnumerable<Tuple<SolutionType, String>> PossibleSolutions
@@ -76,6 +76,7 @@ namespace FactorioModBuilder.ViewModels.Dialogs
         {
             _setResult = setResult;
             this.Project = new NewProject();
+            this.RegisterModel(this.Project);
         }
 
         private bool CanOK()

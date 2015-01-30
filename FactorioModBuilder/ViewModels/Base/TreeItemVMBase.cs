@@ -18,7 +18,7 @@ namespace FactorioModBuilder.ViewModels.Base
     /// The base view model that wraps a TreeItem and exposes the appropriate methods to handle
     /// selection, expand/collapse operations and display of children
     /// </summary>
-    public abstract class TreeItemVMBase : NewBaseVM, IDataErrorInfo
+    public abstract class TreeItemVMBase : BaseVM, IDataErrorInfo
     {
         /// <summary>
         /// An event handler for the InitCompleted event fired after the construction and initialization

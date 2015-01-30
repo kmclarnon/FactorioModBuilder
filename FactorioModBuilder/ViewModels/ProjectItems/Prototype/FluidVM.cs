@@ -184,12 +184,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         /// </summary>
         private void SelectBaseColor()
         {
-            var dlg = new ColorDialog();
-            dlg.OldColor = this.BaseColor;
-            dlg.Owner = Application.Current.MainWindow;
-           
-            if(dlg.ShowDialog() == true)
-                this.BaseColor = dlg.SelectedColor;
+
         }
 
         /// <summary>
@@ -197,12 +192,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         /// </summary>
         private void SelectFlowColor()
         {
-            var dlg = new ColorDialog();
-            dlg.OldColor = this.FlowColor;
-            dlg.Owner = Application.Current.MainWindow;
 
-            if (dlg.ShowDialog() == true)
-                this.FlowColor = dlg.SelectedColor;
         }
 
         /// <summary>
