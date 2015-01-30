@@ -4,7 +4,7 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="../Colors.xaml"/>
     </ResourceDictionary.MergedDictionaries>
-    <Style TargetType="{x:Type ContextMenu}">
+    <Style x:Key="StandardContextMenu" TargetType="{x:Type ContextMenu}">
         <!-- Binding for IMenuProvider -->
         <Setter Property="ItemsSource" Value="{Binding Path=MenuItems}"/>
         <Setter Property="ItemContainerStyle">
@@ -33,5 +33,10 @@
                 </Style>
             </Setter.Value>
         </Setter>
+        <Style.Triggers>
+            <Trigger Property="HasItems" Value="False">
+                <Setter Property="Visibility" Value="Collapsed"/>
+            </Trigger>
+        </Style.Triggers>
     </Style>
 </ResourceDictionary>

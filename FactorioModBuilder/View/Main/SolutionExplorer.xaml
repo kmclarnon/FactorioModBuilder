@@ -53,7 +53,8 @@
                 </Grid>
                 <!-- Solution TreeView -->
                 <TreeView Grid.Row="3" BorderThickness="0" ItemsSource="{Binding Path=Solutions}"
-                          cmds:MouseDoubleClick.Command="{Binding OpenSelectedItemCmd}"/>
+                          cmds:MouseDoubleClick.Command="{Binding OpenSelectedItemCmd}">
+                </TreeView>
             </Grid>
         </Border>
     </DataTemplate>

@@ -4,6 +4,7 @@
         <!-- Style Resources -->
         <ResourceDictionary Source="Styles/ButtonStyle.xaml"/>
         <ResourceDictionary Source="Styles/ComboBoxStyle.xaml"/>
+        <ResourceDictionary Source="Styles/ContextMenuStyle.xaml"/>
         <ResourceDictionary Source="Styles/DataGridStyle.xaml"/>
         <ResourceDictionary Source="Styles/GroupBoxStyle.xaml"/>
         <ResourceDictionary Source="Styles/ListBoxStyle.xaml"/>
@@ -19,6 +20,7 @@
     </ResourceDictionary.MergedDictionaries>
     <!-- Styles -->
     <Style TargetType="{x:Type Button}" BasedOn="{StaticResource StandardButton}"/>
+    <Style TargetType="{x:Type ContextMenu}" BasedOn="{StaticResource StandardContextMenu}"/>
     <Style TargetType="{x:Type Window}" BasedOn="{StaticResource StandardWindow}"/>
     <Style TargetType="{x:Type TabControl}" BasedOn="{StaticResource StandardTabControl}"/>
     <Style TargetType="{x:Type Menu}" BasedOn="{StaticResource StandardMenu}"/>

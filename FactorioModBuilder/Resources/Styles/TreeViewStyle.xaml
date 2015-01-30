@@ -3,6 +3,7 @@
                     xmlns:conv="clr-namespace:WpfUtils.ValueConverters;assembly=WpfUtils">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="../Colors.xaml"/>
+        <ResourceDictionary Source="ContextMenuStyle.xaml"/>
     </ResourceDictionary.MergedDictionaries>
     <SolidColorBrush x:Key="GlyphBrush" Color="#444"/>
     <Style x:Key="StandardTreeView" TargetType="{x:Type TreeView}">
@@ -66,6 +67,11 @@
         <Setter Property="IsSelected" Value="{Binding Path=IsSelected, Mode=TwoWay}"/>
         <Setter Property="FontWeight" Value="Normal"/>
         <Setter Property="Foreground" Value="White"/>
+        <Setter Property="ContextMenu">
+            <Setter.Value>
+                <ContextMenu Style="{StaticResource StandardContextMenu}"/>
+            </Setter.Value>
+        </Setter>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TreeViewItem}">

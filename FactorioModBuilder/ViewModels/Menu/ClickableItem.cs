@@ -25,7 +25,7 @@ namespace FactorioModBuilder.ViewModels.Menu
         /// <summary>
         /// Creates a menu item that can optionally execute a command when clicked on by the user
         /// </summary>
-        /// <param name="header">The text to be displayed on this menu ite</param>
+        /// <param name="header">The text to be displayed on this menu item</param>
         /// <param name="onClick">The action to execute when this item is clicked</param>
         public ClickableItem(string header, Action onClick)
             : this(header, onClick, (() => true))
@@ -35,7 +35,7 @@ namespace FactorioModBuilder.ViewModels.Menu
         /// <summary>
         /// Creates a menu item that can optionally execute a command when clicked on by the user
         /// </summary>
-        /// <param name="header">The text to be displayed on this menu ite</param>
+        /// <param name="header">The text to be displayed on this menu item</param>
         /// <param name="onClick">The action to execute when this item is clicked</param>
         /// <param name="canClick">The function used to determine if this menu item can currently be clicked on</param>
         public ClickableItem(string header, Action onClick, Func<bool> canClick)
@@ -46,7 +46,7 @@ namespace FactorioModBuilder.ViewModels.Menu
         /// <summary>
         /// Creates a menu item that can optionally execute a command when clicked on by the user
         /// </summary>
-        /// <param name="header">The text to be displayed on this menu ite</param>
+        /// <param name="header">The text to be displayed on this menu item</param>
         /// <param name="onClick">The action to execute when this item is clicked</param>
         /// <param name="canClick">The function used to determine if this menu item can currently be clicked on</param>
         /// <param name="icon">The icon to display next to this menu item</param>
@@ -58,7 +58,7 @@ namespace FactorioModBuilder.ViewModels.Menu
         /// <summary>
         /// Creates a menu item that can optionally execute a command when clicked on by the user
         /// </summary>
-        /// <param name="header">The text to be displayed on this menu ite</param>
+        /// <param name="header">The text to be displayed on this menu item</param>
         /// <param name="onClick">The action to execute when this item is clicked</param>
         /// <param name="canClick">The function used to determine if this menu item can currently be clicked on</param>
         /// <param name="icon">The icon to display next to this menu item</param>
