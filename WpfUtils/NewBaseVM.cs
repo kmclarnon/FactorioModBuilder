@@ -38,6 +38,20 @@ namespace WpfUtils
         /// </summary>
         protected HashSet<object> _propertyModels = new HashSet<object>();
 
+        public NewBaseVM()
+        {
+        }
+
+        /// <summary>
+        /// Constructor that registers provided model objects
+        /// </summary>
+        /// <param name="models">data models to register and use as property backers</param>
+        public NewBaseVM(params object[] models)
+        {
+            foreach (var m in models)
+                this.RegisterModel(m);
+        }
+
         #region Property Change Methods
         /// <summary>
         /// Provides a convenient way to send notifications.  When called inside a property,
