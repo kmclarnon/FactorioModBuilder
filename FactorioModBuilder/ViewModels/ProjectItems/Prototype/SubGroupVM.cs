@@ -19,32 +19,32 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
             get
             {
                 return new SubGroupData(this.Name, 
-                    this.GroupName, this.Order).ListWrap();
+                    this.Group, this.Order).ListWrap();
             }
         }
 
         public string Type
         {
-            get { return _internal.Type; }
-            set { this.SetProperty(_internal, value); }
+            get { return this.GetProperty<string>(); }
+            set { this.SetProperty(value); }
         }
 
-        public GroupVM Group
+        public GroupVM GroupItem
         {
             get { return this.GetProperty<GroupVM>(); }
-            set { this.SetProperty(value, null, (() => this.GroupName = (value == null) ? String.Empty : value.Name)); }
+            set { this.SetProperty(value, false, null, (x => this.Group = (x == null) ? String.Empty : x.Name)); }
         }
 
-        public string GroupName
+        public string Group
         {
-            get { return _internal.Group; }
-            set { this.SetProperty(_internal, value, false, null, "Group"); }
+            get { return this.GetProperty<string>(); }
+            set { this.SetProperty(value); }
         }
 
         public string Order
         {
-            get { return _internal.Order; }
-            set { this.SetProperty(_internal, value); }
+            get { return this.GetProperty<string>(); }
+            set { this.SetProperty(value); }
         }
 
         public SubGroupVM(SubGroup item)
@@ -59,9 +59,8 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 
         public void ForceRemoveGroup()
         {
-            this.SetProperty<GroupVM>(null, null, null, true,
-                PropertyMethods.GetName(() => this.Group));
-            this.GroupName = String.Empty;
+            this.SetProperty(null, (() => this.Group));
+            this.Group = String.Empty;
         }
     }
 }

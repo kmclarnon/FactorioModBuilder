@@ -49,8 +49,8 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         /// </summary>
         public int DefaultTemp
         {
-            get { return _internal.DefaultTemp; }
-            set { this.SetProperty(_internal, value); }
+            get { return this.GetProperty<int>(); }
+            set { this.SetProperty(value); }
         }
 
         /// <summary>
@@ -58,8 +58,8 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         /// </summary>
         public int HeatCapacity
         {
-            get { return _internal.HeatCapacity; }
-            set { this.SetProperty(_internal, value); }
+            get { return this.GetProperty<int>(); }
+            set { this.SetProperty(value); }
         }
 
         /// <summary>
@@ -67,8 +67,8 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         /// </summary>
         public EnergyUnit HeatCapacityUnit
         {
-            get { return _internal.HeatCapacityUnit; }
-            set { this.SetProperty(_internal, value); }
+            get { return this.GetProperty<EnergyUnit>(); }
+            set { this.SetProperty(value); }
         }
 
         /// <summary>
@@ -76,8 +76,8 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         /// </summary>
         public Color BaseColor
         {
-            get { return _internal.BaseColor; }
-            set { this.SetProperty(_internal, value); }
+            get { return this.GetProperty<Color>(); }
+            set { this.SetProperty(value); }
         }
 
         /// <summary>
@@ -85,8 +85,8 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         /// </summary>
         public Color FlowColor
         {
-            get { return _internal.FlowColor; }
-            set { this.SetProperty(_internal, value); }
+            get { return this.GetProperty<Color>(); }
+            set { this.SetProperty(value); }
         }
 
         /// <summary>
@@ -94,8 +94,8 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         /// </summary>
         public int MaxTemp
         {
-            get { return _internal.MaxTemp; }
-            set { this.SetProperty(_internal, value); }
+            get { return this.GetProperty<int>(); }
+            set { this.SetProperty(value); }
         }
 
         /// <summary>
@@ -103,8 +103,8 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         /// </summary>
         public string IconPath
         {
-            get { return _internal.IconPath; }
-            set { this.SetProperty(_internal, value, false, (() => this.GraphicPath = (value == null) ? String.Empty : value)); }
+            get { return this.GetProperty<string>(); }
+            set { this.SetProperty(value, false, null, (x => this.GraphicPath = (value == null) ? String.Empty : value)); }
         }
 
         /// <summary>
@@ -113,12 +113,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         public SubGroupVM SubGroupItem
         {
             get { return this.GetProperty<SubGroupVM>(); }
-            set 
-            { 
-                this.SetProperty(value, 
-                    this.UpdateSubGroupBinding, 
-                    (() => this.SubGroup = (value == null) ? String.Empty : value.Name)); 
-            }
+            set { this.SetProperty(value, false, this.UpdateSubGroupBinding, (x => this.SubGroup = x.Name)); }
         }
 
         /// <summary>
@@ -126,8 +121,8 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         /// </summary>
         public string SubGroup
         {
-            get { return _internal.SubGroup; }
-            set { this.SetProperty(_internal, value); }
+            get { return this.GetProperty<string>(); }
+            set { this.SetProperty(value); }
         }
 
         /// <summary>
@@ -135,8 +130,8 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         /// </summary>
         public float PressureToSpeed
         {
-            get { return _internal.PressureToSpeed; }
-            set { this.SetProperty(_internal, value); }
+            get { return this.GetProperty<float>(); }
+            set { this.SetProperty(value); }
         }
 
         /// <summary>
@@ -144,8 +139,8 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         /// </summary>
         public float FlowToEnergy
         {
-            get { return _internal.FlowToEnergy; }
-            set { this.SetProperty(_internal, value); }
+            get { return this.GetProperty<float>(); }
+            set { this.SetProperty(value); }
         }
 
         /// <summary>
@@ -153,8 +148,8 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         /// </summary>
         public string Order
         {
-            get { return _internal.Order; }
-            set { this.SetProperty(_internal, value); }
+            get { return this.GetProperty<string>(); }
+            set { this.SetProperty(value); }
         }
 
         /// <summary>
@@ -255,8 +250,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         /// </summary>
         public void ForceRemoveSubGroup()
         {
-            this.SetProperty<SubGroupVM>(null, null, null, true,
-                PropertyMethods.GetName(() => this.SubGroup));
+            this.SetProperty(null, (() => this.SubGroup));
             this.SubGroup = String.Empty;
         }
     }

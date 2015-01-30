@@ -46,20 +46,20 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
 
         public string TempDir
         {
-            get { return _internal.TempDir; }
-            set { this.SetProperty(_internal, value); }
+            get { return this.GetProperty<string>(); }
+            set { this.SetProperty(value); }
         }
 
         public string OutDir
         {
-            get { return _internal.OutDir; }
-            set { this.SetProperty(_internal, value); }
+            get { return this.GetProperty<string>(); }
+            set { this.SetProperty(value); }
         }
 
         public string Version
         {
-            get { return _internal.Version; }
-            set { this.SetProperty(_internal, value); }
+            get { return this.GetProperty<string>(); }
+            set { this.SetProperty(value); }
         }
 
         public ProjectVM(Project header, IEnumerable<TreeItemVMBase> projectChildren)

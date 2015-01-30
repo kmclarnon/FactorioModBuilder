@@ -23,7 +23,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
             get 
             { 
                 return new ItemData(this.Name, this.IconPath, 
-                    this.SubGroupName, this.Order, 
+                    this.SubGroup, this.Order, 
                     this.PlaceResult, this.StackSize, this.Flag).ListWrap(); 
             }
         }
@@ -34,57 +34,52 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
             set { this.SetProperty(value); }
         }
 
-        public SubGroupVM SubGroup
+        public SubGroupVM SubGroupItem
         {
             get { return this.GetProperty<SubGroupVM>(); }
-            set 
-            { 
-                this.SetProperty(value, 
-                    this.UpdateSubGroupBinding, 
-                    (() => this.SubGroupName = (value == null) ? String.Empty : value.Name)); 
-            }
+            set { this.SetProperty(value, false, this.UpdateSubGroupBinding, (x => this.SubGroup = x.Name)); }
         }
 
-        public string SubGroupName
+        public string SubGroup
         {
-            get { return _internal.SubGroup; }
-            set { this.SetProperty(_internal, value, false, null, "SubGroup"); }
+            get { return this.GetProperty<string>(); }
+            set { this.SetProperty(value); }
         }
 
         public string Order
         {
-            get { return _internal.Order; }
-            set { this.SetProperty(_internal, value); }
+            get { return this.GetProperty<string>(); }
+            set { this.SetProperty(value); }
         }
 
         public string IconPath
         {
-            get { return _internal.IconPath; }
-            set { this.SetProperty(_internal, value, false, (() => this.GraphicPath = (value == null) ? String.Empty : value)); }
+            get { return this.GetProperty<string>(); }
+            set { this.SetProperty(value, false, null, (x => this.GraphicPath = (value == null) ? String.Empty : value)); }
         }
 
         public int StackSize
         {
-            get { return _internal.StackSize; }
-            set { this.SetProperty(_internal, value); }
+            get { return this.GetProperty<int>(); }
+            set { this.SetProperty(value); }
         }
 
         public EntityVM PlaceResultEntity
         {
             get { return this.GetProperty<EntityVM>(); }
-            set { this.SetProperty(value, null, (() => this.PlaceResult = (value == null) ? String.Empty : value.Name)); }
+            set { this.SetProperty(value, false, null, (x => this.PlaceResult = (value == null) ? String.Empty : value.Name)); }
         }
 
         public string PlaceResult
         {
-            get { return _internal.PlaceResult; }
-            set { this.SetProperty(_internal, value); }
+            get { return this.GetProperty<string>(); }
+            set { this.SetProperty(value); }
         }
 
         public ItemFlag Flag
         {
-            get { return _internal.Flag; }
-            set { this.SetProperty(_internal, value); }
+            get { return this.GetProperty<ItemFlag>(); }
+            set { this.SetProperty(value); }
         }
 
         public ICommand FindImageCmd { get { return this.GetCommand(this.FindImage, this.CanFindImage); } }
@@ -130,8 +125,8 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         /// <param name="val"></param>
         private void UpdateSubGroupBinding(SubGroupVM val)
         {
-            if (this.SubGroup != null)
-                this.SubGroup.PropertyChanged -= SubGroupPropertyChanged;
+            if (this.SubGroupItem != null)
+                this.SubGroupItem.PropertyChanged -= SubGroupPropertyChanged;
             if (val != null)
                 val.PropertyChanged += SubGroupPropertyChanged;
         }
@@ -141,10 +136,10 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         /// </summary>
         void SubGroupPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (this.SubGroup == null)
-                this.SubGroupName = String.Empty;
+            if (this.SubGroupItem == null)
+                this.SubGroup = String.Empty;
             else
-                this.SubGroupName = this.SubGroup.Name;
+                this.SubGroup = this.SubGroupItem.Name;
         }
     }
 }

@@ -22,8 +22,8 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         /// </summary>
         public string IconPath
         {
-            get { return _internal.IconPath; }
-            set { this.SetProperty(_internal, value); }
+            get { return this.GetProperty<string>(); }
+            set { this.SetProperty(value); }
         }
 
         /// <summary>
@@ -31,8 +31,8 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         /// </summary>
         public int UnitCount
         {
-            get { return _internal.UnitCount; }
-            set { this.SetProperty(_internal, value); }
+            get { return this.GetProperty<int>(); }
+            set { this.SetProperty(value); }
         }
 
         /// <summary>
@@ -40,8 +40,8 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         /// </summary>
         public int UnitTime
         {
-            get { return _internal.UnitTime; }
-            set { this.SetProperty(_internal, value); }
+            get { return this.GetProperty<int>(); }
+            set { this.SetProperty(value); }
         }
 
         /// <summary>
@@ -49,8 +49,8 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         /// </summary>
         public string Order
         {
-            get { return _internal.Order; }
-            set { this.SetProperty(_internal, value); }
+            get { return this.GetProperty<string>(); }
+            set { this.SetProperty(value); }
         }
 
         /// <summary>
@@ -58,8 +58,8 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         /// </summary>
         public bool Upgrade
         {
-            get { return _internal.Upgrade; }
-            set { this.SetProperty(_internal, value); }
+            get { return this.GetProperty<bool>(); }
+            set { this.SetProperty(value); }
         }
 
         /// <summary>

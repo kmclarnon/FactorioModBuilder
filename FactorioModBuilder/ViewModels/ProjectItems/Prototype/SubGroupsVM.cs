@@ -72,7 +72,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
                 {
                     foreach (var sg in this.ItemList)
                     {
-                        if (sg.Group == g)
+                        if (sg.GroupItem == g)
                             sg.ForceRemoveGroup();
                     }
                 }

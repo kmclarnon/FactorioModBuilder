@@ -18,7 +18,7 @@ namespace FactorioModBuilder.ViewModels.Base
     /// The base view model that wraps a TreeItem and exposes the appropriate methods to handle
     /// selection, expand/collapse operations and display of children
     /// </summary>
-    public abstract class TreeItemVMBase : BaseVM, IDataErrorInfo
+    public abstract class TreeItemVMBase : NewBaseVM, IDataErrorInfo
     {
         /// <summary>
         /// An event handler for the InitCompleted event fired after the construction and initialization
@@ -48,7 +48,7 @@ namespace FactorioModBuilder.ViewModels.Base
         public bool IsExpanded
         {
             get { return this.GetProperty<bool>(); }
-            set { this.SetProperty(value, null, (() => this.OnIsExpandedChanged())); }
+            set { this.SetProperty(value, false, null, (x => this.OnIsExpandedChanged())); }
         }
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace FactorioModBuilder.ViewModels.Base
         public bool IsSelected
         {
             get { return this.GetProperty<bool>(); }
-            set { this.SetProperty(value, null, (() => this.OnIsSelectedChanged())); }
+            set { this.SetProperty(value, false, null, (x => this.OnIsSelectedChanged())); }
         }
 
         /// <summary>
@@ -65,8 +65,8 @@ namespace FactorioModBuilder.ViewModels.Base
         /// </summary>
         public string Name
         {
-            get { return this.GetProperty<String>(_item, this.OnGetName); }
-            set { this.SetProperty(_item, value, false, this.OnNameChanged); }
+            get { return this.GetProperty<string>(null, null, this.OnGetName); }
+            set { this.SetProperty(value, false, null, (x => this.OnNameChanged())); }
         }
 
         /// <summary>
@@ -130,6 +130,7 @@ namespace FactorioModBuilder.ViewModels.Base
         /// <param name="item">The TreeItem that will back this view model</param>
         /// <param name="children">The TreeItem view models to be displayed as children of this view model</param>
         public TreeItemVMBase(TreeItemVMBase parent, TreeItemBase item, IEnumerable<TreeItemVMBase> children)
+            : base(item)
         {
             _parent = parent;
             _item = item;

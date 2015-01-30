@@ -22,8 +22,8 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         /// </summary>
         public int Quantity
         {
-            get { return _internal.Quantity; }
-            set { this.SetProperty(_internal, value); }
+            get { return this.GetProperty<int>(); }
+            set { this.SetProperty(value); }
         }
 
         /// <summary>
@@ -32,11 +32,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         public ItemVM Ingredient
         {
             get { return this.GetProperty<ItemVM>(); }
-            set 
-            { 
-                this.SetProperty(value,
-                    this.HandleItemBinding,
-                    (() => this.Name = (value == null) ? String.Empty : value.Name)); 
+            set { this.SetProperty(value, false, this.HandleItemBinding, (x => this.Name = x.Name)); 
             }
         }
 
