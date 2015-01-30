@@ -502,10 +502,10 @@ namespace WpfUtils
             if (models.Any())
             {
                 var model = models.Single();
-                var prop = models.GetType().GetProperty(propertyName);
+                var prop = model.GetType().GetProperty(propertyName);
                 if(prop == null)
                     throw new InvalidOperationException("Could not retrieve expected model property: " + propertyName);
-                getValue = (() => (T)prop.GetValue(models));
+                getValue = (() => (T)prop.GetValue(model));
             }
             else
             {
@@ -639,7 +639,7 @@ namespace WpfUtils
         {
             // find the command or create it if it doesn't exit
             RelayCommand res;
-            if(_commands.TryGetValue(propertyName, out res))
+            if(!_commands.TryGetValue(propertyName, out res))
             {
                 res = new RelayCommand(execute, canExecute);
                 _commands.Add(propertyName, res);
