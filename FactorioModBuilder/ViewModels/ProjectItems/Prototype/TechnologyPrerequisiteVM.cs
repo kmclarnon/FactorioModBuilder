@@ -26,12 +26,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         public TechnologyVM Technology
         {
             get { return this.GetProperty<TechnologyVM>(); }
-            set 
-            {
-                this.SetProperty(value,
-                    this.HandleTechnologyBinding,
-                    (() => this.Name = (value == null) ? String.Empty : value.Name));
-            }
+            set { this.SetProperty(value, false, this.HandleTechnologyBinding, (x => this.Name = x.Name)); }
         }
 
         public TechnologyPrerequisiteVM(TechnologyPrerequisite item)

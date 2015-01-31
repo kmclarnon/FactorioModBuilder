@@ -21,8 +21,8 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         /// </summary>
         public TechEffectType Type
         {
-            get { return _internal.Type; }
-            set { this.SetProperty(_internal, value); }
+            get { return this.GetProperty<TechEffectType>(); ; }
+            set { this.SetProperty(value); }
         }
 
         /// <summary>
@@ -30,8 +30,8 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         /// </summary>
         public string Recipe
         {
-            get { return _internal.Recipe; }
-            set { this.SetProperty(_internal, value); }
+            get { return this.GetProperty<string>(); }
+            set { this.SetProperty(value); }
         }
 
         /// <summary>
@@ -40,12 +40,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         public RecipeVM RecipeItem
         {
             get { return this.GetProperty<RecipeVM>(); }
-            set
-            {
-                this.SetProperty(value,
-                    this.HandleRecipeBinding,
-                    (() => this.Recipe = (value == null) ? String.Empty : value.Name));
-            }
+            set { this.SetProperty(value, false, this.HandleRecipeBinding, (x => this.Recipe = x.Name)); }
         }
 
         public TechnologyEffectVM(TechnologyEffect item)

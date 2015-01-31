@@ -20,14 +20,14 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
 
         public string ExportPath
         {
-            get { return _internal.ExportPath; }
-            set { this.SetProperty(_internal, value); }
+            get { return this.GetProperty<string>(); }
+            set { this.SetProperty(value); }
         }
 
         public string ImportPath
         {
-            get { return _internal.ImportPath; }
-            set { this.SetProperty(_internal, value); }
+            get { return this.GetProperty<string>(); }
+            set { this.SetProperty(value); }
         }
 
         public string ParentPath
@@ -46,10 +46,13 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
             get { return this.GetProperty<IGraphicsSource>(); }
             set 
             {
-                var s = this.GetProperty<IGraphicsSource>();
-                if (s != null)
-                    s.PropertyChanged -= this.OnSourcePropertyChanged;
-                this.SetProperty(value, null, this.SourceUpdated); 
+                this.SetProperty(value, false,
+                    (x =>
+                    {
+                        if (x != null)
+                            x.PropertyChanged -= this.OnSourcePropertyChanged;
+                    }),
+                    (x => this.SourceUpdated()));
             }
         }
 

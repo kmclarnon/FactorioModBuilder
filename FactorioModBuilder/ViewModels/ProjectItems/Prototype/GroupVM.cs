@@ -33,32 +33,32 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 
         public string Type
         {
-            get { return _internal.Type; }
-            set { this.SetProperty(_internal, value); }
+            get { return this.GetProperty<string>(); }
+            set { this.SetProperty(value); }
         }
 
         public string IconPath
         {
-            get { return _internal.IconPath; }
-            set { this.SetProperty(_internal, value, false, (() => this.GraphicPath = (value == null) ? String.Empty : value)); }
+            get { return this.GetProperty<string>(); }
+            set { this.SetProperty(value, false, null, (x => this.GraphicPath = (value == null) ? String.Empty : value)); }
         }
 
         public string InvOrder
         {
-            get { return _internal.InvOrder; }
-            set { this.SetProperty(_internal, value); }
+            get { return this.GetProperty<string>(); }
+            set { this.SetProperty(value); }
         }
 
         public string Order
         {
-            get { return _internal.Order; }
-            set { this.SetProperty(_internal, value); }
+            get { return this.GetProperty<string>(); }
+            set { this.SetProperty(value); }
         }
 
         public bool Enabled
         {
-            get { return _internal.Enabled; }
-            set { this.SetProperty(_internal, value); }
+            get { return this.GetProperty<bool>(); }
+            set { this.SetProperty(value); }
         }
 
         public ICommand FindImageCmd { get { return this.GetCommand(this.FindImage, this.CanFindImage); } }

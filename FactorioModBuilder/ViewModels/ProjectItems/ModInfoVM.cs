@@ -37,45 +37,45 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
 
         public string ModName
         {
-            get { return _internal.ModName; }
-            set { this.SetProperty(_internal, value, false, this.UpdateProjectName); }
+            get { return this.GetProperty<string>(); }
+            set { this.SetProperty(value, false, null, (x => this.UpdateProjectName())); }
         }
 
         public string Version
         {
-            get { return _internal.Version; }
-            set { this.SetProperty(_internal, value, false, this.UpdateProjectVersion); }
+            get { return this.GetProperty<string>(); }
+            set { this.SetProperty(value, false, null, (x => this.UpdateProjectVersion())); }
 
         }
 
         public string Title
         {
-            get { return _internal.Title; }
-            set { this.SetProperty(_internal, value); }
+            get { return this.GetProperty<string>(); }
+            set { this.SetProperty(value); }
         }
 
         public string Author
         {
-            get { return _internal.Author; }
-            set { this.SetProperty(_internal, value); }
+            get { return this.GetProperty<string>(); }
+            set { this.SetProperty(value); }
         }
 
         public string Contact
         {
-            get { return _internal.Contact; }
-            set { this.SetProperty(_internal, value); }
+            get { return this.GetProperty<string>(); }
+            set { this.SetProperty(value); }
         }
 
         public string Homepage
         {
-            get { return _internal.Homepage; }
-            set { this.SetProperty(_internal, value); }
+            get { return this.GetProperty<string>(); }
+            set { this.SetProperty(value); }
         }
 
         public string Description
         {
-            get { return _internal.Description; }
-            set { this.SetProperty(_internal, value); }
+            get { return this.GetProperty<string>(); }
+            set { this.SetProperty(value); }
         }
 
         public ICommand RemoveDependencyCmd { get { return this.GetCommand(this.RemoveDependency, this.CanRemoveDependency); } }

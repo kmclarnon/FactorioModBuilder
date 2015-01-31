@@ -22,26 +22,26 @@ namespace FactorioModBuilder.ViewModels.Dialogs
 
         public string ResultProjectName
         {
-            get { return this.Project.ResultProjectName; }
-            set { this.SetProperty(this.Project, value, false, this.OnUpdateName); }
+            get { return this.GetProperty<string>(); }
+            set { this.SetProperty(value, false, null, (x => this.OnUpdateName())); }
         }
 
         public string ResultLocation
         {
-            get { return this.Project.ResultLocation; }
-            set { this.SetProperty(this.Project, value); }
+            get { return this.GetProperty<string>(); }
+            set { this.SetProperty(value); }
         }
 
         public SolutionType ResultSolutionType
         {
-            get { return this.Project.ResultSolutionType; }
-            set { this.SetProperty(this.Project, value); }
+            get { return this.GetProperty<SolutionType>(); }
+            set { this.SetProperty(value); }
         }
 
         public string ResultSolutionName
         {
-            get { return this.Project.ResultSolutionName; }
-            set { this.SetProperty(this.Project, value, false, this.OnUpdateSolution); }
+            get { return this.GetProperty<string>(); }
+            set { this.SetProperty(value, false, (x => this.OnUpdateSolution())); }
         }
 
         public IEnumerable<Tuple<SolutionType, String>> PossibleSolutions
@@ -69,13 +69,13 @@ namespace FactorioModBuilder.ViewModels.Dialogs
         private Action<bool> _setResult;
         private bool _solutionModified = false;
 
-        public NewProject Project { get; private set; }
-
+        public NewProject Project { get; set; }
 
         public NewProjectVM(Action<bool> setResult)
         {
-            _setResult = setResult;
             this.Project = new NewProject();
+            this.RegisterModel(this.Project);
+            _setResult = setResult;
         }
 
         private bool CanOK()
@@ -132,7 +132,7 @@ namespace FactorioModBuilder.ViewModels.Dialogs
         {
             if (!_solutionModified)
             {
-                this.Project.ResultSolutionName = this.ResultProjectName;
+                this.SetProperty(this.ResultProjectName, (() => this.ResultSolutionName));
                 this.NotifyPropertyChanged("ResultSolutionName");
             }
         }

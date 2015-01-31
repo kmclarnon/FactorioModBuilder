@@ -18,37 +18,32 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 
         public bool Enabled
         {
-            get { return _internal.Enabled; }
-            set { this.SetProperty(_internal, value); }
+            get { return this.GetProperty<bool>(); }
+            set { this.SetProperty(value); }
         }
 
         public ItemVM ResultItem
         {
             get { return this.GetProperty<ItemVM>(); }
-            set 
-            { 
-                this.SetProperty(value, 
-                    this.UpdateItemBinding, 
-                    (() => this.Result = (value == null) ? String.Empty : value.Name)); 
-            }
+            set {  this.SetProperty(value, false, this.UpdateItemBinding, (x => this.Result = (value == null) ? String.Empty : value.Name)); }
         }
 
         public string Result
         {
-            get { return _internal.Result; }
-            set { this.SetProperty(_internal, value); }
+            get { return this.GetProperty<string>(); }
+            set { this.SetProperty(value); }
         }
 
         public int ResultCount
         {
-            get { return _internal.ResultCount; }
-            set { this.SetProperty(_internal, value); }
+            get { return this.GetProperty<int>(); }
+            set { this.SetProperty(value); }
         }
 
         public int EnergyRequired
         {
-            get { return _internal.EnergyRequired; }
-            set { this.SetProperty(_internal, value); }
+            get { return this.GetProperty<int>(); }
+            set { this.SetProperty(value); }
         }
 
         public ICommand AddIngredientCmd { get { return this.GetCommand(this.AddIngredient); } }
@@ -123,8 +118,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         /// </summary>
         public void ForceRemoveResultItem()
         {
-            this.SetProperty<ItemVM>(null, null, null, true, 
-                PropertyMethods.GetName(() => this.ResultItem));
+            this.SetProperty(null, (() => this.ResultItem));
             this.Result = String.Empty;
         }
 

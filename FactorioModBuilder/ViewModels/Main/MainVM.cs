@@ -30,38 +30,38 @@ namespace FactorioModBuilder.ViewModels
 {
     public class MainVM : BaseVM
     {
-        public string AppTitle { get { return _main.AppTitle; } }
-        public string AppName { get { return _main.AppName; } }
-        public string AppVersion { get { return _main.AppVersion; } }
+        public string AppTitle { get { return this.GetProperty<string>(); } }
+        public string AppName { get { return this.GetProperty<string>(); } }
+        public string AppVersion { get { return this.GetProperty<string>(); } }
         
         public int AppHeight
         {
-            get { return _main.AppHeight; }
-            set { this.SetProperty(_main, value); }
+            get { return this.GetProperty<int>(); }
+            set { this.SetProperty(value); }
         }
 
         public int AppWidth
         {
-            get { return _main.AppWidth; }
-            set { this.SetProperty(_main, value); }
+            get { return this.GetProperty<int>(); }
+            set { this.SetProperty(value); }
         }
 
         public int AppTop
         {
-            get { return _main.AppTop; }
-            set { this.SetProperty(_main, value); }
+            get { return this.GetProperty<int>(); }
+            set { this.SetProperty(value); }
         }
 
         public int AppLeft
         {
-            get { return _main.AppLeft; }
-            set { this.SetProperty(_main, value); }
+            get { return this.GetProperty<int>(); }
+            set { this.SetProperty(value); }
         }
 
         public bool Active
         {
             get { return this.GetProperty<bool>(); }
-            set { this.SetProperty(value, null, () => this.ShowBorder = this.Active && (this.WindowState == System.Windows.WindowState.Normal)); }
+            set { this.SetProperty(value, false, null, (x => this.ShowBorder = x && (this.WindowState == System.Windows.WindowState.Normal))); }
         }
 
         public bool ShowBorder
@@ -73,7 +73,7 @@ namespace FactorioModBuilder.ViewModels
         public WindowState WindowState
         {
             get { return this.GetProperty<WindowState>(); }
-            set { this.SetProperty(value, null, () => this.ShowBorder = this.Active && (this.WindowState == System.Windows.WindowState.Normal)); }
+            set { this.SetProperty(value, false, null, (x => this.ShowBorder = this.Active && (this.WindowState == System.Windows.WindowState.Normal))); }
         }
 
         public SolutionExplorerVM SolutionExplorer { get; private set; }
@@ -82,13 +82,12 @@ namespace FactorioModBuilder.ViewModels
 
         public MainContentVM MainContent { get; private set; }
 
-        public Compiler Compiler { get { return _main.Compiler; } }
-
-        private MainModel _main;
+        public Compiler Compiler { get; private set; }
 
         public MainVM(MainModel m)
+            : base(m)
         {
-            _main = m;
+            this.Compiler = m.Compiler;
             this.SolutionExplorer = new SolutionExplorerVM(this);
             this.MainMenu = new MainMenuVM(this, new FileMenuVM(this));
             this.MainContent = new MainContentVM();

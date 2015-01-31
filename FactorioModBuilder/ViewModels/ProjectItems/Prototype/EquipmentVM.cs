@@ -18,8 +18,8 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         /// </summary>
         public string Type
         {
-            get { return _internal.Type; }
-            set { this.SetProperty(_internal, value); }
+            get { return this.GetProperty<string>(); }
+            set { this.SetProperty(value); }
         }
 
         /// <summary>
@@ -27,8 +27,8 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         /// </summary>
         public int EnergyInput
         {
-            get { return _internal.EnergyInput; }
-            set { this.SetProperty(_internal, value); }
+            get { return this.GetProperty<int>(); }
+            set { this.SetProperty(value); }
         }
 
         /// <summary>
@@ -36,8 +36,8 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         /// </summary>
         public int ShapeWidth
         {
-            get { return _internal.ShapeWidth; }
-            set { this.SetProperty(_internal, value); }
+            get { return this.GetProperty<int>(); }
+            set { this.SetProperty(value); }
         }
 
         /// <summary>
@@ -45,8 +45,8 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         /// </summary>
         public int ShapeHeight
         {
-            get { return _internal.ShapeHeight; }
-            set { this.SetProperty(_internal, value); }
+            get { return this.GetProperty<int>(); }
+            set { this.SetProperty(value); }
         }
 
         /// <summary>
@@ -54,8 +54,8 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         /// </summary>
         public string SpriteFilename
         {
-            get { return _internal.SpriteFilename; }
-            set { this.SetProperty(_internal, value); }
+            get { return this.GetProperty<string>(); }
+            set { this.SetProperty(value); }
         }
 
         /// <summary>
@@ -63,8 +63,8 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         /// </summary>
         public int SpriteWidth
         {
-            get { return _internal.SpriteWidth; }
-            set { this.SetProperty(_internal, value); }
+            get { return this.GetProperty<int>(); }
+            set { this.SetProperty(value); }
         }
 
         /// <summary>
@@ -72,8 +72,8 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         /// </summary>
         public int SpriteHeight
         {
-            get { return _internal.SpriteHeight; }
-            set { this.SetProperty(_internal, value); }
+            get { return this.GetProperty<int>(); }
+            set { this.SetProperty(value); }
         }
 
         /// <summary>
@@ -81,8 +81,8 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         /// </summary>
         public SpritePriority SpritePriority
         {
-            get { return _internal.SpritePriority; }
-            set { this.SetProperty(_internal, value); }
+            get { return this.GetProperty<SpritePriority>(); }
+            set { this.SetProperty(value); }
         }
 
         /// <summary>
@@ -90,8 +90,8 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         /// </summary>
         public ShapeType ShapeType
         {
-            get { return _internal.ShapeType; }
-            set { this.SetProperty(_internal, value); }
+            get { return this.GetProperty<ShapeType>(); }
+            set { this.SetProperty(value); }
         }
 
         /// <summary>
@@ -99,8 +99,8 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         /// </summary>
         public int MaxShieldValue
         {
-            get { return _internal.MaxShieldValue; }
-            set { this.SetProperty(_internal, value); }
+            get { return this.GetProperty<int>(); }
+            set { this.SetProperty(value); }
         }
 
         /// <summary>
@@ -108,8 +108,8 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         /// </summary>
         public int EnergyPerShield
         {
-            get { return _internal.EnergyPerShield; }
-            set { this.SetProperty(_internal, value); }
+            get { return this.GetProperty<int>(); }
+            set { this.SetProperty(value); }
         }
 
         /// <summary>
@@ -117,8 +117,8 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         /// </summary>
         public string EnergySourceType
         {
-            get { return _internal.EnergySourceType; }
-            set { this.SetProperty(_internal, value); }
+            get { return this.GetProperty<string>(); }
+            set { this.SetProperty(value); }
         }
 
         /// <summary>
@@ -126,8 +126,8 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         /// </summary>
         public string BufferCap
         {
-            get { return _internal.BufferCap; }
-            set { this.SetProperty(_internal, value); }
+            get { return this.GetProperty<string>(); }
+            set { this.SetProperty(value); }
         }
 
         /// <summary>
@@ -135,8 +135,8 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         /// </summary>
         public string InputLimit
         {
-            get { return _internal.InputLimit; }
-            set { this.SetProperty(_internal, value); }
+            get { return this.GetProperty<string>(); }
+            set { this.SetProperty(value); }
         }
 
         /// <summary>
@@ -144,8 +144,8 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         /// </summary>
         public string OutputLimit
         {
-            get { return _internal.OutputLimit; }
-            set { this.SetProperty(_internal, value); }
+            get { return this.GetProperty<string>(); }
+            set { this.SetProperty(value); }
         }
 
         /// <summary>
@@ -153,8 +153,8 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         /// </summary>
         public string UsagePriority
         {
-            get { return _internal.UsagePriority; }
-            set { this.SetProperty(_internal, value); }
+            get { return this.GetProperty<string>(); }
+            set { this.SetProperty(value); }
         }
 
         /// <summary>

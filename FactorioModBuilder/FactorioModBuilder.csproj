@@ -169,7 +169,6 @@
     <Compile Include="Models\SolutionItems\Solution.cs" />
     <Compile Include="Resources\Icons\AppIcon.cs" />
     <Compile Include="Resources\Icons\IconConverter.cs" />
-    <Compile Include="ViewModels\Dialogs\ColorDialogVM.cs" />
     <Compile Include="ViewModels\Dialogs\NewProjectVM.cs" />
     <Compile Include="ViewModels\ProjectItems\IDoubleClickBehavior.cs" />
     <Compile Include="ViewModels\Main\MainContentItemVM.cs" />
@@ -203,9 +202,6 @@
     <Compile Include="ViewModels\ProjectItems\Prototype\TechnologyPrerequisiteVM.cs" />
     <Compile Include="ViewModels\ProjectItems\SolutionVM.cs" />
     <Compile Include="ViewModels\SolutionExplorerVM.cs" />
-    <Compile Include="View\Dialogs\ColorDialog.xaml.cs">
-      <DependentUpon>ColorDialog.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\Dialogs\NewProjectDialog.xaml.cs">
       <DependentUpon>NewProjectDialog.xaml</DependentUpon>
     </Compile>
@@ -274,10 +270,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\Styles\WindowStyle.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Dialogs\ColorDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

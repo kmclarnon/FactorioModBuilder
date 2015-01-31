@@ -24,20 +24,20 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
 
         public bool Optional
         {
-            get { return _internal.Optional; }
-            set { this.SetProperty(_internal, value); }
+            get { return this.GetProperty<bool>(); }
+            set { this.SetProperty(value); }
         }
 
         public bool Enabled
         {
-            get { return _internal.Enabled; }
-            set { this.SetProperty(_internal, value); }
+            get { return this.GetProperty<bool>(); }
+            set { this.SetProperty(value); }
         }
 
         public string Version
         {
-            get { return _internal.Version; }
-            set { this.SetProperty(_internal, value); }
+            get { return this.GetProperty<string>(); }
+            set { this.SetProperty(value); }
         }
 
         public ModInfoDependencyVM(ModInfoDependency item)

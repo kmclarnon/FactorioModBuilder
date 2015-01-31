@@ -19,17 +19,13 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         public TreeItemVMBase Ingredient
         {
             get { return this.GetProperty<TreeItemVMBase>(); }
-            set 
-            { 
-                this.SetProperty(value, 
-                    this.UpdateSubGroupBinding, 
-                    (() => this.Name = (value == null) ? String.Empty : value.Name)); }
+            set { this.SetProperty(value, false, this.UpdateSubGroupBinding, (x => this.Name = x.Name)); }
         }
 
         public int Quantity
         {
-            get { return _internal.Quantity; }
-            set { this.SetProperty(_internal, value); }
+            get { return this.GetProperty<int>(); }
+            set { this.SetProperty(value); }
         }
 
         public RecipeIngredientVM(RecipeIngredient item)

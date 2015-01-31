@@ -44,7 +44,7 @@ namespace FactorioModBuilder.ViewModels.Menu.Base
         public bool IsChecked
         {
             get { return this.GetProperty<bool>(); }
-            set { this.SetProperty(value, null, this.InternalIsCheckedChanged); }
+            set { this.SetProperty(value, false, null, (x => this.InternalIsCheckedChanged())); }
         }
 
         /// <summary>
