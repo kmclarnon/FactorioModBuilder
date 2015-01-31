@@ -11,7 +11,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype.Filters
         private int _newFilter = 1;
 
         public EntityFilterVM(string name)
-            : base(name)
+            : base(name, "Entity")
         {
         }
 

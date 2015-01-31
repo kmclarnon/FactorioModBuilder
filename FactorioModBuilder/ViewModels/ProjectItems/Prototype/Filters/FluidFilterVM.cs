@@ -17,7 +17,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype.Filters
         private int _newCount = 1;
 
         public FluidFilterVM(string name)
-            : base(name)
+            : base(name, "Fluid")
         {
         }
 

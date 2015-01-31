@@ -13,7 +13,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype.Filters
         private int _newEquip = 1;
 
         public EquipmentFilterVM(string name)
-            : base(name)
+            : base(name, "Equipment")
         {
         }
 

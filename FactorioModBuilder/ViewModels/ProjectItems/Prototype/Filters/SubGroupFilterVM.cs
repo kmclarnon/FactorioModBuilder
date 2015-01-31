@@ -19,7 +19,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype.Filters
         private int _newCount = 1;
 
         public SubGroupFilterVM(string name)
-            : base(name)
+            : base(name, "SubGroup")
         {
         }
 

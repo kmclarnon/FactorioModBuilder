@@ -128,7 +128,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype.Filters
             // menu items
             this.MenuItems.Add(new CategoryItem("Add",
                 new ClickableItem("New " + this.ChildDisplayName, this.AddChild),
-                new ClickableItem("New Filter", this.AddFilter)));
+                new ClickableItem("New " + this.ChildDisplayName + " Filter", this.AddFilter)));
             this.MenuItems.Add(new SeparatorItem());
             this.MenuItems.Add(new ClickableItem("Cut", this.Cut));
             this.MenuItems.Add(new ClickableItem("Copy", this.Copy));

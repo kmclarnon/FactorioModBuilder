@@ -20,7 +20,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype.Filters
         private int _newChild = 1;
 
         public GroupsFilterVM(string name)
-            : base(name)
+            : base(name, "Group")
         {
         }
 
