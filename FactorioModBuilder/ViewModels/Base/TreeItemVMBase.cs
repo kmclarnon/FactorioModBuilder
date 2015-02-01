@@ -49,7 +49,7 @@ namespace FactorioModBuilder.ViewModels.Base
         public bool IsExpanded
         {
             get { return this.GetProperty<bool>(); }
-            set { this.SetProperty(value, false, null, (x => this.OnIsExpandedChanged())); }
+            set { this.SetProperty(value, false, null, (x => this.OnIsExpandedChanged()), (x => x ? this.Children.Any() : true)); }
         }
 
         /// <summary>
