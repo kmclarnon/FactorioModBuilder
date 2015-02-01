@@ -2,6 +2,7 @@
 using FactorioModBuilder.Models.Dialogs;
 using FactorioModBuilder.ViewModels;
 using FactorioModBuilder.ViewModels.Dialogs;
+using MahApps.Metro.Controls;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -24,7 +25,7 @@ namespace FactorioModBuilder.View.Dialogs
     /// <summary>
     /// Interaction logic for NewProject.xaml
     /// </summary>
-    public partial class NewProjectDialog : Window
+    public partial class NewProjectDialog : MetroWindow
     {
         public NewProject NewProjectResult { get { return ((NewProjectVM)this.DataContext).Project; } }
 

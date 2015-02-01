@@ -7,7 +7,7 @@
                     xmlns:prot="clr-namespace:FactorioModBuilder.ViewModels.ProjectItems.Prototype"
                     xmlns:fil="clr-namespace:FactorioModBuilder.ViewModels.ProjectItems.Prototype.Filters">
     <DataTemplate DataType="{x:Type sln:SolutionExplorerVM}">
-        <Border BorderBrush="{StaticResource BorderBrushHighlighted}" BorderThickness="0.25">
+        <Border BorderBrush="{StaticResource SolutionExplorer_Border}" BorderThickness="0.25">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -16,7 +16,7 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <!-- Header -->
-                <Label Content="Solution Explorer" FontSize="11" Foreground="{StaticResource Foreground}"/>
+                <Label Content="Solution Explorer" FontSize="11" Foreground="{StaticResource BaseTextColor}"/>
                 <!-- Option buttons -->
                 <ToolBarTray Grid.Row="1">
                     
@@ -56,7 +56,10 @@
                 </Grid>
                 <!-- Solution TreeView -->
                 <TreeView Grid.Row="3" BorderThickness="0" ItemsSource="{Binding Path=Solutions}"
-                          cmds:MouseDoubleClick.Command="{Binding OpenSelectedItemCmd}">
+                          cmds:MouseDoubleClick.Command="{Binding OpenSelectedItemCmd}"
+                          Background="{StaticResource SolutionExplorer_Background}"
+                          Foreground="{StaticResource SolutionExplorer_Foreground}"
+                          FontFamily="SegoeUI">
                 </TreeView>
             </Grid>
         </Border>

@@ -1,0 +1,27 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <SolidColorBrush x:Key="BaseTextColor" Color="#F1F1F1"/>
+
+    <!-- Window -->
+    <SolidColorBrush x:Key="Window_Background" Color="#2D2D30"/>
+    <SolidColorBrush x:Key="Window_TitleText" Color="#6F6F70"/>
+    <SolidColorBrush x:Key="Window_StatusBarBackground" Color="#007ACC"/>
+    <SolidColorBrush x:Key="Window_FocusedBorder" Color="#017ACC"/>
+
+    <!-- Scroll Bars -->
+    <SolidColorBrush x:Key="ScrollBar_Background" Color="#3E3E42"/>
+    <SolidColorBrush x:Key="ScrollBar_Foreground" Color="#686868"/>
+    <SolidColorBrush x:Key="ScrollBar_CanScrollArrows" Color="#999999"/>
+    <SolidColorBrush x:Key="ScrollBar_NoScrollArrows" Color="#555558"/>
+    
+    <!-- Solution Explorer -->
+    <SolidColorBrush x:Key="SolutionExplorer_Background" Color="#252526"/>
+    <SolidColorBrush x:Key="SolutionExplorer_FocusedRowHighlight" Color="#333337"/>
+    <SolidColorBrush x:Key="SolutionExplorer_LostFocusRowHighlight" Color="#252526"/>
+    <SolidColorBrush x:Key="SolutionExplorer_SearchBoxBackground" Color="#3F3F46"/>
+    <SolidColorBrush x:Key="SolutionExplorer_Border" Color="#3F3F46"/>
+    <SolidColorBrush x:Key="SolutionExplorer_Foreground" Color="#F1F1F1"/>
+    
+   
+</ResourceDictionary>

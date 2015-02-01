@@ -8,6 +8,7 @@
         <Setter Property="Foreground" Value="{StaticResource Foreground}"/>
         <Setter Property="Background" Value="{StaticResource BackgroundNormal}"/>
         <Setter Property="BorderBrush" Value="{StaticResource BorderBrushNormal}"/>
+        <Setter Property="FontFamily" Value="SegoeUI"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">

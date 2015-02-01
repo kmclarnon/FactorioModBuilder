@@ -1,10 +1,13 @@
-﻿<Window x:Class="FactorioModBuilder.View.Dialogs.NewProjectDialog"
+﻿<mah:MetroWindow x:Class="FactorioModBuilder.View.Dialogs.NewProjectDialog"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:system="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:FactorioModBuilder.View"
         xmlns:conv="clr-namespace:WpfUtils.ValueConverters;assembly=WpfUtils"
-        Title="Create New Project" Height="500" Width="750">
+        xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        GlowBrush="#007ACC" BorderThickness="0.5"
+        Title="Create New Project" TitleForeground="#6F6F70" TitleCaps="False"
+        Height="500" Width="750">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -60,4 +63,4 @@
             </Grid>
         </Grid>
     </Grid>
-</Window>
+</mah:MetroWindow>

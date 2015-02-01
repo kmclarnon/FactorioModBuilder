@@ -8,7 +8,7 @@
         Top="{Binding Path=AppTop, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
         Left="{Binding Path=AppLeft, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
         WindowState="{Binding Path=WindowState, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-        BorderBrush="#007ACC" BorderThickness="0.7"
+        GlowBrush="#007ACC" BorderThickness="0.7" FontFamily="SegoeUI"
         Title="{Binding Path=AppTitle}" TitleForeground="#6F6F70" TitleCaps="False"
         Activated="OnActivated" Deactivated="OnDeactivated">
     <Window.Resources>
