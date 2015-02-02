@@ -84,7 +84,8 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype.Filters
         /// </summary>
         protected void AddFilter()
         {
-            this.SubFilters.Add(this.GetNewFilter());
+            this.SubFilters.Add(this.GetNewFilter()); // must call this before attempting to expand
+            this.IsExpanded = true; // auto-expand when we add a visual child
         }
 
         /// <summary>
@@ -100,7 +101,8 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype.Filters
         /// </summary>
         protected void AddChild()
         {
-            this.TypedChildren.Add(this.GetNewChild());
+            this.TypedChildren.Add(this.GetNewChild()); // must call this before attempting to expand
+            this.IsExpanded = true; // auto-expand when we add a visual child
         }
 
         /// <summary>
