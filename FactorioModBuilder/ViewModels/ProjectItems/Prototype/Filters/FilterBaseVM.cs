@@ -85,7 +85,8 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype.Filters
         protected void AddFilter()
         {
             this.SubFilters.Add(this.GetNewFilter()); // must call this before attempting to expand
-            this.IsExpanded = true; // auto-expand when we add a visual child
+            // must call this after addition
+            this.CheckExpandedState();
         }
 
         /// <summary>
@@ -94,6 +95,8 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype.Filters
         protected void RemoveSelectedFilters()
         {
             this.SubFilters.RemoveWhere(o => o.IsSelected);
+            // must call this after removal
+            this.CheckExpandedState();
         }
 
         /// <summary>
@@ -101,8 +104,9 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype.Filters
         /// </summary>
         protected void AddChild()
         {
-            this.TypedChildren.Add(this.GetNewChild()); // must call this before attempting to expand
-            this.IsExpanded = true; // auto-expand when we add a visual child
+            this.TypedChildren.Add(this.GetNewChild());
+            // must call this after addition
+            this.CheckExpandedState();
         }
 
         /// <summary>
@@ -111,6 +115,8 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype.Filters
         protected void RemoveSelectedChildren()
         {
             this.TypedChildren.RemoveWhere(o => o.IsSelected);
+            // must call this after removal
+            this.CheckExpandedState();
         }
 
         /// <summary>
@@ -236,6 +242,14 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype.Filters
                     this.Children.RemoveWhere(o => o is FilterBaseVM<TChildren>);
                     break;
             }
+        }
+
+        /// <summary>
+        /// Sync visual child state with IsExpanded
+        /// </summary>
+        private void CheckExpandedState()
+        {
+            this.IsExpanded = this.Children.Any();
         }
 
         /// <summary>
