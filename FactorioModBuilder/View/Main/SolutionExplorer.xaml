@@ -57,6 +57,7 @@
                 <!-- Solution TreeView -->
                 <TreeView Grid.Row="3" BorderThickness="0" ItemsSource="{Binding Path=Solutions}"
                           cmds:MouseDoubleClick.Command="{Binding OpenSelectedItemCmd}"
+                          cmds:TreeViewRightClickSelect.RightClickSelect="True"
                           Background="{StaticResource SolutionExplorer_Background}"
                           Foreground="{StaticResource SolutionExplorer_Foreground}"
                           FontFamily="SegoeUI">

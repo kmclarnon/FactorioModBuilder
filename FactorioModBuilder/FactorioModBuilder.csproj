@@ -400,6 +400,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\Icons\Actions\" />
+    <Folder Include="View\Content\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\Objects\FilterOpen.png" />
