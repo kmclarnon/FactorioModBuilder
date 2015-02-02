@@ -2,8 +2,10 @@
 using FactorioModBuilder.Build.Data;
 using FactorioModBuilder.Models.Base;
 using FactorioModBuilder.ViewModels.Base;
+using FactorioModBuilder.ViewModels.Menu.Base;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,7 +18,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
     /// </summary>
     /// <typeparam name="TModel">The type of the model to wrap</typeparam>
     /// <typeparam name="TViewModel">The type of the this view model (CRTP)</typeparam>
-    public abstract class ProjectItem<TModel, TViewModel> : TreeItemVM<TModel, TViewModel>, ICompilerSource, IDoubleClickBehavior 
+    public abstract class ProjectItem<TModel, TViewModel> : TreeItemVM<TModel, TViewModel>, ICompilerSource, IDoubleClickBehavior, IMenuProvider 
         where TModel : TreeItem<TModel>
         where TViewModel : TreeItemVM<TModel, TViewModel>
     {
@@ -27,6 +29,8 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
         {
             get { return this.Children.Where(o => o is ICompilerSource).Cast<ICompilerSource>().SelectMany(o => o.CompilerData); }
         }
+
+        public ObservableCollection<IMenuItemProvider> MenuItems { get; private set; }
 
         /// <summary>
         /// Whether this project item should be opened when the user double clicks on it
@@ -39,9 +43,8 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
         /// <param name="item"></param>
         /// <param name="openOnDblClick">Whether or not this project item should be opened when the user double clicks on it</param>
         public ProjectItem(TModel item, DoubleClickBehavior dblClickBehavior = DoubleClickBehavior.Ignore) 
-            : base(item)
+            : this(null, item, dblClickBehavior)
         {
-            this.DoubleClickBehavior = dblClickBehavior;
         }
 
         /// <summary>
@@ -55,6 +58,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
             : base(parent, item)
         {
             this.DoubleClickBehavior = dblClickBehavior;
+            this.MenuItems = new ObservableCollection<IMenuItemProvider>();
         }
 
         /// <summary>
@@ -65,9 +69,8 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
         /// <param name="children">The view model children of this model</param>
         /// <param name="openOnDblClick">Whether or not this project item should be opened when the user double clicks on it</param>
         public ProjectItem(TModel item, IEnumerable<TreeItemVMBase> children, DoubleClickBehavior dblClickBehavior = DoubleClickBehavior.Ignore)
-            : base(item, children)
+            : this(null, item, children, dblClickBehavior)
         {
-            this.DoubleClickBehavior = dblClickBehavior;
         }
 
         /// <summary>
@@ -83,6 +86,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
             : base(parent, item, children)
         {
             this.DoubleClickBehavior = dblClickBehavior;
+            this.MenuItems = new ObservableCollection<IMenuItemProvider>();
         }
     }
 }

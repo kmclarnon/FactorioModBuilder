@@ -35,11 +35,6 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype.Filters
         public ObservableCollection<FilterBaseVM<TChildren>> SubFilters { get; private set; }
 
         /// <summary>
-        /// Provides the list of contenxt menu items for this filter
-        /// </summary>
-        public ObservableCollection<IMenuItemProvider> MenuItems { get; private set; }
-
-        /// <summary>
         /// The name of the child that will be used in the context menu Add New menu 
         /// </summary>
         public string ChildDisplayName { get; private set; }
@@ -128,11 +123,12 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype.Filters
             // collections
             this.TypedChildren = new ObservableCollection<TChildren>();
             this.SubFilters = new ObservableCollection<FilterBaseVM<TChildren>>();
-            this.MenuItems = new ObservableCollection<IMenuItemProvider>();
+
             // event handlers
             this.TypedChildren.CollectionChanged += TypedChildrenCollectionChanged;
             this.Children.CollectionChanged += ChildrenCollectionChanged;
             this.SubFilters.CollectionChanged += SubFilterCollectionChanged;
+
             // menu items
             this.MenuItems.Add(new CategoryItem("Add",
                 new ClickableItem("New " + this.ChildDisplayName, this.AddChild),
@@ -141,10 +137,11 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype.Filters
             this.MenuItems.Add(new ClickableItem("Cut", this.Cut));
             this.MenuItems.Add(new ClickableItem("Copy", this.Copy));
             this.MenuItems.Add(new ClickableItem("Paste", this.Paste, this.CanPaste));
-            this.MenuItems.Add(new ClickableItem("Delete", this.Delete));
-            this.MenuItems.Add(new ClickableItem("Rename", this.Rename));
+            this.MenuItems.Add(new ClickableItem("Delete", this.Delete, this.CanDelete));
+            this.MenuItems.Add(new ClickableItem("Rename", this.Rename, this.CanRename));
             this.MenuItems.Add(new SeparatorItem());
             this.MenuItems.Add(new ClickableItem("Properties", this.ViewProperties));
+
             // icon
             this.Icon = Resources.Icons.AppIcon.FilterClosed;
         }
@@ -294,11 +291,27 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype.Filters
         }
 
         /// <summary>
+        /// Determines whether this filter can be deleted
+        /// </summary>
+        protected virtual bool CanDelete()
+        {
+            return true;
+        }
+
+        /// <summary>
         /// Renames this filter
         /// </summary>
         protected virtual void Rename()
         {
 
+        }
+        
+        /// <summary>
+        /// Determines whether this filter can be renamed
+        /// </summary>
+        protected virtual bool CanRename()
+        {
+            return true;
         }
 
         /// <summary>
