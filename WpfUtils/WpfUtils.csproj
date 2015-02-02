@@ -47,6 +47,8 @@
     <Compile Include="Actions\CloseTabItemAction.cs" />
     <Compile Include="BaseVM.cs" />
     <Compile Include="Behaviors\MouseDoubleClick.cs" />
+    <Compile Include="Behaviors\PreviewMouseRighButtontDown.cs" />
+    <Compile Include="Behaviors\TreeViewRightClickSelect.cs" />
     <Compile Include="BindingProxy.cs" />
     <Compile Include="Bindings\BaseBinding.cs" />
     <Compile Include="Bindings\NumberBinding.cs" />
