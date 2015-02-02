@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:util="clr-namespace:WpfUtils;assembly=WpfUtils"
         xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:avd="http://schemas.xceed.com/wpf/xaml/avalondock"
         Height="{Binding Path=AppHeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
         Width="{Binding Path=AppWidth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
         Top="{Binding Path=AppTop, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -25,7 +26,7 @@
         <Style TargetType="{x:Type mah:MetroWindow}">
             <Style.Triggers>
                 <Trigger Property="WindowState" Value="Maximized">
-                    <Setter Property="BorderBrush" Value="Transparent"/>
+                    <Setter Property="GlowBrush" Value="Transparent"/>
                 </Trigger>
             </Style.Triggers>
         </Style>

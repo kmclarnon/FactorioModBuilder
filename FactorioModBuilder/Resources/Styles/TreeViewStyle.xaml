@@ -30,12 +30,17 @@
                               HorizontalAlignment="Left" 
                               VerticalAlignment="Center" 
                               Margin="1,1,1,1"
-                              Fill="{StaticResource GlyphBrush}"
+                              Fill="{StaticResource SolutionExplorer_Toggle}"
+                              Stroke="{StaticResource SolutionExplorer_Toggle}"
                               Data="M 4 0 L 8 4 L 4 8 Z"/>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="True">
-                            <Setter Property="Data" TargetName="ExpandPath" Value="M 0 4 L 8 4 L 4 8 Z"/>
+                            <!-- M 0 4 L 8 4 L 4 8 Z -->
+                            <Setter Property="Data" TargetName="ExpandPath" Value="M 10 0 L 5 5 L 10 5 Z"/>
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="False">
+                            <Setter Property="Fill" TargetName="ExpandPath" Value="Transparent"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

@@ -22,6 +22,7 @@
     <SolidColorBrush x:Key="SolutionExplorer_SearchBoxBackground" Color="#3F3F46"/>
     <SolidColorBrush x:Key="SolutionExplorer_Border" Color="#3F3F46"/>
     <SolidColorBrush x:Key="SolutionExplorer_Foreground" Color="#F1F1F1"/>
+    <SolidColorBrush x:Key="SolutionExplorer_Toggle" Color="#F1F1F1"/>
     
    
 </ResourceDictionary>

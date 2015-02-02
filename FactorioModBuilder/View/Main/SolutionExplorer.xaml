@@ -60,6 +60,9 @@
                           Background="{StaticResource SolutionExplorer_Background}"
                           Foreground="{StaticResource SolutionExplorer_Foreground}"
                           FontFamily="SegoeUI">
+                    <TreeView.ContextMenu>
+                        <ContextMenu Style="{StaticResource StandardContextMenu}"/>
+                    </TreeView.ContextMenu>
                 </TreeView>
             </Grid>
         </Border>
