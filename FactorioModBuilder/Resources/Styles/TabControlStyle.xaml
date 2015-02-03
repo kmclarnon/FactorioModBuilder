@@ -4,6 +4,7 @@
                     xmlns:Actions="clr-namespace:WpfUtils.Actions;assembly=WpfUtils">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="../Colors.xaml"/>
+        <ResourceDictionary Source="../Themes/Dark.xaml"/>
     </ResourceDictionary.MergedDictionaries>
     <Style TargetType="{x:Type TabControl}" x:Key="MainContentTabControl">
         <Style.Resources>
@@ -22,7 +23,7 @@
                                 </Grid.ColumnDefinitions>
                                 <ContentPresenter ContentSource="Header" Margin="10,0,10,0" HorizontalAlignment="Center" VerticalAlignment="Center">
                                     <ContentPresenter.Resources>
-                                        <Style TargetType="TextBlock">
+                                        <Style TargetType="{x:Type TextBlock}">
                                             <Setter Property="Foreground" Value="{StaticResource Foreground}"/>
                                         </Style>
                                     </ContentPresenter.Resources>
@@ -145,13 +146,10 @@
                             </Grid>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsSelected" Value="false">
-                                    <Setter Property="Background" Value="Transparent"/>
-                                </Trigger>
-                                <Trigger Property="IsMouseOver" Value="true">
-                                    <Setter Property="Background" Value="{StaticResource BorderBrushSelected}"/>
+                                    <Setter Property="Background" Value="{StaticResource ContentControl_DesignerTab}"/>
                                 </Trigger>
                                 <Trigger Property="IsSelected" Value="true">
-                                    <Setter Property="Background" Value="{StaticResource BackgroundSelected}"/>
+                                    <Setter Property="Background" Value="{StaticResource ContentControl_DesignerSelectedTab}"/>
                                 </Trigger>
                             </ControlTemplate.Triggers>
                         </ControlTemplate>

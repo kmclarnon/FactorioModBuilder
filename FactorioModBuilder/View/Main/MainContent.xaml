@@ -9,7 +9,7 @@
     </ResourceDictionary.MergedDictionaries>
     
     <DataTemplate DataType="{x:Type main:MainContentVM}">
-        <TabControl ItemsSource="{Binding Path=Content}" Style="{StaticResource MainContentTabControl}">
+        <TabControl ItemsSource="{Binding Path=Content}" Style="{StaticResource MainContentTabControl}" Background="Transparent">
             <TabControl.ContentTemplate>
                 <DataTemplate>
                     <ContentPresenter Content="{Binding Path=Content}"/>

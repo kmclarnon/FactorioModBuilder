@@ -2,5 +2,6 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="ModInfo.xaml"/>
+        <ResourceDictionary Source="Group.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

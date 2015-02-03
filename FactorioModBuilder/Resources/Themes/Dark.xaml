@@ -24,5 +24,9 @@
     <SolidColorBrush x:Key="SolutionExplorer_Foreground" Color="#F1F1F1"/>
     <SolidColorBrush x:Key="SolutionExplorer_Toggle" Color="#F1F1F1"/>
     
+    <!-- Content Control -->
+    <SolidColorBrush x:Key="ContentControl_DesignerSelectedTab" Color="#434346"/>
+    <SolidColorBrush x:Key="ContentControl_DesignerTab" Color="#333337"/>
+    
    
 </ResourceDictionary>
