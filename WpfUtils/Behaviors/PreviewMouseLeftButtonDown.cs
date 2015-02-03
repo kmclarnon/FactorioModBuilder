@@ -10,9 +10,9 @@ using System.Windows.Input;
 namespace WpfUtils.Behaviors
 {
     /// <summary>
-    /// Behavior that allows binding an ICommand to the PrieviewMouseRightButtonDown event of a Control
+    /// Behavior that allows binding an ICommand to the PrieviewMouseLeftButtonDown event of a Control
     /// </summary>
-    public class PreviewMouseRightButtontDown
+    public class PreviewMouseLeftButtontDown
     {
         /// <summary>
         /// ICommand binding property
@@ -20,7 +20,7 @@ namespace WpfUtils.Behaviors
         public static DependencyProperty CommandProperty =
         DependencyProperty.RegisterAttached("Command",
             typeof(ICommand),
-            typeof(PreviewMouseRightButtontDown),
+            typeof(PreviewMouseLeftButtontDown),
             new UIPropertyMetadata(CommandChanged));
 
         /// <summary>
@@ -29,7 +29,7 @@ namespace WpfUtils.Behaviors
         public static DependencyProperty CommandParameterProperty =
             DependencyProperty.RegisterAttached("CommandParameter",
             typeof(object),
-            typeof(PreviewMouseRightButtontDown),
+            typeof(PreviewMouseLeftButtontDown),
             new UIPropertyMetadata(null));
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace WpfUtils.Behaviors
         }
 
         /// <summary>
-        /// Handles hooking and unhooking the OnPreviewMouseRightButtonDown event
+        /// Handles hooking and unhooking the OnPreviewMouseLeftButtonDown event
         /// </summary>
         private static void CommandChanged(DependencyObject target, DependencyPropertyChangedEventArgs e)
         {
@@ -66,11 +66,11 @@ namespace WpfUtils.Behaviors
             {
                 if ((e.NewValue != null) && (e.OldValue == null))
                 {
-                    control.PreviewMouseRightButtonDown += OnPreviewMouseRightButtonDown;
+                    control.PreviewMouseLeftButtonDown += OnPreviewMouseLeftButtonDown;
                 }
                 else if ((e.NewValue == null) && (e.OldValue != null))
                 {
-                    control.PreviewMouseRightButtonDown -= OnPreviewMouseRightButtonDown;
+                    control.PreviewMouseLeftButtonDown -= OnPreviewMouseLeftButtonDown;
                 }
             }
         }
@@ -78,7 +78,7 @@ namespace WpfUtils.Behaviors
         /// <summary>
         /// Handles invoking the bounding command
         /// </summary>
-        private static void OnPreviewMouseRightButtonDown(object sender, RoutedEventArgs e)
+        private static void OnPreviewMouseLeftButtonDown(object sender, RoutedEventArgs e)
         {
             Control control = sender as Control;
             if (control != null)
