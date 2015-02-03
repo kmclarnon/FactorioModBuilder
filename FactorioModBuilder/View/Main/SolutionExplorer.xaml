@@ -61,7 +61,6 @@
                 <TreeView Grid.Row="3" BorderThickness="0" ItemsSource="{Binding Path=Solutions}"
                           mouse:MouseDoubleClick.Command="{Binding OpenSelectedItemCmd}"
                           ctrl:TreeViewRightClickSelect.Active="True"
-                          mouse:PreviewMouseLeftButtontDown.Command="{Binding RenameCmd}"
                           Background="{StaticResource SolutionExplorer_Background}"
                           Foreground="{StaticResource SolutionExplorer_Foreground}"
                           VerticalContentAlignment="Center"
