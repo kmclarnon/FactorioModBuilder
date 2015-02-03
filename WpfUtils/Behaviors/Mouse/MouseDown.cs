@@ -10,9 +10,9 @@ using System.Windows.Input;
 namespace WpfUtils.Behaviors.Mouse
 {
     /// <summary>
-    /// Behavior that allows binding an ICommand to the MouseRightButtonUp event of a Control
+    /// Behavior that allows binding an ICommand to the MouseDown event of a Control
     /// </summary>
-    public class MouseRightButtonUp
+    public class MouseDown
     {
         /// <summary>
         /// ICommand binding property
@@ -20,7 +20,7 @@ namespace WpfUtils.Behaviors.Mouse
         public static readonly DependencyProperty CommandProperty =
         DependencyProperty.RegisterAttached("Command",
             typeof(ICommand),
-            typeof(MouseRightButtonUp),
+            typeof(MouseDown),
             new UIPropertyMetadata(CommandChanged));
 
         /// <summary>
@@ -29,7 +29,7 @@ namespace WpfUtils.Behaviors.Mouse
         public static readonly DependencyProperty CommandParameterProperty =
             DependencyProperty.RegisterAttached("CommandParameter",
             typeof(object),
-            typeof(MouseRightButtonUp),
+            typeof(MouseDown),
             new UIPropertyMetadata(null));
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace WpfUtils.Behaviors.Mouse
         }
 
         /// <summary>
-        /// Handles hooking and unhooking the MouseRightButtonUp event
+        /// Handles hooking and unhooking the MouseDown event
         /// </summary>
         private static void CommandChanged(DependencyObject target, DependencyPropertyChangedEventArgs e)
         {
@@ -66,11 +66,11 @@ namespace WpfUtils.Behaviors.Mouse
             {
                 if ((e.NewValue != null) && (e.OldValue == null))
                 {
-                    control.MouseRightButtonUp += OnMouseRightButtonUp;
+                    control.MouseDown += OnMouseDown;
                 }
                 else if ((e.NewValue == null) && (e.OldValue != null))
                 {
-                    control.MouseRightButtonUp -= OnMouseRightButtonUp;
+                    control.MouseDown -= OnMouseDown;
                 }
             }
         }
@@ -78,7 +78,7 @@ namespace WpfUtils.Behaviors.Mouse
         /// <summary>
         /// Handles invoking the bounding command
         /// </summary>
-        private static void OnMouseRightButtonUp(object sender, RoutedEventArgs e)
+        private static void OnMouseDown(object sender, RoutedEventArgs e)
         {
             Control control = sender as Control;
             if (control != null)
@@ -91,4 +91,3 @@ namespace WpfUtils.Behaviors.Mouse
         }
     }
 }
-

@@ -48,10 +48,12 @@
     <Compile Include="BaseVM.cs" />
     <Compile Include="Behaviors\Controls\TextBoxSelectTextOnFocus.cs" />
     <Compile Include="Behaviors\Mouse\MouseDoubleClick.cs" />
+    <Compile Include="Behaviors\Mouse\MouseDown.cs" />
     <Compile Include="Behaviors\Mouse\MouseLeftButtonDown.cs" />
     <Compile Include="Behaviors\Mouse\MouseLeftButtonUp.cs" />
     <Compile Include="Behaviors\Mouse\MouseRightButtonDown.cs" />
     <Compile Include="Behaviors\Mouse\MouseRightButtonUp.cs" />
+    <Compile Include="Behaviors\Mouse\MouseUp.cs" />
     <Compile Include="Behaviors\Mouse\PreviewMouseLeftButtonDown.cs" />
     <Compile Include="Behaviors\Mouse\PreviewMouseLeftButtonUp.cs" />
     <Compile Include="Behaviors\Mouse\PreviewMouseRighButtontDown.cs" />

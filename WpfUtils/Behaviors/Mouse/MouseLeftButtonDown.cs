@@ -10,7 +10,7 @@ using System.Windows.Input;
 namespace WpfUtils.Behaviors.Mouse
 {
     /// <summary>
-    /// Behavior that allows binding an ICommand to the MosueLeftButtonDown event of a Control
+    /// Behavior that allows binding an ICommand to the MouseLeftButtonDown event of a Control
     /// </summary>
     public class MouseLeftButtonDown
     {
