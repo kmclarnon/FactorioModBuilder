@@ -8,6 +8,9 @@ using System.Windows.Controls;
 
 namespace WpfUtils.Behaviors.Controls
 {
+    /// <summary>
+    /// Behavior that causes a text box to select all contained text when it gains focus
+    /// </summary>
     public class TextBoxSelectTextOnFocus
     {
         /// <summary>
