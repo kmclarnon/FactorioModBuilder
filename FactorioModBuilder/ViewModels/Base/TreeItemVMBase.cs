@@ -13,6 +13,7 @@ using WpfUtils;
 using System.ComponentModel;
 using FactorioModBuilder.Resources.Icons;
 using System.Windows.Input;
+using System.Collections.Specialized;
 
 namespace FactorioModBuilder.ViewModels.Base
 {
@@ -168,15 +169,57 @@ namespace FactorioModBuilder.ViewModels.Base
             _parent = parent;
             _item = item;
             this.Children = new ObservableCollection<TreeItemVMBase>();
+            this.Children.CollectionChanged += OnChildrenCollectionChanged;
             foreach (var c in children)
-            {
-                c._parent = this;
-                this.OnInitComplete += c.ParentInitComplete;
                 this.Children.Add(c);
-            }
 
             if(_parent != null)
                 parent.OnInitComplete += ParentInitComplete;
+        }
+
+        private void OnChildrenCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            switch (e.Action)
+            {
+                case NotifyCollectionChangedAction.Add:
+                    foreach(TreeItemVMBase i in e.NewItems)
+                    {
+                        i._parent = this;
+                        this.OnInitComplete += i.ParentInitComplete;
+                    }
+                    break;
+                case NotifyCollectionChangedAction.Remove:
+                    foreach(TreeItemVMBase i in e.OldItems)
+                    {
+                        if (ReferenceEquals(this, i._parent))
+                            i._parent = null;
+                        this.OnInitComplete -= i.ParentInitComplete;
+                    }
+                    break;
+                case NotifyCollectionChangedAction.Replace:
+                    foreach(TreeItemVMBase oi in e.OldItems)
+                    {
+                        if (ReferenceEquals(this, oi._parent))
+                            oi._parent = null;
+                        this.OnInitComplete -= oi.ParentInitComplete;
+                    }
+                    foreach(TreeItemVMBase ni in e.NewItems)
+                    {
+                        ni._parent = this;
+                        this.OnInitComplete += ni.ParentInitComplete;
+                    }
+                    break;
+                case NotifyCollectionChangedAction.Reset:
+                    foreach(TreeItemVMBase i in e.OldItems)
+                    {
+                        if (ReferenceEquals(this, i._parent))
+                            i._parent = null;
+                        this.OnInitComplete -= i.ParentInitComplete;
+                    }
+                    break;
+                default:
+                    throw new Exception("Unhandled Children Collection Changed");
+            }
         }
 
         /// <summary>
