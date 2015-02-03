@@ -7,7 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace WpfUtils.Behaviors
+namespace WpfUtils.Behaviors.Controls
 {
     /// <summary>
     /// Behavior that allows a treeview to select the node right-clicked on before the right click event
@@ -17,24 +17,24 @@ namespace WpfUtils.Behaviors
         /// <summary>
         /// The right click select dependency property
         /// </summary>
-        public static readonly DependencyProperty RightClickSelectProperty =
-            DependencyProperty.RegisterAttached("RightClickSelect",
+        public static readonly DependencyProperty ActiveProperty =
+            DependencyProperty.RegisterAttached("Active",
                 typeof(bool),
                 typeof(TreeViewRightClickSelect),
-                new UIPropertyMetadata(RightClickSelectChanged));
+                new UIPropertyMetadata(ActiveChanged));
 
         /// <summary>
         /// Sets the right click select property value
         /// </summary>
-        public static void SetRightClickSelect(DependencyObject target, bool value)
+        public static void SetActive(DependencyObject target, bool value)
         {
-            target.SetValue(RightClickSelectProperty, value);
+            target.SetValue(ActiveProperty, value);
         }
 
         /// <summary>
         /// Handles hooking and unhooking the events required to handle right click selection
         /// </summary>
-        public static void RightClickSelectChanged(DependencyObject target, DependencyPropertyChangedEventArgs e)
+        public static void ActiveChanged(DependencyObject target, DependencyPropertyChangedEventArgs e)
         {
             TreeView tree = target as TreeView;
             if (tree != null)

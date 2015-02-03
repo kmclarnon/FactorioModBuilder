@@ -7,29 +7,29 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace WpfUtils.Behaviors
+namespace WpfUtils.Behaviors.Mouse
 {
     /// <summary>
-    /// Behavior that allows binding an ICommand to the PrieviewMouseRightButtonDown event of a Control
+    /// Behavior that allows binding an ICommand to the MosueRightButtonDown event of a Control
     /// </summary>
-    public class PreviewMouseRightButtontDown
+    public class MouseRightButtonDown
     {
         /// <summary>
         /// ICommand binding property
         /// </summary>
-        public static DependencyProperty CommandProperty =
+        public static readonly DependencyProperty CommandProperty =
         DependencyProperty.RegisterAttached("Command",
             typeof(ICommand),
-            typeof(PreviewMouseRightButtontDown),
+            typeof(MouseRightButtonDown),
             new UIPropertyMetadata(CommandChanged));
 
         /// <summary>
         /// ICommand paramaeter binding property
         /// </summary>
-        public static DependencyProperty CommandParameterProperty =
+        public static readonly DependencyProperty CommandParameterProperty =
             DependencyProperty.RegisterAttached("CommandParameter",
             typeof(object),
-            typeof(PreviewMouseRightButtontDown),
+            typeof(MouseRightButtonDown),
             new UIPropertyMetadata(null));
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace WpfUtils.Behaviors
         }
 
         /// <summary>
-        /// Handles hooking and unhooking the OnPreviewMouseRightButtonDown event
+        /// Handles hooking and unhooking the MouseRightButtonDown event
         /// </summary>
         private static void CommandChanged(DependencyObject target, DependencyPropertyChangedEventArgs e)
         {
@@ -66,11 +66,11 @@ namespace WpfUtils.Behaviors
             {
                 if ((e.NewValue != null) && (e.OldValue == null))
                 {
-                    control.PreviewMouseRightButtonDown += OnPreviewMouseRightButtonDown;
+                    control.MouseRightButtonDown += OnMouseRightButtonDown;
                 }
                 else if ((e.NewValue == null) && (e.OldValue != null))
                 {
-                    control.PreviewMouseRightButtonDown -= OnPreviewMouseRightButtonDown;
+                    control.MouseRightButtonDown -= OnMouseRightButtonDown;
                 }
             }
         }
@@ -78,7 +78,7 @@ namespace WpfUtils.Behaviors
         /// <summary>
         /// Handles invoking the bounding command
         /// </summary>
-        private static void OnPreviewMouseRightButtonDown(object sender, RoutedEventArgs e)
+        private static void OnMouseRightButtonDown(object sender, RoutedEventArgs e)
         {
             Control control = sender as Control;
             if (control != null)
@@ -91,3 +91,4 @@ namespace WpfUtils.Behaviors
         }
     }
 }
+

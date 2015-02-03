@@ -7,7 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace WpfUtils.Behaviors
+namespace WpfUtils.Behaviors.Mouse
 {
     /// <summary>
     /// Behavior that allows binding an ICommand to the MosueLeftButtonDown event of a Control

@@ -26,7 +26,6 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="True">
-                            <!-- M 0 4 L 8 4 L 4 8 Z -->
                             <Setter Property="Data" TargetName="ExpandPath" Value="M 10 0 L 5 5 L 10 5 Z"/>
                         </Trigger>
                         <Trigger Property="IsChecked" Value="False">

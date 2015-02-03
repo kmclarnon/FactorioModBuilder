@@ -46,11 +46,17 @@
   <ItemGroup>
     <Compile Include="Actions\CloseTabItemAction.cs" />
     <Compile Include="BaseVM.cs" />
-    <Compile Include="Behaviors\MouseDoubleClick.cs" />
-    <Compile Include="Behaviors\MouseLeftButtonDown.cs" />
-    <Compile Include="Behaviors\PreviewMouseLeftButtonDown.cs" />
-    <Compile Include="Behaviors\PreviewMouseRighButtontDown.cs" />
-    <Compile Include="Behaviors\TreeViewRightClickSelect.cs" />
+    <Compile Include="Behaviors\Controls\TextBoxSelectTextOnFocus.cs" />
+    <Compile Include="Behaviors\Mouse\MouseDoubleClick.cs" />
+    <Compile Include="Behaviors\Mouse\MouseLeftButtonDown.cs" />
+    <Compile Include="Behaviors\Mouse\MouseLeftButtonUp.cs" />
+    <Compile Include="Behaviors\Mouse\MouseRightButtonDown.cs" />
+    <Compile Include="Behaviors\Mouse\MouseRightButtonUp.cs" />
+    <Compile Include="Behaviors\Mouse\PreviewMouseLeftButtonDown.cs" />
+    <Compile Include="Behaviors\Mouse\PreviewMouseLeftButtonUp.cs" />
+    <Compile Include="Behaviors\Mouse\PreviewMouseRighButtontDown.cs" />
+    <Compile Include="Behaviors\Mouse\PreviewMouseRightButtonUp.cs" />
+    <Compile Include="Behaviors\Controls\TreeViewRightClickSelect.cs" />
     <Compile Include="BindingProxy.cs" />
     <Compile Include="Bindings\BaseBinding.cs" />
     <Compile Include="Bindings\NumberBinding.cs" />

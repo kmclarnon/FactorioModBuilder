@@ -2,7 +2,8 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:sln="clr-namespace:FactorioModBuilder.ViewModels"
                     xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-                    xmlns:cmds="clr-namespace:WpfUtils.Behaviors;assembly=WpfUtils"
+                    xmlns:mouse="clr-namespace:WpfUtils.Behaviors.Mouse;assembly=WpfUtils"
+                    xmlns:ctrl="clr-namespace:WpfUtils.Behaviors.Controls;assembly=WpfUtils"
                     xmlns:proj="clr-namespace:FactorioModBuilder.ViewModels.ProjectItems"
                     xmlns:prot="clr-namespace:FactorioModBuilder.ViewModels.ProjectItems.Prototype"
                     xmlns:fil="clr-namespace:FactorioModBuilder.ViewModels.ProjectItems.Prototype.Filters"
@@ -58,9 +59,9 @@
                 </Grid>
                 <!-- Solution TreeView -->
                 <TreeView Grid.Row="3" BorderThickness="0" ItemsSource="{Binding Path=Solutions}"
-                          cmds:MouseDoubleClick.Command="{Binding OpenSelectedItemCmd}"
-                          cmds:TreeViewRightClickSelect.RightClickSelect="True"
-                          cmds:PreviewMouseLeftButtontDown.Command="{Binding RenameCmd}"
+                          mouse:MouseDoubleClick.Command="{Binding OpenSelectedItemCmd}"
+                          ctrl:TreeViewRightClickSelect.Active="True"
+                          mouse:PreviewMouseLeftButtontDown.Command="{Binding RenameCmd}"
                           Background="{StaticResource SolutionExplorer_Background}"
                           Foreground="{StaticResource SolutionExplorer_Foreground}"
                           VerticalContentAlignment="Center"
