@@ -54,6 +54,7 @@
     <Compile Include="BindingProxy.cs" />
     <Compile Include="Bindings\BaseBinding.cs" />
     <Compile Include="Bindings\NumberBinding.cs" />
+    <Compile Include="Debug\DebugConverter.cs" />
     <Compile Include="Extensions\PropertyMethods.cs" />
     <Compile Include="Extensions\TreeViewItemMethods.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
