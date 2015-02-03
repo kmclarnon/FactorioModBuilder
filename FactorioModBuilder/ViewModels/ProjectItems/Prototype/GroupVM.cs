@@ -11,6 +11,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using WpfUtils;
+using FactorioModBuilder.Extensions;
+using System.Collections.ObjectModel;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
@@ -63,8 +65,14 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 
         public ICommand FindImageCmd { get { return this.GetCommand(this.FindImage, this.CanFindImage); } }
 
+        public ICommand AddSubGroupCmd { get { return this.GetCommand(this.AddSubGroup); } }
+
+        public ICommand RemoveSubGroupCmd { get { return this.GetCommand(this.RemoveSubGroup, this.CanRemoveSubGroup); } }
+
+        private int _newCount = 1;
+
         public GroupVM(Group group)
-            : base(group, DoubleClickBehavior.OpenContent)
+            : this(null, group)
         {
         }
 
@@ -89,6 +97,22 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
             {
                 this.IconPath = ofd.FileName;
             }
+        }
+
+        private void AddSubGroup()
+        {
+            this.Children.Add(new SubGroupVM(new SubGroup("new-subgroup-" + _newCount)));
+            _newCount++;
+        }
+
+        private bool CanRemoveSubGroup()
+        {
+            return this.Children.Any(o => o.IsSelected);
+        }
+
+        private void RemoveSubGroup()
+        {
+            this.Children.RemoveWhere(o => o.IsSelected);
         }
     }
 }

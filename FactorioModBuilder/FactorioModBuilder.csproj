@@ -196,7 +196,6 @@
     <Compile Include="ViewModels\ProjectItems\Prototype\Filters\FluidFilterVM.cs" />
     <Compile Include="ViewModels\ProjectItems\Prototype\Filters\GroupsFilterVM.cs" />
     <Compile Include="ViewModels\ProjectItems\Prototype\Filters\ItemFilterVM.cs" />
-    <Compile Include="ViewModels\ProjectItems\Prototype\Filters\SubGroupFilterVM.cs" />
     <Compile Include="ViewModels\ProjectItems\Prototype\RecipeIngredientVM.cs" />
     <Compile Include="ViewModels\ProjectItems\Prototype\TechnologyEffectVM.cs" />
     <Compile Include="ViewModels\ProjectItems\Prototype\TechnologyIngredientVM.cs" />

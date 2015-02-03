@@ -112,10 +112,9 @@ namespace FactorioModBuilder.ViewModels
                             new PrototypesVM(new Prototypes(),
                                 new List<TreeItemVMBase>()
                                 {
-                                    new GroupsFilterVM("Groups"),
-                                    new SubGroupFilterVM("SubGroups"),
-                                    new EntityFilterVM("Entities"),
+                                    new GroupsFilterVM("Item Groups"),
                                     new ItemFilterVM("Items"),
+                                    new EntityFilterVM("Entities"),
                                     new EquipmentFilterVM("Equipment"),
                                     new FluidFilterVM("Fluids")
                                 }),

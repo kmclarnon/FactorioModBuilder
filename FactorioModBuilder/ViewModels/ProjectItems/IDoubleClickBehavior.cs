@@ -9,6 +9,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
     public enum DoubleClickBehavior
     {
         OpenContent,
+        OpenParent,
         Ignore
     }
 
