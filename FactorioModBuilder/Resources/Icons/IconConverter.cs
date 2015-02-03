@@ -12,6 +12,7 @@ namespace FactorioModBuilder.Resources.Icons
         public Object IconNoIcon { get; set; }
         public Object IconFilterOpen { get; set; }
         public Object IconFilterClosed { get; set; }
+        public Object IconPrototypes { get; set; }
 
         public override object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
@@ -22,6 +23,7 @@ namespace FactorioModBuilder.Resources.Icons
                     case AppIcon.NoIcon: return this.IconNoIcon;
                     case AppIcon.FilterClosed: return this.IconFilterClosed;
                     case AppIcon.FilterOpen: return this.IconFilterOpen;
+                    case AppIcon.Prototypes: return this.IconPrototypes;
                     default:
                         throw new Exception("Unknown AppIcon enumeration value");
                 }

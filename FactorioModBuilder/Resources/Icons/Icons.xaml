@@ -3,9 +3,11 @@
                     xmlns:icon="clr-namespace:FactorioModBuilder.Resources.Icons">
     <BitmapImage x:Key="FilterOpen" UriSource="Objects/FilterOpen.png"/>
     <BitmapImage x:Key="FilterClosed" UriSource="Objects/FilterClosed.png"/>
+    <BitmapImage x:Key="Prototypes" UriSource="Objects/Prototypes.png"/>
     
     <icon:IconConverter x:Key="IconSelector"
                         IconNoIcon="{x:Null}"
                         IconFilterOpen="{StaticResource FilterOpen}"
-                        IconFilterClosed="{StaticResource FilterClosed}"/>
+                        IconFilterClosed="{StaticResource FilterClosed}"
+                        IconPrototypes="{StaticResource Prototypes}"/>
 </ResourceDictionary>

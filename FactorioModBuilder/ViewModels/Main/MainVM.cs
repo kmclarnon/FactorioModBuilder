@@ -91,6 +91,8 @@ namespace FactorioModBuilder.ViewModels
             this.SolutionExplorer = new SolutionExplorerVM(this);
             this.MainMenu = new MainMenuVM(this, new FileMenuVM(this));
             this.MainContent = new MainContentVM();
+            this.AppTop = 150;
+            this.AppLeft = 400;
         }
 
         public SolutionVM CreateNewSolution(string solutionName, string projectName, string location)

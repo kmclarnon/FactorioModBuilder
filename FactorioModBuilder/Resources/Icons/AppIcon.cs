@@ -10,6 +10,7 @@ namespace FactorioModBuilder.Resources.Icons
     {
         NoIcon,
         FilterClosed,
-        FilterOpen
+        FilterOpen,
+        Prototypes
     }
 }

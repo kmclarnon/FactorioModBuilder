@@ -31,27 +31,14 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
             : base(types, children, DoubleClickBehavior.Ignore)
         {
             this.GraphicsSources = new ObservableCollection<IGraphicsSource>();
-            this.UpdateIcon();
+            this.Icon = AppIcon.Prototypes;
         }
 
         public PrototypesVM(TreeItemVMBase parent, Prototypes types, IEnumerable<TreeItemVMBase> children)
             : base(parent, types, children, DoubleClickBehavior.Ignore)
         {
             this.GraphicsSources = new ObservableCollection<IGraphicsSource>();
-            this.UpdateIcon();
-        }
-
-        protected override void OnIsExpandedChanged()
-        {
-            this.UpdateIcon();
-        }
-
-        protected void UpdateIcon()
-        {
-            if (this.IsExpanded)
-                this.Icon = AppIcon.FilterOpen;
-            else
-                this.Icon = AppIcon.FilterClosed;
+            this.Icon = AppIcon.Prototypes;
         }
     }
 }
