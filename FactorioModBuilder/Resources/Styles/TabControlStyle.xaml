@@ -5,7 +5,7 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="../Colors.xaml"/>
     </ResourceDictionary.MergedDictionaries>
-    <Style TargetType="{x:Type TabControl}" x:Key="StandardTabControl">
+    <Style TargetType="{x:Type TabControl}" x:Key="MainContentTabControl">
         <Style.Resources>
             <Style TargetType="{x:Type TabItem}">
                 <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
@@ -116,6 +116,60 @@
                         </Border>
                         <Border Grid.Row="1" Background="{StaticResource Background}"/>
                         <ContentPresenter Grid.Row="1" Name="PART_SelectedContentHost" 
+                                          ContentSource="SelectedContent"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="{x:Type TabControl}" x:Key="MainContentInternalTabControl">
+        <Style.Resources>
+            <Style TargetType="{x:Type TabItem}">
+                <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type TabItem}">
+                            <Grid Background="{TemplateBinding Background}" SnapsToDevicePixels="true" Height="18">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="25"/>
+                                </Grid.ColumnDefinitions>
+                                <ContentPresenter ContentSource="Header" Margin="10,0,10,0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <ContentPresenter.Resources>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="Foreground" Value="{StaticResource Foreground}"/>
+                                        </Style>
+                                    </ContentPresenter.Resources>
+                                </ContentPresenter>
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsSelected" Value="false">
+                                    <Setter Property="Background" Value="Transparent"/>
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="true">
+                                    <Setter Property="Background" Value="{StaticResource BorderBrushSelected}"/>
+                                </Trigger>
+                                <Trigger Property="IsSelected" Value="true">
+                                    <Setter Property="Background" Value="{StaticResource BackgroundSelected}"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </Style.Resources>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TabControl}">
+                    <Grid KeyboardNavigation.TabNavigation="Local">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <TabPanel Name="HeaderPanel" Grid.Row="1" Panel.ZIndex="1" Margin="0,0,4,-1" 
+                                    IsItemsHost="True" KeyboardNavigation.TabIndex="1" Background="{StaticResource Background}"/>
+                        <ContentPresenter Grid.Row="0" Name="PART_SelectedContentHost" 
                                           ContentSource="SelectedContent"/>
                     </Grid>
                 </ControlTemplate>

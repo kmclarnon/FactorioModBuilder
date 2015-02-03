@@ -282,6 +282,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Content\ContentViews.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Content\ModInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Main\MainContent.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -401,7 +409,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\Icons\Actions\" />
-    <Folder Include="View\Content\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\Objects\FilterOpen.png" />

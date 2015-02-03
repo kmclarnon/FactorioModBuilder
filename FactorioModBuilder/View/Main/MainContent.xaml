@@ -2,13 +2,17 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:main="clr-namespace:FactorioModBuilder.ViewModels.Main"
                     xmlns:conv="clr-namespace:WpfUtils.ValueConverters;assembly=WpfUtils"
-                    xmlns:local="clr-namespace:FactorioModBuilder">
-    <local:ViewTemplateSelector x:Key="selector"/>
+                    xmlns:local="clr-namespace:FactorioModBuilder"
+                    xmlns:ctrl="clr-namespace:WpfUtils.Behaviors.Controls;assembly=WpfUtils">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="../Content/ContentViews.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+    
     <DataTemplate DataType="{x:Type main:MainContentVM}">
-        <TabControl ItemsSource="{Binding Path=Content}">
+        <TabControl ItemsSource="{Binding Path=Content}" Style="{StaticResource MainContentTabControl}">
             <TabControl.ContentTemplate>
                 <DataTemplate>
-                    <ContentPresenter Content="{Binding Path=Content}" ContentTemplateSelector="{StaticResource selector}"/>
+                    <ContentPresenter Content="{Binding Path=Content}"/>
                 </DataTemplate>
             </TabControl.ContentTemplate>
         </TabControl>

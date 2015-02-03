@@ -25,7 +25,6 @@
     <Style TargetType="{x:Type Button}" BasedOn="{StaticResource StandardButton}"/>
     <Style TargetType="{x:Type ContextMenu}" BasedOn="{StaticResource StandardContextMenu}"/>
     <Style TargetType="{x:Type Window}" BasedOn="{StaticResource StandardWindow}"/>
-    <Style TargetType="{x:Type TabControl}" BasedOn="{StaticResource StandardTabControl}"/>
     <Style TargetType="{x:Type Menu}" BasedOn="{StaticResource StandardMenu}"/>
     <Style TargetType="{x:Type Label}" BasedOn="{StaticResource StandardLabel}"/>
     <Style TargetType="{x:Type ListBox}" BasedOn="{StaticResource StandardListBox}"/>

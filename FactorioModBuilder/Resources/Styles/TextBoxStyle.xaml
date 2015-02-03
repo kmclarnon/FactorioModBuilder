@@ -5,6 +5,7 @@
     </ResourceDictionary.MergedDictionaries>
     <Style TargetType="TextBox" x:Key="StandardTextBox">
         <Setter Property="Background" Value="{StaticResource TextBoxBackground}"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="Foreground" Value="{StaticResource Foreground}"/>
         <Setter Property="CaretBrush" Value="{StaticResource Foreground}"/>
         <Setter Property="Template">
