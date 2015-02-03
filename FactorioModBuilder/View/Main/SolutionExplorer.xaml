@@ -5,7 +5,9 @@
                     xmlns:cmds="clr-namespace:WpfUtils.Behaviors;assembly=WpfUtils"
                     xmlns:proj="clr-namespace:FactorioModBuilder.ViewModels.ProjectItems"
                     xmlns:prot="clr-namespace:FactorioModBuilder.ViewModels.ProjectItems.Prototype"
-                    xmlns:fil="clr-namespace:FactorioModBuilder.ViewModels.ProjectItems.Prototype.Filters">
+                    xmlns:fil="clr-namespace:FactorioModBuilder.ViewModels.ProjectItems.Prototype.Filters"
+                    xmlns:base="clr-namespace:FactorioModBuilder.ViewModels.Base"
+                    xmlns:dbg="clr-namespace:WpfUtils.Debug;assembly=WpfUtils">
     <DataTemplate DataType="{x:Type sln:SolutionExplorerVM}">
         <Border BorderBrush="{StaticResource SolutionExplorer_Border}" BorderThickness="0.25">
             <Grid>
@@ -58,12 +60,48 @@
                 <TreeView Grid.Row="3" BorderThickness="0" ItemsSource="{Binding Path=Solutions}"
                           cmds:MouseDoubleClick.Command="{Binding OpenSelectedItemCmd}"
                           cmds:TreeViewRightClickSelect.RightClickSelect="True"
+                          cmds:PreviewMouseLeftButtontDown.Command="{Binding RenameCmd}"
                           Background="{StaticResource SolutionExplorer_Background}"
                           Foreground="{StaticResource SolutionExplorer_Foreground}"
+                          VerticalContentAlignment="Center"
                           FontFamily="SegoeUI">
                     <TreeView.ContextMenu>
                         <ContextMenu Style="{StaticResource StandardContextMenu}"/>
                     </TreeView.ContextMenu>
+                    <TreeView.ItemTemplate>
+                        <HierarchicalDataTemplate ItemsSource="{Binding Children}">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <Image Height="16" Width="16" SnapsToDevicePixels="True" Source="{Binding Icon, Converter={StaticResource IconSelector}}"/>
+                                <ContentControl Content="{Binding}" Margin="5,0" VerticalAlignment="Center">
+                                    <ContentControl.Style>
+                                        <Style TargetType="{x:Type ContentControl}">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Path=DisplayState}" Value="{x:Static base:DisplayState.Normal}">
+                                                    <Setter Property="ContentTemplate">
+                                                        <Setter.Value>
+                                                            <DataTemplate>
+                                                                <TextBlock Text="{Binding Path=Name}" VerticalAlignment="Center"/>
+                                                            </DataTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding Path=DisplayState}" Value="{x:Static base:DisplayState.Renaming}">
+                                                    <Setter Property="ContentTemplate">
+                                                        <Setter.Value>
+                                                            <DataTemplate>
+                                                                <TextBox Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                                                         VerticalAlignment="Center" Background="White" Foreground="Black"/>
+                                                            </DataTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </ContentControl.Style>
+                                </ContentControl>
+                            </StackPanel>
+                        </HierarchicalDataTemplate>
+                    </TreeView.ItemTemplate>
                 </TreeView>
             </Grid>
         </Border>

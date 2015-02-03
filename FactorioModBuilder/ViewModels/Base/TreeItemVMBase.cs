@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using WpfUtils;
 using System.ComponentModel;
 using FactorioModBuilder.Resources.Icons;
+using System.Windows.Input;
 
 namespace FactorioModBuilder.ViewModels.Base
 {
@@ -19,7 +20,7 @@ namespace FactorioModBuilder.ViewModels.Base
     /// The base view model that wraps a TreeItem and exposes the appropriate methods to handle
     /// selection, expand/collapse operations and display of children
     /// </summary>
-    public abstract class TreeItemVMBase : BaseVM, IDataErrorInfo
+    public abstract class TreeItemVMBase : BaseVM, IDataErrorInfo, IDisplayState
     {
         /// <summary>
         /// An event handler for the InitCompleted event fired after the construction and initialization
@@ -58,7 +59,7 @@ namespace FactorioModBuilder.ViewModels.Base
         public bool IsSelected
         {
             get { return this.GetProperty<bool>(); }
-            set { this.SetProperty(value, false, null, (x => this.OnIsSelectedChanged())); }
+            set { this.SetProperty(value, false, null, (x => this.OnIsSelectedChangedInternal())); }
         }
 
         /// <summary>
@@ -85,6 +86,15 @@ namespace FactorioModBuilder.ViewModels.Base
         {
             get { return this.GetProperty<AppIcon>(); }
             set { this.SetProperty(value); }
+        }
+
+        /// <summary>
+        /// How this item should be displayed by the treview
+        /// </summary>
+        public DisplayState DisplayState
+        {
+            get { return this.GetProperty<DisplayState>(); }
+            private set { this.SetProperty(value, false, null, (x => this.OnDisplayStateChanged())); }
         }
 
         /// <summary>
@@ -219,6 +229,15 @@ namespace FactorioModBuilder.ViewModels.Base
         }
 
         /// <summary>
+        /// Returns the item state to normal and calls OnIsSelectedChanged
+        /// </summary>
+        private void OnIsSelectedChangedInternal()
+        {
+            this.DisplayState = Base.DisplayState.Normal;
+            this.OnIsSelectedChanged();
+        }
+
+        /// <summary>
         /// Called when the IsSelected property is changes
         /// </summary>
         protected virtual void OnIsSelectedChanged()
@@ -232,6 +251,21 @@ namespace FactorioModBuilder.ViewModels.Base
         {
             if (this.IsExpanded && _parent != null) 
                 _parent.IsExpanded = true; 
+        }
+
+        /// <summary>
+        /// Called when the DisplayState property changes
+        /// </summary>
+        protected virtual void OnDisplayStateChanged()
+        {
+        }
+
+        /// <summary>
+        /// Puts this node into the renaming state
+        /// </summary>
+        public virtual void DoRename()
+        {
+            this.DisplayState = Base.DisplayState.Renaming;
         }
 
         /// <summary>

@@ -38,6 +38,11 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
         public DoubleClickBehavior DoubleClickBehavior { get; private set; }
 
         /// <summary>
+        /// Used to store the initial value to return to it when the item state requires it
+        /// </summary>
+        private DoubleClickBehavior _initalDblClick;
+
+        /// <summary>
         /// The basic constructor to wrap the given model in its associated view model
         /// </summary>
         /// <param name="item"></param>
@@ -86,7 +91,19 @@ namespace FactorioModBuilder.ViewModels.ProjectItems
             : base(parent, item, children)
         {
             this.DoubleClickBehavior = dblClickBehavior;
+            _initalDblClick = dblClickBehavior;
             this.MenuItems = new ObservableCollection<IMenuItemProvider>();
+        }
+
+        /// <summary>
+        /// Prevents opening of content when double clicking in renaming mode
+        /// </summary>
+        protected override void OnDisplayStateChanged()
+        {
+            if (this.DisplayState == Base.DisplayState.Renaming)
+                this.DoubleClickBehavior = DoubleClickBehavior.Ignore;
+            else
+                this.DoubleClickBehavior = _initalDblClick;
         }
     }
 }

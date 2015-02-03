@@ -138,7 +138,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype.Filters
             this.MenuItems.Add(new ClickableItem("Copy", this.Copy));
             this.MenuItems.Add(new ClickableItem("Paste", this.Paste, this.CanPaste));
             this.MenuItems.Add(new ClickableItem("Delete", this.Delete, this.CanDelete));
-            this.MenuItems.Add(new ClickableItem("Rename", this.Rename, this.CanRename));
+            this.MenuItems.Add(new ClickableItem("Rename", this.DoRename, this.CanRename));
             this.MenuItems.Add(new SeparatorItem());
             this.MenuItems.Add(new ClickableItem("Properties", this.ViewProperties));
 
@@ -296,14 +296,6 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype.Filters
         protected virtual bool CanDelete()
         {
             return true;
-        }
-
-        /// <summary>
-        /// Renames this filter
-        /// </summary>
-        protected virtual void Rename()
-        {
-
         }
         
         /// <summary>

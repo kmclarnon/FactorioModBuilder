@@ -35,4 +35,5 @@
     <Style TargetType="{x:Type ComboBox}" BasedOn="{StaticResource StandardComboBox}"/>
     <Style TargetType="{x:Type GroupBox}" BasedOn="{StaticResource StandardGroupBox}"/>
     <Style TargetType="{x:Type TreeView}" BasedOn="{StaticResource StandardTreeView}"/>
+    <Style TargetType="{x:Type TreeViewItem}" BasedOn="{StaticResource StandardTreeViewItem}"/>
 </ResourceDictionary>

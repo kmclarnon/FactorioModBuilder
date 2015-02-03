@@ -169,6 +169,7 @@
     <Compile Include="Models\SolutionItems\Solution.cs" />
     <Compile Include="Resources\Icons\AppIcon.cs" />
     <Compile Include="Resources\Icons\IconConverter.cs" />
+    <Compile Include="ViewModels\Base\IDisplayState.cs" />
     <Compile Include="ViewModels\Dialogs\NewProjectVM.cs" />
     <Compile Include="ViewModels\ProjectItems\IDoubleClickBehavior.cs" />
     <Compile Include="ViewModels\Main\MainContentItemVM.cs" />
