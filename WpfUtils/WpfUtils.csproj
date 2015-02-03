@@ -47,6 +47,7 @@
     <Compile Include="Actions\CloseTabItemAction.cs" />
     <Compile Include="BaseVM.cs" />
     <Compile Include="Behaviors\Controls\TextBoxSelectTextOnFocus.cs" />
+    <Compile Include="Behaviors\Controls\TreeViewMultiSelect.cs" />
     <Compile Include="Behaviors\Mouse\MouseDoubleClick.cs" />
     <Compile Include="Behaviors\Mouse\MouseDown.cs" />
     <Compile Include="Behaviors\Mouse\MouseLeftButtonDown.cs" />
