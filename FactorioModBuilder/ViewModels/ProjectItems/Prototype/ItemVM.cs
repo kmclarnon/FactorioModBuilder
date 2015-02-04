@@ -16,8 +16,14 @@ using System.Text.RegularExpressions;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
+    /// <summary>
+    /// View model for item prototypes
+    /// </summary>
     public class ItemVM : ProjectItem<Item, ItemVM>, IGraphicsSource
     {
+        /// <summary>
+        /// Data to provide to the compiler at build time
+        /// </summary>
         public override IEnumerable<DataUnit> CompilerData
         {
             get 
@@ -28,61 +34,102 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
             }
         }
 
+        /// <summary>
+        /// Implementation of the IGraphicSource interface to allow automatic graphic management
+        /// </summary>
         public string GraphicPath
         {
             get { return this.GetProperty<string>(); }
             set { this.SetProperty(value); }
         }
 
+        /// <summary>
+        /// Reference to the parent item subgroup to catch INotifyProperty changes of the Name
+        /// </summary>
         public SubGroupVM SubGroupItem
         {
             get { return this.GetProperty<SubGroupVM>(); }
             set { this.SetProperty(value, false, this.UpdateSubGroupBinding, (x => this.SubGroup = x.Name)); }
         }
 
+        /// <summary>
+        /// Actual string name of the parent subgroup
+        /// </summary>
         public string SubGroup
         {
             get { return this.GetProperty<string>(); }
             set { this.SetProperty(value); }
         }
 
+        /// <summary>
+        /// Order to dispaly item in its parent subgroup
+        /// </summary>
         public string Order
         {
             get { return this.GetProperty<string>(); }
             set { this.SetProperty(value); }
         }
 
+        /// <summary>
+        /// File path to the icon that represents this item in the inventory
+        /// </summary>
         public string IconPath
         {
             get { return this.GetProperty<string>(); }
             set { this.SetProperty(value, false, null, (x => this.GraphicPath = (value == null) ? String.Empty : value)); }
         }
 
+        /// <summary>
+        /// Maximum stack size of the item in the players inventory
+        /// </summary>
         public int StackSize
         {
             get { return this.GetProperty<int>(); }
             set { this.SetProperty(value); }
         }
 
+        /// <summary>
+        /// Reference to the selected entity that should be spawned when the player places this item on the ground
+        /// </summary>
         public EntityVM PlaceResultEntity
         {
             get { return this.GetProperty<EntityVM>(); }
             set { this.SetProperty(value, false, null, (x => this.PlaceResult = (value == null) ? String.Empty : value.Name)); }
         }
 
+        /// <summary>
+        /// Actual name of the referenced PlaceResultEntity
+        /// </summary>
         public string PlaceResult
         {
             get { return this.GetProperty<string>(); }
             set { this.SetProperty(value); }
         }
 
+        /// <summary>
+        /// Relevant item flags
+        /// </summary>
         public ItemFlag Flag
         {
             get { return this.GetProperty<ItemFlag>(); }
             set { this.SetProperty(value); }
         }
 
-        public ICommand FindImageCmd { get { return this.GetCommand(this.FindImage, this.CanFindImage); } }
+        /// <summary>
+        /// Command to bring up a dialog for the user to specify the icon image
+        /// </summary>
+        public ICommand FindImageCmd { get { return this.GetCommand(this.FindImage); } }
+
+        public ObservableCollection<SubGroupVM> SubGroups
+        {
+            get
+            {
+                PrototypesVM pvm;
+                if (!this.TryFindElementUp(out pvm))
+                    throw new Exception("Could not find project parent");
+                return pvm.SubGroups;
+            }
+        }
 
         static ItemVM()
         {
@@ -91,21 +138,28 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
                 "Stacksize must be a positive whole number");
         }
 
+        /// <summary>
+        /// View model wrapper for the Item model
+        /// </summary>
+        /// <param name="item">The Item model to wrap</param>
         public ItemVM(Item item)
             : base(item, DoubleClickBehavior.OpenContent)
         {
         }
 
+        /// <summary>
+        /// View model wrapper for the Item model
+        /// </summary>
+        /// <param name="parent">The tree node parent of this view model</param>
+        /// <param name="item">The Item model to wrap</param>
         public ItemVM(TreeItemVMBase parent, Item item)
             : base(parent, item)
         {
         }
 
-        private bool CanFindImage()
-        {
-            return true;
-        }
-
+        /// <summary>
+        /// Displays a file selection dialog that allows the user to select image files
+        /// </summary>
         private void FindImage()
         {
             var ofd = new OpenFileDialog();
@@ -122,7 +176,6 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         /// <summary>
         /// Handles hooking and unhooking the SubGroupVM's property changed notification to catch renaming
         /// </summary>
-        /// <param name="val"></param>
         private void UpdateSubGroupBinding(SubGroupVM val)
         {
             if (this.SubGroupItem != null)
@@ -134,7 +187,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         /// <summary>
         /// Re-reads the name property from the subgroup whenever there is a property change
         /// </summary>
-        void SubGroupPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void SubGroupPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (this.SubGroupItem == null)
                 this.SubGroup = String.Empty;

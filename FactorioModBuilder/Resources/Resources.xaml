@@ -16,6 +16,7 @@
         <ResourceDictionary Source="Styles/TextBoxStyle.xaml"/>
         <ResourceDictionary Source="Styles/TreeViewStyle.xaml"/>
         <ResourceDictionary Source="Styles/WindowStyle.xaml"/>
+        <ResourceDictionary Source="Styles/XceedStyles.xaml"/>
         <!-- Color Resources -->
         <ResourceDictionary Source="Colors.xaml"/>
         <!-- Icons -->

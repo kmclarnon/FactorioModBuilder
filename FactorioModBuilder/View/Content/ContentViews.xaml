@@ -3,5 +3,6 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="ModInfo.xaml"/>
         <ResourceDictionary Source="Group.xaml"/>
+        <ResourceDictionary Source="Item.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

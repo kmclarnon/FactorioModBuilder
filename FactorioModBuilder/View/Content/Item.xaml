@@ -2,8 +2,17 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:FactorioModBuilder.ViewModels.ProjectItems.Prototype"
                     xmlns:conv="clr-namespace:WpfUtils.ValueConverters;assembly=WpfUtils"
-                    xmlns:dbg="clr-namespace:WpfUtils.Debug;assembly=WpfUtils">
-    <DataTemplate DataType="{x:Type local:GroupVM}">
+                    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                    xmlns:flags="clr-namespace:FactorioModBuilder.Models.ProjectItems.Prototype">
+    <DataTemplate DataType="{x:Type local:ItemVM}">
+        <DataTemplate.Resources>
+            <ObjectDataProvider x:Key="itemFlags" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
+                <ObjectDataProvider.MethodParameters>
+                    <x:Type TypeName="flags:ItemFlag"/>
+                </ObjectDataProvider.MethodParameters>
+            </ObjectDataProvider>
+        </DataTemplate.Resources>
         <TabControl Style="{StaticResource MainContentInternalTabControl}">
             <TabItem Header="Design">
                 <ScrollViewer>
@@ -11,6 +20,7 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
@@ -20,7 +30,7 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <Border Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Margin="2.5" Background="{StaticResource ContentControl_DesignerTab}">
+                        <Border Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4" Margin="2.5" Background="{StaticResource ContentControl_DesignerTab}">
                             <Grid>
                                 <TextBlock Text="Select an icon below" Foreground="{StaticResource Foreground}" 
                                            VerticalAlignment="Center" HorizontalAlignment="Center" Panel.ZIndex="1"/>
@@ -29,10 +39,12 @@
                                 </Viewbox>
                             </Grid>
                         </Border>
+                        <!-- Left column settings -->
                         <Label Grid.Row="1" Grid.Column="0" Content="Name" Margin="2.5"/>
                         <TextBox Grid.Row="1" Grid.Column="1" Margin="2.5" Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                        <Label Grid.Row="2" Grid.Column="0" Content="Inv. Order" Margin="2.5"/>
-                        <TextBox Grid.Row="2" Grid.Column="1" Margin="2.5" Text="{Binding Path=InvOrder, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <Label Grid.Row="2" Grid.Column="0" Margin="2.5" Content="SubGroup"/>
+                        <ComboBox Grid.Row="2" Grid.Column="1" Margin="2.5" ItemsSource="{Binding Path=SubGroups}" DisplayMemberPath="Name" 
+                                  SelectedItem="{Binding Path=SubGroup, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                         <Label Grid.Row="3" Grid.Column="0" Content="Order" Margin="2.5"/>
                         <TextBox Grid.Row="3" Grid.Column="1" Margin="2.5" Text="{Binding Path=Order, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                         <Label Grid.Row="4" Grid.Column="0" Margin="2.5" Content="Icon"/>
@@ -44,22 +56,24 @@
                             <TextBox Grid.Column="0" Margin="2.5" IsReadOnly="True" Text="{Binding Path=IconPath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                             <Button Grid.Column="1" Margin="2.5" Content="..." Command="{Binding Path=FindImageCmd}"/>
                         </Grid>
-                        <DataGrid Grid.Column="2" Grid.RowSpan="4" Margin="2.5" AutoGenerateColumns="False" ItemsSource="{Binding Path=Children}">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Header="SubGroups" Width="2*" Binding="{Binding Path=Name}" IsReadOnly="True"/>
-                                <DataGridTextColumn Header="Order" Width="*" Binding="{Binding Path=Order, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                            </DataGrid.Columns>
-                        </DataGrid>
-                        <Grid Grid.Column="2" Grid.Row="4">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <Button Grid.Column="0" Margin="2.5" Command="{Binding Path=AddSubGroupCmd}" Content="Add SubGroup"/>
-                            <Button Grid.Column="1" Margin="2.5" Command="{Binding Path=RemoveSubGroupCmd}" Content="Remove SubGroup"/>
-                        </Grid>
+                        <!-- Right column settings -->
+                        <Label Grid.Row="1" Grid.Column="2" Content="Stack Size" Margin="2.5"/>
+                        <xctk:IntegerUpDown Grid.Row="1" Grid.Column="3" Margin="2.5" Increment="1" 
+                                            Minimum="1" Value="{Binding Path=StackSize, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <Label Grid.Row="2" Grid.Column="2" Content="Item Flags" Margin="2.5"/>
+                        <ComboBox Grid.Row="2" Grid.Column="3" Margin="2.5" ItemsSource="{Binding Source={StaticResource itemFlags}}"
+                                  SelectedItem="{Binding Path=Flag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Converter={conv:EnumToDescriptionString}}"/>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <Label Grid.Row="3" Grid.Column="2" Margin="2.5" Content="Place Result"/>
+                        <ComboBox Grid.Row="3" Grid.Column="3" Margin="2.5" ItemsSource="{Binding Path=PlaceResults}" DisplayMemberPath="Name"
+                                  SelectedItem="{Binding Path=PlaceResultEntity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     </Grid>
-                </ScrollViewer>    
+                </ScrollViewer>
             </TabItem>
             <TabItem Header="Code">
                 <TextBox/>
