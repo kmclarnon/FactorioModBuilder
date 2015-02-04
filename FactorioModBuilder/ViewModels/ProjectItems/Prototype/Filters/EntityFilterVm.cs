@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,11 +9,14 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype.Filters
 {
     public class EntityFilterVM : FilterBaseVM<EntityVM>
     {
+        public ObservableCollection<EntityVM> Entities { get; private set; }
+
         private int _newFilter = 1;
 
         public EntityFilterVM(string name)
             : base(name, "Entity")
         {
+            this.Entities = new ObservableCollection<EntityVM>();
         }
 
         protected override FilterBaseVM<EntityVM> GetNewFilter()

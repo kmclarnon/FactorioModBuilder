@@ -120,14 +120,31 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         /// </summary>
         public ICommand FindImageCmd { get { return this.GetCommand(this.FindImage); } }
 
+        /// <summary>
+        /// The possible subgroups this item could belong to
+        /// </summary>
         public ObservableCollection<SubGroupVM> SubGroups
         {
             get
             {
                 PrototypesVM pvm;
                 if (!this.TryFindElementUp(out pvm))
-                    throw new Exception("Could not find project parent");
+                    throw new Exception("Could not find prototypes parent");
                 return pvm.SubGroups;
+            }
+        }
+
+        /// <summary>
+        /// The possible entities that could be placed by this item
+        /// </summary>
+        public ObservableCollection<EntityVM> PlaceResults
+        {
+            get
+            {
+                PrototypesVM pvm;
+                if (!this.TryFindElementUp(out pvm))
+                    throw new Exception("Could not find prototypes parent");
+                return pvm.Entities;
             }
         }
 
