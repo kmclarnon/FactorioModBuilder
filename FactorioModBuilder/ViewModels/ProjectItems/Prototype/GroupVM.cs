@@ -11,7 +11,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using WpfUtils;
-using FactorioModBuilder.Extensions;
 using System.Collections.ObjectModel;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
@@ -107,12 +106,12 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 
         private bool CanRemoveSubGroup()
         {
-            return this.Children.Any(o => o.IsSelected);
+            return this.Children.Any(o => o.ContentIsSelected);
         }
 
         private void RemoveSubGroup()
         {
-            this.Children.RemoveWhere(o => o.IsSelected);
+            this.Children.RemoveWhere(o => o.ContentIsSelected);
         }
     }
 }

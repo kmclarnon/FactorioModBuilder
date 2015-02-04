@@ -38,7 +38,7 @@
                         <TextBox Grid.Row="6" Grid.Column="1" Margin="2.5" Text="{Binding Path=Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                                  TextWrapping="Wrap" Grid.RowSpan="2" VerticalContentAlignment="Top"/>
                         <DataGrid Grid.Row="0" Grid.RowSpan="8" Grid.Column="2" Margin="2.5" AutoGenerateColumns="False"
-                                  ItemsSource="{Binding Path=Dependencies}" SelectionMode="Extended">
+                                  ItemsSource="{Binding Path=Dependencies}">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Dependency" Width="3*" IsReadOnly="True" Binding="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                                 <DataGridTextColumn Header="Version" Width="*" IsReadOnly="True" Binding="{Binding Path=Version, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
