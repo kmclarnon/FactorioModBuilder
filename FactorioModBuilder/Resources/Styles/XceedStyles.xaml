@@ -17,12 +17,5 @@
                 <Setter Property="Background" Value="{StaticResource TextBoxBackgroundSelected}"/>
             </Trigger>
         </Style.Triggers>
-        <Style.Resources>
-            <Style TargetType="{x:Type Button}">
-                <Setter Property="Foreground" Value="{StaticResource Foreground}"/>
-                <Setter Property="Background" Value="{StaticResource BackgroundNormal}"/>
-                <Setter Property="BorderBrush" Value="{StaticResource BorderBrushNormal}"/>
-            </Style>
-        </Style.Resources>
     </Style>
 </ResourceDictionary>
