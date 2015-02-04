@@ -64,6 +64,15 @@ namespace FactorioModBuilder.ViewModels.Base
         }
 
         /// <summary>
+        /// Used for selection binding when this node is referenced outside of the treeview
+        /// </summary>
+        public bool ContentIsSelected
+        {
+            get { return this.GetProperty<bool>(); }
+            set { this.SetProperty(value); }
+        }
+
+        /// <summary>
         /// The name of this tree item view model
         /// </summary>
         public string Name
