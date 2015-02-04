@@ -35,7 +35,7 @@ namespace FactorioModBuilder.ViewModels
             set { this.SetProperty(value); }
         }
 
-        public ICommand OpenSelectedItemCmd { get { return this.GetCommand(this.OpenSelectedItem); } }
+        public ICommand OpenCmd { get { return this.GetCommand(this.Open); } }
 
         public ICommand RenameCmd { get { return this.GetCommand(this.RenameSelected); } }
 
@@ -54,12 +54,15 @@ namespace FactorioModBuilder.ViewModels
             this.Solutions = new ObservableCollection<SolutionVM>();
         }
 
-        private void OpenSelectedItem()
+        private void Open()
         {
             var res = this.Solutions.SelectMany(o => o.SelectedNodes)
-                .Where(o => o is IDoubleClickBehavior).Cast<IDoubleClickBehavior>()
-                .Where(o => o.DoubleClickBehavior == DoubleClickBehavior.OpenContent);
-            _parent.OpenItems(res.Cast<TreeItemVMBase>());
+                .Where(o => o is IDoubleClickBehavior).Cast<IDoubleClickBehavior>();
+            var open = res.Where(o => o.DoubleClickBehavior == DoubleClickBehavior.OpenContent);
+            var openParent = res.Where(o => o.DoubleClickBehavior == DoubleClickBehavior.OpenParent);
+
+            _parent.OpenItems(open.Cast<TreeItemVMBase>());
+            _parent.OpenParentItems(openParent.Cast<TreeItemVMBase>());
         }
 
         private void RenameSelected()

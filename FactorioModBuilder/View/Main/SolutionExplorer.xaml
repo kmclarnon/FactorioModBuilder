@@ -59,7 +59,7 @@
                 </Grid>
                 <!-- Solution TreeView -->
                 <TreeView Grid.Row="3" BorderThickness="0" ItemsSource="{Binding Path=Solutions}"
-                          mouse:MouseDoubleClick.Command="{Binding OpenSelectedItemCmd}"
+                          mouse:MouseDoubleClick.Command="{Binding OpenCmd}"
                           ctrl:TreeViewRightClickSelect.Active="True"
                           Background="{StaticResource SolutionExplorer_Background}"
                           Foreground="{StaticResource SolutionExplorer_Foreground}"

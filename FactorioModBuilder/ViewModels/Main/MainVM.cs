@@ -152,6 +152,12 @@ namespace FactorioModBuilder.ViewModels
             this.MainContent.OpenItems(items);
         }
 
+        public void OpenParentItems(IEnumerable<TreeItemVMBase> items)
+        {
+            var res = items.Where(o => o.Parent != null).Select(o => o.Parent);
+            this.MainContent.OpenItems(res);
+        }
+
         private string Wrap(string val)
         {
             if (!val.Any(o => Char.IsWhiteSpace(o)))

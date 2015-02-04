@@ -53,7 +53,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         }
 
         public SubGroupVM(TreeItemVMBase parent, SubGroup item)
-            : base(parent, item, DoubleClickBehavior.OpenContent)
+            : base(parent, item, DoubleClickBehavior.OpenParent)
         {
         }
 

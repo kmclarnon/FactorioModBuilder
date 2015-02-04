@@ -37,7 +37,7 @@ namespace FactorioModBuilder.ViewModels.Base
         /// <summary>
         /// The immediant parent of this tree item view model
         /// </summary>
-        protected TreeItemVMBase _parent;
+        public TreeItemVMBase Parent { get; private set; }
 
         /// <summary>
         /// The children owned by this tree item view model.  Children are displayed below and indented in the TreeView
@@ -175,14 +175,14 @@ namespace FactorioModBuilder.ViewModels.Base
         public TreeItemVMBase(TreeItemVMBase parent, TreeItemBase item, IEnumerable<TreeItemVMBase> children)
             : base(item)
         {
-            _parent = parent;
+            Parent = parent;
             _item = item;
             this.Children = new ObservableCollection<TreeItemVMBase>();
             this.Children.CollectionChanged += OnChildrenCollectionChanged;
             foreach (var c in children)
                 this.Children.Add(c);
 
-            if(_parent != null)
+            if(Parent != null)
                 parent.OnInitComplete += ParentInitComplete;
         }
 
@@ -193,36 +193,36 @@ namespace FactorioModBuilder.ViewModels.Base
                 case NotifyCollectionChangedAction.Add:
                     foreach(TreeItemVMBase i in e.NewItems)
                     {
-                        i._parent = this;
+                        i.Parent = this;
                         this.OnInitComplete += i.ParentInitComplete;
                     }
                     break;
                 case NotifyCollectionChangedAction.Remove:
                     foreach(TreeItemVMBase i in e.OldItems)
                     {
-                        if (ReferenceEquals(this, i._parent))
-                            i._parent = null;
+                        if (ReferenceEquals(this, i.Parent))
+                            i.Parent = null;
                         this.OnInitComplete -= i.ParentInitComplete;
                     }
                     break;
                 case NotifyCollectionChangedAction.Replace:
                     foreach(TreeItemVMBase oi in e.OldItems)
                     {
-                        if (ReferenceEquals(this, oi._parent))
-                            oi._parent = null;
+                        if (ReferenceEquals(this, oi.Parent))
+                            oi.Parent = null;
                         this.OnInitComplete -= oi.ParentInitComplete;
                     }
                     foreach(TreeItemVMBase ni in e.NewItems)
                     {
-                        ni._parent = this;
+                        ni.Parent = this;
                         this.OnInitComplete += ni.ParentInitComplete;
                     }
                     break;
                 case NotifyCollectionChangedAction.Reset:
                     foreach(TreeItemVMBase i in e.OldItems)
                     {
-                        if (ReferenceEquals(this, i._parent))
-                            i._parent = null;
+                        if (ReferenceEquals(this, i.Parent))
+                            i.Parent = null;
                         this.OnInitComplete -= i.ParentInitComplete;
                     }
                     break;
@@ -301,8 +301,8 @@ namespace FactorioModBuilder.ViewModels.Base
         /// </summary>
         protected virtual void OnIsExpandedChanged()
         {
-            if (this.IsExpanded && _parent != null) 
-                _parent.IsExpanded = true; 
+            if (this.IsExpanded && Parent != null) 
+                Parent.IsExpanded = true; 
         }
 
         /// <summary>
@@ -352,7 +352,7 @@ namespace FactorioModBuilder.ViewModels.Base
         public bool TryFindElementUp<T>(out T element) where T : TreeItemVMBase
         {
             element = default(T);
-            var res = (TreeItemVMBase)_parent;
+            var res = (TreeItemVMBase)Parent;
             while (res != null)
             {
                 if (res.GetType() == typeof(T))
@@ -361,7 +361,7 @@ namespace FactorioModBuilder.ViewModels.Base
                     return true;
                 }
                 else
-                    res = (TreeItemVMBase)res._parent;
+                    res = (TreeItemVMBase)res.Parent;
             }
 
             return false;
@@ -401,7 +401,7 @@ namespace FactorioModBuilder.ViewModels.Base
         public bool TryFindElementPeer<T>(out T element) where T : TreeItemVMBase
         {
             element = default(T);
-            TreeItemVMBase res = (TreeItemVMBase)_parent;
+            TreeItemVMBase res = (TreeItemVMBase)Parent;
             if (res == null)
                 return false;
             else
