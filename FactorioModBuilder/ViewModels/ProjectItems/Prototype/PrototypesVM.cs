@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections.Specialized;
 using FactorioModBuilder.Resources.Icons;
+using FactorioModBuilder.ViewModels.ProjectItems.Prototype.Filters;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
@@ -25,13 +26,22 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
             }
         }
 
+        public ObservableCollection<SubGroupVM> SubGroups
+        {
+            get
+            {
+                GroupsFilterVM gfvm;
+                if (!this.TryFindElementDown(out gfvm))
+                    throw new Exception("Could not find child: GroupsFilterVM");
+                return gfvm.SubGroups;
+            }
+        }
+
         public ObservableCollection<IGraphicsSource> GraphicsSources { get; private set; }
 
         public PrototypesVM(Prototypes types, IEnumerable<TreeItemVMBase> children)
-            : base(types, children, DoubleClickBehavior.Ignore)
+            : this(null, types, children)
         {
-            this.GraphicsSources = new ObservableCollection<IGraphicsSource>();
-            this.Icon = AppIcon.Prototypes;
         }
 
         public PrototypesVM(TreeItemVMBase parent, Prototypes types, IEnumerable<TreeItemVMBase> children)
