@@ -14,12 +14,12 @@ namespace WpfUtils.Debug
         public override object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             Debugger.Break();
-            return Binding.DoNothing;
+            return value;
         }
 
         public override object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            throw new NotImplementedException();
+            return value;
         }
     }
 }
