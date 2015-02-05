@@ -289,6 +289,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Content\Fluid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Content\Group.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

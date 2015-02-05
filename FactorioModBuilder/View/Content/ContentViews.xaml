@@ -4,5 +4,6 @@
         <ResourceDictionary Source="ModInfo.xaml"/>
         <ResourceDictionary Source="Group.xaml"/>
         <ResourceDictionary Source="Item.xaml"/>
+        <ResourceDictionary Source="Fluid.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

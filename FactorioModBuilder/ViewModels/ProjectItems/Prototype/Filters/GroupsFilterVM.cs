@@ -16,8 +16,14 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype.Filters
     /// </summary>
     public class GroupsFilterVM : FilterBaseVM<GroupVM>
     {
+        /// <summary>
+        /// Groups contained by this group filter and its children
+        /// </summary>
         public ObservableCollection<GroupVM> Groups { get; private set; }
 
+        /// <summary>
+        /// Subgroups contained in the this filters groups collection
+        /// </summary>
         public ObservableCollection<SubGroupVM> SubGroups { get; private set; }
 
         /// <summary>
