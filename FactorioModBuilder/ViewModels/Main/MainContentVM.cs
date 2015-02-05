@@ -25,7 +25,7 @@ namespace FactorioModBuilder.ViewModels.Main
         {
             foreach (var i in items)
             {
-                var res = this.Content.Where(o => o.Content.Equals(i));
+                var res = this.Content.Where(o => o.ItemContent.Equals(i));
                 if (!res.Any())
                 {
                     var mc = new MainContentItemVM(i);

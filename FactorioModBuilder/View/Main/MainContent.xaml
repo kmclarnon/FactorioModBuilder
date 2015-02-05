@@ -12,7 +12,7 @@
         <TabControl ItemsSource="{Binding Path=Content}" Style="{StaticResource MainContentTabControl}" Background="Transparent">
             <TabControl.ContentTemplate>
                 <DataTemplate>
-                    <ContentPresenter Content="{Binding Path=Content}"/>
+                    <ContentPresenter Content="{Binding Path=ItemContent}"/>
                 </DataTemplate>
             </TabControl.ContentTemplate>
         </TabControl>

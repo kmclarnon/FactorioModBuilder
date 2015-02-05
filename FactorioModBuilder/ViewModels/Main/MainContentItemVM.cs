@@ -22,20 +22,20 @@ namespace FactorioModBuilder.ViewModels.Main
             set { this.SetProperty(value); }
         }
 
-        public TreeItemVMBase Content { get; private set; }
+        public TreeItemVMBase ItemContent { get; private set; }
 
         public MainContentItemVM(TreeItemVMBase item)
         {
             if (item == null)
                 throw new ArgumentNullException("item");
-            this.Content = item;
-            this.HeaderText = this.Content.Name;
-            this.Content.PropertyChanged += ItemPropertyChanged;
+            this.ItemContent = item;
+            this.HeaderText = this.ItemContent.Name;
+            this.ItemContent.PropertyChanged += ItemPropertyChanged;
         }
 
         void ItemPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            this.HeaderText = Content.Name;
+            this.HeaderText = ItemContent.Name;
         }
     }
 }
