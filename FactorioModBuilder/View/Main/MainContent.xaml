@@ -9,10 +9,17 @@
     </ResourceDictionary.MergedDictionaries>
     
     <DataTemplate DataType="{x:Type main:MainContentVM}">
-        <TabControl ItemsSource="{Binding Path=Content}" Style="{StaticResource MainContentTabControl}" Background="Transparent">
+        <TabControl x:Name="MainContent" ItemsSource="{Binding Path=Content}" Style="{StaticResource MainContentTabControl}" Background="Transparent">
             <TabControl.ContentTemplate>
                 <DataTemplate>
-                    <ContentPresenter Content="{Binding Path=ItemContent}"/>
+                    <TabControl x:Name="InternalContent" Style="{StaticResource MainContentInternalTabControl}">
+                        <TabItem Header="Design">
+                            <ContentPresenter Content="{Binding Path=ItemContent}"/>
+                        </TabItem>
+                        <TabItem Header="Code">
+                            <TextBox/>
+                        </TabItem>
+                    </TabControl>
                 </DataTemplate>
             </TabControl.ContentTemplate>
         </TabControl>

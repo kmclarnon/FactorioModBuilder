@@ -1,7 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
-                    xmlns:Actions="clr-namespace:WpfUtils.Actions;assembly=WpfUtils">
+                    xmlns:Actions="clr-namespace:WpfUtils.Actions;assembly=WpfUtils"
+                    xmlns:dbg="clr-namespace:WpfUtils.Debug;assembly=WpfUtils">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="../Colors.xaml"/>
         <ResourceDictionary Source="../Themes/Dark.xaml"/>
