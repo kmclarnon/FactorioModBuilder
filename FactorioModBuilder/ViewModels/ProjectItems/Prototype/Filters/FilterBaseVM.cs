@@ -25,7 +25,12 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype.Filters
         
     {
         /// <summary>
-        /// Strongly typed children collection that is synchronized with the inherited Children collection
+        /// Strongly typed children collection that contains all typed children contained in this filter and those of all contained subfilters
+        /// </summary>
+        public ObservableCollection<TChildren> RecusiveTypedChildren { get; private set; }
+
+        /// <summary>
+        /// Strongly typed children collection that is synchronized with the inherited Children collection and contains children directly contained by this filter
         /// </summary>
         public ObservableCollection<TChildren> TypedChildren { get; private set; }
 
@@ -44,10 +49,8 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype.Filters
         /// </summary>
         /// <param name="name">The display name of the filter</param>
         public FilterBaseVM(string name, string childName = "Item")
-            : base(new Filter(name))
+            : this(null, name, childName)
         {
-            this.ChildDisplayName = childName;
-            this.Setup();
         }
 
         /// <summary>
@@ -121,6 +124,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype.Filters
         private void Setup()
         {
             // collections
+            this.RecusiveTypedChildren = new ObservableCollection<TChildren>();
             this.TypedChildren = new ObservableCollection<TChildren>();
             this.SubFilters = new ObservableCollection<FilterBaseVM<TChildren>>();
 
@@ -167,19 +171,21 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype.Filters
                 case NotifyCollectionChangedAction.Add:
                     foreach (TChildren i in e.NewItems)
                     {
+                        if (!this.RecusiveTypedChildren.Contains(i))
+                            this.RecusiveTypedChildren.Add(i);
                         if (!this.Children.Contains(i))
                             this.Children.Add(i);
                     }
                     break;
                 case NotifyCollectionChangedAction.Remove:
                     foreach (TChildren i in e.OldItems)
+                    {
+                        this.RecusiveTypedChildren.Remove(i);
                         this.Children.Remove(i);
-                    break;
-                case NotifyCollectionChangedAction.Reset:
-                    this.Children.RemoveWhere(o => o is TChildren);
+                    }
                     break;
                 default:
-                    throw new Exception("Unhandled filter collection changed");
+                    throw new Exception("Unhandled filter typed children collection changed");
             }
         }
 
@@ -193,27 +199,41 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype.Filters
                 case NotifyCollectionChangedAction.Add:
                     foreach(TreeItemVMBase i in e.NewItems)
                     {
-                        if ((i is TChildren) && !this.TypedChildren.Contains(i))
-                            this.TypedChildren.Add((TChildren)i);
-                        else if ((i is FilterBaseVM<TChildren>) && !this.SubFilters.Contains(i))
-                            this.SubFilters.Add((FilterBaseVM<TChildren>)i);
+                        var tc = i as TChildren;
+                        if (tc != null)
+                        {
+                            if (!this.TypedChildren.Contains(tc))
+                                this.TypedChildren.Add(tc);
+                            continue;
+                        }
+
+                        var ftc = i as FilterBaseVM<TChildren>;
+                        if(ftc != null)
+                        {
+                            if (!this.SubFilters.Contains(ftc))
+                                this.SubFilters.Add(ftc);
+                        }
                     }
                     break;
                 case NotifyCollectionChangedAction.Remove:
                     foreach(TreeItemVMBase i in e.OldItems)
                     {
-                        if (i is TChildren)
-                            this.TypedChildren.Remove((TChildren)i);
-                        else if (i is FilterBaseVM<TChildren>)
-                            this.SubFilters.Remove((FilterBaseVM<TChildren>)i);
+                        var tc = i as TChildren;
+                        if (tc != null)
+                        {
+                            this.TypedChildren.Remove(tc);
+                            continue;
+                        }
+
+                        var ftc = i as FilterBaseVM<TChildren>;
+                        if (ftc != null)
+                        {
+                            this.SubFilters.Remove(ftc);
+                        }
                     }
                     break;
-                case NotifyCollectionChangedAction.Reset:
-                    this.TypedChildren.Clear();
-                    this.SubFilters.Clear();
-                    break;
                 default:
-                    throw new Exception("Unhandled filter collection changed");
+                    throw new Exception("Unhandled filter children collection changed");
             }
         }
 
@@ -227,17 +247,51 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype.Filters
                 case NotifyCollectionChangedAction.Add:
                     foreach (FilterBaseVM<TChildren> f in e.NewItems)
                     {
+                        // sync with the children collection
                         if (!this.Children.Contains(f))
                             this.Children.Add(f);
+                        // attach handlers and sync with the recusive collection
+                        f.RecusiveTypedChildren.CollectionChanged += RecursiveTypedChildrenCollectionChanged;
+                        foreach (TChildren c in f.RecusiveTypedChildren)
+                            if(!this.RecusiveTypedChildren.Contains(c))
+                                this.RecusiveTypedChildren.Add(c);
                     }
                     break;
                 case NotifyCollectionChangedAction.Remove:
                     foreach (FilterBaseVM<TChildren> f in e.OldItems)
+                    {
+                        // sync with children collection
                         this.Children.Remove(f);
+                        // remove handler and sync with the recusrive collection
+                        f.RecusiveTypedChildren.CollectionChanged -= RecursiveTypedChildrenCollectionChanged;
+                        foreach(TChildren c in f.RecusiveTypedChildren)
+                            this.RecusiveTypedChildren.Remove(c);
+                    }
                     break;
-                case NotifyCollectionChangedAction.Reset:
-                    this.Children.RemoveWhere(o => o is FilterBaseVM<TChildren>);
+                default:
+                    throw new Exception("Unhandled filter subfilter collection changed action");
+            }
+        }
+
+        /// <summary>
+        /// Handles synchronizing subfilter recursive typed children 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void RecursiveTypedChildrenCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            switch (e.Action)
+            {
+                case NotifyCollectionChangedAction.Add:
+                    foreach (TChildren c in e.NewItems)
+                        this.RecusiveTypedChildren.Add(c);
                     break;
+                case NotifyCollectionChangedAction.Remove:
+                    foreach (TChildren c in e.OldItems)
+                        this.RecusiveTypedChildren.Remove(c);
+                    break;
+                default:
+                    throw new Exception("Unhandled filter recursivetypedchildren collection changed action");
             }
         }
 

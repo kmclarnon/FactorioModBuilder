@@ -42,7 +42,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
                 GroupsFilterVM gfvm;
                 if (!this.TryFindElementDown(out gfvm))
                     throw new Exception("Could not find child: GroupsFilterVM");
-                return gfvm.Groups;
+                return gfvm.RecusiveTypedChildren;
             }
         }
 
