@@ -5,3 +5,5 @@ WpfUtils/obj/
 *.pdb
 *.suo
 *.tmp_proj
+*.psess
+*.vsp
