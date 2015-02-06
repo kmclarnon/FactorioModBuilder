@@ -1,10 +1,12 @@
 ﻿using FactorioModBuilder.Models.ProjectItems.Prototype;
 using FactorioModBuilder.ViewModels.Base;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
@@ -49,6 +51,11 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
             set { this.SetProperty(value); }
         }
 
+        /// <summary>
+        /// Command binding to allow the user to select a sprite image file
+        /// </summary>
+        public ICommand SelectSpriteCmd { get { return this.GetCommand(this.SelectSprite); } }
+
         public EquipmentSpriteVM(EquipmentSprite item)
             : base(item, DoubleClickBehavior.OpenParent)
         {
@@ -57,6 +64,22 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         public EquipmentSpriteVM(TreeItemVMBase parent, EquipmentSprite item)
             : base(parent, item, DoubleClickBehavior.OpenParent)
         {
+        }
+
+        /// <summary>
+        /// Displays dialog for user sprite file selection
+        /// </summary>
+        private void SelectSprite()
+        {
+            var ofd = new OpenFileDialog();
+            ofd.CheckFileExists = true;
+            ofd.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
+            ofd.Multiselect = false;
+
+            if (ofd.ShowDialog() == true)
+            {
+                this.FileName = ofd.FileName;
+            }
         }
     }
 }

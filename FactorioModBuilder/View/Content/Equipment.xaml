@@ -99,8 +99,8 @@
                             <ColumnDefinition Width="30"/>
                         </Grid.ColumnDefinitions>
                         <TextBox Grid.Column="0" Margin="2.5" IsReadOnly="True" 
-                                 Text="{Binding Path=Sprite.Filename, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                        <Button Grid.Column="1" Margin="2.5" Content="..." Command="{Binding Path=FindSpriteCmd}"/>
+                                 Text="{Binding Path=Sprite.FileName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <Button Grid.Column="1" Margin="2.5" Content="..." Command="{Binding Path=Sprite.SelectSpriteCmd}"/>
                     </Grid>
                     <Label Grid.Column="0" Grid.Row="4" Margin="2.5" Content="Width"/>
                     <xctk:IntegerUpDown Grid.Column="1" Grid.Row="4" Margin="2.5" Increment="1" Minimum="1"
@@ -230,26 +230,6 @@
                     <Label Grid.Column="0" Grid.Row="9" Margin="2.5" Content="Priority"/>
                     <ComboBox Grid.Column="1" Grid.Row="9" Margin="2.4" ItemsSource="{Binding Source={StaticResource energyPriorities}}"
                               SelectedItem="{Binding Path=EnergySource.UsagePriority, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                    <!-- Misc settings -->
-                    <Label Grid.Column="0" Grid.Row="10" Grid.ColumnSpan="2" Margin="2.5" 
-                        Content="Misc" FontSize="13" FontWeight="Bold"/>
-                    <Label Grid.Column="0" Grid.Row="11" Content="Energy Input"/>
-                    <Grid Grid.Column="1" Grid.Row="11">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="55"/>
-                        </Grid.ColumnDefinitions>
-                        <xctk:IntegerUpDown Grid.Column="0" Margin="2.5" Minimum="1" Increment="1"
-                                            Value="{Binding Path=EnergyInput, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                        <ComboBox Grid.Column="1" Margin="2.5" ItemsSource="{Binding Source={StaticResource powerUnits}}"
-                                  SelectedItem="{Binding Path=EnergyInputUnit, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                            <ComboBox.ItemTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding Converter={conv:EnumToDescriptionString}, Mode=OneWay}"/>
-                                </DataTemplate>
-                            </ComboBox.ItemTemplate>
-                        </ComboBox>
-                    </Grid>
                 </Grid>
             </Grid>
         </ScrollViewer>
