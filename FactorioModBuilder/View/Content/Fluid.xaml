@@ -1,23 +1,30 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:conv="clr-namespace:WpfUtils.ValueConverters;assembly=WpfUtils"
-                    xmlns:local="clr-namespace:FactorioModBuilder.ViewModels.ProjectItems.Prototype">
+                    xmlns:local="clr-namespace:FactorioModBuilder.ViewModels.ProjectItems.Prototype"
+                    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                    xmlns:unit="clr-namespace:FactorioModBuilder.Models.ProjectItems.Prototype"
+                    xmlns:dbg="clr-namespace:WpfUtils.Debug;assembly=WpfUtils">
     <DataTemplate DataType="{x:Type local:FluidVM}">
+        <DataTemplate.Resources>
+            <ObjectDataProvider x:Key="unitTypes" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
+                <ObjectDataProvider.MethodParameters>
+                    <x:Type TypeName="unit:EnergyUnit"/>
+                </ObjectDataProvider.MethodParameters>
+            </ObjectDataProvider>
+        </DataTemplate.Resources>
         <ScrollViewer>
             <Grid Margin="5">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <Border Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Margin="2.5" Background="{StaticResource ContentControl_DesignerTab}">
+                <Border Grid.Column="0" Grid.Row="0" Margin="2.5" Background="{StaticResource ContentControl_DesignerTab}">
                     <Grid>
                         <TextBlock Text="Select an icon below" Foreground="{StaticResource Foreground}" 
                                            VerticalAlignment="Center" HorizontalAlignment="Center" Panel.ZIndex="1"/>
@@ -26,18 +33,85 @@
                         </Viewbox>
                     </Grid>
                 </Border>
-                <Label Grid.Row="1" Grid.Column="0" Content="Name" Margin="2.5"/>
-                <TextBox Grid.Row="1" Grid.Column="1" Margin="2.5" Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                <Label Grid.Row="2" Grid.Column="0" Content="Order" Margin="2.5"/>
-                <TextBox Grid.Row="2" Grid.Column="1" Margin="2.5" Text="{Binding Path=Order, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                <Label Grid.Row="3" Grid.Column="0" Margin="2.5" Content="Icon"/>
-                <Grid Grid.Row="3" Grid.Column="1">
+                <!-- Left column selections -->
+                <Grid Grid.Row="1" Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="30"/>
                     </Grid.ColumnDefinitions>
-                    <TextBox Grid.Column="0" Margin="2.5" IsReadOnly="True" Text="{Binding Path=IconPath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                    <Button Grid.Column="1" Margin="2.5" Content="..." Command="{Binding Path=FindImageCmd}"/>
+                    <Label Grid.Row="0" Grid.Column="0" Content="Name" Margin="2.5"/>
+                    <TextBox Grid.Row="0" Grid.Column="1" Margin="2.5" Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <Label Grid.Row="1" Grid.Column="0" Content="Order" Margin="2.5"/>
+                    <TextBox Grid.Row="1" Grid.Column="1" Margin="2.5" Text="{Binding Path=Order, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <Label Grid.Row="2" Grid.Column="0" Margin="2.5" Content="SubGroup"/>
+                    <ComboBox Grid.Row="2" Grid.Column="1" Margin="2.5" ItemsSource="{Binding Path=SubGroups}" DisplayMemberPath="Name"
+                          SelectedItem="{Binding Path=SubGroupItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <Label Grid.Row="3" Grid.Column="0" Margin="2.5" Content="Icon"/>
+                    <Grid Grid.Row="3" Grid.Column="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="30"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox Grid.Column="0" Margin="2.5" IsReadOnly="True" Text="{Binding Path=IconPath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <Button Grid.Column="1" Margin="2.5" Content="..." Command="{Binding Path=FindImageCmd}"/>
+                    </Grid>
+                </Grid>
+                <!-- Right column selections -->
+                <Grid Grid.Row="0" Grid.RowSpan="2" Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Row="0" Grid.Column="0" Margin="2.5" Content="Default Temp"/>
+                    <xctk:IntegerUpDown Grid.Row="0" Grid.Column="1" Margin="2.5" Increment="1" 
+                                        Value="{Binding Path=DefaultTemp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <Label Grid.Row="1" Grid.Column="0" Margin="2.5" Content="Max Temp"/>
+                    <xctk:IntegerUpDown Grid.Row="1" Grid.Column="1" Margin="2.5" Increment="1"
+                                        Value="{Binding Path=MaxTemp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <Label Grid.Row="2" Grid.Column="0" Margin="2.5" Content="Heat Capacity"/>
+                    <Grid Grid.Row="2" Grid.Column="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <xctk:IntegerUpDown Grid.Column="0" Margin="2.5" Minimum="1" Increment="1"
+                                            Value="{Binding Path=HeatCapacity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <ComboBox Grid.Column="1" Margin="2.5" ItemsSource="{Binding Source={StaticResource unitTypes}}"
+                                  SelectedItem="{Binding Path=HeatCapacityUnit, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Converter={conv:EnumToDescriptionString}, Mode=OneWay}"/>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </Grid>
+                    <Label Grid.Row="3" Grid.Column="0" Margin="2.5" Content="Base Color"/>
+                    <xctk:ColorPicker Grid.Row="3" Grid.Column="1" Margin="2.5" UsingAlphaChannel="False" ShowAdvancedButton="True"
+                                      SelectedColor="{Binding Path=BaseColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <Label Grid.Row="4" Grid.Column="0" Margin="2.5" Content="Flow Color"/>
+                    <xctk:ColorPicker Grid.Row="4" Grid.Column="1" Margin="2.5" UsingAlphaChannel="False" ShowAdvancedButton="True"
+                                      SelectedColor="{Binding Path=FlowColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <Label Grid.Row="5" Grid.Column="0" Margin="2.5" Content="P-S Ratio"/>
+                    <xctk:DecimalUpDown Grid.Row="5" Grid.Column="1" Margin="2.5" Increment="0.001" Minimum="0"
+                                        Value="{Binding Path=PressureToSpeed, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <Label Grid.Row="6" Grid.Column="0" Margin="2.5" Content="F-E Ratio"/>
+                    <xctk:DecimalUpDown Grid.Row="6" Grid.Column="1" Margin="2.5" Increment="0.001" Minimum="0"
+                                        Value="{Binding Path=FlowToEnergy, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 </Grid>
             </Grid>
         </ScrollViewer>

@@ -13,6 +13,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using WpfUtils.Extensions;
+using System.Collections.ObjectModel;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
@@ -165,7 +166,21 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         /// <summary>
         /// Provides a file selection dialog to select the fluid icon
         /// </summary>
-        public ICommand SelectIconCmd { get { return this.GetCommand(this.SelectIcon); } }
+        public ICommand FindImageCmd { get { return this.GetCommand(this.SelectIcon); } }
+
+        /// <summary>
+        /// The available subgroups to select as a subgroup for this fluid
+        /// </summary>
+        public ObservableCollection<SubGroupVM> SubGroups
+        {
+            get
+            {
+                PrototypesVM pvm;
+                if (!this.TryFindElementUp(out pvm))
+                    throw new Exception("Could not find parent prototypes view model");
+                return pvm.SubGroups;
+            }
+        }
 
         public FluidVM(Fluid fluid)
             : this(null, fluid)
