@@ -50,15 +50,15 @@
             <TextBox Grid.Row="3" Grid.Column="1" VerticalContentAlignment="Center" Margin="5"
                      Text="{Binding Path=ResultSolutionName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             <Label Grid.Column="0" Grid.Row="4" Content="{Binding Path=Message}"/>
-            <Grid Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="4">
+            <Grid Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="4" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="3*"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Button Content="OK" Grid.Column="1" Margin="5"
+                <Button Content="OK" Grid.Column="1" Margin="5" MinHeight="20"
                         Command="{Binding Path=OkCmd}"/>
-                <Button Content="Cancel" Grid.Column="2" Margin="5"
+                <Button Content="Cancel" Grid.Column="2" Margin="5" MinHeight="20"
                         Command="{Binding Path=CancelCmd}"/>
             </Grid>
         </Grid>
