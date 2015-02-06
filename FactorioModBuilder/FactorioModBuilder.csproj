@@ -153,7 +153,6 @@
     <Compile Include="Build\Messages\FatalMessage.cs" />
     <Compile Include="Build\Messages\InfoMessage.cs" />
     <Compile Include="Build\Messages\WarningMessage.cs" />
-    <Compile Include="EquipmentTemplateSelector.cs" />
     <Compile Include="Extensions\CollectionMethods.cs" />
     <Compile Include="Models\Dialogs\NewProject.cs" />
     <Compile Include="Models\ProjectItems\GraphicsFilter.cs" />
