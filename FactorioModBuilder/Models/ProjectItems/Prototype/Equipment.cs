@@ -36,27 +36,50 @@ namespace FactorioModBuilder.Models.ProjectItems.Prototype
         Terciary
     }
 
+    public enum EquipmentType
+    {
+        [DescriptionAttribute("Night Vision Equipment")]
+        NightVision,
+        [DescriptionAttribute("Energy Shield Equipment")]
+        EnergyShield,
+        [DescriptionAttribute("Battery Equipment")]
+        Battery,
+        [DescriptionAttribute("Solar Panel Equipment")]
+        SolarPanel,
+        [DescriptionAttribute("Generator Equipment")]
+        Generator,
+        [DescriptionAttribute("Active Defense Equipment")]
+        ActiveDefense,
+        [DescriptionAttribute("Movement Bonus Equipment")]
+        MovementBonus
+    }
+
+    public enum PowerUnit
+    {
+        [DescriptionAttribute("W")]
+        Watt,
+        [DescriptionAttribute("kW")]
+        KiloWatt,
+        [DescriptionAttribute("MW")]
+        MegaWatt
+    }
+
     public class Equipment : TreeItem<Equipment>
     {
-        public string Type { get; set; }
+        public EquipmentType Type { get; set; }
         public int EnergyInput { get; set; }
-        public int ShapeWidth { get; set; }
-        public int ShapeHeight { get; set; }
-        public ShapeType ShapeType { get; set; }
-        public string SpriteFilename { get; set; }
-        public int SpriteWidth { get; set; }
-        public int SpriteHeight { get; set; }
-        public SpritePriority SpritePriority { get; set; }
+        public EquipmentShape Shape { get; private set; }
+        public EquipmentSprite Sprite { get; private set; }
         public int MaxShieldValue { get; set; }
         public int EnergyPerShield { get; set; }
-        public string EnergySourceType { get; set; }
-        public string BufferCap { get; set; }
-        public string InputLimit { get; set; }
-        public string OutputLimit { get; set; }
+        public EquipmentEnergySource EnergySource { get; private set; }
         public string UsagePriority { get; set; }
 
         public Equipment(string name) : base(name)
         {
+            this.Shape = new EquipmentShape();
+            this.Sprite = new EquipmentSprite();
+            this.EnergySource = new EquipmentEnergySource();
         }
     }
 }

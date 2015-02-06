@@ -2,70 +2,63 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:FactorioModBuilder.ViewModels.ProjectItems">
     <DataTemplate DataType="{x:Type local:ModInfoVM}">
-        <TabControl Style="{StaticResource MainContentInternalTabControl}">
-            <TabItem Header="Design">
-                <ScrollViewer>
-                    <Grid Margin="5">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="*" MaxWidth="300" MinWidth="200"/>
-                            <ColumnDefinition Width="*" MinWidth="300"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <Label Content="Mod Name" Grid.Row="0" Grid.Column="0" Margin="2.5"/>
-                        <TextBox Grid.Row="0" Grid.Column="1" Margin="2.5" Text="{Binding Path=ModName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                        <Label Content="Version" Grid.Row="1" Grid.Column="0" Margin="2.5"/>
-                        <TextBox Grid.Row="1" Grid.Column="1" Margin="2.5" Text="{Binding Path=Version, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                        <Label Content="Title" Grid.Row="2" Grid.Column="0" Margin="2.5"/>
-                        <TextBox Grid.Row="2" Grid.Column="1" Margin="2.5" Text="{Binding Path=Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                        <Label Content="Author" Grid.Row="3" Grid.Column="0" Margin="2.5"/>
-                        <TextBox Grid.Row="3" Grid.Column="1" Margin="2.5" Text="{Binding Path=Author, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                        <Label Content="Contact" Grid.Row="4" Grid.Column="0" Margin="2.5"/>
-                        <TextBox Grid.Row="4" Grid.Column="1" Margin="2.5" Text="{Binding Path=Contact, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                        <Label Content="Homepage" Grid.Row="5" Grid.Column="0" Margin="2.5"/>
-                        <TextBox Grid.Row="5" Grid.Column="1" Margin="2.5" Text="{Binding Path=Homepage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                        <Label Content="Description" Grid.Row="6" Grid.Column="0" Margin="2.5"/>
-                        <TextBox Grid.Row="6" Grid.Column="1" Margin="2.5" Text="{Binding Path=Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+        <ScrollViewer>
+            <Grid Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*" MaxWidth="300" MinWidth="200"/>
+                    <ColumnDefinition Width="*" MinWidth="300"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label Content="Mod Name" Grid.Row="0" Grid.Column="0" Margin="2.5"/>
+                <TextBox Grid.Row="0" Grid.Column="1" Margin="2.5" Text="{Binding Path=ModName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <Label Content="Version" Grid.Row="1" Grid.Column="0" Margin="2.5"/>
+                <TextBox Grid.Row="1" Grid.Column="1" Margin="2.5" Text="{Binding Path=Version, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <Label Content="Title" Grid.Row="2" Grid.Column="0" Margin="2.5"/>
+                <TextBox Grid.Row="2" Grid.Column="1" Margin="2.5" Text="{Binding Path=Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <Label Content="Author" Grid.Row="3" Grid.Column="0" Margin="2.5"/>
+                <TextBox Grid.Row="3" Grid.Column="1" Margin="2.5" Text="{Binding Path=Author, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <Label Content="Contact" Grid.Row="4" Grid.Column="0" Margin="2.5"/>
+                <TextBox Grid.Row="4" Grid.Column="1" Margin="2.5" Text="{Binding Path=Contact, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <Label Content="Homepage" Grid.Row="5" Grid.Column="0" Margin="2.5"/>
+                <TextBox Grid.Row="5" Grid.Column="1" Margin="2.5" Text="{Binding Path=Homepage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <Label Content="Description" Grid.Row="6" Grid.Column="0" Margin="2.5"/>
+                <TextBox Grid.Row="6" Grid.Column="1" Margin="2.5" Text="{Binding Path=Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                                  TextWrapping="Wrap" Grid.RowSpan="2" VerticalContentAlignment="Top"/>
-                        <DataGrid Grid.Row="0" Grid.RowSpan="8" Grid.Column="2" Margin="2.5" AutoGenerateColumns="False"
+                <DataGrid Grid.Row="0" Grid.RowSpan="8" Grid.Column="2" Margin="2.5" AutoGenerateColumns="False"
                                   ItemsSource="{Binding Path=Dependencies}">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Header="Dependency" Width="3*" IsReadOnly="True" Binding="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                                <DataGridTextColumn Header="Version" Width="*" IsReadOnly="True" Binding="{Binding Path=Version, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                                <DataGridTemplateColumn Header="Optional" Width="80">
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <CheckBox IsChecked="{Binding Path=Optional, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Dependency" Width="3*" IsReadOnly="True" Binding="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <DataGridTextColumn Header="Version" Width="*" IsReadOnly="True" Binding="{Binding Path=Version, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <DataGridTemplateColumn Header="Optional" Width="80">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsChecked="{Binding Path=Optional, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                                                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
-                            </DataGrid.Columns>
-                        </DataGrid>
-                        <Grid Grid.Row="8" Grid.Column="2">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-                            <Button Grid.Column="0" Margin="2.5" Content="Import Dependency" Height="20" Command="{Binding Path=AddDependencyCmd}"/>
-                            <Button Grid.Column="1" Margin="2.5" Content="Remove Dependecy" Height="20" Command="{Binding Path=RemoveDependencyCmd}"/>
-                        </Grid>
-                    </Grid>
-                </ScrollViewer>
-            </TabItem>
-            <TabItem Header="Code">
-                <TextBox/>
-            </TabItem>
-        </TabControl>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <Grid Grid.Row="8" Grid.Column="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0" Margin="2.5" Content="Import Dependency" Height="20" Command="{Binding Path=AddDependencyCmd}"/>
+                    <Button Grid.Column="1" Margin="2.5" Content="Remove Dependecy" Height="20" Command="{Binding Path=RemoveDependencyCmd}"/>
+                </Grid>
+            </Grid>
+        </ScrollViewer>
     </DataTemplate>
 </ResourceDictionary>

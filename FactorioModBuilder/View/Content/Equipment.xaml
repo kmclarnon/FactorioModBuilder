@@ -1,0 +1,257 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:FactorioModBuilder.ViewModels.ProjectItems.Prototype"
+                    xmlns:conv="clr-namespace:WpfUtils.ValueConverters;assembly=WpfUtils"
+                    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                    xmlns:enum="clr-namespace:FactorioModBuilder.Models.ProjectItems.Prototype"
+                    xmlns:select="clr-namespace:FactorioModBuilder"
+                    xmlns:util="clr-namespace:WpfUtils;assembly=WpfUtils">
+    <DataTemplate DataType="{x:Type local:EquipmentVM}">
+        <DataTemplate.Resources>
+            <!-- Enum providers -->
+            <ObjectDataProvider x:Key="energyPriorities" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
+                <ObjectDataProvider.MethodParameters>
+                    <x:Type TypeName="enum:UsagePriority"/>
+                </ObjectDataProvider.MethodParameters>
+            </ObjectDataProvider>
+            <ObjectDataProvider x:Key="energyUnits" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
+                <ObjectDataProvider.MethodParameters>
+                    <x:Type TypeName="enum:EnergyUnit"/>
+                </ObjectDataProvider.MethodParameters>
+            </ObjectDataProvider>
+            <ObjectDataProvider x:Key="powerUnits" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
+                <ObjectDataProvider.MethodParameters>
+                    <x:Type TypeName="enum:PowerUnit"/>
+                </ObjectDataProvider.MethodParameters>
+            </ObjectDataProvider>
+            <ObjectDataProvider x:Key="spritePriorities" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
+                <ObjectDataProvider.MethodParameters>
+                    <x:Type TypeName="enum:SpritePriority"/>
+                </ObjectDataProvider.MethodParameters>
+            </ObjectDataProvider>
+            <ObjectDataProvider x:Key="shapeTypes" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
+                <ObjectDataProvider.MethodParameters>
+                    <x:Type TypeName="enum:ShapeType"/>
+                </ObjectDataProvider.MethodParameters>
+            </ObjectDataProvider>
+            <ObjectDataProvider x:Key="equipmentTypes" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
+                <ObjectDataProvider.MethodParameters>
+                    <x:Type TypeName="enum:EquipmentType"/>
+                </ObjectDataProvider.MethodParameters>
+            </ObjectDataProvider>
+            <ObjectDataProvider x:Key="energySourceTypes" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
+                <ObjectDataProvider.MethodParameters>
+                    <x:Type TypeName="enum:EnergySourceType"/>
+                </ObjectDataProvider.MethodParameters>
+            </ObjectDataProvider>
+        </DataTemplate.Resources>
+        <ScrollViewer>
+            <Grid Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Border Grid.Column="0" Grid.Row="0" Margin="2.5" Background="{StaticResource ContentControl_DesignerTab}">
+                    <Grid>
+                        <TextBlock Text="Select an icon below" Foreground="{StaticResource Foreground}" 
+                                           VerticalAlignment="Center" HorizontalAlignment="Center" Panel.ZIndex="1"/>
+                        <Viewbox Stretch="Uniform" Panel.ZIndex="100">
+                            <Image Source="{Binding Path=Sprite.FileName, Converter={conv:NullImage}}"/>
+                        </Viewbox>
+                    </Grid>
+                </Border>
+                <!-- Left Column -->
+                <Grid Grid.Row="1" Grid.Column="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Column="0" Grid.Row="0" Margin="2.5" Content="Name"/>
+                    <TextBox Grid.Column="1" Grid.Row="0" Margin="2.5" Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <Label Grid.Column="0" Grid.Row="1" Margin="2.5" Content="Type"/>
+                    <ComboBox Grid.Column="1" Grid.Row="1" Margin="2.5" ItemsSource="{Binding Source={StaticResource equipmentTypes}}"
+                              SelectedItem="{Binding Path=Type, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Converter={conv:EnumToDescriptionString}, Mode=OneWay}"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <Label Grid.Column="0" Grid.Row="2" Margin="2.5" Grid.ColumnSpan="2" Content="Sprite" FontSize="13" FontWeight="Bold"/>
+                    <Label Grid.Column="0" Grid.Row="3" Margin="2.5" Content="  File"/>
+                    <Grid Grid.Column="1" Grid.Row="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="30"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox Grid.Column="0" Margin="2.5" IsReadOnly="True" 
+                                 Text="{Binding Path=Sprite.Filename, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <Button Grid.Column="1" Margin="2.5" Content="..." Command="{Binding Path=FindSpriteCmd}"/>
+                    </Grid>
+                    <Label Grid.Column="0" Grid.Row="4" Margin="2.5" Content="Width"/>
+                    <xctk:IntegerUpDown Grid.Column="1" Grid.Row="4" Margin="2.5" Increment="1" Minimum="1"
+                                        Value="{Binding Path=Sprite.Width, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <Label Grid.Column="0" Grid.Row="5" Margin="2.5" Content="Height"/>
+                    <xctk:IntegerUpDown Grid.Column="1" Grid.Row="5" Margin="2.5" Increment="1" Minimum="1"
+                                        Value="{Binding Path=Sprite.Height, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <Label Grid.Column="0" Grid.Row="6" Margin="2.5" Content="Priority"/>
+                    <ComboBox Grid.Column="1" Grid.Row="6" Margin="2.5" ItemsSource="{Binding Source={StaticResource spritePriorities}}"
+                              SelectedItem="{Binding Path=Sprite.Priority, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Converter={conv:EnumToDescriptionString}, Mode=OneWay}"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </Grid>
+                <!-- Right Column -->
+                <Grid Grid.Row="0" Grid.RowSpan="2" Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Column="0" Grid.Row="0" Margin="2.5" Grid.ColumnSpan="2" 
+                           Content="Shape" FontSize="13" FontWeight="Bold"/>
+                    <Label Grid.Column="0" Grid.Row="1" Margin="2.5" Content="Width"/>
+                    <xctk:IntegerUpDown Grid.Column="1" Grid.Row="1" Margin="2.5" Increment="1" Minimum="1"
+                                        Value="{Binding Path=Shape.Width, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <Label Grid.Column="0" Grid.Row="2" Margin="2.5" Content="Height"/>
+                    <xctk:IntegerUpDown Grid.Column="1" Grid.Row="2" Margin="2.5" Increment="1" Minimum="1"
+                                        Value="{Binding Path=Shape.Height, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <Label Grid.Column="0" Grid.Row="3" Margin="2.5" Content="Type"/>
+                    <ComboBox Grid.Column="1" Grid.Row="3" Margin="2.5" ItemsSource="{Binding Source={StaticResource shapeTypes}}"
+                              SelectedItem="{Binding Path=Shape.Type, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Converter={conv:EnumToDescriptionString}, Mode=OneWay}"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <!-- Energy Source -->
+                    <Label Grid.Column="0" Grid.Row="4" Margin="2.5" Grid.ColumnSpan="2"
+                        Content="Energy Source" FontSize="13" FontWeight="Bold"/>
+                    <!-- Type -->
+                    <Label Grid.Column="0" Grid.Row="5" Margin="2.5" Content="Type"/>
+                    <ComboBox Grid.Column="1" Grid.Row="5" Margin="2.5" ItemsSource="{Binding Source={StaticResource energySourceTypes}}"
+                            SelectedItem="{Binding Path=EnergySource.Type, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Converter={conv:EnumToDescriptionString}, Mode=OneWay}"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <!-- Buffer Capacity -->
+                    <Label Grid.Column="0" Grid.Row="6" Margin="2.5" Content="Buffer Cap" 
+                           IsEnabled="{Binding Path=EnergySource.HasBufferCap}"/>
+                    <Grid Grid.Column="1" Grid.Row="6" IsEnabled="{Binding Path=EnergySource.HasBufferCap}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="55"/>
+                        </Grid.ColumnDefinitions>
+                        <xctk:IntegerUpDown Grid.Column="0" Margin="2.5" Minimum="1" Increment="1"
+                                        Value="{Binding Path=EnergySource.BufferCapacity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <ComboBox Grid.Column="1" Margin="2.5" ItemsSource="{Binding Source={StaticResource energyUnits}}"
+                                SelectedItem="{Binding Path=EnergySource.BufferCapUnit, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Converter={conv:EnumToDescriptionString}, Mode=OneWay}"/>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </Grid>
+                    <!-- Input Limit -->
+                    <Label Grid.Column="0" Grid.Row="7" Margin="2.5" Content="Input Limit"
+                           IsEnabled="{Binding Path=EnergySource.HasInputLimit}"/>
+                    <Grid Grid.Column="1" Grid.Row="7" IsEnabled="{Binding Path=EnergySource.HasInputLimit}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="55"/>
+                        </Grid.ColumnDefinitions>
+                        <xctk:IntegerUpDown Grid.Column="0" Margin="2.5" Minimum="1" Increment="1"
+                                        Value="{Binding Path=EnergySource.InputFlowLimit, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <ComboBox Grid.Column="1" Margin="2.5" ItemsSource="{Binding Source={StaticResource powerUnits}}"
+                                SelectedItem="{Binding Path=EnergySource.InputFlowLimitUnit, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Converter={conv:EnumToDescriptionString}, Mode=OneWay}"/>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </Grid>
+                    <!-- Output Limit -->
+                    <Label Grid.Column="0" Grid.Row="8" Margin="2.5" Content="Output Limit"
+                           IsEnabled="{Binding Path=EnergySource.HasOutputLimit}"/>
+                    <Grid Grid.Column="1" Grid.Row="8" IsEnabled="{Binding Path=EnergySource.HasOutputLimit}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="55"/>
+                        </Grid.ColumnDefinitions>
+                        <xctk:IntegerUpDown Grid.Column="0" Margin="2.5" Minimum="1" Increment="1"
+                                        Value="{Binding Path=EnergySource.OutputFlowLimit, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <ComboBox Grid.Column="1" Margin="2.5" ItemsSource="{Binding Source={StaticResource powerUnits}}"
+                                SelectedItem="{Binding Path=EnergySource.OutputFlowLimitUnit, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Converter={conv:EnumToDescriptionString}, Mode=OneWay}"/>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </Grid>
+                    <!-- Usage Priority -->
+                    <Label Grid.Column="0" Grid.Row="9" Margin="2.5" Content="Priority"/>
+                    <ComboBox Grid.Column="1" Grid.Row="9" Margin="2.4" ItemsSource="{Binding Source={StaticResource energyPriorities}}"
+                              SelectedItem="{Binding Path=EnergySource.UsagePriority, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <!-- Misc settings -->
+                    <Label Grid.Column="0" Grid.Row="10" Grid.ColumnSpan="2" Margin="2.5" 
+                        Content="Misc" FontSize="13" FontWeight="Bold"/>
+                    <Label Grid.Column="0" Grid.Row="11" Content="Energy Input"/>
+                    <Grid Grid.Column="1" Grid.Row="11">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="55"/>
+                        </Grid.ColumnDefinitions>
+                        <xctk:IntegerUpDown Grid.Column="0" Margin="2.5" Minimum="1" Increment="1"
+                                            Value="{Binding Path=EnergyInput, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <ComboBox Grid.Column="1" Margin="2.5" ItemsSource="{Binding Source={StaticResource powerUnits}}"
+                                  SelectedItem="{Binding Path=EnergyInputUnit, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Converter={conv:EnumToDescriptionString}, Mode=OneWay}"/>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </ScrollViewer>
+    </DataTemplate>
+</ResourceDictionary>

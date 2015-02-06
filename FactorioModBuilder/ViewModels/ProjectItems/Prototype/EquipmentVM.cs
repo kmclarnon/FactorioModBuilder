@@ -16,83 +16,26 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         /// <summary>
         /// The type parameter of the Equipment model
         /// </summary>
-        public string Type
+        public EquipmentType Type
         {
-            get { return this.GetProperty<string>(); }
-            set { this.SetProperty(value); }
+            get { return this.GetProperty<EquipmentType>(); }
+            set { this.SetProperty(value, false, null, (x => this.EnergySource.ParentEquipmentType = x)); }
         }
 
         /// <summary>
-        /// The energy input parameter of the Equipment model
+        /// The sprite file and associated parameters
         /// </summary>
-        public int EnergyInput
-        {
-            get { return this.GetProperty<int>(); }
-            set { this.SetProperty(value); }
-        }
+        public EquipmentSpriteVM Sprite { get; private set; }
 
         /// <summary>
-        /// The shape width of the Equipment model
+        /// The shape of this equipment in the armor gui
         /// </summary>
-        public int ShapeWidth
-        {
-            get { return this.GetProperty<int>(); }
-            set { this.SetProperty(value); }
-        }
+        public EquipmentShapeVM Shape { get; private set; }
 
         /// <summary>
-        /// The shape height of the Equipment model
+        /// The energy source of this equipment
         /// </summary>
-        public int ShapeHeight
-        {
-            get { return this.GetProperty<int>(); }
-            set { this.SetProperty(value); }
-        }
-
-        /// <summary>
-        /// The file path of the Equipment model sprite
-        /// </summary>
-        public string SpriteFilename
-        {
-            get { return this.GetProperty<string>(); }
-            set { this.SetProperty(value); }
-        }
-
-        /// <summary>
-        /// The width of the Equipment model sprite
-        /// </summary>
-        public int SpriteWidth
-        {
-            get { return this.GetProperty<int>(); }
-            set { this.SetProperty(value); }
-        }
-
-        /// <summary>
-        /// The height of the Equipment model sprite
-        /// </summary>
-        public int SpriteHeight
-        {
-            get { return this.GetProperty<int>(); }
-            set { this.SetProperty(value); }
-        }
-
-        /// <summary>
-        /// The priority of the Equipment model sprite
-        /// </summary>
-        public SpritePriority SpritePriority
-        {
-            get { return this.GetProperty<SpritePriority>(); }
-            set { this.SetProperty(value); }
-        }
-
-        /// <summary>
-        /// The shape type of the Equipment model
-        /// </summary>
-        public ShapeType ShapeType
-        {
-            get { return this.GetProperty<ShapeType>(); }
-            set { this.SetProperty(value); }
-        }
+        public EquipmentEnergySourceVM EnergySource { get; private set; }
 
         /// <summary>
         /// The max shield value of the Equipment model
@@ -113,47 +56,20 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         }
 
         /// <summary>
-        /// The energy source type of the Equipment model
+        /// The energy that this device requires to activate
         /// </summary>
-        public string EnergySourceType
+        public int EnergyInput
         {
-            get { return this.GetProperty<string>(); }
+            get { return this.GetProperty<int>(); }
             set { this.SetProperty(value); }
         }
 
         /// <summary>
-        /// The buffer capacity of the Equipment model
+        /// The unit of the EnergyInput property
         /// </summary>
-        public string BufferCap
+        public PowerUnit EnergyInputUnit
         {
-            get { return this.GetProperty<string>(); }
-            set { this.SetProperty(value); }
-        }
-
-        /// <summary>
-        /// The input limit value of the Equipment model
-        /// </summary>
-        public string InputLimit
-        {
-            get { return this.GetProperty<string>(); }
-            set { this.SetProperty(value); }
-        }
-
-        /// <summary>
-        /// The output limit value of the Equipment model
-        /// </summary>
-        public string OutputLimit
-        {
-            get { return this.GetProperty<string>(); }
-            set { this.SetProperty(value); }
-        }
-
-        /// <summary>
-        /// The usage priority value of the Equipment model
-        /// </summary>
-        public string UsagePriority
-        {
-            get { return this.GetProperty<string>(); }
+            get { return this.GetProperty<PowerUnit>(); }
             set { this.SetProperty(value); }
         }
 
@@ -162,7 +78,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         /// </summary>
         /// <param name="equip"></param>
         public EquipmentVM(Equipment equip)
-            : base(equip, DoubleClickBehavior.OpenContent)
+            : this(null, equip)
         {
         }
 
@@ -175,6 +91,9 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         public EquipmentVM(TreeItemVMBase parent, Equipment equip)
             : base(parent, equip, DoubleClickBehavior.OpenContent)
         {
+            this.EnergySource = new EquipmentEnergySourceVM(new EquipmentEnergySource());
+            this.Shape = new EquipmentShapeVM(new EquipmentShape());
+            this.Sprite = new EquipmentSpriteVM(new EquipmentSprite());
         }
     }
 }

@@ -153,6 +153,7 @@
     <Compile Include="Build\Messages\FatalMessage.cs" />
     <Compile Include="Build\Messages\InfoMessage.cs" />
     <Compile Include="Build\Messages\WarningMessage.cs" />
+    <Compile Include="EquipmentTemplateSelector.cs" />
     <Compile Include="Extensions\CollectionMethods.cs" />
     <Compile Include="Models\Dialogs\NewProject.cs" />
     <Compile Include="Models\ProjectItems\GraphicsFilter.cs" />
@@ -190,6 +191,9 @@
     <Compile Include="ViewModels\ProjectItems\IGraphicsSource.cs" />
     <Compile Include="ViewModels\ProjectItems\ModInfoDependencyVM.cs" />
     <Compile Include="ViewModels\ProjectItems\ProjectItem.cs" />
+    <Compile Include="ViewModels\ProjectItems\Prototype\EquipmentEnergySourceVM.cs" />
+    <Compile Include="ViewModels\ProjectItems\Prototype\EquipmentShapeVM.cs" />
+    <Compile Include="ViewModels\ProjectItems\Prototype\EquipmentSpriteVM.cs" />
     <Compile Include="ViewModels\ProjectItems\Prototype\Filters\EntityFilterVM.cs" />
     <Compile Include="ViewModels\ProjectItems\Prototype\Filters\EquipmentFilterVM.cs" />
     <Compile Include="ViewModels\ProjectItems\Prototype\Filters\FilterBaseVM.cs" />
@@ -286,6 +290,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Content\ContentViews.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Content\Equipment.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
