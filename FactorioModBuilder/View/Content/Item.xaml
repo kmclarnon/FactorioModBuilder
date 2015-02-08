@@ -12,13 +12,13 @@
                     <x:Type TypeName="flags:ItemFlag"/>
                 </ObjectDataProvider.MethodParameters>
             </ObjectDataProvider>
+            <sys:String x:Key="postfix"> Ingredients</sys:String>
         </DataTemplate.Resources>
         <ScrollViewer>
             <Grid Margin="5">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
@@ -27,8 +27,12 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <Border Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4" Margin="2.5" Background="{StaticResource ContentControl_DesignerTab}">
+                <Border Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Margin="2.5" Background="{StaticResource ContentControl_DesignerTab}">
                     <Grid>
                         <TextBlock Text="Select an icon below" Foreground="{StaticResource Foreground}" 
                                            VerticalAlignment="Center" HorizontalAlignment="Center" Panel.ZIndex="1"/>
@@ -54,12 +58,11 @@
                     <TextBox Grid.Column="0" Margin="2.5" IsReadOnly="True" Text="{Binding Path=IconPath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     <Button Grid.Column="1" Margin="2.5" Content="..." Command="{Binding Path=FindImageCmd}"/>
                 </Grid>
-                <!-- Right column settings -->
-                <Label Grid.Row="1" Grid.Column="2" Content="Stack Size" Margin="2.5"/>
-                <xctk:IntegerUpDown Grid.Row="1" Grid.Column="3" Margin="2.5" Increment="1" 
+                <Label Grid.Row="5" Grid.Column="0" Content="Stack Size" Margin="2.5"/>
+                <xctk:IntegerUpDown Grid.Row="5" Grid.Column="1" Margin="2.5" Increment="1" 
                                             Minimum="1" Value="{Binding Path=StackSize, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                <Label Grid.Row="2" Grid.Column="2" Content="Item Flags" Margin="2.5"/>
-                <ComboBox Grid.Row="2" Grid.Column="3" Margin="2.5" ItemsSource="{Binding Source={StaticResource itemFlags}}"
+                <Label Grid.Row="6" Grid.Column="0" Content="Item Flags" Margin="2.5"/>
+                <ComboBox Grid.Row="6" Grid.Column="1" Margin="2.5" ItemsSource="{Binding Source={StaticResource itemFlags}}"
                                   SelectedItem="{Binding Path=Flag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
@@ -67,9 +70,76 @@
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
-                <Label Grid.Row="3" Grid.Column="2" Margin="2.5" Content="Place Result"/>
-                <ComboBox Grid.Row="3" Grid.Column="3" Margin="2.5" ItemsSource="{Binding Path=PlaceResults}" DisplayMemberPath="Name"
+                <Label Grid.Row="7" Grid.Column="0" Margin="2.5" Content="Place Result"/>
+                <ComboBox Grid.Row="7" Grid.Column="1" Margin="2.5" ItemsSource="{Binding Path=PlaceResults}" DisplayMemberPath="Name"
                                   SelectedItem="{Binding Path=PlaceResultEntity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <!-- Right column recipe -->
+                <Grid Grid.Row="0" Grid.Column="2" Grid.RowSpan="100">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <DataGrid x:Name="recipeList" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="2.5" AutoGenerateColumns="False"
+                              ItemsSource="{Binding Path=Recipes}" SelectionUnit="FullRow">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Item Recipes" Width="*" Binding="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            <DataGridTemplateColumn Header="Enabled" Width="Auto">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <CheckBox IsChecked="{Binding Path=Enabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Button Grid.Column="0" Grid.Row="1" Margin="2.5" Content="Add Recipe" Command="{Binding Path=AddRecipeCmd}"/>
+                    <Button Grid.Column="1" Grid.Row="1" Margin="2.5" Content="Remove Recipe" Command="{Binding Path=RemoveRecipeCmd}"/>
+                    <Grid Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" Grid.Column="0" Margin="2.5" Content="Energy Req"/>
+                        <xctk:IntegerUpDown Grid.Row="0" Grid.Column="1" Margin="2.5" Increment="1" Minimum="0" 
+                                            Value="{Binding Path=SelectedItem.EnergyRequired, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ElementName=recipeList}"/>
+                        <Label Grid.Row="1" Grid.Column="0" Margin="2.5" Content="Result Count"/>
+                        <xctk:IntegerUpDown Grid.Row="1" Grid.Column="1" Margin="2.5" Increment="1" Minimum="1"
+                                            Value="{Binding Path=SelectedItem.ResultCount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ElementName=recipeList}"/>
+                    </Grid>
+                    <DataGrid Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Margin="2.5" AutoGenerateColumns="False"
+                              ItemsSource="{Binding Path=SelectedItem.Ingredients, ElementName=recipeList}">
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn Width="*" Header="Ingredients">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <ComboBox ItemsSource="{Binding Path=Ingredients}" DisplayMemberPath="Name"
+                                                  SelectedItem="{Binding Path=Ingredient, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Quantity" Width="Auto">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <xctk:IntegerUpDown Minimum="1" Increment="1" Value="{Binding Path=Quantity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Button Grid.Column="0" Grid.Row="4" Margin="2.5" Content="Add Ingredient" Command="{Binding Path=AddIngredientCmd}"/>
+                    <Button Grid.Column="1" Grid.Row="4" Margin="2.5" Content="Remove Ingredient" Command="{Binding Path=RemoveIngredientCmd}"/>
+                </Grid>
             </Grid>
         </ScrollViewer>
     </DataTemplate>

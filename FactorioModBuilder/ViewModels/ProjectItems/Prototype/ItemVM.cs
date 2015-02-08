@@ -148,6 +148,35 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
             }
         }
 
+        /// <summary>
+        /// Recipes that can produce this item
+        /// </summary>
+        public ObservableCollection<RecipeVM> Recipes { get; private set; }
+        
+        /// <summary>
+        /// Ingredients that can be added to the recipes that can make this item
+        /// </summary>
+        public ObservableCollection<ItemVM> Ingredients
+        {
+            get
+            {
+                PrototypesVM pvm;
+                if (!this.TryFindElementUp(out pvm))
+                    throw new Exception("Could not find prototypes parent");
+                return pvm.Items;
+            }
+        }
+
+        /// <summary>
+        /// Command binding to allow the user to add a new recipe to the recipe list
+        /// </summary>
+        public ICommand AddRecipeCmd { get { return this.GetCommand(this.AddRecipe); } }
+
+        /// <summary>
+        /// Command binding to allow the user to remove a selected recipe from the list
+        /// </summary>
+        public ICommand RemvoeRecipeCmd { get { return this.GetCommand(this.RemoveRecipes, this.CanRemoveRecipes); } }
+
         static ItemVM()
         {
             ItemVM.AddPropertyValidation("StackSize",
@@ -160,7 +189,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         /// </summary>
         /// <param name="item">The Item model to wrap</param>
         public ItemVM(Item item)
-            : base(item, DoubleClickBehavior.OpenContent)
+            : this(null, item)
         {
         }
 
@@ -170,8 +199,9 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         /// <param name="parent">The tree node parent of this view model</param>
         /// <param name="item">The Item model to wrap</param>
         public ItemVM(TreeItemVMBase parent, Item item)
-            : base(parent, item)
+            : base(parent, item, DoubleClickBehavior.OpenContent)
         {
+            this.Recipes = new ObservableCollection<RecipeVM>();
         }
 
         /// <summary>
@@ -210,6 +240,31 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
                 this.SubGroup = String.Empty;
             else
                 this.SubGroup = this.SubGroupItem.Name;
+        }
+
+        /// <summary>
+        /// Adds a new recipe to the list
+        /// </summary>
+        private void AddRecipe()
+        {
+            this.Recipes.Add(new RecipeVM(new Recipe("New " + this.Name + "recipe")));
+        }
+
+        /// <summary>
+        /// Determines if a recipe can be removed from the list
+        /// </summary>
+        /// <returns>True if any recipes are selected, otherwise false</returns>
+        private bool CanRemoveRecipes()
+        {
+            return this.Recipes.Any(o => o.ContentIsSelected);
+        }
+
+        /// <summary>
+        /// Removes all selected recipes from the list
+        /// </summary>
+        private void RemoveRecipes()
+        {
+            this.Recipes.RemoveWhere(o => o.ContentIsSelected);
         }
     }
 }

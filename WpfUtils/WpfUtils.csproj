@@ -78,6 +78,7 @@
     <Compile Include="ValueConverters\NullImage.cs" />
     <Compile Include="ValueConverters\ObjectIsType.cs" />
     <Compile Include="ValueConverters\ObjectNotNull.cs" />
+    <Compile Include="ValueConverters\StringConcat.cs" />
     <Compile Include="ValueConverters\StringToLength.cs" />
   </ItemGroup>
   <ItemGroup />

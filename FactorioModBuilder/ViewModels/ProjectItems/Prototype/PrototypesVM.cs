@@ -70,7 +70,18 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
                 EntityFilterVM efvm;
                 if (!this.TryFindElementDown(out efvm))
                     throw new Exception("Could not find child: EntityFilterVM");
-                return efvm.Entities;
+                return efvm.RecusiveTypedChildren;
+            }
+        }
+
+        public ObservableCollection<ItemVM> Items
+        {
+            get
+            {
+                ItemFilterVM ifvm;
+                if (!this.TryFindElementDown(out ifvm))
+                    throw new Exception("Could not find child: ItemFilterVM");
+                return ifvm.RecusiveTypedChildren;
             }
         }
 
