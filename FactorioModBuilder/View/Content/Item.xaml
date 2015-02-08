@@ -137,8 +137,8 @@
                             </DataGridTemplateColumn>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <Button Grid.Column="0" Grid.Row="4" Margin="2.5" Content="Add Ingredient" Command="{Binding Path=AddIngredientCmd}"/>
-                    <Button Grid.Column="1" Grid.Row="4" Margin="2.5" Content="Remove Ingredient" Command="{Binding Path=RemoveIngredientCmd}"/>
+                    <Button Grid.Column="0" Grid.Row="4" Margin="2.5" Content="Add Ingredient" Command="{Binding Path=SelectedItem.AddIngredientCmd, ElementName=recipeList}"/>
+                    <Button Grid.Column="1" Grid.Row="4" Margin="2.5" Content="Remove Ingredient" Command="{Binding Path=SelectedItem.RemoveIngredientCmd, ElementName=recipeList}"/>
                 </Grid>
             </Grid>
         </ScrollViewer>
