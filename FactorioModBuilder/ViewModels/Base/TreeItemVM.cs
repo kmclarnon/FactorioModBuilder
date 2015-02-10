@@ -27,7 +27,7 @@ namespace FactorioModBuilder.ViewModels.Base
         /// <summary>
         /// The strongly-typed wrapped model
         /// </summary>
-        //protected TModel _internal { get { return (TModel)_item; } }
+        protected TModel _internal { get { return (TModel)_item; } }
 
         /// <summary>
         /// Provides access to errors exposed to the IDataErrorInfo interface.  These errors can be registered with 

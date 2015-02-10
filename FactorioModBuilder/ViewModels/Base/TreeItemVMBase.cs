@@ -88,6 +88,15 @@ namespace FactorioModBuilder.ViewModels.Base
         }
 
         /// <summary>
+        /// The name value used to determine sort order
+        /// </summary>
+        public string SortName
+        {
+            get { return this.GetProperty<string>(); }
+            set { this.SetProperty(value, false, null, (x => { if(this.ChildrenView != null) this.ChildrenView.Refresh(); })); }
+        }
+
+        /// <summary>
         /// The current error message exposed 
         /// </summary>
         public string Error
@@ -267,7 +276,7 @@ namespace FactorioModBuilder.ViewModels.Base
         protected virtual void SetupChildrenView()
         {
             this.ChildrenView.SortDescriptions.Add(
-                new SortDescription("Name", ListSortDirection.Ascending));
+                new SortDescription("SortName", ListSortDirection.Ascending));
         }
 
         /// <summary>
