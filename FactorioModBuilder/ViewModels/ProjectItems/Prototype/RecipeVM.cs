@@ -12,39 +12,64 @@ using WpfUtils.Extensions;
 
 namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
+    /// <summary>
+    /// View model to for a recipe prototype
+    /// </summary>
     public class RecipeVM : ProjectItem<Recipe, RecipeVM>
     {
+        /// <summary>
+        /// Whether or not this recipe is enabled at the start of the game
+        /// </summary>
         public bool Enabled
         {
             get { return this.GetProperty<bool>(); }
             set { this.SetProperty(value); }
         }
 
+        /// <summary>
+        /// The item that is created by this recipe
+        /// </summary>
         public ItemVM ResultItem
         {
             get { return this.GetProperty<ItemVM>(); }
             set {  this.SetProperty(value, false, this.UpdateItemBinding, (x => this.Result = (value == null) ? String.Empty : value.Name)); }
         }
 
+        /// <summary>
+        /// The name of the item that is created by this recipe
+        /// </summary>
         public string Result
         {
             get { return this.GetProperty<string>(); }
             set { this.SetProperty(value); }
         }
 
+        /// <summary>
+        /// The number of result items that are produced by this recipe
+        /// </summary>
         public int ResultCount
         {
             get { return this.GetProperty<int>(); }
             set { this.SetProperty(value); }
         }
 
+        /// <summary>
+        /// The energy required to use this recipe
+        /// </summary>
         public int EnergyRequired
         {
             get { return this.GetProperty<int>(); }
             set { this.SetProperty(value); }
         }
 
+        /// <summary>
+        /// Command binding for adding an ingredient to this recipe
+        /// </summary>
         public ICommand AddIngredientCmd { get { return this.GetCommand(this.AddIngredient); } }
+
+        /// <summary>
+        /// Command binding for removing selected ingredients from this recipe
+        /// </summary>
         public ICommand RemoveIngredientCmd { get { return this.GetCommand(this.RemoveIngredient, this.CanRemoveIngredient); } }
 
         private int _newCount = 1;

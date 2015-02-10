@@ -63,6 +63,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype.Filters
         {
             this.ChildDisplayName = childName;
             this.Setup();
+            this.SortName = "1AAA" + this.Name;
         }
 
         /// <summary>
@@ -366,6 +367,11 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype.Filters
         protected virtual void ViewProperties()
         {
 
+        }
+
+        protected override void OnNameChanged()
+        {
+            this.SortName = "1AAA" + this.Name;
         }
     }
 }

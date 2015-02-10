@@ -116,7 +116,8 @@ namespace FactorioModBuilder.ViewModels
                                     new ItemFilterVM("Items"),
                                     new EntityFilterVM("Entities"),
                                     new EquipmentFilterVM("Equipment"),
-                                    new FluidFilterVM("Fluids")
+                                    new FluidFilterVM("Fluids"),
+                                    new TechnologyFilterVM("Technology")
                                 }),
                             new LocaleVM(new Locale())
                         }),
