@@ -69,7 +69,7 @@
                         <ContextMenu Style="{StaticResource StandardContextMenu}"/>
                     </TreeView.ContextMenu>
                     <TreeView.ItemTemplate>
-                        <HierarchicalDataTemplate ItemsSource="{Binding Children}">
+                        <HierarchicalDataTemplate ItemsSource="{Binding ChildrenView}">
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                 <Image Height="16" Width="16" SnapsToDevicePixels="True" Source="{Binding Icon, Converter={StaticResource IconSelector}}"/>
                                 <ContentControl Content="{Binding}" Margin="5,0" VerticalAlignment="Center">

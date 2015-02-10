@@ -14,6 +14,7 @@ using System.ComponentModel;
 using FactorioModBuilder.Resources.Icons;
 using System.Windows.Input;
 using System.Collections.Specialized;
+using System.Windows.Data;
 
 namespace FactorioModBuilder.ViewModels.Base
 {
@@ -38,6 +39,11 @@ namespace FactorioModBuilder.ViewModels.Base
         /// The immediant parent of this tree item view model
         /// </summary>
         public TreeItemVMBase Parent { get; private set; }
+
+        /// <summary>
+        /// View for the children collection
+        /// </summary>
+        public ICollectionView ChildrenView { get; private set; }
 
         /// <summary>
         /// The children owned by this tree item view model.  Children are displayed below and indented in the TreeView
@@ -178,14 +184,18 @@ namespace FactorioModBuilder.ViewModels.Base
             Parent = parent;
             _item = item;
             this.Children = new ObservableCollection<TreeItemVMBase>();
+            this.ChildrenView = CollectionViewSource.GetDefaultView(this.Children);
             this.Children.CollectionChanged += OnChildrenCollectionChanged;
             foreach (var c in children)
                 this.Children.Add(c);
-
+            this.SetupChildrenView();
             if(Parent != null)
                 parent.OnInitComplete += ParentInitComplete;
         }
 
+        /// <summary>
+        /// Handles collection changed events on the children's collection
+        /// </summary>
         private void OnChildrenCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             switch (e.Action)
@@ -249,6 +259,15 @@ namespace FactorioModBuilder.ViewModels.Base
         /// </summary>
         protected virtual void Initialize()
         {
+        }
+
+        /// <summary>
+        /// Sets up the filtering, sorting, etc of the ChildrenView. By default children are sorted ascending by name
+        /// </summary>
+        protected virtual void SetupChildrenView()
+        {
+            this.ChildrenView.SortDescriptions.Add(
+                new SortDescription("Name", ListSortDirection.Ascending));
         }
 
         /// <summary>
