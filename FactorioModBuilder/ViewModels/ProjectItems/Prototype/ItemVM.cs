@@ -149,25 +149,6 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         }
 
         /// <summary>
-        /// Recipes that can produce this item
-        /// </summary>
-        public ObservableCollection<RecipeVM> Recipes { get; private set; }
-        
-        /// <summary>
-        /// Ingredients that can be added to the recipes that can make this item
-        /// </summary>
-        public ObservableCollection<ItemVM> Ingredients
-        {
-            get
-            {
-                PrototypesVM pvm;
-                if (!this.TryFindElementUp(out pvm))
-                    throw new Exception("Could not find prototypes parent");
-                return pvm.Items;
-            }
-        }
-
-        /// <summary>
         /// Command binding to allow the user to add a new recipe to the recipe list
         /// </summary>
         public ICommand AddRecipeCmd { get { return this.GetCommand(this.AddRecipe); } }
@@ -201,7 +182,6 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         public ItemVM(TreeItemVMBase parent, Item item)
             : base(parent, item, DoubleClickBehavior.OpenContent)
         {
-            this.Recipes = new ObservableCollection<RecipeVM>();
         }
 
         /// <summary>
@@ -247,7 +227,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         /// </summary>
         private void AddRecipe()
         {
-            this.Recipes.Add(new RecipeVM(new Recipe("New " + this.Name + "recipe")));
+            this.Children.Add(new RecipeVM(new Recipe("New " + this.Name + "recipe")));
         }
 
         /// <summary>
@@ -256,7 +236,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         /// <returns>True if any recipes are selected, otherwise false</returns>
         private bool CanRemoveRecipes()
         {
-            return this.Recipes.Any(o => o.ContentIsSelected);
+            return this.Children.Any(o => o.ContentIsSelected);
         }
 
         /// <summary>
@@ -264,7 +244,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         /// </summary>
         private void RemoveRecipes()
         {
-            this.Recipes.RemoveWhere(o => o.ContentIsSelected);
+            this.Children.RemoveWhere(o => o.ContentIsSelected);
         }
     }
 }

@@ -87,7 +87,7 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <DataGrid x:Name="recipeList" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="2.5" AutoGenerateColumns="False"
-                              ItemsSource="{Binding Path=Recipes}" SelectionUnit="FullRow">
+                              ItemsSource="{Binding Path=Children}" SelectionUnit="FullRow">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Item Recipes" Width="*" Binding="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                             <DataGridTemplateColumn Header="Enabled" Width="Auto">
@@ -118,7 +118,7 @@
                                             Value="{Binding Path=SelectedItem.ResultCount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ElementName=recipeList}"/>
                     </Grid>
                     <DataGrid Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Margin="2.5" AutoGenerateColumns="False"
-                              ItemsSource="{Binding Path=SelectedItem.Ingredients, ElementName=recipeList}">
+                              ItemsSource="{Binding Path=SelectedItem.Children, ElementName=recipeList}">
                         <DataGrid.Columns>
                             <DataGridTemplateColumn Width="*" Header="Ingredients">
                                 <DataGridTemplateColumn.CellTemplate>

@@ -14,8 +14,6 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
 {
     public class RecipeVM : ProjectItem<Recipe, RecipeVM>
     {
-        public ObservableCollection<RecipeIngredientVM> Ingredients { get; private set; }
-
         public bool Enabled
         {
             get { return this.GetProperty<bool>(); }
@@ -59,7 +57,6 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         public RecipeVM(TreeItemVMBase parent, Recipe rec)
             : base(parent, rec, DoubleClickBehavior.OpenContent)
         {
-            this.Ingredients = new ObservableCollection<RecipeIngredientVM>();
         }
 
         /// <summary>
@@ -67,7 +64,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         /// </summary>
         private void AddIngredient()
         {
-            this.Ingredients.Add(new RecipeIngredientVM(
+            this.Children.Add(new RecipeIngredientVM(
                 new RecipeIngredient("New Ingredient " + _newCount, 1)));
             _newCount++;
         }
@@ -78,7 +75,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         /// <returns>True if any ingredients are selected, false otherwise</returns>
         private bool CanRemoveIngredient()
         {
-            return this.Ingredients.Any(o => o.IsSelected);
+            return this.Children.Any(o => o.IsSelected);
         }
 
         /// <summary>
@@ -86,7 +83,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         /// </summary>
         private void RemoveIngredient()
         {
-            this.Ingredients.RemoveWhere(o => o.IsSelected);
+            this.Children.RemoveWhere(o => o.IsSelected);
         }
 
         /// <summary>
@@ -129,11 +126,11 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         /// <param name="ingredient"></param>
         public void ForceRemoveIngredient(TreeItemVMBase ingredient)
         {
-            var tmpList = this.Ingredients.ToList();
+            var tmpList = this.Children.ToList();
             foreach(var i in tmpList)
             {
-                if (i.Ingredient == ingredient)
-                    this.Ingredients.Remove(i);
+                if (i is RecipeIngredientVM && ((RecipeIngredientVM)i).Ingredient == ingredient)
+                    this.Children.Remove(i);
             }
         }
     }
