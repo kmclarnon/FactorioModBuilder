@@ -156,7 +156,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         /// <summary>
         /// Command binding to allow the user to remove a selected recipe from the list
         /// </summary>
-        public ICommand RemvoeRecipeCmd { get { return this.GetCommand(this.RemoveRecipes, this.CanRemoveRecipes); } }
+        public ICommand RemoveRecipeCmd { get { return this.GetCommand(this.RemoveRecipes, this.CanRemoveRecipes); } }
 
         static ItemVM()
         {
