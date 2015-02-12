@@ -32,7 +32,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         public ItemVM Ingredient
         {
             get { return this.GetProperty<ItemVM>(); }
-            set { this.SetProperty(value, false, this.HandleItemBinding, (x => this.Name = x.Name)); 
+            set { this.SetProperty(value, false, this.HandleItemBinding, (x => this.Name = value.Name)); 
             }
         }
 

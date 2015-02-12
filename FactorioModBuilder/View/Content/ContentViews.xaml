@@ -6,5 +6,6 @@
         <ResourceDictionary Source="Item.xaml"/>
         <ResourceDictionary Source="Fluid.xaml"/>
         <ResourceDictionary Source="Equipment.xaml"/>
+        <ResourceDictionary Source="Technology.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

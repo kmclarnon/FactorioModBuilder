@@ -1,0 +1,174 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:FactorioModBuilder.ViewModels.ProjectItems.Prototype"
+                    xmlns:conv="clr-namespace:WpfUtils.ValueConverters;assembly=WpfUtils"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+                    xmlns:enum="clr-namespace:FactorioModBuilder.Models.ProjectItems.Prototype">
+    <DataTemplate DataType="{x:Type local:TechnologyVM}">
+        <DataTemplate.Resources>
+            <ObjectDataProvider x:Key="techEffects" MethodName="GetValues" ObjectType="{x:Type sys:Enum}">
+                <ObjectDataProvider.MethodParameters>
+                    <x:Type TypeName="enum:ItemFlag"/>
+                </ObjectDataProvider.MethodParameters>
+            </ObjectDataProvider>
+        </DataTemplate.Resources>
+        <ScrollViewer>
+            <Grid Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Border Grid.Column="0" Grid.Row="0" Margin="2.5" Background="{StaticResource ContentControl_DesignerTab}">
+                    <Grid>
+                        <TextBlock Text="Select an icon below" Foreground="{StaticResource Foreground}" 
+                                           VerticalAlignment="Center" HorizontalAlignment="Center" Panel.ZIndex="1"/>
+                        <Viewbox Stretch="Uniform" Panel.ZIndex="100">
+                            <Image Source="{Binding Path=IconPath, Converter={conv:NullImage}}"/>
+                        </Viewbox>
+                    </Grid>
+                </Border>
+                <!-- Left column selections -->
+                <Grid Grid.Row="1" Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Row="0" Grid.Column="0" Content="Name" Margin="2.5"/>
+                    <TextBox Grid.Row="0" Grid.Column="1" Margin="2.5" Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <Label Grid.Row="1" Grid.Column="0" Content="Order" Margin="2.5"/>
+                    <Grid Grid.Row="1" Grid.Column="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox Grid.Row="0" Grid.Column="1" Margin="2.5" Text="{Binding Path=Order, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <Label Grid.Row="0" Grid.Column="2" Margin="2.5" Content="Upgrade"/>
+                        <CheckBox Grid.Row="0" Grid.Column="3" Margin="2.5" VerticalContentAlignment="Center"
+                              IsChecked="{Binding Path=Upgrade, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    </Grid>
+                    <Label Grid.Row="2" Grid.Column="0" Margin="2.5" Content="Icon"/>
+                    <Grid Grid.Row="2" Grid.Column="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="30"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox Grid.Column="0" Margin="2.5" IsReadOnly="True" Text="{Binding Path=IconPath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <Button Grid.Column="1" Margin="2.5" Content="..." Command="{Binding Path=FindImageCmd}"/>
+                    </Grid>
+                    <Label Grid.Row="4" Grid.Column="0" Margin="2.5" Content="Unit Count"/>
+                    <Grid Grid.Row="4" Grid.Column="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <xctk:IntegerUpDown Grid.Row="0" Grid.Column="0" Margin="2.5" Increment="1" Minimum="1"
+                                        Value="{Binding Path=UnitCount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <Label Grid.Row="0" Grid.Column="1" Margin="2.5" Content="Unit Time"/>
+                        <xctk:IntegerUpDown Grid.Row="0" Grid.Column="2" Margin="2.5" Increment="1" Minimum="1"
+                                        Value="{Binding Path=UnitTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    </Grid>
+                    <!-- Tech Unit Ingredients -->
+                    <DataGrid Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Margin="2.5" AutoGenerateColumns="False"
+                              ItemsSource="{Binding Path=UnitIngredients}" MinHeight="150" SelectionUnit="FullRow">
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn Header="Unit Ingredients" Width="*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <ComboBox ItemsSource="{Binding Path=Ingredients}" DisplayMemberPath="Name"
+                                                  SelectedItem="{Binding Path=Ingredient, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Quantity" Width="Auto">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <xctk:IntegerUpDown Minimum="1" Increment="1" Value="{Binding Path=Quantity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Grid Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="0" Margin="2.5" Content="Add Ingredient" Command="{Binding Path=AddIngredientCmd}"/>
+                        <Button Grid.Column="1" Margin="2.5" Content="Remove Ingredient" Command="{Binding Path=RemoveIngredientCmd}"/>
+                    </Grid>
+                </Grid>
+                <!-- Right column selections -->
+                <Grid Grid.Row="0" Grid.RowSpan="2" Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <!-- Tech Prereqs -->
+                    <DataGrid Grid.Row="0" Grid.Column="0" Margin="2.5" AutoGenerateColumns="False"
+                              ItemsSource="{Binding Path=Prerequisites}" SelectionUnit="FullRow">
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn Header="Prerequisite" Width="*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <ComboBox ItemsSource="{Binding Path=Technologies}" DisplayMemberPath="Name"
+                                                  SelectedItem="{Binding Path=Technology, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Grid Grid.Row="1" Grid.Column="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="0" Margin="2.5" Content="Add Prereq" Command="{Binding Path=AddPrereqCmd}"/>
+                        <Button Grid.Column="1" Margin="2.5" Content="Remove Prereq" Command="{Binding Path=RemovePrereqCmd}"/>
+                    </Grid>
+                    <!-- Tech effects -->
+                    <DataGrid Grid.Row="2" Grid.Column="0" Margin="2.5" AutoGenerateColumns="False"
+                              ItemsSource="{Binding Path=Effects}" SelectionUnit="FullRow">
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn Header="Effect" Width="*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <ComboBox ItemsSource="{Binding Source={StaticResource techEffects}}" DisplayMemberPath="Name"
+                                                  SelectedItem="{Binding Path=Type, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Grid Grid.Row="3" Grid.Column="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="0" Margin="2.5" Content="Add Effect" Command="{Binding Path=AddEffectCmd}"/>
+                        <Button Grid.Column="1" Margin="2.5" Content="Remove Effect" Command="{Binding Path=RemoveEffectCmd}"/>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </ScrollViewer>
+    </DataTemplate>
+</ResourceDictionary>
