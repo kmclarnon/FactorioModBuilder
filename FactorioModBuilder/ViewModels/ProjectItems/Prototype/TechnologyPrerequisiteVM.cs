@@ -2,6 +2,7 @@
 using FactorioModBuilder.ViewModels.Base;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +16,9 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
     public class TechnologyPrerequisiteVM 
         : ProjectItem<TechnologyPrerequisite, TechnologyPrerequisiteVM>
     {
+        /// <summary>
+        /// Information to provide to the compiler at build time
+        /// </summary>
         public override IEnumerable<Build.Data.DataUnit> CompilerData
         {
             get { throw new NotImplementedException(); }
@@ -26,7 +30,21 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         public TechnologyVM Technology
         {
             get { return this.GetProperty<TechnologyVM>(); }
-            set { this.SetProperty(value, false, this.HandleTechnologyBinding, (x => this.Name = x.Name)); }
+            set { this.SetProperty(value, false, this.HandleTechnologyBinding, (x => this.Name = value.Name)); }
+        }
+
+        /// <summary>
+        /// Technologies that could be selected as a prerequsite
+        /// </summary>
+        public ObservableCollection<TechnologyVM> Technologies
+        {
+            get
+            {
+                PrototypesVM pvm;
+                if (!this.TryFindElementUp(out pvm))
+                    throw new Exception("Could not find prototypes parent");
+                return pvm.Technologies;
+            }
         }
 
         public TechnologyPrerequisiteVM(TechnologyPrerequisite item)

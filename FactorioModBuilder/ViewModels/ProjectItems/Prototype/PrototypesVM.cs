@@ -74,6 +74,9 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
             }
         }
 
+        /// <summary>
+        /// All item prototypes currently available
+        /// </summary>
         public ObservableCollection<ItemVM> Items
         {
             get
@@ -82,6 +85,20 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
                 if (!this.TryFindElementDown(out ifvm))
                     throw new Exception("Could not find child: ItemFilterVM");
                 return ifvm.RecusiveTypedChildren;
+            }
+        }
+
+        /// <summary>
+        /// All technology prototypes currently available
+        /// </summary>
+        public ObservableCollection<TechnologyVM> Technologies
+        {
+            get
+            {
+                TechnologyFilterVM tfvm;
+                if (!this.TryFindElementDown(out tfvm))
+                    throw new Exception("Could not find child: TechnologyFilterVM");
+                return tfvm.RecusiveTypedChildren;
             }
         }
 
