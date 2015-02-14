@@ -2,6 +2,7 @@
 using FactorioModBuilder.ViewModels.Base;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -33,6 +34,20 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         {
             get { return this.GetProperty<ItemVM>(); }
             set { this.SetProperty(value, false, this.HandleItemBinding, (x => this.Name = value.Name)); 
+            }
+        }
+
+        /// <summary>
+        /// Ingredients that could be used for this technology
+        /// </summary>
+        public ObservableCollection<ItemVM> Ingredients
+        {
+            get
+            {
+                PrototypesVM pvm;
+                if (!this.TryFindElementUp(out pvm))
+                    throw new Exception("Could not find prototypes parent");
+                return pvm.Items;
             }
         }
 

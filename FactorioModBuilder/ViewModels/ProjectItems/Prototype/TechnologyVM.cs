@@ -132,7 +132,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         private void AddIngredient()
         {
             this.UnitIngredients.Add(
-                new TechnologyIngredientVM(
+                new TechnologyIngredientVM(this,
                     new TechnologyIngredient("", 1)));
         }
 
@@ -142,7 +142,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         private void AddEffect()
         {
             this.Effects.Add(
-                new TechnologyEffectVM(
+                new TechnologyEffectVM(this,
                     new TechnologyEffect()));
         }
 
@@ -152,7 +152,7 @@ namespace FactorioModBuilder.ViewModels.ProjectItems.Prototype
         private void AddPrereq()
         {
             this.Prerequisites.Add(
-                new TechnologyPrerequisiteVM(
+                new TechnologyPrerequisiteVM(this,
                     new TechnologyPrerequisite()));
         }
 
